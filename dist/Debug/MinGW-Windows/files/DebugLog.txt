@@ -1,9 +1,9 @@
 [INFO] Launching IPOC V0.4.0
-[INFO] File path: C:\Users\Ben\Documents\NetBeansProjects\IPOC\dist\Debug\MinGW-Windows\files\
+[INFO] File path: C:\Users\Ben\Documents\NetBeansProjects\IPOC Core\dist\Debug\MinGW-Windows\files\
 [INFO] Loaded settings
 [INFO] Loaded controllers
 [INFO] Loaded I/O threads
-[INFO] -------------------------------------------------------START OF PS LOAD: Thu Jun 22 07:50:51 2017
+[INFO] -------------------------------------------------------START OF PS LOAD: Sun Jun 25 01:46:10 2017
 [INFO] loadMainMenuThread started
 [INFO] Loaded font (test font)
 [INFO] Loaded texture (test texture)
@@ -12,11 +12,11 @@
 [INFO] Loaded texture (button down texture)
 [INFO] Loaded texture (cursor texture)
 [INFO] loadMainMenuThread joined
-[INFO] -------------------------------------------------------END OF PS LOAD: Thu Jun 22 07:50:51 2017
-[INFO] -------------------------------------------------------START OF LOOP: Thu Jun 22 07:50:51 2017
+[INFO] -------------------------------------------------------END OF PS LOAD: Sun Jun 25 01:46:10 2017
+[INFO] -------------------------------------------------------START OF LOOP: Sun Jun 25 01:46:10 2017
 [INFO] exitCleanUpThread started
 [INFO] exitCleanUpThread joined
-[INFO] -------------------------------------------------------END OF LOOP: Thu Jun 22 07:50:59 2017
+[INFO] -------------------------------------------------------END OF LOOP: Sun Jun 25 01:46:11 2017
 [INFO] Successfully ended threads
 [INFO] No memory leaks detected
 [INFO] Program ended successfully.

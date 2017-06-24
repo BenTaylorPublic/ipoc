@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=MinGW-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW-Windows
-CND_ARTIFACT_NAME_Debug=ipoc
-CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/ipoc
+CND_ARTIFACT_NAME_Debug=ipoc_core
+CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/ipoc_core
 CND_PACKAGE_DIR_Debug=dist/Debug/MinGW-Windows/package
-CND_PACKAGE_NAME_Debug=ipoc.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/ipoc.tar
+CND_PACKAGE_NAME_Debug=ipoccore.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/ipoccore.tar
 # Release configuration
 CND_PLATFORM_Release=MinGW-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/MinGW-Windows
-CND_ARTIFACT_NAME_Release=ipoc
-CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/ipoc
+CND_ARTIFACT_NAME_Release=ipoc_core
+CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/ipoc_core
 CND_PACKAGE_DIR_Release=dist/Release/MinGW-Windows/package
-CND_PACKAGE_NAME_Release=ipoc.tar
-CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/ipoc.tar
+CND_PACKAGE_NAME_Release=ipoccore.tar
+CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/ipoccore.tar
 #
 # include compiler specific variables
 #
