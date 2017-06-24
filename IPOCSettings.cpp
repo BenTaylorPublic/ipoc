@@ -35,6 +35,7 @@ void IPOCSettings::loadSettings()
 	filePath = temp.substr(0, pos) + "\\files\\";*/
 
         filePath = "C:\\Users\\Ben\\Documents\\NetBeansProjects\\ipoc-core\\dist\\Debug\\MinGW-Windows\\files\\";
+        //FUCK THE POLICE TEMPORARILY
 	Debug::setFilePath(filePath);
 
 	std::string settingsFilePath = filePath + "Settings.ini";
