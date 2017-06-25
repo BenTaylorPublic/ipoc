@@ -36,10 +36,7 @@ void IPOCSettings::loadSettings()
     GetCurrentDir(buff, FILENAME_MAX);
     std::string current_working_dir(buff);
 
-    //This seems dodgy
-    //But the directory only gives me the directory of the cpp and h files
-    //Will have to test later on release
-    filePath = current_working_dir + "\\dist\\Debug\\MinGW-Windows\\files\\";
+    filePath = current_working_dir + "\\files\\";
     
     Debug::setFilePath(filePath);
 
