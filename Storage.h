@@ -3,7 +3,7 @@
 #include <vector>
 #include "Point2D.h"
 #include "Color.h"
-#include "IPOCFont.h"
+#include "Font.h"
 #include "IPOCText.h"
 #include "IPOCTexture.h"
 #include "IPOCSprite.h"
@@ -21,7 +21,7 @@ public:
     ProgramState state = LoadingMainMenu;
     
     //GLOBAL    
-    IPOCFont* font1;
+    Font* font1;
     vector<IPOCTexture*> textures;
     IPOCText* textLoading;    
     IPOCSprite* spriteCursor;

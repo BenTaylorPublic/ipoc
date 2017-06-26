@@ -1,7 +1,7 @@
 #include "IPOCText.h"
 #include "Debug.h"
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString("SAMPLE TEXT");
@@ -9,7 +9,7 @@ IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont)
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const std::string& inputString)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -17,7 +17,7 @@ IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const std:
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ, const std::string& inputString)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -26,7 +26,7 @@ IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int&
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString("SAMPLE TEXT");
@@ -35,7 +35,7 @@ IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int&
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const std::string& inputString, const Point2D& point)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -44,7 +44,7 @@ IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const std:
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -54,7 +54,7 @@ IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int&
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ, const Point2D& point)
+IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString("SAMPLE TEXT");

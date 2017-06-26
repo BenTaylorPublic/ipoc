@@ -48,7 +48,7 @@ bool ThreadManager::loadMainMenuJoinable()
 void ThreadManager::loadMainMenuThread()
 {
 	//Fonts
-	storage->font1 = new IPOCFont("test font", "courier new.ttf");
+	storage->font1 = new Font("test font", "courier new.ttf");
 	
 	//Loading screen
 	storage->textLoading = new IPOCText("test text", *storage->font1, 0, "Loading..." , Point2D(100,700));

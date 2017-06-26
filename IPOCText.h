@@ -3,7 +3,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "Point2D.h"
-#include "IPOCFont.h"
+#include "Font.h"
 #include "Drawable.h"
 
 /*
@@ -12,13 +12,13 @@ IPOCText is a Data Type (Wrapper)
 class IPOCText : public Drawable
 {
 public:
-    IPOCText(const std::string& inputName, IPOCFont& inputFont);
-    IPOCText(const std::string& inputName, IPOCFont& inputFont, const std::string& inputString);
-    IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ);
-    IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ, const std::string& inputString);
-    IPOCText(const std::string& inputName, IPOCFont& inputFont, const std::string& inputString, const Point2D& point);
-    IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ, const Point2D& point);
-    IPOCText(const std::string& inputName, IPOCFont& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point);
+    IPOCText(const std::string& inputName, Font& inputFont);
+    IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString);
+    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ);
+    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString);
+    IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point);
+    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point);
+    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point);
     ~IPOCText();
     std::string name; //Name that is mainly used for debugging
     Point2D getPosition(); //Returns the current position of the text (TL)

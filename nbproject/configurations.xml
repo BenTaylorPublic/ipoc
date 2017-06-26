@@ -9,7 +9,7 @@
       <itemPath>Debug.h</itemPath>
       <itemPath>Drawable.h</itemPath>
       <itemPath>FileManager.h</itemPath>
-      <itemPath>IPOCFont.h</itemPath>
+      <itemPath>Font.h</itemPath>
       <itemPath>IPOCFrame.h</itemPath>
       <itemPath>IPOCSettings.h</itemPath>
       <itemPath>IPOCSprite.h</itemPath>
@@ -39,7 +39,7 @@
       <itemPath>Debug.cpp</itemPath>
       <itemPath>Drawable.cpp</itemPath>
       <itemPath>FileManager.cpp</itemPath>
-      <itemPath>IPOCFont.cpp</itemPath>
+      <itemPath>Font.cpp</itemPath>
       <itemPath>IPOCFrame.cpp</itemPath>
       <itemPath>IPOCSettings.cpp</itemPath>
       <itemPath>IPOCSprite.cpp</itemPath>
@@ -119,9 +119,9 @@
       </item>
       <item path="FileManager.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IPOCFont.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Font.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="IPOCFont.h" ex="false" tool="3" flavor2="0">
+      <item path="Font.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="IPOCFrame.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -228,9 +228,9 @@
       </item>
       <item path="FileManager.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IPOCFont.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Font.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="IPOCFont.h" ex="false" tool="3" flavor2="0">
+      <item path="Font.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="IPOCFrame.cpp" ex="false" tool="1" flavor2="0">
       </item>

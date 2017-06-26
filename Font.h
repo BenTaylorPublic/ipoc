@@ -6,11 +6,11 @@
 /*
 IPOCFont is a Data Type (Wrapper)
 */
-class IPOCFont
+class Font
 {
 public:
-    IPOCFont(const std::string& inputName, const std::string& fileName);
-    ~IPOCFont();
+    Font(const std::string& inputName, const std::string& fileName);
+    ~Font();
     std::string name; //Name that is mainly used for debugging
     /*
     Returns a string indicating this object's current status, and all objects it manages.

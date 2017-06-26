@@ -1,8 +1,8 @@
-#include "IPOCFont.h"
+#include "Font.h"
 #include "Debug.h"
 #include "IPOCSettings.h"
 
-IPOCFont::IPOCFont(const std::string& inputName, const std::string& fileName)
+Font::Font(const std::string& inputName, const std::string& fileName)
 {
 	name = inputName;
 
@@ -27,17 +27,17 @@ IPOCFont::IPOCFont(const std::string& inputName, const std::string& fileName)
 	Debug::notifyOfConstruction(13);
 }
 
-IPOCFont::~IPOCFont()
+Font::~Font()
 {
 	Debug::notifyOfDestruction(13);	
 }
 
- sf::Font* IPOCFont::getFont()
+ sf::Font* Font::getFont()
  {
 	 return &font;
  }
 
-std::string IPOCFont::getStatusString()
+std::string Font::getStatusString()
 {
 	return "Font name=" + name;
 }
