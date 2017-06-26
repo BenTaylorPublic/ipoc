@@ -23,4 +23,4 @@ Using SFML as a base, IPOC allows the user to quickly load textures, create spri
 SFML is entirely wrapped, so the graphics library can be swapped out with ease, if a better choice comes along.
 
 ## Setting up ##
-I might add this later, but not now, dbf
+I might add this later, but not now, cbf
