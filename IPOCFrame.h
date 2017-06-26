@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include "IPOCDrawable.h"
+#include "Drawable.h"
 
 class IPOCFrame
 {
@@ -15,11 +15,11 @@ public:
     void markStartOfDrawing();
     void markAsDrawable();
     bool isDrawable();
-    void addToFrame(IPOCDrawable* drawable);
-    void removeFromFrame(IPOCDrawable* drawable);
-    IPOCDrawable* getNextDrawable();
+    void addToFrame(Drawable* drawable);
+    void removeFromFrame(Drawable* drawable);
+    Drawable* getNextDrawable();
 private:
-    vector<vector<IPOCDrawable*>> drawables;
+    vector<vector<Drawable*>> drawables;
     queue<int> frameIdsToGive;
     bool isDrawableBool;
     int currentDrawingZ;

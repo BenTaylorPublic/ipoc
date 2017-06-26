@@ -7,8 +7,8 @@
       <itemPath>Color.h</itemPath>
       <itemPath>Conversions.h</itemPath>
       <itemPath>Debug.h</itemPath>
+      <itemPath>Drawable.h</itemPath>
       <itemPath>FileManager.h</itemPath>
-      <itemPath>IPOCDrawable.h</itemPath>
       <itemPath>IPOCFont.h</itemPath>
       <itemPath>IPOCFrame.h</itemPath>
       <itemPath>IPOCSettings.h</itemPath>
@@ -37,8 +37,8 @@
       <itemPath>Color.cpp</itemPath>
       <itemPath>Conversions.cpp</itemPath>
       <itemPath>Debug.cpp</itemPath>
+      <itemPath>Drawable.cpp</itemPath>
       <itemPath>FileManager.cpp</itemPath>
-      <itemPath>IPOCDrawable.cpp</itemPath>
       <itemPath>IPOCFont.cpp</itemPath>
       <itemPath>IPOCFrame.cpp</itemPath>
       <itemPath>IPOCSettings.cpp</itemPath>
@@ -111,13 +111,13 @@
       </item>
       <item path="Debug.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Drawable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Drawable.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="FileManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FileManager.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="IPOCDrawable.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IPOCDrawable.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="IPOCFont.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -220,13 +220,13 @@
       </item>
       <item path="Debug.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Drawable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Drawable.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="FileManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="FileManager.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="IPOCDrawable.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IPOCDrawable.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="IPOCFont.cpp" ex="false" tool="1" flavor2="0">
       </item>

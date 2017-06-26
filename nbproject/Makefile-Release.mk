@@ -38,8 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/Color.o \
 	${OBJECTDIR}/Conversions.o \
 	${OBJECTDIR}/Debug.o \
+	${OBJECTDIR}/Drawable.o \
 	${OBJECTDIR}/FileManager.o \
-	${OBJECTDIR}/IPOCDrawable.o \
 	${OBJECTDIR}/IPOCFont.o \
 	${OBJECTDIR}/IPOCFrame.o \
 	${OBJECTDIR}/IPOCSettings.o \
@@ -98,15 +98,15 @@ ${OBJECTDIR}/Debug.o: Debug.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Debug.o Debug.cpp
 
+${OBJECTDIR}/Drawable.o: Drawable.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Drawable.o Drawable.cpp
+
 ${OBJECTDIR}/FileManager.o: FileManager.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FileManager.o FileManager.cpp
-
-${OBJECTDIR}/IPOCDrawable.o: IPOCDrawable.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IPOCDrawable.o IPOCDrawable.cpp
 
 ${OBJECTDIR}/IPOCFont.o: IPOCFont.cpp
 	${MKDIR} -p ${OBJECTDIR}

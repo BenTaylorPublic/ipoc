@@ -25,14 +25,14 @@ OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType
 
 OnscreenButton::~OnscreenButton()
 {
-	for (IPOCDrawable* it : stateUpDrawables)
+	for (Drawable* it : stateUpDrawables)
 	{
 		delete it;
 	}
 	stateUpDrawables.clear();
 	stateUpOffset.clear();
 	
-	for (IPOCDrawable* it : stateDownDrawables)
+	for (Drawable* it : stateDownDrawables)
 	{
 		delete it;
 	}
@@ -42,7 +42,7 @@ OnscreenButton::~OnscreenButton()
 	Debug::notifyOfDestruction(10);
 }
 
-void OnscreenButton::addToUp(IPOCDrawable* drawable, const Point2D& offsetFromTopLeft)
+void OnscreenButton::addToUp(Drawable* drawable, const Point2D& offsetFromTopLeft)
 {
 	Debug::notifyOfCopy(12);
 	Debug::notifyOfCopy(12);
@@ -51,7 +51,7 @@ void OnscreenButton::addToUp(IPOCDrawable* drawable, const Point2D& offsetFromTo
 	stateUpOffset.push_back(offsetFromTopLeft);
 }
 
-void OnscreenButton::addToDown(IPOCDrawable* drawable, const Point2D& offsetFromTopLeft)
+void OnscreenButton::addToDown(Drawable* drawable, const Point2D& offsetFromTopLeft)
 {
 	Debug::notifyOfCopy(12);
 	Debug::notifyOfCopy(12);
@@ -60,7 +60,7 @@ void OnscreenButton::addToDown(IPOCDrawable* drawable, const Point2D& offsetFrom
 	stateDownOffset.push_back(offsetFromTopLeft);
 }
 
-void OnscreenButton::addToUp(IPOCDrawable* drawable)
+void OnscreenButton::addToUp(Drawable* drawable)
 {
 	Debug::notifyOfCopy(12);
 	drawable->setPosition(drawingPosition);
@@ -68,7 +68,7 @@ void OnscreenButton::addToUp(IPOCDrawable* drawable)
 	stateUpOffset.push_back(Point2D(0, 0));
 }
 
-void OnscreenButton::addToDown(IPOCDrawable* drawable)
+void OnscreenButton::addToDown(Drawable* drawable)
 {
 	Debug::notifyOfCopy(12);
 	drawable->setPosition(drawingPosition);
@@ -91,17 +91,17 @@ void OnscreenButton::draw(sf::RenderTarget& target)
 {
 	if (stateUp)
 	{
-		for (IPOCDrawable* it : stateUpDrawables)
-		{
-			it->draw(target);
-		}
+            for (Drawable* it : stateUpDrawables)
+            {
+                it->draw(target);
+            }
 	}
 	else
 	{
-		for (IPOCDrawable* it : stateDownDrawables)
-		{
-			it->draw(target);
-		}		
+            for (Drawable* it : stateDownDrawables)
+            {
+                it->draw(target);
+            }		
 	}
 }
 

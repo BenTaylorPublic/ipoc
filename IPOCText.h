@@ -4,12 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include "Point2D.h"
 #include "IPOCFont.h"
-#include "IPOCDrawable.h"
+#include "Drawable.h"
 
 /*
 IPOCText is a Data Type (Wrapper)
 */
-class IPOCText : public IPOCDrawable
+class IPOCText : public Drawable
 {
 public:
     IPOCText(const std::string& inputName, IPOCFont& inputFont);

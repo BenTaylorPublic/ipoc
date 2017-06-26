@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "IPOCDrawable.h"
+#include "Drawable.h"
 #include "Point2D.h"
 
 enum OnscreenButtonType
@@ -11,17 +11,17 @@ enum OnscreenButtonType
     TriggerOnUp = 0, TriggerOnDown = 1, TriggerOnHold = 2
 };
 
-class OnscreenButton : public IPOCDrawable
+class OnscreenButton : public Drawable
 {
 public:
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType);
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const int& inputZ);
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const int& inputZ, const Point2D& point);
     ~OnscreenButton();
-    void addToUp(IPOCDrawable* drawable, const Point2D& offsetFromTopLeft);
-    void addToDown(IPOCDrawable* drawable, const Point2D& offsetFromTopLeft);
-    void addToUp(IPOCDrawable* drawable);
-    void addToDown(IPOCDrawable* drawable);
+    void addToUp(Drawable* drawable, const Point2D& offsetFromTopLeft);
+    void addToDown(Drawable* drawable, const Point2D& offsetFromTopLeft);
+    void addToUp(Drawable* drawable);
+    void addToDown(Drawable* drawable);
     void setHitBox(const Point2D& inputTopLeft, const Point2D& inputBottomRight);
     void setPosition(const Point2D& newPoint) override;    
     bool mouseDown(const Point2D& mousePoint);
@@ -38,8 +38,8 @@ private:
     bool stateUp = true;
     int onscreenButtonManagerId = -1;
     OnscreenButtonType onscreenButtonType;
-    vector<IPOCDrawable*> stateUpDrawables;
-    vector<IPOCDrawable*> stateDownDrawables;
+    vector<Drawable*> stateUpDrawables;
+    vector<Drawable*> stateDownDrawables;
     vector<Point2D> stateUpOffset;
     vector<Point2D> stateDownOffset;
     Point2D hitBoxTopLeft;

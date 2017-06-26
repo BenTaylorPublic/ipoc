@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "IPOCSettings.h"
 
-IPOCFrame::IPOCFrame() : drawables (1, vector<IPOCDrawable*>(0))
+IPOCFrame::IPOCFrame() : drawables (1, vector<Drawable*>(0))
 {
 	isDrawableBool = false;
 	Debug::notifyOfConstruction(17);
@@ -15,7 +15,7 @@ IPOCFrame::~IPOCFrame()
 
 void IPOCFrame::IPOCLoad()
 {	
-	vector<IPOCDrawable*> toAdd;
+	vector<Drawable*> toAdd;
 	for (int i = 0; i < IPOCSettings::maxZ; i++)
 	{
 		drawables.push_back(toAdd);
@@ -38,7 +38,7 @@ void IPOCFrame::markStartOfDrawing()
 	currentDrawingZ = 0;
 }
 
-void IPOCFrame::addToFrame(IPOCDrawable* drawable)
+void IPOCFrame::addToFrame(Drawable* drawable)
 {
 	drawables.at(drawable->getZ()).push_back(drawable);
 	if (frameIdsToGive.size() == 0)
@@ -54,7 +54,7 @@ void IPOCFrame::addToFrame(IPOCDrawable* drawable)
 	frameIdsToGive.pop();
 }
 
-void IPOCFrame::removeFromFrame(IPOCDrawable* drawable)
+void IPOCFrame::removeFromFrame(Drawable* drawable)
 {
 	int z = drawable->getZ();
 	
@@ -73,7 +73,7 @@ void IPOCFrame::removeFromFrame(IPOCDrawable* drawable)
 	}
 }
 
-IPOCDrawable* IPOCFrame::getNextDrawable()
+Drawable* IPOCFrame::getNextDrawable()
 {
 	while (true)
 	{

@@ -4,12 +4,12 @@
 #include "Point2D.h"
 #include "IPOCTexture.h"
 #include <SFML/Graphics.hpp>
-#include "IPOCDrawable.h"
+#include "Drawable.h"
 
 /*
 IPOCSprite is a Data Type (Wrapper)
 */
-class IPOCSprite : public IPOCDrawable
+class IPOCSprite : public Drawable
 {
 public:
     IPOCSprite(const string& inputName, IPOCTexture& inputTexture);
