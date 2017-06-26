@@ -3,7 +3,7 @@
 #include <string>
 #include <thread>
 #include "Storage.h"
-#include "IPOCFrame.h"
+#include "Frame.h"
 #include "OnscreenButtonManager.h"
 
 class ThreadManager
@@ -11,7 +11,7 @@ class ThreadManager
 public:
     ThreadManager();
     ~ThreadManager();
-    void IPOCLoad(Storage* inputStorage, IPOCFrame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager);
+    void IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager);
     std::string getStatusString();
     
     //loadMainMenu
@@ -26,7 +26,7 @@ public:
     
 private:
     Storage* storage;
-    IPOCFrame* frame;
+    Frame* frame;
     OnscreenButtonManager* onscreenButtonManager;
     
     //loadMainMenu

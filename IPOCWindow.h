@@ -2,7 +2,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "Point2D.h"
-#include "IPOCFrame.h"
+#include "Frame.h"
 #include "Color.h"
 #include <vector>
 
@@ -14,7 +14,7 @@ public:
     void load();
     void handleEvents();
     void openWindow(const int& inputWindowXSize, const int& inputWindowYSize, const std::string& inputWindowName, const std::string& inputWindowType, const bool& hideCursor);
-    void drawFrame(IPOCFrame* frame);
+    void drawFrame(Frame* frame);
     void renderWindow();
     void clearWindow();
     void closeWindow();

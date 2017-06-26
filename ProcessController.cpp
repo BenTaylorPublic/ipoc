@@ -15,7 +15,7 @@ ProcessController::~ProcessController()
 	Debug::notifyOfDestruction(2);
 }
 
-void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, IPOCFrame* inputFrame)
+void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame)
 {
 	inputController = inputControllerPtr;
 	onscreenButtonManager = inputOnscreenButtonManager;

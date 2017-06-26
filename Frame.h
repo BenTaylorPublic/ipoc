@@ -5,11 +5,11 @@
 #include <queue>
 #include "Drawable.h"
 
-class IPOCFrame
+class Frame
 {
 public:
-    IPOCFrame();
-    ~IPOCFrame();
+    Frame();
+    ~Frame();
     void IPOCLoad();
     std::string getStatusString();
     void markStartOfDrawing();

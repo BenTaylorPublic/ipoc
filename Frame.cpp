@@ -1,19 +1,19 @@
-#include "IPOCFrame.h"
+#include "Frame.h"
 #include "Debug.h"
 #include "IPOCSettings.h"
 
-IPOCFrame::IPOCFrame() : drawables (1, vector<Drawable*>(0))
+Frame::Frame() : drawables (1, vector<Drawable*>(0))
 {
 	isDrawableBool = false;
 	Debug::notifyOfConstruction(17);
 }
 
-IPOCFrame::~IPOCFrame()
+Frame::~Frame()
 {
 	Debug::notifyOfDestruction(17);	
 }
 
-void IPOCFrame::IPOCLoad()
+void Frame::IPOCLoad()
 {	
 	vector<Drawable*> toAdd;
 	for (int i = 0; i < IPOCSettings::maxZ; i++)
@@ -27,18 +27,18 @@ void IPOCFrame::IPOCLoad()
 	}
 }
 
-std::string IPOCFrame::getStatusString()
+std::string Frame::getStatusString()
 {
 	return "N/A";
 }
 
-void IPOCFrame::markStartOfDrawing()
+void Frame::markStartOfDrawing()
 {
 	currentDrawingIndex = 0;
 	currentDrawingZ = 0;
 }
 
-void IPOCFrame::addToFrame(Drawable* drawable)
+void Frame::addToFrame(Drawable* drawable)
 {
 	drawables.at(drawable->getZ()).push_back(drawable);
 	if (frameIdsToGive.size() == 0)
@@ -54,7 +54,7 @@ void IPOCFrame::addToFrame(Drawable* drawable)
 	frameIdsToGive.pop();
 }
 
-void IPOCFrame::removeFromFrame(Drawable* drawable)
+void Frame::removeFromFrame(Drawable* drawable)
 {
 	int z = drawable->getZ();
 	
@@ -73,7 +73,7 @@ void IPOCFrame::removeFromFrame(Drawable* drawable)
 	}
 }
 
-Drawable* IPOCFrame::getNextDrawable()
+Drawable* Frame::getNextDrawable()
 {
 	while (true)
 	{
@@ -96,7 +96,7 @@ Drawable* IPOCFrame::getNextDrawable()
 	
 }
 
-void IPOCFrame::markAsDrawable()
+void Frame::markAsDrawable()
 {
 //	if (isDrawableBool)//Output isn't keeping up (get a better GPU lmao)
 //	{
@@ -106,7 +106,7 @@ void IPOCFrame::markAsDrawable()
 	isDrawableBool = true;
 }
 
-bool IPOCFrame::isDrawable()
+bool Frame::isDrawable()
 {
 	return isDrawableBool;
 }

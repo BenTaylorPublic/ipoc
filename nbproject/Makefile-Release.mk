@@ -41,7 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Drawable.o \
 	${OBJECTDIR}/FileManager.o \
 	${OBJECTDIR}/Font.o \
-	${OBJECTDIR}/IPOCFrame.o \
+	${OBJECTDIR}/Frame.o \
 	${OBJECTDIR}/IPOCSettings.o \
 	${OBJECTDIR}/IPOCSprite.o \
 	${OBJECTDIR}/IPOCText.o \
@@ -113,10 +113,10 @@ ${OBJECTDIR}/Font.o: Font.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Font.o Font.cpp
 
-${OBJECTDIR}/IPOCFrame.o: IPOCFrame.cpp
+${OBJECTDIR}/Frame.o: Frame.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IPOCFrame.o IPOCFrame.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Frame.o Frame.cpp
 
 ${OBJECTDIR}/IPOCSettings.o: IPOCSettings.cpp
 	${MKDIR} -p ${OBJECTDIR}

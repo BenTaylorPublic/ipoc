@@ -13,7 +13,7 @@ ThreadManager::~ThreadManager()
 	Debug::notifyOfDestruction(19);
 }
 
-void ThreadManager::IPOCLoad(Storage* inputStorage, IPOCFrame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager)
+void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager)
 {
 	storage = inputStorage;
 	frame = inputFrame;

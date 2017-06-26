@@ -14,7 +14,7 @@ OutputController::~OutputController()
 	Debug::notifyOfDestruction(3);
 }
 
-void OutputController::IPOCLoad(IPOCFrame* inputFrame)
+void OutputController::IPOCLoad(Frame* inputFrame)
 {
 	window.load();
 	

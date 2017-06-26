@@ -54,7 +54,7 @@ void IPOCWindow::openWindow(const int& inputWindowXSize, const int& inputWindowY
 	window.display();
 }
 
-void IPOCWindow::drawFrame(IPOCFrame* frame)
+void IPOCWindow::drawFrame(Frame* frame)
 {
 	frame->markStartOfDrawing();
 	Drawable* drawable = frame->getNextDrawable();

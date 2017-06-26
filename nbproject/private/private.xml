@@ -6,16 +6,6 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/IPOCFrame.cpp</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/Drawable.h</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/Drawable.cpp</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/IPOCWindow.cpp</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/OnscreenButton.h</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/OnscreenButton.cpp</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/IPOCSprite.h</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/IPOCFrame.h</file>
-            <file>file:/C:/Users/Ben/Documents/NetBeansProjects/ipoc-core/IPOCText.h</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

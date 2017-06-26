@@ -3,19 +3,19 @@
 #include "IPOCWindow.h"
 #include "InputController.h"
 #include "Storage.h"
-#include "IPOCFrame.h"
+#include "Frame.h"
 
 class OutputController
 {
 public:
     OutputController();
     ~OutputController();
-    void IPOCLoad(IPOCFrame* inputFrame);
+    void IPOCLoad(Frame* inputFrame);
     void createGraphicsWindow(InputController* inputController);
     void output();
     void closeGraphicsWindow();
     std::string getStatusString();
 private:
     IPOCWindow window;
-    IPOCFrame* frame;
+    Frame* frame;
 };

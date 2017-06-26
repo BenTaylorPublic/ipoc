@@ -4,7 +4,7 @@
 #include "ProcessController.h"
 #include "OutputController.h"
 #include "OnscreenButtonManager.h"
-#include "IPOCFrame.h"
+#include "Frame.h"
 #include <thread>
 
 class MasterController
@@ -19,7 +19,7 @@ private:
     ProcessController* processController;
     OutputController* outputController;
     OnscreenButtonManager* onscreenButtonManager;
-    IPOCFrame* frame;
+    Frame* frame;
     
     thread inputThread;
     thread outputThread;

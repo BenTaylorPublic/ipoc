@@ -15,7 +15,7 @@ void MasterController::IPOCLoad()
 	processController = new ProcessController();
 	outputController = new OutputController();
 	onscreenButtonManager = new OnscreenButtonManager();
-	frame = new IPOCFrame();
+	frame = new Frame();
 	
 	
 	threadsLoaded = false;
