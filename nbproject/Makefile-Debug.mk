@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileManager.o \
 	${OBJECTDIR}/Font.o \
 	${OBJECTDIR}/Frame.o \
-	${OBJECTDIR}/IPOCSettings.o \
 	${OBJECTDIR}/IPOCSprite.o \
 	${OBJECTDIR}/IPOCText.o \
 	${OBJECTDIR}/IPOCTexture.o \
@@ -54,6 +53,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/OutputController.o \
 	${OBJECTDIR}/Point2D.o \
 	${OBJECTDIR}/ProcessController.o \
+	${OBJECTDIR}/Settings.o \
 	${OBJECTDIR}/Storage.o \
 	${OBJECTDIR}/ThreadManager.o \
 	${OBJECTDIR}/main.o
@@ -118,11 +118,6 @@ ${OBJECTDIR}/Frame.o: Frame.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Frame.o Frame.cpp
 
-${OBJECTDIR}/IPOCSettings.o: IPOCSettings.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IPOCSettings.o IPOCSettings.cpp
-
 ${OBJECTDIR}/IPOCSprite.o: IPOCSprite.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -177,6 +172,11 @@ ${OBJECTDIR}/ProcessController.o: ProcessController.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ProcessController.o ProcessController.cpp
+
+${OBJECTDIR}/Settings.o: Settings.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Settings.o Settings.cpp
 
 ${OBJECTDIR}/Storage.o: Storage.cpp
 	${MKDIR} -p ${OBJECTDIR}

@@ -1,7 +1,7 @@
 
 #include "IPOCWindow.h"
 #include "Debug.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 
 IPOCWindow::IPOCWindow()
 {

@@ -1,6 +1,6 @@
 #include "Debug.h"
 #include <iostream>
-#include "IPOCSettings.h"
+#include "Settings.h"
 #include "FileManager.h"
 #include <time.h>
 #include "MasterController.h"

@@ -1,4 +1,4 @@
-#include "IPOCSettings.h"
+#include "Settings.h"
 #include "Debug.h"
 #include <string>
 #include "FileManager.h"
@@ -14,23 +14,23 @@
 #endif 
 
 //All the defaults
-std::string IPOCSettings::ipocVersion = "0.4.0";
+std::string Settings::ipocVersion = "0.4.0";
 
-std::string IPOCSettings::imageFilePath = "default file path";
-std::string IPOCSettings::fontFilePath = "default file path";
-int IPOCSettings::loopsPerSecond = 1;
-std::string IPOCSettings::filePath = "default file path";
+std::string Settings::imageFilePath = "default file path";
+std::string Settings::fontFilePath = "default file path";
+int Settings::loopsPerSecond = 1;
+std::string Settings::filePath = "default file path";
 
-int IPOCSettings::screenWidth = 1;
-int IPOCSettings::screenHeight = 1;
-std::string IPOCSettings::screenTitle = "default screen title";
-int IPOCSettings::maxZ = 0;
-int IPOCSettings::maxDrawables = 0;
-std::string IPOCSettings::windowType = "windowed";
-bool IPOCSettings::hideCursor = true;
-bool IPOCSettings::logClassAmountInfo = false;
+int Settings::screenWidth = 1;
+int Settings::screenHeight = 1;
+std::string Settings::screenTitle = "default screen title";
+int Settings::maxZ = 0;
+int Settings::maxDrawables = 0;
+std::string Settings::windowType = "windowed";
+bool Settings::hideCursor = true;
+bool Settings::logClassAmountInfo = false;
 
-void IPOCSettings::loadSettings() 
+void Settings::loadSettings() 
 {
     char buff[FILENAME_MAX];
     GetCurrentDir(buff, FILENAME_MAX);
@@ -61,7 +61,7 @@ void IPOCSettings::loadSettings()
     logClassAmountInfo = getBoolFromSettings(settingsFile, "log_class_amount_info");
 }
 
-int IPOCSettings::getIntFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
+int Settings::getIntFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
     for (int i = 0; i < inputFile.size(); i++) {
         if (Conversions::stringContains(inputFile[i], inputString)) {
             std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
@@ -78,7 +78,7 @@ int IPOCSettings::getIntFromSettings(vector<std::string>& inputFile, const std::
     return -1;
 }
 
-std::string IPOCSettings::getStringFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
+std::string Settings::getStringFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
     for (int i = 0; i < inputFile.size(); i++) {
         if (Conversions::stringContains(inputFile[i], inputString)) {
             std::string result = inputFile[i].erase(0, inputString.length() + 2);
@@ -94,7 +94,7 @@ std::string IPOCSettings::getStringFromSettings(vector<std::string>& inputFile, 
     return "";
 }
 
-bool IPOCSettings::getBoolFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
+bool Settings::getBoolFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
     for (int i = 0; i < inputFile.size(); i++) {
         if (Conversions::stringContains(inputFile[i], inputString)) {
             std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
@@ -113,7 +113,7 @@ bool IPOCSettings::getBoolFromSettings(vector<std::string>& inputFile, const std
     return false;
 }
 
-std::string IPOCSettings::getStatusString() {
+std::string Settings::getStatusString() {
     return "N/A";
 }
 

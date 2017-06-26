@@ -1,5 +1,5 @@
 #include "OutputController.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 #include "Debug.h"
 #include "Point2D.h"
 #include "Color.h"
@@ -23,7 +23,7 @@ void OutputController::IPOCLoad(Frame* inputFrame)
 
 void OutputController::createGraphicsWindow(InputController* inputController)
 {
-	window.openWindow(IPOCSettings::screenWidth, IPOCSettings::screenHeight, IPOCSettings::screenTitle, IPOCSettings::windowType, IPOCSettings::hideCursor);
+	window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
 	inputController->setGraphicsWindow(&window);
 }
 

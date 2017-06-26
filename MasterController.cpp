@@ -1,5 +1,5 @@
 #include "MasterController.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 #include "Debug.h"
 #include "FileManager.h"
 #include "Conversions.h"
@@ -19,13 +19,13 @@ void MasterController::IPOCLoad()
 	
 	
 	threadsLoaded = false;
-	IPOCSettings::loadSettings();
+	Settings::loadSettings();
 	Debug::newLog();
 	Debug::log("[INFO] Launching IPOC V");
-	Debug::log(IPOCSettings::ipocVersion);
+	Debug::log(Settings::ipocVersion);
 	Debug::commitLogLine();
 	Debug::log("[INFO] File path: ");
-	Debug::log(IPOCSettings::filePath);
+	Debug::log(Settings::filePath);
 	Debug::commitLogLine();
 	Debug::log("[INFO] Loaded settings");
 	Debug::commitLogLine();
@@ -64,7 +64,7 @@ void MasterController::start()
 	Debug::commitLogLine();
 
 	//Calculating loop time
-	chrono::nanoseconds nanosecondsPerLoop(1000000000 / IPOCSettings::loopsPerSecond);
+	chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
 	chrono::system_clock::time_point startOfLoopTime;
 	
 	startOfLoopTime = chrono::system_clock::now(); //Current time
@@ -150,7 +150,7 @@ void MasterController::exit()
 	delete onscreenButtonManager;
 	delete frame;
 	
-	if (IPOCSettings::logClassAmountInfo)
+	if (Settings::logClassAmountInfo)
 		Debug::logClassAmountInfo(); //Log all info
 	else
 		Debug::logMemoryLeakInfo(); //Only log if there was a leak
@@ -166,7 +166,7 @@ std::string MasterController::getStatusString()
 	result += inputController->getStatusString();
 	result += processController->getStatusString();
 	result += outputController->getStatusString();
-	result += IPOCSettings::getStatusString();
+	result += Settings::getStatusString();
 	result += FileManager::getStatusString();
 	result += Conversions::getStatusString();
 

@@ -1,6 +1,6 @@
 #include "ThreadManager.h"
 #include "Debug.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 
 
 ThreadManager::ThreadManager()

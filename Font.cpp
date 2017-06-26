@@ -1,12 +1,12 @@
 #include "Font.h"
 #include "Debug.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 
 Font::Font(const std::string& inputName, const std::string& fileName)
 {
 	name = inputName;
 
-	if (!font.loadFromFile(IPOCSettings::fontFilePath + fileName))
+	if (!font.loadFromFile(Settings::fontFilePath + fileName))
 	{
 		Debug::write("[ERROR] SFML font didn't load (");
 		Debug::write(name);

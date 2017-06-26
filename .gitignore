@@ -1,4 +1,4 @@
 /build/*
 /dist/Debug/MinGW-Windows/files/DebugLog.txt
-*/ipoc-core.exe
-*/private.xml
+/dist/Debug/MinGW-Windows/ipoc-core.exe
+/nbproject/private/private.xml

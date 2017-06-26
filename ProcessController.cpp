@@ -1,7 +1,7 @@
 #include "ProcessController.h"
 #include "Debug.h"
 #include "Conversions.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 #include "InputEnums.h"
 #include "Color.h"
 

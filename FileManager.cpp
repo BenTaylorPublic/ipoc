@@ -1,5 +1,5 @@
 #include "FileManager.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 #include "Debug.h"
 
 void FileManager::writeToFile(const std::string& filePath, const std::string& input)

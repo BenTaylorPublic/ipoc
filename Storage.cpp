@@ -1,6 +1,6 @@
 #include "Debug.h"
 #include "Storage.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 
 Storage::Storage()
 {

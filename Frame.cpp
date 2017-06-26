@@ -1,6 +1,6 @@
 #include "Frame.h"
 #include "Debug.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 
 Frame::Frame() : drawables (1, vector<Drawable*>(0))
 {
@@ -16,12 +16,12 @@ Frame::~Frame()
 void Frame::IPOCLoad()
 {	
 	vector<Drawable*> toAdd;
-	for (int i = 0; i < IPOCSettings::maxZ; i++)
+	for (int i = 0; i < Settings::maxZ; i++)
 	{
 		drawables.push_back(toAdd);
 	}
 	
-	for (int i = 0; i < IPOCSettings::maxDrawables; i++)
+	for (int i = 0; i < Settings::maxDrawables; i++)
 	{
 		frameIdsToGive.push(i);
 	}

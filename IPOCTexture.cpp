@@ -1,11 +1,11 @@
 #include "IPOCTexture.h"
 #include "Debug.h"
-#include "IPOCSettings.h"
+#include "Settings.h"
 
 IPOCTexture::IPOCTexture(const std::string& inputName, const std::string& fileName)
 {
 	name = inputName;
-	if (!texture.loadFromFile(IPOCSettings::imageFilePath + fileName))
+	if (!texture.loadFromFile(Settings::imageFilePath + fileName))
 	{
 		Debug::write("[ERROR] SFML texture didn't load (");
 		Debug::write(inputName);

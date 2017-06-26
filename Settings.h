@@ -2,7 +2,7 @@
 #include <string>
 #include "Storage.h"
 
-class IPOCSettings
+class Settings
 {
 public:
     static std::string getStatusString();
