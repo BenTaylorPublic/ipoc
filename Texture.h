@@ -6,11 +6,11 @@
 /*
 IPOCTexture is a Data Type (Wrapper)
 */
-class IPOCTexture
+class Texture
 {
 public:
-    IPOCTexture(const std::string& inputName, const std::string& fileName);
-    ~IPOCTexture();
+    Texture(const std::string& inputName, const std::string& fileName);
+    ~Texture();
     std::string name; //Name that is mainly used for debugging
     sf::Texture* getTexture(); //Should strictly be used for creating new Sprite objects. AKA don't use this you fuck
     /*

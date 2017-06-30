@@ -1,8 +1,8 @@
-#include "IPOCTexture.h"
+#include "Texture.h"
 #include "Debug.h"
 #include "Settings.h"
 
-IPOCTexture::IPOCTexture(const std::string& inputName, const std::string& fileName)
+Texture::Texture(const std::string& inputName, const std::string& fileName)
 {
 	name = inputName;
 	if (!texture.loadFromFile(Settings::imageFilePath + fileName))
@@ -25,17 +25,17 @@ IPOCTexture::IPOCTexture(const std::string& inputName, const std::string& fileNa
 	Debug::notifyOfConstruction(15);	
 }
 
-IPOCTexture::~IPOCTexture()
+Texture::~Texture()
 {
 	Debug::notifyOfDestruction(15);
 }
 
-sf::Texture* IPOCTexture::getTexture()
+sf::Texture* Texture::getTexture()
 {
 	return &texture;
 }
 
-std::string IPOCTexture::getStatusString()
+std::string Texture::getStatusString()
 {
 	return "Texture name=" + name;
 }

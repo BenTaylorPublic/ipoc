@@ -5,7 +5,7 @@
 #include "Color.h"
 #include "Font.h"
 #include "Text.h"
-#include "IPOCTexture.h"
+#include "Texture.h"
 #include "Sprite.h"
 #include "OnscreenButton.h"
 
@@ -22,7 +22,7 @@ public:
     
     //GLOBAL    
     Font* font1;
-    vector<IPOCTexture*> textures;
+    vector<Texture*> textures;
     Text* textLoading;    
     Sprite* spriteCursor;
     

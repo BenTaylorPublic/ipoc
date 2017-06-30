@@ -56,11 +56,11 @@ void ThreadManager::loadMainMenuThread()
 	frame->markAsDrawable();
 	
 	//Textures
-	storage->textures.push_back(new IPOCTexture("test texture", "default texture.png"));
-	storage->textures.push_back(new IPOCTexture("circle texture", "mouse circle.png"));
-	storage->textures.push_back(new IPOCTexture("button up texture", "button up.png"));
-	storage->textures.push_back(new IPOCTexture("button down texture", "button down.png"));
-	storage->textures.push_back(new IPOCTexture("cursor texture", "cursor.png"));
+	storage->textures.push_back(new Texture("test texture", "default texture.png"));
+	storage->textures.push_back(new Texture("circle texture", "mouse circle.png"));
+	storage->textures.push_back(new Texture("button up texture", "button up.png"));
+	storage->textures.push_back(new Texture("button down texture", "button down.png"));
+	storage->textures.push_back(new Texture("cursor texture", "cursor.png"));
 	
 	//Texts
 	storage->textHeading = new Text("test text", *storage->font1, 0, "BEVS", Point2D(20,20));
@@ -155,9 +155,9 @@ void ThreadManager::exitCleanUpThread(const ProgramState& exitingFrom)
 	delete storage->textLoading;
 	delete storage->spriteCursor;	
 	
-	for (IPOCTexture* it : storage->textures)
+	for (Texture* it : storage->textures)
 	{
-		delete it;
+            delete it;
 	}
 	storage->textures.clear();		
 	
