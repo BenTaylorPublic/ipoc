@@ -19,7 +19,7 @@ public:
     void removeFromFrame(Drawable* drawable);
     Drawable* getNextDrawable();
 private:
-    vector<vector<Drawable*>> drawables;
+    vector<vector<Drawable*> > drawables;
     queue<int> frameIdsToGive;
     bool isDrawableBool;
     int currentDrawingZ;

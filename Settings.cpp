@@ -35,8 +35,12 @@ void Settings::loadSettings()
     char buff[FILENAME_MAX];
     GetCurrentDir(buff, FILENAME_MAX);
     std::string current_working_dir(buff);
-
+#ifdef WINDOWS
     filePath = current_working_dir + "\\files\\";
+#else
+    filePath = current_working_dir + "/files/";
+#endif
+    
     
     Debug::setFilePath(filePath);
 
