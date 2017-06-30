@@ -13,7 +13,7 @@ public:
     void IPOCLoad(Frame* inputFrame);
     void createGraphicsWindow(InputController* inputController);
     void output();
-    void closeGraphicsWindow();
+    void closeGraphicsWindow(); //for a test commit
     std::string getStatusString();
 private:
     Window window;
