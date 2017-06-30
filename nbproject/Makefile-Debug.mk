@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/FileManager.o \
 	${OBJECTDIR}/Font.o \
 	${OBJECTDIR}/Frame.o \
-	${OBJECTDIR}/IPOCSprite.o \
 	${OBJECTDIR}/IPOCText.o \
 	${OBJECTDIR}/IPOCTexture.o \
 	${OBJECTDIR}/IPOCWindow.o \
@@ -54,6 +53,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Point2D.o \
 	${OBJECTDIR}/ProcessController.o \
 	${OBJECTDIR}/Settings.o \
+	${OBJECTDIR}/Sprite.o \
 	${OBJECTDIR}/Storage.o \
 	${OBJECTDIR}/ThreadManager.o \
 	${OBJECTDIR}/main.o
@@ -118,11 +118,6 @@ ${OBJECTDIR}/Frame.o: Frame.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Frame.o Frame.cpp
 
-${OBJECTDIR}/IPOCSprite.o: IPOCSprite.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IPOCSprite.o IPOCSprite.cpp
-
 ${OBJECTDIR}/IPOCText.o: IPOCText.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -177,6 +172,11 @@ ${OBJECTDIR}/Settings.o: Settings.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Settings.o Settings.cpp
+
+${OBJECTDIR}/Sprite.o: Sprite.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../../SFML-2.4.2/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sprite.o Sprite.cpp
 
 ${OBJECTDIR}/Storage.o: Storage.cpp
 	${MKDIR} -p ${OBJECTDIR}

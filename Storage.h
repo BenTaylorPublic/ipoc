@@ -6,7 +6,7 @@
 #include "Font.h"
 #include "IPOCText.h"
 #include "IPOCTexture.h"
-#include "IPOCSprite.h"
+#include "Sprite.h"
 #include "OnscreenButton.h"
 
 enum ProgramState {LoadingMainMenu, MainMenu, Exiting, SaveScreen};
@@ -24,7 +24,7 @@ public:
     Font* font1;
     vector<IPOCTexture*> textures;
     IPOCText* textLoading;    
-    IPOCSprite* spriteCursor;
+    Sprite* spriteCursor;
     
     //state: MainMenu + LoadingMainMenu
     IPOCText* textHeading;

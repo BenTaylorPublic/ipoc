@@ -1,14 +1,14 @@
-#include "IPOCSprite.h"
+#include "Sprite.h"
 #include "Debug.h"
 
-IPOCSprite::IPOCSprite(const std::string& inputName, IPOCTexture& inputTexture)
+Sprite::Sprite(const std::string& inputName, IPOCTexture& inputTexture)
 {
 	name = inputName;
 	sprite.setTexture(*inputTexture.getTexture());
 	Debug::notifyOfConstruction(16);
 }
 
-IPOCSprite::IPOCSprite(const std::string& inputName, IPOCTexture& inputTexture, const int& inputZ)
+Sprite::Sprite(const std::string& inputName, IPOCTexture& inputTexture, const int& inputZ)
 {
 	name = inputName;
 	setZ(inputZ);
@@ -16,17 +16,17 @@ IPOCSprite::IPOCSprite(const std::string& inputName, IPOCTexture& inputTexture, 
 	Debug::notifyOfConstruction(16);
 }
 
-IPOCSprite::~IPOCSprite()
+Sprite::~Sprite()
 {
 	Debug::notifyOfDestruction(16);
 }
 
-void IPOCSprite::setPosition(const Point2D& newPoint)
+void Sprite::setPosition(const Point2D& newPoint)
 {
 	sprite.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
 }
 
-Point2D IPOCSprite::getPosition()
+Point2D Sprite::getPosition()
 {
 	Point2D result;
 	result.x = sprite.getPosition().x;
@@ -34,22 +34,22 @@ Point2D IPOCSprite::getPosition()
 	return result;
 }
 
-int IPOCSprite::getWidth()
+int Sprite::getWidth()
 {
 	return sprite.getGlobalBounds().width;
 }
 
-int IPOCSprite::getHeight()
+int Sprite::getHeight()
 {
 	return sprite.getGlobalBounds().height;
 }
 
-void IPOCSprite::draw(sf::RenderTarget& target)
+void Sprite::draw(sf::RenderTarget& target)
 {
 	target.draw(sprite);
 }
 
-std::string IPOCSprite::getStatusString()
+std::string Sprite::getStatusString()
 {
 	return "Sprite name=" + name;
 }

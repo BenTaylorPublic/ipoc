@@ -9,12 +9,12 @@
 /*
 IPOCSprite is a Data Type (Wrapper)
 */
-class IPOCSprite : public Drawable
+class Sprite : public Drawable
 {
 public:
-    IPOCSprite(const string& inputName, IPOCTexture& inputTexture);
-    IPOCSprite(const string& inputName, IPOCTexture& inputTexture, const int& inputZ);
-    ~IPOCSprite();
+    Sprite(const string& inputName, IPOCTexture& inputTexture);
+    Sprite(const string& inputName, IPOCTexture& inputTexture, const int& inputZ);
+    ~Sprite();
     std::string name; //Name that is mainly used for debugging
     void setPosition(const Point2D& newPoint) override; //Sets the position of the sprite, to the new provided position
     Point2D getPosition(); //Returns the current position of the text (TL)
