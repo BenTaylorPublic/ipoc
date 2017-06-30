@@ -4,7 +4,7 @@
 #include "Point2D.h"
 #include "Color.h"
 #include "Font.h"
-#include "IPOCText.h"
+#include "Text.h"
 #include "IPOCTexture.h"
 #include "Sprite.h"
 #include "OnscreenButton.h"
@@ -23,11 +23,11 @@ public:
     //GLOBAL    
     Font* font1;
     vector<IPOCTexture*> textures;
-    IPOCText* textLoading;    
+    Text* textLoading;    
     Sprite* spriteCursor;
     
     //state: MainMenu + LoadingMainMenu
-    IPOCText* textHeading;
+    Text* textHeading;
     OnscreenButton* buttonPlay;
     OnscreenButton* buttonOptions;
     OnscreenButton* buttonExitGame;

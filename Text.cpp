@@ -1,7 +1,7 @@
-#include "IPOCText.h"
+#include "Text.h"
 #include "Debug.h"
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont)
+Text::Text(const std::string& inputName, Font& inputFont)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString("SAMPLE TEXT");
@@ -9,7 +9,7 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont)
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString)
+Text::Text(const std::string& inputName, Font& inputFont, const std::string& inputString)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -17,7 +17,7 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const std::str
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString)
+Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -26,7 +26,7 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inp
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ)
+Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString("SAMPLE TEXT");
@@ -35,7 +35,7 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inp
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point)
+Text::Text(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -44,7 +44,7 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const std::str
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point)
+Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString(inputString);
@@ -54,7 +54,7 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inp
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point)
+Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point)
 {
 	text.setFont(*inputFont.getFont());
 	text.setString("SAMPLE TEXT");
@@ -64,12 +64,12 @@ IPOCText::IPOCText(const std::string& inputName, Font& inputFont, const int& inp
 	Debug::notifyOfConstruction(14);
 }
 
-IPOCText::~IPOCText()
+Text::~Text()
 {
 	Debug::notifyOfDestruction(14);
 }
 
-Point2D IPOCText::getPosition()
+Point2D Text::getPosition()
 {
 	Point2D result;
 	result.x = text.getPosition().x;
@@ -77,42 +77,42 @@ Point2D IPOCText::getPosition()
 	return result;
 }
 
-int IPOCText::getWidth()
+int Text::getWidth()
 {
 	return text.getGlobalBounds().width;
 }
 
-int IPOCText::getHeight()
+int Text::getHeight()
 {
 	return text.getGlobalBounds().height;
 }
 
-int IPOCText::getLength()
+int Text::getLength()
 {
 	return text.getString().getSize();
 }
 
-void IPOCText::setPosition(const Point2D& newPosition)
+void Text::setPosition(const Point2D& newPosition)
 {
 	text.setPosition(sf::Vector2f(newPosition.x, newPosition.y));
 }
 
-void IPOCText::setText(const string& input)
+void Text::setText(const string& input)
 {
 	text.setString(input);
 }
 
-void IPOCText::addText(const string& input)
+void Text::addText(const string& input)
 {
 	text.setString(text.getString() + input);
 }
 
-void IPOCText::draw(sf::RenderTarget& target)
+void Text::draw(sf::RenderTarget& target)
 {
 	target.draw(text);
 }
 
-std::string IPOCText::getStatusString()
+std::string Text::getStatusString()
 {
 	return "Sprite name=" + name + " text=" + text.getString();
 }

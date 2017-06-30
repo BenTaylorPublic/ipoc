@@ -51,7 +51,7 @@ void ThreadManager::loadMainMenuThread()
 	storage->font1 = new Font("test font", "courier new.ttf");
 	
 	//Loading screen
-	storage->textLoading = new IPOCText("test text", *storage->font1, 0, "Loading..." , Point2D(100,700));
+	storage->textLoading = new Text("test text", *storage->font1, 0, "Loading..." , Point2D(100,700));
 	frame->addToFrame(storage->textLoading);
 	frame->markAsDrawable();
 	
@@ -63,7 +63,7 @@ void ThreadManager::loadMainMenuThread()
 	storage->textures.push_back(new IPOCTexture("cursor texture", "cursor.png"));
 	
 	//Texts
-	storage->textHeading = new IPOCText("test text", *storage->font1, 0, "BEVS", Point2D(20,20));
+	storage->textHeading = new Text("test text", *storage->font1, 0, "BEVS", Point2D(20,20));
 	
 	//Sprites
 	storage->spriteCursor = new Sprite("cursor sprite", *storage->textures[4], 2);
@@ -72,25 +72,25 @@ void ThreadManager::loadMainMenuThread()
 	storage->buttonPlay = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 100));
 	storage->buttonPlay->setHitBox(Point2D(0,0), Point2D(300,100));
 	storage->buttonPlay->addToUp(new Sprite("play button up sprite", *storage->textures[2]));
-	storage->buttonPlay->addToUp(new IPOCText("play button up text", *storage->font1, "Play"), Point2D(20, 30));
+	storage->buttonPlay->addToUp(new Text("play button up text", *storage->font1, "Play"), Point2D(20, 30));
 	storage->buttonPlay->addToDown(new Sprite("play button down sprite", *storage->textures[3]));
-	storage->buttonPlay->addToDown(new IPOCText("play button down text", *storage->font1, "Play"), Point2D(20, 37));
+	storage->buttonPlay->addToDown(new Text("play button down text", *storage->font1, "Play"), Point2D(20, 37));
 	onscreenButtonManager->addOnscreenButton(storage->buttonPlay);
 	
 	storage->buttonOptions = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 260));
 	storage->buttonOptions->setHitBox(Point2D(0,0), Point2D(300,100));
 	storage->buttonOptions->addToUp(new Sprite("options button up sprite", *storage->textures[2]));
-	storage->buttonOptions->addToUp(new IPOCText("options button up text", *storage->font1, "Options"), Point2D(20, 30));
+	storage->buttonOptions->addToUp(new Text("options button up text", *storage->font1, "Options"), Point2D(20, 30));
 	storage->buttonOptions->addToDown(new Sprite("options button down sprite", *storage->textures[3]));
-	storage->buttonOptions->addToDown(new IPOCText("options button down text", *storage->font1, "Options"), Point2D(20, 37));
+	storage->buttonOptions->addToDown(new Text("options button down text", *storage->font1, "Options"), Point2D(20, 37));
 	onscreenButtonManager->addOnscreenButton(storage->buttonOptions);
 	
 	storage->buttonExitGame = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 420));
 	storage->buttonExitGame->setHitBox(Point2D(0,0), Point2D(300,100));
 	storage->buttonExitGame->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
-	storage->buttonExitGame->addToUp(new IPOCText("exit button up text", *storage->font1, "Exit"), Point2D(20, 30));
+	storage->buttonExitGame->addToUp(new Text("exit button up text", *storage->font1, "Exit"), Point2D(20, 30));
 	storage->buttonExitGame->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
-	storage->buttonExitGame->addToDown(new IPOCText("exit button down text", *storage->font1, "Exit"), Point2D(20, 37));
+	storage->buttonExitGame->addToDown(new Text("exit button down text", *storage->font1, "Exit"), Point2D(20, 37));
 	onscreenButtonManager->addOnscreenButton(storage->buttonExitGame);
 	
 	//Remove loading screen

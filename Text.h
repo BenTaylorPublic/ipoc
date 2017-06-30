@@ -9,17 +9,17 @@
 /*
 IPOCText is a Data Type (Wrapper)
 */
-class IPOCText : public Drawable
+class Text : public Drawable
 {
 public:
-    IPOCText(const std::string& inputName, Font& inputFont);
-    IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString);
-    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ);
-    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString);
-    IPOCText(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point);
-    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point);
-    IPOCText(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point);
-    ~IPOCText();
+    Text(const std::string& inputName, Font& inputFont);
+    Text(const std::string& inputName, Font& inputFont, const std::string& inputString);
+    Text(const std::string& inputName, Font& inputFont, const int& inputZ);
+    Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString);
+    Text(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point);
+    Text(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point);
+    Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point);
+    ~Text();
     std::string name; //Name that is mainly used for debugging
     Point2D getPosition(); //Returns the current position of the text (TL)
     int getWidth(); //Returns an integer which represents the width of the text in pixels

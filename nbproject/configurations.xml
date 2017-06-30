@@ -11,7 +11,6 @@
       <itemPath>FileManager.h</itemPath>
       <itemPath>Font.h</itemPath>
       <itemPath>Frame.h</itemPath>
-      <itemPath>IPOCText.h</itemPath>
       <itemPath>IPOCTexture.h</itemPath>
       <itemPath>IPOCWindow.h</itemPath>
       <itemPath>InputController.h</itemPath>
@@ -25,6 +24,7 @@
       <itemPath>Settings.h</itemPath>
       <itemPath>Sprite.h</itemPath>
       <itemPath>Storage.h</itemPath>
+      <itemPath>Text.h</itemPath>
       <itemPath>ThreadManager.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -41,7 +41,6 @@
       <itemPath>FileManager.cpp</itemPath>
       <itemPath>Font.cpp</itemPath>
       <itemPath>Frame.cpp</itemPath>
-      <itemPath>IPOCText.cpp</itemPath>
       <itemPath>IPOCTexture.cpp</itemPath>
       <itemPath>IPOCWindow.cpp</itemPath>
       <itemPath>InputController.cpp</itemPath>
@@ -54,6 +53,7 @@
       <itemPath>Settings.cpp</itemPath>
       <itemPath>Sprite.cpp</itemPath>
       <itemPath>Storage.cpp</itemPath>
+      <itemPath>Text.cpp</itemPath>
       <itemPath>ThreadManager.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -127,10 +127,6 @@
       </item>
       <item path="Frame.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IPOCText.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IPOCText.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="IPOCTexture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="IPOCTexture.h" ex="false" tool="3" flavor2="0">
@@ -180,6 +176,10 @@
       <item path="Storage.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Storage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Text.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Text.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ThreadManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -236,10 +236,6 @@
       </item>
       <item path="Frame.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IPOCText.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IPOCText.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="IPOCTexture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="IPOCTexture.h" ex="false" tool="3" flavor2="0">
@@ -289,6 +285,10 @@
       <item path="Storage.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Storage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Text.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Text.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ThreadManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
