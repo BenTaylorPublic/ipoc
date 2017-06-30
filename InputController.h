@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "IPOCWindow.h"
+#include "Window.h"
 #include "InputEnums.h"
 #include "Point2D.h"
 #include <SFML/Graphics.hpp>
@@ -15,7 +15,7 @@ public:
     bool getKeyboardStatus(const Key& inputKey, const ButtonStatus& inputStatus);
     bool getMouseStatus(const Mouse& inputButton, const ButtonStatus& inputStatus);
     const Point2D& getMousePoint();
-    void setGraphicsWindow(IPOCWindow* inputWindow);
+    void setGraphicsWindow(Window* inputWindow);
     void input();
     void markStartOfLoop(); //Used to mark ButtonDown to ButtonHold, and ButtonUp to ButtonUntouched
     void markEndOfLoop(); //Used to mark ButtonDown to ButtonHold, and ButtonUp to ButtonUntouched
@@ -32,5 +32,5 @@ private:
     queue<int> buttonUpKeyboard; //Used to mark ButtonUp to ButtonUntouched
     queue<int> buttonUpMouse; //Used to mark ButtonUp to ButtonUntouched
     
-    IPOCWindow* window; //Needed for mouse location relative to window
+    Window* window; //Needed for mouse location relative to window
 };

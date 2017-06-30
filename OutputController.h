@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "IPOCWindow.h"
+#include "Window.h"
 #include "InputController.h"
 #include "Storage.h"
 #include "Frame.h"
@@ -16,6 +16,6 @@ public:
     void closeGraphicsWindow();
     std::string getStatusString();
 private:
-    IPOCWindow window;
+    Window window;
     Frame* frame;
 };

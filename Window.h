@@ -6,11 +6,11 @@
 #include "Color.h"
 #include <vector>
 
-class IPOCWindow
+class Window
 {
 public:
-    IPOCWindow();
-    ~IPOCWindow();
+    Window();
+    ~Window();
     void load();
     void handleEvents();
     void openWindow(const int& inputWindowXSize, const int& inputWindowYSize, const std::string& inputWindowName, const std::string& inputWindowType, const bool& hideCursor);

@@ -1,24 +1,24 @@
 
-#include "IPOCWindow.h"
+#include "Window.h"
 #include "Debug.h"
 #include "Settings.h"
 
-IPOCWindow::IPOCWindow()
+Window::Window()
 {
 	Debug::notifyOfConstruction(9);
 }
 
-IPOCWindow::~IPOCWindow()
+Window::~Window()
 {
 	Debug::notifyOfDestruction(9);	
 }
 
-void IPOCWindow::load()
+void Window::load()
 {
 	//nothing yet
 }
 
-void IPOCWindow::handleEvents()
+void Window::handleEvents()
 {
 	sf::Event event;
 	while (window.pollEvent(event))
@@ -35,7 +35,7 @@ void IPOCWindow::handleEvents()
 	}
 }
 
-void IPOCWindow::openWindow(const int& inputWindowXSize, const int& inputWindowYSize, const std::string& inputWindowName, const std::string& inputWindowType, const bool& hideCursor)
+void Window::openWindow(const int& inputWindowXSize, const int& inputWindowYSize, const std::string& inputWindowName, const std::string& inputWindowType, const bool& hideCursor)
 {
 	if (inputWindowType == "borderless window")
 	{
@@ -54,7 +54,7 @@ void IPOCWindow::openWindow(const int& inputWindowXSize, const int& inputWindowY
 	window.display();
 }
 
-void IPOCWindow::drawFrame(Frame* frame)
+void Window::drawFrame(Frame* frame)
 {
 	frame->markStartOfDrawing();
 	Drawable* drawable = frame->getNextDrawable();
@@ -65,27 +65,27 @@ void IPOCWindow::drawFrame(Frame* frame)
 	}
 }
 
-void IPOCWindow::renderWindow()
+void Window::renderWindow()
 {
 	window.display();
 }
 
-void IPOCWindow::clearWindow()
+void Window::clearWindow()
 {
 	window.clear();
 }
 
-void IPOCWindow::closeWindow()
+void Window::closeWindow()
 {
 	window.close();
 }
 
-sf::RenderWindow* IPOCWindow::getWindow()
+sf::RenderWindow* Window::getWindow()
 {
 	return &window;
 }
 
-std::string IPOCWindow::getStatusString()
+std::string Window::getStatusString()
 {
 	return "N/A";
 }

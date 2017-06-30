@@ -317,7 +317,7 @@ void InputController::handleMouseButton(const sf::Mouse::Button& inputButton, co
 	}	
 }
 
-void InputController::setGraphicsWindow(IPOCWindow* inputWindow)
+void InputController::setGraphicsWindow(Window* inputWindow)
 {
 	window = inputWindow;
 }
