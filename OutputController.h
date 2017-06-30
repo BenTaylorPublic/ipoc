@@ -12,9 +12,9 @@ public:
     ~OutputController();
     void IPOCLoad(Frame* inputFrame);
     void createGraphicsWindow(InputController* inputController);
-    void output(); //final test commit
-    void closeGraphicsWindow(); //for a test commit
-    std::string getStatusString(); //for another test commit
+    void output();
+    void closeGraphicsWindow();
+    std::string getStatusString();
 private:
     Window window;
     Frame* frame;
