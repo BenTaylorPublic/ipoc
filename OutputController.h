@@ -14,7 +14,7 @@ public:
     void createGraphicsWindow(InputController* inputController);
     void output();
     void closeGraphicsWindow(); //for a test commit
-    std::string getStatusString();
+    std::string getStatusString(); //for another test commit
 private:
     Window window;
     Frame* frame;
