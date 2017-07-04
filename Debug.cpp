@@ -127,10 +127,10 @@ void Debug::crash(const int& crashId, const std::string& callFrom)
 	
 	/*
 	 * CrashID summary
-	 * 103: IPOCFrame.addToFrame()
-	 * 104: IPOCSettings.getIntFromSettings()
-	 * 105: IPOCSettings.getStringFromSettings()
-	 * 106: IPOCSettings.getBoolFromSettings() 
+	 * 103: Frame.addToFrame()
+	 * 104: Settings.getIntFromSettings()
+	 * 105: Settings.getStringFromSettings()
+	 * 106: Settings.getBoolFromSettings() 
 	 */
 	
 }

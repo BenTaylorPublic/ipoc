@@ -42,9 +42,8 @@ void MasterController::IPOCLoad()
     Debug::commitLogLine();
 
     inputThread = thread(&MasterController::inputLoop, this);
-    outputThread = thread(&MasterController::outputLoop, this);
 
-    while (!threadsLoaded); //Wait until both threads are loaded
+    //while (!threadsLoaded); //Wait until both threads are loaded
     Debug::log("[INFO] Loaded I/O threads");
     Debug::commitLogLine();
     Debug::log("[INFO] -------------------------------------------------------START OF PS LOAD: ");
@@ -57,6 +56,33 @@ void MasterController::IPOCLoad()
 }
 
 void MasterController::start() 
+{
+    processThread = thread(&MasterController::processLoop, this);
+    
+    //Open graphics window
+    outputController->createGraphicsWindow(inputController);
+
+    //That's all the loading required, setting the bool so the program can start
+    threadsLoaded = true;
+    while (!processController->checkForExitProgram()) 
+    {
+        outputController->output();
+    }
+}
+
+void MasterController::inputLoop() 
+{
+    //Input thread requires no loading
+    //Wait until output thread is loaded
+    while (!threadsLoaded);
+
+    while (!processController->checkForExitProgram()) 
+    {
+        inputController->input();
+    }
+}
+
+void MasterController::processLoop() 
 {
     //Initial writing to console
     Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
@@ -112,38 +138,13 @@ void MasterController::start()
     exit();
 }
 
-void MasterController::inputLoop() 
-{
-    //Input thread requires no loading
-    //Wait until output thread is loaded
-    while (!threadsLoaded);
-
-    while (!processController->checkForExitProgram()) 
-    {
-        inputController->input();
-    }
-}
-
-void MasterController::outputLoop() 
-{
-    //Open graphics window
-    outputController->createGraphicsWindow(inputController);
-
-    //That's all the loading required, setting the bool so the program can start
-    threadsLoaded = true;
-    while (!processController->checkForExitProgram()) 
-    {
-        outputController->output();
-    }
-}
-
 void MasterController::exit() 
 {
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
     inputThread.join();
-    outputThread.join();
+    processThread.join();
     //Finally log that everything went well
     Debug::log("[INFO] Successfully ended threads");
     Debug::commitLogLine();
