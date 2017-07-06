@@ -37,7 +37,7 @@ void ProcessController::load()
 void ProcessController::process()
 {
 
-    storage.sCursor->setPosition(inputController->getMousePoint());
+    storage.sprCursor->setPosition(inputController->getMousePoint());
     
     switch (storage.state)
     {
@@ -49,13 +49,13 @@ void ProcessController::process()
 	    }
 	    break;
 	case MainMenu:
-	    if (storage.bTriggerOnDown->isTriggered() || storage.bTriggerOnUp->isTriggered() || storage.bTriggerOnHold->isTriggered())
+	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
 	    {
 		storage.counter++;
-		storage.tCounter->setText(std::to_string(storage.counter));
+		storage.txtCounter->setText(std::to_string(storage.counter));
 	    }
 	    
-	    if (storage.bExit->isTriggered())
+	    if (storage.btnExit->isTriggered())
 	    {
 		storage.state = Exiting;
 		threadManager.exitCleanUpStart();
