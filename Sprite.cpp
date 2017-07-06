@@ -1,6 +1,12 @@
 #include "Sprite.h"
 #include "Debug.h"
 
+Sprite::Sprite(const std::string& inputName)
+{
+    name = inputName;
+    Debug::notifyOfConstruction(16);
+}
+
 Sprite::Sprite(const std::string& inputName, Texture& inputTexture)
 {
     name = inputName;
@@ -19,6 +25,11 @@ Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const int& i
 Sprite::~Sprite()
 {
     Debug::notifyOfDestruction(16);
+}
+
+void Sprite::setTexture(Texture& inputTexture)
+{
+    sprite.setTexture(*inputTexture.getTexture());
 }
 
 void Sprite::setPosition(const Point2D& newPoint)

@@ -68,6 +68,7 @@ void ThreadManager::loadMainMenuThread()
     storage->spriteCursor = new Sprite("cursor sprite", *storage->textures[4], 2);
 
     //Buttons
+    //Buttons - Play
     storage->buttonPlay = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 100));
     storage->buttonPlay->setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonPlay->addToUp(new Sprite("play button up sprite", *storage->textures[2]));
@@ -76,6 +77,7 @@ void ThreadManager::loadMainMenuThread()
     storage->buttonPlay->addToDown(new Text("play button down text", *storage->font1, "Play"), Point2D(20, 37));
     onscreenButtonManager->addOnscreenButton(storage->buttonPlay);
 
+    //Buttons - Options
     storage->buttonOptions = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 260));
     storage->buttonOptions->setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonOptions->addToUp(new Sprite("options button up sprite", *storage->textures[2]));
@@ -84,6 +86,7 @@ void ThreadManager::loadMainMenuThread()
     storage->buttonOptions->addToDown(new Text("options button down text", *storage->font1, "Options"), Point2D(20, 37));
     onscreenButtonManager->addOnscreenButton(storage->buttonOptions);
 
+    //Buttons - Exit
     storage->buttonExitGame = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 420));
     storage->buttonExitGame->setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonExitGame->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
