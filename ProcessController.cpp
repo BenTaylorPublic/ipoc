@@ -36,6 +36,9 @@ void ProcessController::load()
 
 void ProcessController::process()
 {
+
+    storage.spriteCursor->setPosition(inputController->getMousePoint());
+    
     switch (storage.state)
     {
 	case Exiting:
@@ -49,7 +52,7 @@ void ProcessController::process()
 	    if (storage.buttonExitGame->isTriggered())
 	    {
 		storage.state = Exiting;
-		threadManager.exitCleanUpStart(MainMenu);
+		threadManager.exitCleanUpStart();
 	    }
 	    break;
 
@@ -57,12 +60,10 @@ void ProcessController::process()
 
     if (storage.state != Exiting)
     {
-	storage.spriteCursor->setPosition(inputController->getMousePoint());
-
 	if (inputController->getKeyboardStatus(EscapeKey, ButtonDown))
 	{
 	    storage.state = Exiting;
-	    threadManager.exitCleanUpStart(MainMenu);
+	    threadManager.exitCleanUpStart();
 	}
     }
 }

@@ -20,7 +20,7 @@ public:
     bool loadMainMenuJoinable();
     
     //exitCleanUp
-    void exitCleanUpStart(const ProgramState& inputExitingFrom);
+    void exitCleanUpStart();
     void exitCleanUpJoin();
     bool exitCleanUpJoinable();    
     
@@ -34,7 +34,7 @@ private:
     std::thread* loadMainMenu;
     
     //exitCleanUp
-    void exitCleanUpThread(const ProgramState& exitingFrom);
+    void exitCleanUpThread();
     std::thread* exitCleanUp;
     
 };

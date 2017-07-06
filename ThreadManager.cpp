@@ -104,9 +104,9 @@ void ThreadManager::loadMainMenuThread()
     storage->state = MainMenu;
 }
 
-void ThreadManager::exitCleanUpStart(const ProgramState& inputExitingFrom)
+void ThreadManager::exitCleanUpStart()
 {
-    exitCleanUp = new std::thread(&ThreadManager::exitCleanUpThread, this, inputExitingFrom);
+    exitCleanUp = new std::thread(&ThreadManager::exitCleanUpThread, this);
     Debug::log("[INFO] exitCleanUpThread started");
     Debug::commitLogLine();
 }
@@ -124,30 +124,18 @@ bool ThreadManager::exitCleanUpJoinable()
     return exitCleanUp->joinable();
 }
 
-void ThreadManager::exitCleanUpThread(const ProgramState& exitingFrom)
+void ThreadManager::exitCleanUpThread()
 {
-    switch (exitingFrom)
-    {
-	case MainMenu:
-	    frame->removeFromFrame(storage->textHeading);
-	    frame->removeFromFrame(storage->buttonPlay);
-	    frame->removeFromFrame(storage->buttonOptions);
-	    frame->removeFromFrame(storage->buttonExitGame);
-	    delete storage->textHeading;
-	    delete storage->buttonPlay;
-	    delete storage->buttonOptions;
-	    delete storage->buttonExitGame;
-	    break;
-	default:
-	    Debug::log("[WARNING] Unrecognisable exit state.");
-	    Debug::commitLogLine();
-	    Debug::log("[WARNING] There will probably be memory leaks as a result.");
-	    Debug::commitLogLine();
-	    Debug::log("[WARNING] Check ThreadManager.exitCleanUpThread() for more info");
-	    Debug::commitLogLine();
-	    break;
+    frame->removeFromFrame(storage->textHeading);
+    frame->removeFromFrame(storage->buttonPlay);
+    frame->removeFromFrame(storage->buttonOptions);
+    frame->removeFromFrame(storage->buttonExitGame);
+    delete storage->textHeading;
+    delete storage->buttonPlay;
+    delete storage->buttonOptions;
+    delete storage->buttonExitGame;
 
-    }
+
 
     frame->removeFromFrame(storage->textLoading);
     frame->removeFromFrame(storage->spriteCursor);
