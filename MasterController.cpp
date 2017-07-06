@@ -41,7 +41,7 @@ void MasterController::IPOCLoad()
     Debug::log("[INFO] Loaded controllers");
     Debug::commitLogLine();
 
-    inputThread = thread(&MasterController::inputLoop, this);
+    inputThread = std::thread(&MasterController::inputLoop, this);
 
     Debug::log("[INFO] -------------------------------------------------------START OF PS LOAD: ");
     Debug::logTimeStamp();
@@ -54,7 +54,7 @@ void MasterController::IPOCLoad()
 
 void MasterController::start() 
 {
-    processThread = thread(&MasterController::processLoop, this);
+    processThread = std::thread(&MasterController::processLoop, this);
     
     //Open graphics window
     outputController->createGraphicsWindow(inputController);

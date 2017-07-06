@@ -33,7 +33,7 @@ void Debug::writeLoopNumber()
 
 void Debug::log(const int& input)
 {
-	toLog += to_string(input);
+	toLog += std::to_string(input);
 }
 
 void Debug::log(const std::string& input)
@@ -43,7 +43,7 @@ void Debug::log(const std::string& input)
 
 void Debug::logLoopNumber()
 {
-	toLog += to_string(loopNumber);
+	toLog += std::to_string(loopNumber);
 }
 
 void Debug::commitLogLine()
@@ -92,19 +92,11 @@ void Debug::setFilePath(std::string inputPath)
 void Debug::notifyOfConstruction(const int& classId)
 {
 	constructionAmount[classId]++;
-	/*if (classId == 14)
-	{
-		write("Constructed\n");		
-	}*/
 }
 
 void Debug::notifyOfDestruction(const int& classId)
 {
 	destructionAmount[classId]++;	
-	/*if (classId == 14)
-	{
-		write("Destructed\n");
-	}*/
 }
 
 void Debug::notifyOfCopy(const int& classId)
@@ -150,7 +142,7 @@ void Debug::logClassAmountInfo()
 		{
 			log("MEMORY LEAK, ");
 		}
-		log("ClassID " + to_string(i) + ", constructed " + to_string(constructionAmount[i]) + ", copied " + to_string(copyAmount[i]) + ", destructed " +  to_string(destructionAmount[i]) + ".");
+		log("ClassID " + std::to_string(i) + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " +  std::to_string(destructionAmount[i]) + ".");
 		commitLogLine();
 	}
 	
