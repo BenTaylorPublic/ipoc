@@ -22,7 +22,7 @@ public:
     
     //GLOBAL    
     Font* font1;
-    vector<Texture*> textures;
+    std::vector<Texture*> textures;
     Text* textLoading;    
     Sprite* spriteCursor;
     

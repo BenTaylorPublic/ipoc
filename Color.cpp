@@ -38,6 +38,6 @@ void Color::random()
 
 std::string Color::getStatusString()
 {
-    string result = "(" + std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b) + ")";
+    std::string result = "(" + std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b) + ")";
     return result;
 }

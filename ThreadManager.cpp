@@ -26,7 +26,7 @@ std::string ThreadManager::getStatusString()
 
 void ThreadManager::loadMainMenuStart()
 {
-    loadMainMenu = new thread(&ThreadManager::loadMainMenuThread, this);
+    loadMainMenu = new std::thread(&ThreadManager::loadMainMenuThread, this);
     Debug::log("[INFO] loadMainMenuThread started");
     Debug::commitLogLine();
 }
@@ -106,7 +106,7 @@ void ThreadManager::loadMainMenuThread()
 
 void ThreadManager::exitCleanUpStart(const ProgramState& inputExitingFrom)
 {
-    exitCleanUp = new thread(&ThreadManager::exitCleanUpThread, this, inputExitingFrom);
+    exitCleanUp = new std::thread(&ThreadManager::exitCleanUpThread, this, inputExitingFrom);
     Debug::log("[INFO] exitCleanUpThread started");
     Debug::commitLogLine();
 }

@@ -4,23 +4,23 @@
 
 void FileManager::writeToFile(const std::string& filePath, const std::string& input)
 {
-    ofstream file;
-    file.open(filePath, ios_base::app);
+    std::ofstream file;
+    file.open(filePath, std::ios_base::app);
     file << input;
     file.close();
 }
 
 void FileManager::writeToFile(const std::string& filePath, const char& input)
 {
-    ofstream file;
-    file.open(filePath, ios_base::app);
+    std::ofstream file;
+    file.open(filePath, std::ios_base::app);
     file << input;
     file.close();
 }
 
 void FileManager::clearFile(const std::string& filePath)
 {
-    ofstream file;
+    std::ofstream file;
     file.open(filePath);
     file << "";
     file.close();
@@ -31,7 +31,7 @@ std::vector<std::string> FileManager::readFile(const std::string& filePath)
     std::vector<std::string> result = {};
 
     std::string line = "";
-    ifstream file(filePath);
+    std::ifstream file(filePath);
     if (file.is_open())
     {
 	while (getline(file, line))

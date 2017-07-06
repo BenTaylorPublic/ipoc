@@ -97,12 +97,12 @@ void Text::setPosition(const Point2D& newPosition)
     text.setPosition(sf::Vector2f(newPosition.x, newPosition.y));
 }
 
-void Text::setText(const string& input)
+void Text::setText(const std::string& input)
 {
     text.setString(input);
 }
 
-void Text::addText(const string& input)
+void Text::addText(const std::string& input)
 {
     text.setString(text.getString() + input);
 }

@@ -94,16 +94,16 @@ void MasterController::processLoop()
 {
     
     //Calculating loop time
-    chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
-    chrono::system_clock::time_point startOfLoopTime;
+    std::chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
+    std::chrono::system_clock::time_point startOfLoopTime;
 
-    startOfLoopTime = chrono::system_clock::now(); //Current time
+    startOfLoopTime = std::chrono::system_clock::now(); //Current time
     while (!processController->checkForExitProgram()) 
     {
 #ifdef WINDOWS
         startOfLoopTime += nanosecondsPerLoop; //Current time
 #else
-        startOfLoopTime = chrono::system_clock::now();
+        startOfLoopTime = std::chrono::system_clock::now();
 #endif
 
         //Increment both loop numbers (stored in 2 locations, for debugging)
@@ -120,7 +120,7 @@ void MasterController::processLoop()
         inputController->markEndOfLoop();
 
         //Checks if the loop went overtime
-        if (chrono::system_clock::now() >= (startOfLoopTime + nanosecondsPerLoop)) 
+        if (std::chrono::system_clock::now() >= (startOfLoopTime + nanosecondsPerLoop)) 
         {
             //If it did, log and write a warning
             Debug::write("[WARN] Loop went over time frame\n");
@@ -130,7 +130,7 @@ void MasterController::processLoop()
         } else 
         {
             //Otherwise sleep until the next loop is required
-            this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
+            std::this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
         }
     }
     

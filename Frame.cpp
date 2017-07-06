@@ -15,7 +15,7 @@ Frame::~Frame()
 
 void Frame::IPOCLoad()
 {
-    vector<Drawable*> toAdd;
+    std::vector<Drawable*> toAdd;
     for (int i = 0; i < Settings::maxZ; i++)
     {
 	drawables.push_back(toAdd);

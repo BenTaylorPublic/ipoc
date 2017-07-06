@@ -85,7 +85,7 @@ std::string ProcessController::getStatusString()
     else
 	result += "false\n";
 
-    result += "loopNumber: " + to_string(loopNumber) + "\n";
+    result += "loopNumber: " + std::to_string(loopNumber) + "\n";
 
     return result;
 }

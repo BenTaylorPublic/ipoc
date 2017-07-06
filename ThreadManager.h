@@ -31,10 +31,10 @@ private:
     
     //loadMainMenu
     void loadMainMenuThread();
-    thread* loadMainMenu;
+    std::thread* loadMainMenu;
     
     //exitCleanUp
     void exitCleanUpThread(const ProgramState& exitingFrom);
-    thread* exitCleanUp;
+    std::thread* exitCleanUp;
     
 };

@@ -50,7 +50,7 @@ void Settings::loadSettings()
     imageFilePath = Conversions::replaceStringInString(filePath, "\\", "/");
     fontFilePath = Conversions::replaceStringInString(filePath, "\\", "/");
 
-    std::vector<string> settingsFile = FileManager::readFile(settingsFilePath);
+    std::vector<std::string> settingsFile = FileManager::readFile(settingsFilePath);
 
     imageFilePath += getStringFromSettings(settingsFile, "image_file_path");
     fontFilePath += getStringFromSettings(settingsFile, "font_file_path");

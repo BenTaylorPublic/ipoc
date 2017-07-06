@@ -12,8 +12,8 @@ IPOCSprite is a Data Type (Wrapper)
 class Sprite : public Drawable
 {
 public:
-    Sprite(const string& inputName, Texture& inputTexture);
-    Sprite(const string& inputName, Texture& inputTexture, const int& inputZ);
+    Sprite(const std::string& inputName, Texture& inputTexture);
+    Sprite(const std::string& inputName, Texture& inputTexture, const int& inputZ);
     ~Sprite();
     std::string name; //Name that is mainly used for debugging
     void setPosition(const Point2D& newPoint) override; //Sets the position of the sprite, to the new provided position
