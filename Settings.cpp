@@ -77,7 +77,7 @@ int Settings::getIntFromSettings(vector<std::string>& inputFile, const std::stri
 
     Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString);
     Debug::commitLogLine();
-    Debug::crash(104, "IPOCSettings.getIntFromSettings()");
+    Debug::crash(104, "Settings.getIntFromSettings()");
 
     return -1;
 }
@@ -93,7 +93,7 @@ std::string Settings::getStringFromSettings(vector<std::string>& inputFile, cons
 
     Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString);
     Debug::commitLogLine();
-    Debug::crash(105, "IPOCSettings.getStringFromSettings()");
+    Debug::crash(105, "Settings.getStringFromSettings()");
 
     return "";
 }
@@ -112,7 +112,7 @@ bool Settings::getBoolFromSettings(vector<std::string>& inputFile, const std::st
 
     Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString);
     Debug::commitLogLine();
-    Debug::crash(106, "IPOCSettings.getBoolFromSettings()");
+    Debug::crash(106, "Settings.getBoolFromSettings()");
 
     return false;
 }
