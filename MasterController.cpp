@@ -43,9 +43,6 @@ void MasterController::IPOCLoad()
 
     inputThread = thread(&MasterController::inputLoop, this);
 
-    //while (!threadsLoaded); //Wait until both threads are loaded
-    Debug::log("[INFO] Loaded I/O threads");
-    Debug::commitLogLine();
     Debug::log("[INFO] -------------------------------------------------------START OF PS LOAD: ");
     Debug::logTimeStamp();
     Debug::commitLogLine();
@@ -62,12 +59,23 @@ void MasterController::start()
     //Open graphics window
     outputController->createGraphicsWindow(inputController);
 
+    //Initial writing to console
+    Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
+    Debug::logTimeStamp();
+    Debug::commitLogLine();
     //That's all the loading required, setting the bool so the program can start
     threadsLoaded = true;
     while (!processController->checkForExitProgram()) 
     {
         outputController->output();
     }
+
+    //End of program statements
+    Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
+    Debug::logTimeStamp();
+    Debug::commitLogLine();
+
+    exit();
 }
 
 void MasterController::inputLoop() 
@@ -84,11 +92,7 @@ void MasterController::inputLoop()
 
 void MasterController::processLoop() 
 {
-    //Initial writing to console
-    Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
-    Debug::logTimeStamp();
-    Debug::commitLogLine();
-
+    
     //Calculating loop time
     chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
     chrono::system_clock::time_point startOfLoopTime;
@@ -129,13 +133,7 @@ void MasterController::processLoop()
             this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
         }
     }
-
-    //End of program statements
-    Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
-    Debug::logTimeStamp();
-    Debug::commitLogLine();
-
-    exit();
+    
 }
 
 void MasterController::exit() 
