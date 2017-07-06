@@ -9,7 +9,7 @@
 #include "Sprite.h"
 #include "OnscreenButton.h"
 
-enum ProgramState {LoadingMainMenu, MainMenu, Exiting, SaveScreen};
+enum ProgramState {LoadingMainMenu, MainMenu, Exiting};
 
 class Storage
 {
