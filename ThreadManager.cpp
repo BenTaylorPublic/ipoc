@@ -50,8 +50,8 @@ void ThreadManager::loadMainMenuThread()
     storage->font1 = new Font("test font", "courier new.ttf");
 
     //Loading screen
-    storage->textLoading = new Text("test text", *storage->font1, 0, "Loading...", Point2D(100, 700));
-    frame->addToFrame(storage->textLoading);
+    storage->tLoading = new Text("loading text", *storage->font1, 0, "Loading...", Point2D(100, 700));
+    frame->addToFrame(storage->tLoading);
     frame->markAsDrawable();
 
     //Textures
@@ -62,48 +62,59 @@ void ThreadManager::loadMainMenuThread()
     storage->textures.push_back(new Texture("cursor texture", "cursor.png"));
 
     //Texts
-    storage->textHeading = new Text("test text", *storage->font1, 0, "BEVS", Point2D(20, 20));
+    storage->tCounter = new Text("counter text", *storage->font1, 0, "0", Point2D(20, 20));
+    storage->counter = 0;
 
     //Sprites
-    storage->spriteCursor = new Sprite("cursor sprite", *storage->textures[4], 2);
+    storage->sCursor = new Sprite("cursor sprite", *storage->textures[4], 2);
 
     //Buttons
-    //Buttons - Play
-    storage->buttonPlay = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 100));
-    storage->buttonPlay->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonPlay->addToUp(new Sprite("play button up sprite", *storage->textures[2]));
-    storage->buttonPlay->addToUp(new Text("play button up text", *storage->font1, "Play"), Point2D(20, 30));
-    storage->buttonPlay->addToDown(new Sprite("play button down sprite", *storage->textures[3]));
-    storage->buttonPlay->addToDown(new Text("play button down text", *storage->font1, "Play"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->buttonPlay);
+    //Buttons - TriggerOnUp
+    storage->bTriggerOnUp = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 100));
+    storage->bTriggerOnUp->setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->bTriggerOnUp->addToUp(new Sprite("play button up sprite", *storage->textures[2]));
+    storage->bTriggerOnUp->addToUp(new Text("play button up text", *storage->font1, "Trigger On Up"), Point2D(20, 30));
+    storage->bTriggerOnUp->addToDown(new Sprite("play button down sprite", *storage->textures[3]));
+    storage->bTriggerOnUp->addToDown(new Text("play button down text", *storage->font1, "Trigger On Up"), Point2D(20, 37));
+    onscreenButtonManager->addOnscreenButton(storage->bTriggerOnUp);
 
-    //Buttons - Options
-    storage->buttonOptions = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 260));
-    storage->buttonOptions->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonOptions->addToUp(new Sprite("options button up sprite", *storage->textures[2]));
-    storage->buttonOptions->addToUp(new Text("options button up text", *storage->font1, "Options"), Point2D(20, 30));
-    storage->buttonOptions->addToDown(new Sprite("options button down sprite", *storage->textures[3]));
-    storage->buttonOptions->addToDown(new Text("options button down text", *storage->font1, "Options"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->buttonOptions);
+    //Buttons - TriggerOnDown
+    storage->bTriggerOnDown = new OnscreenButton(TriggerOnDown, 1, Point2D(20, 260));
+    storage->bTriggerOnDown->setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->bTriggerOnDown->addToUp(new Sprite("options button up sprite", *storage->textures[2]));
+    storage->bTriggerOnDown->addToUp(new Text("options button up text", *storage->font1, "Trigger On Down"), Point2D(20, 30));
+    storage->bTriggerOnDown->addToDown(new Sprite("options button down sprite", *storage->textures[3]));
+    storage->bTriggerOnDown->addToDown(new Text("options button down text", *storage->font1, "Trigger On Down"), Point2D(20, 37));
+    onscreenButtonManager->addOnscreenButton(storage->bTriggerOnDown);
+
+    //Buttons - TriggerOnHold
+    storage->bTriggerOnHold = new OnscreenButton(TriggerOnHold, 1, Point2D(20, 420));
+    storage->bTriggerOnHold->setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->bTriggerOnHold->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
+    storage->bTriggerOnHold->addToUp(new Text("exit button up text", *storage->font1, "Trigger On Hold"), Point2D(20, 30));
+    storage->bTriggerOnHold->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
+    storage->bTriggerOnHold->addToDown(new Text("exit button down text", *storage->font1, "Trigger On Hold"), Point2D(20, 37));
+    onscreenButtonManager->addOnscreenButton(storage->bTriggerOnHold);
 
     //Buttons - Exit
-    storage->buttonExitGame = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 420));
-    storage->buttonExitGame->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonExitGame->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
-    storage->buttonExitGame->addToUp(new Text("exit button up text", *storage->font1, "Exit"), Point2D(20, 30));
-    storage->buttonExitGame->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
-    storage->buttonExitGame->addToDown(new Text("exit button down text", *storage->font1, "Exit"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->buttonExitGame);
+    storage->bExit = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 580));
+    storage->bExit->setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->bExit->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
+    storage->bExit->addToUp(new Text("exit button up text", *storage->font1, "Exit"), Point2D(20, 30));
+    storage->bExit->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
+    storage->bExit->addToDown(new Text("exit button down text", *storage->font1, "Exit"), Point2D(20, 37));
+    onscreenButtonManager->addOnscreenButton(storage->bExit);
 
     //Remove loading screen
-    frame->removeFromFrame(storage->textLoading);
+    frame->removeFromFrame(storage->tLoading);
 
     //Add to the frame
-    frame->addToFrame(storage->textHeading);
-    frame->addToFrame(storage->spriteCursor);
-    frame->addToFrame(storage->buttonExitGame);
-    frame->addToFrame(storage->buttonOptions);
-    frame->addToFrame(storage->buttonPlay);
+    frame->addToFrame(storage->tCounter);
+    frame->addToFrame(storage->sCursor);
+    frame->addToFrame(storage->bTriggerOnUp);
+    frame->addToFrame(storage->bTriggerOnDown);
+    frame->addToFrame(storage->bTriggerOnHold);
+    frame->addToFrame(storage->bExit);
     storage->state = MainMenu;
 }
 
@@ -129,21 +140,23 @@ bool ThreadManager::exitCleanUpJoinable()
 
 void ThreadManager::exitCleanUpThread()
 {
-    frame->removeFromFrame(storage->textHeading);
-    frame->removeFromFrame(storage->buttonPlay);
-    frame->removeFromFrame(storage->buttonOptions);
-    frame->removeFromFrame(storage->buttonExitGame);
-    delete storage->textHeading;
-    delete storage->buttonPlay;
-    delete storage->buttonOptions;
-    delete storage->buttonExitGame;
+    frame->removeFromFrame(storage->tCounter);
+    frame->removeFromFrame(storage->bTriggerOnHold);
+    frame->removeFromFrame(storage->bTriggerOnDown);
+    frame->removeFromFrame(storage->bTriggerOnUp);
+    frame->removeFromFrame(storage->bExit);
+    delete storage->tCounter;
+    delete storage->bTriggerOnDown;
+    delete storage->bTriggerOnUp;
+    delete storage->bTriggerOnHold;
+    delete storage->bExit;
 
 
 
-    frame->removeFromFrame(storage->textLoading);
-    frame->removeFromFrame(storage->spriteCursor);
-    delete storage->textLoading;
-    delete storage->spriteCursor;
+    frame->removeFromFrame(storage->tLoading);
+    frame->removeFromFrame(storage->sCursor);
+    delete storage->tLoading;
+    delete storage->sCursor;
 
     for (Texture* it : storage->textures)
     {

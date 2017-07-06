@@ -23,18 +23,14 @@ public:
     //GLOBAL    
     Font* font1;
     std::vector<Texture*> textures;
-    Text* textLoading;    
-    Sprite* spriteCursor;
+    Text* tLoading;    
+    Sprite* sCursor;
     
     //state: MainMenu + LoadingMainMenu
-    Text* textHeading;
-    OnscreenButton* buttonPlay;
-    OnscreenButton* buttonOptions;
-    OnscreenButton* buttonExitGame;
-    
-    //state: SaveScreen
-    OnscreenButton* buttonSave1;
-    OnscreenButton* buttonSave2;
-    OnscreenButton* buttonSave3;
-    OnscreenButton* buttonSave4;
+    Text* tCounter;
+    int counter;
+    OnscreenButton* bTriggerOnUp;
+    OnscreenButton* bTriggerOnDown;
+    OnscreenButton* bTriggerOnHold;
+    OnscreenButton* bExit;
 };
