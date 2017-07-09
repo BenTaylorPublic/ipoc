@@ -14,7 +14,7 @@
 #endif 
 
 //All the defaults
-std::string Settings::ipocVersion = "0.4.0";
+std::string Settings::ipocVersion = "0.5.0";
 
 std::string Settings::imageFilePath = "default file path";
 std::string Settings::fontFilePath = "default file path";
