@@ -4,15 +4,15 @@
 
 Storage::Storage()
 {
-	Debug::notifyOfConstruction(8);
+    Debug::notifyOfConstruction(8);
 }
 
 Storage::~Storage()
-{	
-	Debug::notifyOfDestruction(8);
+{
+    Debug::notifyOfDestruction(8);
 }
 
 std::string Storage::getStatusString()
 {
-	return "N/A";
+    return "N/A";
 }

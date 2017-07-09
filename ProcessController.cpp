@@ -7,85 +7,117 @@
 
 ProcessController::ProcessController()
 {
-	Debug::notifyOfConstruction(2);
+    Debug::notifyOfConstruction(2);
 }
 
 ProcessController::~ProcessController()
 {
-	Debug::notifyOfDestruction(2);
+    Debug::notifyOfDestruction(2);
 }
 
-void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame)
+void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame, OutputController* outputControllerPtr)
 {
-	inputController = inputControllerPtr;
-	onscreenButtonManager = inputOnscreenButtonManager;
-	exitProgram = false;
-	loopNumber = 0;
-	frame = inputFrame;
-	threadManager.IPOCLoad(&storage, frame, onscreenButtonManager);
+    ic = inputControllerPtr;
+    oc = outputControllerPtr;
+    obm = inputOnscreenButtonManager;
+    exitProgram = false;
+    loopNumber = 0;
+    frame = inputFrame;
+    tm.IPOCLoad(&storage, frame, obm);
 }
 
 void ProcessController::load()
 {
-	threadManager.loadMainMenuStart();
-	
-	while (!threadManager.loadMainMenuJoinable());
-		
-	threadManager.loadMainMenuJoin();
+    tm.loadMainMenuStart();
+
+    while (!tm.loadMainMenuJoinable());
+
+    tm.loadMainMenuJoin();
 }
 
 void ProcessController::process()
 {
-	switch(storage.state)
-	{
-		case Exiting:
-			if (threadManager.exitCleanUpJoinable())
-			{
-				threadManager.exitCleanUpJoin();
-				exitProgram = true;		
-			}
-			break;
-		case MainMenu:
-			if (storage.buttonExitGame->isTriggered())
-			{
-				storage.state = Exiting;
-				threadManager.exitCleanUpStart(MainMenu);					
-			}
-			break;
-			
-	}
-	
-	if (storage.state != Exiting)
-	{
-		storage.spriteCursor->setPosition(inputController->getMousePoint());
-		
-		if (inputController->getKeyboardStatus(EscapeKey, ButtonDown))
+
+    storage.sprCursor->setPosition(ic->getMousePoint());
+
+    switch (storage.state)
+    {
+	case Exiting:
+	    if (tm.exitCleanUpJoinable())
+	    {
+		tm.exitCleanUpJoin();
+		exitProgram = true;
+	    }
+	    break;
+	case MainMenu:
+	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
+	    {
+		storage.counter++;
+		storage.txtCounter->setText(std::to_string(storage.counter));
+	    }
+
+	    if (ic->getKeyboardStatus(Key::P, ButtonStatus::ButtonDown))
+	    {
+		if (!storage.windowToggleMode)
 		{
-			storage.state = Exiting;
-			threadManager.exitCleanUpStart(MainMenu);					
+		    Settings::screenWidth = 1600;
+		    Settings::screenHeight = 900;
+		    Settings::screenTitle = "IPOC";
+		    Settings::windowType = "borderless window";
+		    Settings::hideCursor = true;
+
+		    storage.windowToggleMode = true;
+		} else
+		{
+		    Settings::screenWidth = 450;
+		    Settings::screenHeight = 800;
+		    Settings::screenTitle = "IPOC toggle 2";
+		    Settings::windowType = "windowed";
+		    Settings::hideCursor = false;
+
+		    storage.windowToggleMode = false;
 		}
+		oc->reloadGraphicsWindow();
+	    }
+
+	    if (storage.btnExit->isTriggered())
+	    {
+		storage.state = Exiting;
+		tm.exitCleanUpStart();
+	    }
+	    break;
+
+    }
+
+    if (storage.state != Exiting)
+    {
+	if (ic->getKeyboardStatus(EscapeKey, ButtonDown))
+	{
+	    storage.state = Exiting;
+	    tm.exitCleanUpStart();
 	}
+    }
 }
 
 bool ProcessController::checkForExitProgram()
 {
-	return exitProgram;
+    return exitProgram;
 }
 
 void ProcessController::incrementLoopNumber()
 {
-	loopNumber++;
+    loopNumber++;
 }
 
 std::string ProcessController::getStatusString()
 {
-	std::string result = "exitProgram: ";
-	if (exitProgram)
-		result += "true\n";
-	else
-		result += "false\n"; 
+    std::string result = "exitProgram: ";
+    if (exitProgram)
+	result += "true\n";
+    else
+	result += "false\n";
 
-	result += "loopNumber: " + to_string(loopNumber) + "\n";
+    result += "loopNumber: " + std::to_string(loopNumber) + "\n";
 
-	return result;
+    return result;
 }

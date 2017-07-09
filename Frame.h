@@ -19,8 +19,8 @@ public:
     void removeFromFrame(Drawable* drawable);
     Drawable* getNextDrawable();
 private:
-    vector<vector<Drawable*> > drawables;
-    queue<int> frameIdsToGive;
+    std::vector<std::vector<Drawable*> > drawables;
+    std::queue<int> frameIdsToGive;
     bool isDrawableBool;
     int currentDrawingZ;
     int currentDrawingIndex;

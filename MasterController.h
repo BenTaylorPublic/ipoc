@@ -21,8 +21,8 @@ private:
     OnscreenButtonManager* onscreenButtonManager;
     Frame* frame;
     
-    thread inputThread;
-    thread processThread;
+    std::thread inputThread;
+    std::thread processThread;
     volatile bool threadsLoaded;
     void inputLoop(); //Called by the inputThread. The inputLoop continuously checks user input
     void processLoop(); //Called by the outputThread. The outputLoop continuously renders/draws to the screen

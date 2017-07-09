@@ -38,10 +38,10 @@ private:
     bool stateUp = true;
     int onscreenButtonManagerId = -1;
     OnscreenButtonType onscreenButtonType;
-    vector<Drawable*> stateUpDrawables;
-    vector<Drawable*> stateDownDrawables;
-    vector<Point2D> stateUpOffset;
-    vector<Point2D> stateDownOffset;
+    std::vector<Drawable*> stateUpDrawables;
+    std::vector<Drawable*> stateDownDrawables;
+    std::vector<Point2D> stateUpOffset;
+    std::vector<Point2D> stateDownOffset;
     Point2D hitBoxTopLeft;
     Point2D hitBoxBottomRight;
     Point2D drawingPosition;

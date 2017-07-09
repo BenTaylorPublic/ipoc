@@ -9,7 +9,7 @@
 #include "Sprite.h"
 #include "OnscreenButton.h"
 
-enum ProgramState {LoadingMainMenu, MainMenu, Exiting, SaveScreen};
+enum ProgramState {LoadingMainMenu, MainMenu, Exiting};
 
 class Storage
 {
@@ -22,19 +22,16 @@ public:
     
     //GLOBAL    
     Font* font1;
-    vector<Texture*> textures;
-    Text* textLoading;    
-    Sprite* spriteCursor;
+    std::vector<Texture*> textures;
+    Text* txtLoading;    
+    Sprite* sprCursor;
     
     //state: MainMenu + LoadingMainMenu
-    Text* textHeading;
-    OnscreenButton* buttonPlay;
-    OnscreenButton* buttonOptions;
-    OnscreenButton* buttonExitGame;
-    
-    //state: SaveScreen
-    OnscreenButton* buttonSave1;
-    OnscreenButton* buttonSave2;
-    OnscreenButton* buttonSave3;
-    OnscreenButton* buttonSave4;
+    Text* txtCounter;
+    int counter;
+    bool windowToggleMode;
+    OnscreenButton* btnTriggerOnUp;
+    OnscreenButton* btnTriggerOnDown;
+    OnscreenButton* btnTriggerOnHold;
+    OnscreenButton* btnExit;
 };

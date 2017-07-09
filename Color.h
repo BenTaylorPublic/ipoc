@@ -5,9 +5,8 @@
 /*
 Color is a Data type
 Color contains 3 integers which correspond to Red Green and Blue components of color
-*/
-class Color
-{
+ */
+class Color {
 public:
     Color(const int& inputR, const int& inputG, const int& inputB); //Creates a new color, with the RGB values inputted	
     Color(); //Creates a new color, that defaults to black RGB = 0
@@ -19,7 +18,7 @@ public:
     /*
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
-    */
+     */
     std::string getStatusString();
 private:
 };

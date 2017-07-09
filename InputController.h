@@ -27,10 +27,10 @@ private:
     void resetInputArrays();
     ButtonStatus inputKeyboardArray[98];
     ButtonStatus inputMouseArray[3];
-    queue<int> buttonDownKeyboard; //Used to mark ButtonDown to ButtonHold
-    queue<int> buttonDownMouse; //Used to mark ButtonDown to ButtonHold
-    queue<int> buttonUpKeyboard; //Used to mark ButtonUp to ButtonUntouched
-    queue<int> buttonUpMouse; //Used to mark ButtonUp to ButtonUntouched
+    std::queue<int> buttonDownKeyboard; //Used to mark ButtonDown to ButtonHold
+    std::queue<int> buttonDownMouse; //Used to mark ButtonDown to ButtonHold
+    std::queue<int> buttonUpKeyboard; //Used to mark ButtonUp to ButtonUntouched
+    std::queue<int> buttonUpMouse; //Used to mark ButtonUp to ButtonUntouched
     
     Window* window; //Needed for mouse location relative to window
 };

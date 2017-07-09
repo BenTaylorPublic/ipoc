@@ -14,7 +14,7 @@
 #endif 
 
 //All the defaults
-std::string Settings::ipocVersion = "0.4.0";
+std::string Settings::ipocVersion = "0.5.0";
 
 std::string Settings::imageFilePath = "default file path";
 std::string Settings::fontFilePath = "default file path";
@@ -29,6 +29,8 @@ int Settings::maxDrawables = 0;
 std::string Settings::windowType = "windowed";
 bool Settings::hideCursor = true;
 bool Settings::logClassAmountInfo = false;
+
+InputStatus Settings::inputStatus = InputStatus::Active;
 
 void Settings::loadSettings() 
 {
@@ -50,7 +52,7 @@ void Settings::loadSettings()
     imageFilePath = Conversions::replaceStringInString(filePath, "\\", "/");
     fontFilePath = Conversions::replaceStringInString(filePath, "\\", "/");
 
-    vector<string> settingsFile = FileManager::readFile(settingsFilePath);
+    std::vector<std::string> settingsFile = FileManager::readFile(settingsFilePath);
 
     imageFilePath += getStringFromSettings(settingsFile, "image_file_path");
     fontFilePath += getStringFromSettings(settingsFile, "font_file_path");
@@ -65,7 +67,7 @@ void Settings::loadSettings()
     logClassAmountInfo = getBoolFromSettings(settingsFile, "log_class_amount_info");
 }
 
-int Settings::getIntFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
+int Settings::getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString) {
     for (int i = 0; i < inputFile.size(); i++) {
         if (Conversions::stringContains(inputFile[i], inputString)) {
             std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
@@ -82,7 +84,7 @@ int Settings::getIntFromSettings(vector<std::string>& inputFile, const std::stri
     return -1;
 }
 
-std::string Settings::getStringFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
+std::string Settings::getStringFromSettings(std::vector<std::string>& inputFile, const std::string& inputString) {
     for (int i = 0; i < inputFile.size(); i++) {
         if (Conversions::stringContains(inputFile[i], inputString)) {
             std::string result = inputFile[i].erase(0, inputString.length() + 2);
@@ -98,7 +100,7 @@ std::string Settings::getStringFromSettings(vector<std::string>& inputFile, cons
     return "";
 }
 
-bool Settings::getBoolFromSettings(vector<std::string>& inputFile, const std::string& inputString) {
+bool Settings::getBoolFromSettings(std::vector<std::string>& inputFile, const std::string& inputString) {
     for (int i = 0; i < inputFile.size(); i++) {
         if (Conversions::stringContains(inputFile[i], inputString)) {
             std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
