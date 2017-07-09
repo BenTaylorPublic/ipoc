@@ -53,6 +53,8 @@ void ThreadManager::loadMainMenuThread()
     storage->txtLoading = new Text("loading text", *storage->font1, 0, "Loading...", Point2D(100, 700));
     frame->addToFrame(storage->txtLoading);
     frame->markAsDrawable();
+    
+    storage->windowToggleMode = true;
 
     //Textures
     storage->textures.push_back(new Texture("test texture", "default texture.png"));

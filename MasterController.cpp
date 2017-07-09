@@ -5,11 +5,11 @@
 #include "Conversions.h"
 #include <chrono>
 
-MasterController::MasterController() 
+MasterController::MasterController()
 {
 }
 
-void MasterController::IPOCLoad() 
+void MasterController::IPOCLoad()
 {
     inputController = new InputController();
     processController = new ProcessController();
@@ -52,10 +52,10 @@ void MasterController::IPOCLoad()
     Debug::commitLogLine();
 }
 
-void MasterController::start() 
+void MasterController::start()
 {
     processThread = std::thread(&MasterController::processLoop, this);
-    
+
     //Open graphics window
     outputController->createGraphicsWindow(inputController);
 
@@ -65,9 +65,9 @@ void MasterController::start()
     Debug::commitLogLine();
     //That's all the loading required, setting the bool so the program can start
     threadsLoaded = true;
-    while (!processController->checkForExitProgram()) 
+    while (!processController->checkForExitProgram())
     {
-        outputController->output();
+	outputController->output();
     }
 
     //End of program statements
@@ -78,65 +78,76 @@ void MasterController::start()
     exit();
 }
 
-void MasterController::inputLoop() 
+void MasterController::inputLoop()
 {
     //Input thread requires no loading
     //Wait until output thread is loaded
     while (!threadsLoaded);
 
-    while (!processController->checkForExitProgram()) 
+    while (!processController->checkForExitProgram())
     {
-        inputController->input();
+	if (Settings::inputStatus == InputStatus::Active)
+	{
+	    inputController->input();
+	}
+	else
+	{
+	    if (Settings::inputStatus == InputStatus::PauseRequested)
+	    {
+		Settings::inputStatus = InputStatus::Paused;
+	    }
+	    //If it's paused, do nothing
+	}
     }
 }
 
-void MasterController::processLoop() 
+void MasterController::processLoop()
 {
-    
+
     //Calculating loop time
     std::chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
     std::chrono::system_clock::time_point startOfLoopTime;
 
     startOfLoopTime = std::chrono::system_clock::now(); //Current time
-    while (!processController->checkForExitProgram()) 
+    while (!processController->checkForExitProgram())
     {
 #ifdef WINDOWS
-        startOfLoopTime += nanosecondsPerLoop; //Current time
+	startOfLoopTime += nanosecondsPerLoop; //Current time
 #else
-        startOfLoopTime = std::chrono::system_clock::now();
+	startOfLoopTime = std::chrono::system_clock::now();
 #endif
 
-        //Increment both loop numbers (stored in 2 locations, for debugging)
-        //I don't know if that's smart or really dumb
-        //But alteast the Debug class knows the loop number without having to point to the ProcessController
-        Debug::incrementLoopNumber();
-        processController->incrementLoopNumber();
+	//Increment both loop numbers (stored in 2 locations, for debugging)
+	//I don't know if that's smart or really dumb
+	//But alteast the Debug class knows the loop number without having to point to the ProcessController
+	Debug::incrementLoopNumber();
+	processController->incrementLoopNumber();
 
-        inputController->markStartOfLoop();
-        onscreenButtonManager->markStartOfLoop();
-        processController->process(); //Executes all program specific code
-        onscreenButtonManager->markEndOfLoop();
-        frame->markAsDrawable();
-        inputController->markEndOfLoop();
+	inputController->markStartOfLoop();
+	onscreenButtonManager->markStartOfLoop();
+	processController->process(); //Executes all program specific code
+	onscreenButtonManager->markEndOfLoop();
+	frame->markAsDrawable();
+	inputController->markEndOfLoop();
 
-        //Checks if the loop went overtime
-        if (std::chrono::system_clock::now() >= (startOfLoopTime + nanosecondsPerLoop)) 
-        {
-            //If it did, log and write a warning
-            Debug::write("[WARN] Loop went over time frame\n");
-            Debug::log("[WARN] Overtime in loop ");
-            Debug::logLoopNumber();
-            Debug::commitLogLine();
-        } else 
-        {
-            //Otherwise sleep until the next loop is required
-            std::this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
-        }
+	//Checks if the loop went overtime
+	if (std::chrono::system_clock::now() >= (startOfLoopTime + nanosecondsPerLoop))
+	{
+	    //If it did, log and write a warning
+	    Debug::write("[WARN] Loop went over time frame\n");
+	    Debug::log("[WARN] Overtime in loop ");
+	    Debug::logLoopNumber();
+	    Debug::commitLogLine();
+	} else
+	{
+	    //Otherwise sleep until the next loop is required
+	    std::this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
+	}
     }
-    
+
 }
 
-void MasterController::exit() 
+void MasterController::exit()
 {
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
@@ -153,15 +164,15 @@ void MasterController::exit()
     delete frame;
 
     if (Settings::logClassAmountInfo)
-        Debug::logClassAmountInfo(); //Log all info
+	Debug::logClassAmountInfo(); //Log all info
     else
-        Debug::logMemoryLeakInfo(); //Only log if there was a leak
+	Debug::logMemoryLeakInfo(); //Only log if there was a leak
 
     Debug::log("[INFO] Program ended successfully.");
     Debug::commitLogLine();
 }
 
-std::string MasterController::getStatusString() 
+std::string MasterController::getStatusString()
 {
     //Calling all objects it has a pointer too
     std::string result = "Master Controller:\n";

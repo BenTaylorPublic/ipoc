@@ -29,6 +29,7 @@ public:
     //state: MainMenu + LoadingMainMenu
     Text* txtCounter;
     int counter;
+    bool windowToggleMode;
     OnscreenButton* btnTriggerOnUp;
     OnscreenButton* btnTriggerOnDown;
     OnscreenButton* btnTriggerOnHold;

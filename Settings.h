@@ -2,6 +2,8 @@
 #include <string>
 #include "Storage.h"
 
+enum InputStatus {Active, PauseRequested, Paused};
+
 class Settings
 {
 public:
@@ -20,6 +22,7 @@ public:
     static std::string windowType;
     static bool hideCursor;
     static bool logClassAmountInfo;
+    static InputStatus inputStatus;
 private:
     static int getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);
     static std::string getStringFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);

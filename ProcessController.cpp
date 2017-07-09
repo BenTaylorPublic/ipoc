@@ -39,7 +39,7 @@ void ProcessController::process()
 {
 
     storage.sprCursor->setPosition(ic->getMousePoint());
-    
+
     switch (storage.state)
     {
 	case Exiting:
@@ -55,7 +55,31 @@ void ProcessController::process()
 		storage.counter++;
 		storage.txtCounter->setText(std::to_string(storage.counter));
 	    }
-	    
+
+	    if (ic->getKeyboardStatus(Key::P, ButtonStatus::ButtonDown))
+	    {
+		if (!storage.windowToggleMode)
+		{
+		    Settings::screenWidth = 1600;
+		    Settings::screenHeight = 900;
+		    Settings::screenTitle = "IPOC";
+		    Settings::windowType = "borderless window";
+		    Settings::hideCursor = true;
+
+		    storage.windowToggleMode = true;
+		} else
+		{
+		    Settings::screenWidth = 450;
+		    Settings::screenHeight = 800;
+		    Settings::screenTitle = "IPOC toggle 2";
+		    Settings::windowType = "windowed";
+		    Settings::hideCursor = false;
+
+		    storage.windowToggleMode = false;
+		}
+		oc->reloadGraphicsWindow();
+	    }
+
 	    if (storage.btnExit->isTriggered())
 	    {
 		storage.state = Exiting;

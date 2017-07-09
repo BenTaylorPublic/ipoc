@@ -27,6 +27,12 @@ void OutputController::createGraphicsWindow(InputController* inputController)
     inputController->setGraphicsWindow(&window);
 }
 
+void OutputController::reloadGraphicsWindow()
+{
+    reloadWindow = true;
+    Settings::inputStatus = InputStatus::PauseRequested;
+}
+
 void OutputController::closeGraphicsWindow()
 {
     window.closeWindow();
@@ -37,6 +43,13 @@ void OutputController::output()
     while (!frame->isDrawable())
     {
 	window.handleEvents();
+
+	if (reloadWindow && Settings::inputStatus == InputStatus::Paused)
+	{
+	    window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
+	    reloadWindow = false;
+	    Settings::inputStatus = InputStatus::Active;
+	}
     }
 
     window.clearWindow();
