@@ -15,36 +15,37 @@ ProcessController::~ProcessController()
     Debug::notifyOfDestruction(2);
 }
 
-void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame)
+void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame, OutputController* outputControllerPtr)
 {
-    inputController = inputControllerPtr;
-    onscreenButtonManager = inputOnscreenButtonManager;
+    ic = inputControllerPtr;
+    oc = outputControllerPtr;
+    obm = inputOnscreenButtonManager;
     exitProgram = false;
     loopNumber = 0;
     frame = inputFrame;
-    threadManager.IPOCLoad(&storage, frame, onscreenButtonManager);
+    tm.IPOCLoad(&storage, frame, obm);
 }
 
 void ProcessController::load()
 {
-    threadManager.loadMainMenuStart();
+    tm.loadMainMenuStart();
 
-    while (!threadManager.loadMainMenuJoinable());
+    while (!tm.loadMainMenuJoinable());
 
-    threadManager.loadMainMenuJoin();
+    tm.loadMainMenuJoin();
 }
 
 void ProcessController::process()
 {
 
-    storage.sprCursor->setPosition(inputController->getMousePoint());
+    storage.sprCursor->setPosition(ic->getMousePoint());
     
     switch (storage.state)
     {
 	case Exiting:
-	    if (threadManager.exitCleanUpJoinable())
+	    if (tm.exitCleanUpJoinable())
 	    {
-		threadManager.exitCleanUpJoin();
+		tm.exitCleanUpJoin();
 		exitProgram = true;
 	    }
 	    break;
@@ -58,7 +59,7 @@ void ProcessController::process()
 	    if (storage.btnExit->isTriggered())
 	    {
 		storage.state = Exiting;
-		threadManager.exitCleanUpStart();
+		tm.exitCleanUpStart();
 	    }
 	    break;
 
@@ -66,10 +67,10 @@ void ProcessController::process()
 
     if (storage.state != Exiting)
     {
-	if (inputController->getKeyboardStatus(EscapeKey, ButtonDown))
+	if (ic->getKeyboardStatus(EscapeKey, ButtonDown))
 	{
 	    storage.state = Exiting;
-	    threadManager.exitCleanUpStart();
+	    tm.exitCleanUpStart();
 	}
     }
 }

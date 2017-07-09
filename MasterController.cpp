@@ -33,7 +33,7 @@ void MasterController::IPOCLoad()
     Debug::setMasterController(this);
 
     inputController->IPOCLoad();
-    processController->IPOCLoad(inputController, onscreenButtonManager, frame);
+    processController->IPOCLoad(inputController, onscreenButtonManager, frame, outputController);
     outputController->IPOCLoad(frame);
     onscreenButtonManager->IPOCLoad(inputController);
     frame->IPOCLoad();
