@@ -33,5 +33,6 @@ public:
     OnscreenButton* btnTriggerOnUp;
     OnscreenButton* btnTriggerOnDown;
     OnscreenButton* btnTriggerOnHold;
+    OnscreenButton* btnToggleWindowMode;
     OnscreenButton* btnExit;
 };

@@ -86,15 +86,15 @@ void MasterController::inputLoop()
 
     while (!processController->checkForExitProgram())
     {
-	if (Settings::inputStatus == InputStatus::Active)
+	if (Settings::inputStatus == Active)
 	{
 	    inputController->input();
 	}
 	else
 	{
-	    if (Settings::inputStatus == InputStatus::PauseRequested)
+	    if (Settings::inputStatus == PauseRequested)
 	    {
-		Settings::inputStatus = InputStatus::Paused;
+		Settings::inputStatus = Paused;
 	    }
 	    //If it's paused, do nothing
 	}

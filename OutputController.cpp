@@ -44,11 +44,11 @@ void OutputController::output()
     {
 	window.handleEvents();
 
-	if (reloadWindow && Settings::inputStatus == InputStatus::Paused)
+	if (reloadWindow && Settings::inputStatus == Paused)
 	{
 	    window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
 	    reloadWindow = false;
-	    Settings::inputStatus = InputStatus::Active;
+	    Settings::inputStatus = Active;
 	}
     }
 

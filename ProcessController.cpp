@@ -56,7 +56,7 @@ void ProcessController::process()
 		storage.txtCounter->setText(std::to_string(storage.counter));
 	    }
 
-	    if (ic->getKeyboardStatus(Key::P, ButtonStatus::ButtonDown))
+	    if (storage.btnToggleWindowMode->isTriggered())
 	    {
 		if (!storage.windowToggleMode)
 		{
@@ -69,7 +69,7 @@ void ProcessController::process()
 		    storage.windowToggleMode = true;
 		} else
 		{
-		    Settings::screenWidth = 450;
+		    Settings::screenWidth = 800;
 		    Settings::screenHeight = 800;
 		    Settings::screenTitle = "IPOC toggle 2";
 		    Settings::windowType = "windowed";

@@ -74,29 +74,38 @@ void ThreadManager::loadMainMenuThread()
     //Buttons - TriggerOnUp
     storage->btnTriggerOnUp = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 100));
     storage->btnTriggerOnUp->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnTriggerOnUp->addToUp(new Sprite("play button up sprite", *storage->textures[2]));
-    storage->btnTriggerOnUp->addToUp(new Text("play button up text", *storage->font1, "Trigger On Up"), Point2D(20, 30));
-    storage->btnTriggerOnUp->addToDown(new Sprite("play button down sprite", *storage->textures[3]));
-    storage->btnTriggerOnUp->addToDown(new Text("play button down text", *storage->font1, "Trigger On Up"), Point2D(20, 37));
+    storage->btnTriggerOnUp->addToUp(new Sprite("trigger on up up sprite", *storage->textures[2]));
+    storage->btnTriggerOnUp->addToUp(new Text("trigger on up up text", *storage->font1, "Trigger On Up"), Point2D(20, 30));
+    storage->btnTriggerOnUp->addToDown(new Sprite("trigger on up down sprite", *storage->textures[3]));
+    storage->btnTriggerOnUp->addToDown(new Text("trigger on up down text", *storage->font1, "Trigger On Up"), Point2D(20, 37));
     onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnUp);
 
     //Buttons - TriggerOnDown
     storage->btnTriggerOnDown = new OnscreenButton(TriggerOnDown, 1, Point2D(20, 260));
     storage->btnTriggerOnDown->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnTriggerOnDown->addToUp(new Sprite("options button up sprite", *storage->textures[2]));
-    storage->btnTriggerOnDown->addToUp(new Text("options button up text", *storage->font1, "Trigger On Down"), Point2D(20, 30));
-    storage->btnTriggerOnDown->addToDown(new Sprite("options button down sprite", *storage->textures[3]));
-    storage->btnTriggerOnDown->addToDown(new Text("options button down text", *storage->font1, "Trigger On Down"), Point2D(20, 37));
+    storage->btnTriggerOnDown->addToUp(new Sprite("trigger on down up sprite", *storage->textures[2]));
+    storage->btnTriggerOnDown->addToUp(new Text("trigger on down up text", *storage->font1, "Trigger On Down"), Point2D(20, 30));
+    storage->btnTriggerOnDown->addToDown(new Sprite("trigger on down down sprite", *storage->textures[3]));
+    storage->btnTriggerOnDown->addToDown(new Text("trigger on down down text", *storage->font1, "Trigger On Down"), Point2D(20, 37));
     onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnDown);
 
     //Buttons - TriggerOnHold
     storage->btnTriggerOnHold = new OnscreenButton(TriggerOnHold, 1, Point2D(20, 420));
     storage->btnTriggerOnHold->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnTriggerOnHold->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
-    storage->btnTriggerOnHold->addToUp(new Text("exit button up text", *storage->font1, "Trigger On Hold"), Point2D(20, 30));
-    storage->btnTriggerOnHold->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
-    storage->btnTriggerOnHold->addToDown(new Text("exit button down text", *storage->font1, "Trigger On Hold"), Point2D(20, 37));
+    storage->btnTriggerOnHold->addToUp(new Sprite("trigger on hold up sprite", *storage->textures[2]));
+    storage->btnTriggerOnHold->addToUp(new Text("trigger on hold up text", *storage->font1, "Trigger On Hold"), Point2D(20, 30));
+    storage->btnTriggerOnHold->addToDown(new Sprite("trigger on hold down sprite", *storage->textures[3]));
+    storage->btnTriggerOnHold->addToDown(new Text("trigger on hold down text", *storage->font1, "Trigger On Hold"), Point2D(20, 37));
     onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnHold);
+    
+    //Buttons - ToggleWindowMode
+    storage->btnToggleWindowMode = new OnscreenButton(TriggerOnUp, 1, Point2D(340, 100));
+    storage->btnToggleWindowMode->setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->btnToggleWindowMode->addToUp(new Sprite("toggle window mode up sprite", *storage->textures[2]));
+    storage->btnToggleWindowMode->addToUp(new Text("toggle window mode up text", *storage->font1, "Toggle Window"), Point2D(20, 30));
+    storage->btnToggleWindowMode->addToDown(new Sprite("toggle window mode down sprite", *storage->textures[3]));
+    storage->btnToggleWindowMode->addToDown(new Text("toggle window mode down text", *storage->font1, "Toggle Window"), Point2D(20, 37));
+    onscreenButtonManager->addOnscreenButton(storage->btnToggleWindowMode);
 
     //Buttons - Exit
     storage->btnExit = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 580));
@@ -116,6 +125,7 @@ void ThreadManager::loadMainMenuThread()
     frame->addToFrame(storage->btnTriggerOnUp);
     frame->addToFrame(storage->btnTriggerOnDown);
     frame->addToFrame(storage->btnTriggerOnHold);
+    frame->addToFrame(storage->btnToggleWindowMode);
     frame->addToFrame(storage->btnExit);
     storage->state = MainMenu;
 }
@@ -146,11 +156,13 @@ void ThreadManager::exitCleanUpThread()
     frame->removeFromFrame(storage->btnTriggerOnHold);
     frame->removeFromFrame(storage->btnTriggerOnDown);
     frame->removeFromFrame(storage->btnTriggerOnUp);
+    frame->removeFromFrame(storage->btnToggleWindowMode);
     frame->removeFromFrame(storage->btnExit);
     delete storage->txtCounter;
     delete storage->btnTriggerOnDown;
     delete storage->btnTriggerOnUp;
     delete storage->btnTriggerOnHold;
+    delete storage->btnToggleWindowMode;
     delete storage->btnExit;
 
 
