@@ -89,8 +89,7 @@ void MasterController::inputLoop()
 	if (Settings::inputStatus == Active)
 	{
 	    inputController->input();
-	}
-	else
+	} else
 	{
 	    if (Settings::inputStatus == PauseRequested)
 	    {
@@ -136,6 +135,10 @@ void MasterController::processLoop()
 	    Debug::commitLogLine();
 	} else
 	{
+	    //Uncomment this to see how long the loop is sleeping for
+	    //std::chrono::nanoseconds result = nanosecondsPerLoop - (std::chrono::high_resolution_clock::now() - startOfLoopTime);
+	    //Debug::write("Time left: " + Conversions::insertCommas(result.count()) + " nanoseconds\n");
+	    
 	    //Otherwise sleep until the next loop is required
 	    std::this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
 	}
