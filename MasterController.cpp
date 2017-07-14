@@ -151,7 +151,9 @@ void MasterController::exit()
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
+    while (!inputThread.joinable()){};
     inputThread.join();
+    while (!processThread.joinable()){};
     processThread.join();
     //Finally log that everything went well
     Debug::log("[INFO] Successfully ended threads");
