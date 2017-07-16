@@ -11,5 +11,4 @@ int main()
     masterController.start();
     
     return 0;
-    std::cout << "Exit";
 }

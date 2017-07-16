@@ -71,10 +71,8 @@ void MasterController::start()
     {
 	outputController->output();
     }
-
-    while (!processThreadJoinable){};
-    processThread.join();
     
+    exit();
 }
 
 void MasterController::inputLoop()
@@ -156,8 +154,6 @@ void MasterController::processLoop()
     Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
     Debug::logTimeStamp();
     Debug::commitLogLine();
-
-    exit();
     
     processThreadJoinable = true;
 }
@@ -171,6 +167,9 @@ void MasterController::exit()
     
     while (!inputThreadJoinable);
     inputThread.join();
+
+    while (!processThreadJoinable);
+    processThread.join();
     
     //Finally log that everything went well
     Debug::log("[INFO] Successfully ended threads");
