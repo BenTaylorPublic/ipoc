@@ -179,8 +179,5 @@ void ThreadManager::exitCleanUp()
 
     delete storage->font1;
     
-    Debug::log("[INFO] exitCleanUpThread ready to join");
-    Debug::commitLogLine();
-    
     exitCleanUpJoinable = true;
 }

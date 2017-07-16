@@ -19,6 +19,9 @@ void MasterController::IPOCLoad()
 
 
     threadsLoaded = false;
+    inputThreadJoinable = false;
+    processThreadJoinable = false;
+    
     Settings::loadSettings();
     Debug::newLog();
     Debug::log("[INFO] Launching IPOC V");
@@ -46,7 +49,9 @@ void MasterController::IPOCLoad()
     Debug::log("[INFO] -------------------------------------------------------START OF PS LOAD: ");
     Debug::logTimeStamp();
     Debug::commitLogLine();
+    
     processController->load();
+    
     Debug::log("[INFO] -------------------------------------------------------END OF PS LOAD: ");
     Debug::logTimeStamp();
     Debug::commitLogLine();
@@ -55,18 +60,11 @@ void MasterController::IPOCLoad()
 void MasterController::start()
 {
     
-    Debug::log("[INFO] Start of start");
-    Debug::commitLogLine();
-    
     processThread = std::thread(&MasterController::processLoop, this);
 
     //Open graphics window
     outputController->createGraphicsWindow(inputController);
 
-    //Initial writing to console
-    Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
-    Debug::logTimeStamp();
-    Debug::commitLogLine();
     //That's all the loading required, setting the bool so the program can start
     threadsLoaded = true;
     while (!processController->checkForExitProgram())
@@ -74,21 +72,13 @@ void MasterController::start()
 	outputController->output();
     }
 
-    //End of program statements
-    Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
-    Debug::logTimeStamp();
-    Debug::commitLogLine();
-
-    exit();
+    while (!processThreadJoinable){};
+    processThread.join();
     
-    Debug::log("[INFO] End of start");
-    Debug::commitLogLine();
 }
 
 void MasterController::inputLoop()
 {
-    Debug::log("[INFO] Start of inputLoop");
-    Debug::commitLogLine();
     
     //Input thread requires no loading
     //Wait until output thread is loaded
@@ -109,20 +99,22 @@ void MasterController::inputLoop()
 	}
     }
     
-    Debug::log("[INFO] End of inputLoop");
-    Debug::commitLogLine();
+    inputThreadJoinable = true;
+    
 }
 
 void MasterController::processLoop()
 {
 
-    Debug::log("[INFO] Start of processLoop");
-    Debug::commitLogLine();
-    
     //Calculating loop time
     std::chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
     std::chrono::high_resolution_clock::time_point startOfLoopTime;
 
+    //Initial writing to console
+    Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
+    Debug::logTimeStamp();
+    Debug::commitLogLine();
+    
     startOfLoopTime = std::chrono::high_resolution_clock::now(); //Current time
     while (!processController->checkForExitProgram())
     {
@@ -160,22 +152,26 @@ void MasterController::processLoop()
 	}
     }
 
-    Debug::log("[INFO] End of processLoop");
+    //End of program statements
+    Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
+    Debug::logTimeStamp();
     Debug::commitLogLine();
+
+    exit();
+    
+    processThreadJoinable = true;
 }
 
 void MasterController::exit()
 {
-    Debug::log("[INFO] Start of exit");
-    Debug::commitLogLine();
     
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
-    while (!inputThread.joinable()){};
+    
+    while (!inputThreadJoinable);
     inputThread.join();
-    while (!processThread.joinable()){};
-    processThread.join();
+    
     //Finally log that everything went well
     Debug::log("[INFO] Successfully ended threads");
     Debug::commitLogLine();
@@ -193,8 +189,6 @@ void MasterController::exit()
     Debug::log("[INFO] Program ended successfully.");
     Debug::commitLogLine();
     
-    Debug::log("[INFO] End of exit");
-    Debug::commitLogLine();
 }
 
 std::string MasterController::getStatusString()
