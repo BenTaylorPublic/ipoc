@@ -27,20 +27,20 @@ std::string ThreadManager::getStatusString()
 void ThreadManager::loadMainMenuStart()
 {
     loadMainMenuJoinable = false;
-    loadMainMenu = new std::thread(&ThreadManager::loadMainMenuThread, this);
+    loadMainMenuThread = new std::thread(&ThreadManager::loadMainMenu, this);
     Debug::log("[INFO] loadMainMenuThread started");
     Debug::commitLogLine();
 }
 
 void ThreadManager::loadMainMenuJoin()
 {
-    loadMainMenu->join();
-    delete loadMainMenu;
+    loadMainMenuThread->join();
+    delete loadMainMenuThread;
     Debug::log("[INFO] loadMainMenuThread joined");
     Debug::commitLogLine();
 }
 
-void ThreadManager::loadMainMenuThread()
+void ThreadManager::loadMainMenu()
 {
     //Fonts
     storage->font1 = new Font("test font", "courier new.ttf");
@@ -131,20 +131,20 @@ void ThreadManager::loadMainMenuThread()
 void ThreadManager::exitCleanUpStart()
 {
     exitCleanUpJoinable = false;
-    exitCleanUp = new std::thread(&ThreadManager::exitCleanUpThread, this);
+    exitCleanUpThread = new std::thread(&ThreadManager::exitCleanUp, this);
     Debug::log("[INFO] exitCleanUpThread started");
     Debug::commitLogLine();
 }
 
 void ThreadManager::exitCleanUpJoin()
 {
-    exitCleanUp->join();
-    delete exitCleanUp;
+    exitCleanUpThread->join();
+    delete exitCleanUpThread;
     Debug::log("[INFO] exitCleanUpThread joined");
     Debug::commitLogLine();
 }
 
-void ThreadManager::exitCleanUpThread()
+void ThreadManager::exitCleanUp()
 {
     for (int i = 0; i < 999999999; i++)
     {

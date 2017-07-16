@@ -30,11 +30,11 @@ private:
     OnscreenButtonManager* onscreenButtonManager;
     
     //loadMainMenu
-    void loadMainMenuThread();
-    std::thread* loadMainMenu;
+    void loadMainMenu();
+    std::thread* loadMainMenuThread;
     
     //exitCleanUp
-    void exitCleanUpThread();
-    std::thread* exitCleanUp;
+    void exitCleanUp();
+    std::thread* exitCleanUpThread;
     
 };
