@@ -26,6 +26,7 @@ std::string ThreadManager::getStatusString()
 
 void ThreadManager::loadMainMenuStart()
 {
+    loadMainMenuJoinable = false;
     loadMainMenu = new std::thread(&ThreadManager::loadMainMenuThread, this);
     Debug::log("[INFO] loadMainMenuThread started");
     Debug::commitLogLine();
@@ -37,11 +38,6 @@ void ThreadManager::loadMainMenuJoin()
     delete loadMainMenu;
     Debug::log("[INFO] loadMainMenuThread joined");
     Debug::commitLogLine();
-}
-
-bool ThreadManager::loadMainMenuJoinable()
-{
-    return loadMainMenu->joinable();
 }
 
 void ThreadManager::loadMainMenuThread()
@@ -128,10 +124,13 @@ void ThreadManager::loadMainMenuThread()
     frame->addToFrame(storage->btnToggleWindowMode);
     frame->addToFrame(storage->btnExit);
     storage->state = MainMenu;
+    
+    loadMainMenuJoinable = true;
 }
 
 void ThreadManager::exitCleanUpStart()
 {
+    exitCleanUpJoinable = false;
     exitCleanUp = new std::thread(&ThreadManager::exitCleanUpThread, this);
     Debug::log("[INFO] exitCleanUpThread started");
     Debug::commitLogLine();
@@ -145,13 +144,13 @@ void ThreadManager::exitCleanUpJoin()
     Debug::commitLogLine();
 }
 
-bool ThreadManager::exitCleanUpJoinable()
-{
-    return exitCleanUp->joinable();
-}
-
 void ThreadManager::exitCleanUpThread()
 {
+    for (int i = 0; i < 999999999; i++)
+    {
+	
+    }
+    
     frame->removeFromFrame(storage->txtCounter);
     frame->removeFromFrame(storage->btnTriggerOnHold);
     frame->removeFromFrame(storage->btnTriggerOnDown);
@@ -179,4 +178,9 @@ void ThreadManager::exitCleanUpThread()
     storage->textures.clear();
 
     delete storage->font1;
+    
+    Debug::log("[INFO] exitCleanUpThread ready to join");
+    Debug::commitLogLine();
+    
+    exitCleanUpJoinable = true;
 }

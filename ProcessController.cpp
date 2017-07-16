@@ -30,7 +30,7 @@ void ProcessController::load()
 {
     tm.loadMainMenuStart();
 
-    while (!tm.loadMainMenuJoinable());
+    while (!tm.loadMainMenuJoinable);
 
     tm.loadMainMenuJoin();
 }
@@ -43,7 +43,7 @@ void ProcessController::process()
     switch (storage.state)
     {
 	case Exiting:
-	    if (tm.exitCleanUpJoinable())
+	    if (tm.exitCleanUpJoinable)
 	    {
 		tm.exitCleanUpJoin();
 		exitProgram = true;

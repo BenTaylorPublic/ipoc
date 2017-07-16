@@ -17,12 +17,12 @@ public:
     //loadMainMenu
     void loadMainMenuStart();
     void loadMainMenuJoin();
-    bool loadMainMenuJoinable();
+    std::atomic<bool> loadMainMenuJoinable;
     
     //exitCleanUp
     void exitCleanUpStart();
     void exitCleanUpJoin();
-    bool exitCleanUpJoinable();    
+    std::atomic<bool> exitCleanUpJoinable; 
     
 private:
     Storage* storage;
