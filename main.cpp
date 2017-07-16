@@ -10,5 +10,5 @@ int main()
     masterController.IPOCLoad();
     masterController.start();
     
-    return 0;
+    return 69; //lol 69 lol
 }
