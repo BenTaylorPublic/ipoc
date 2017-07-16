@@ -54,6 +54,10 @@ void MasterController::IPOCLoad()
 
 void MasterController::start()
 {
+    
+    Debug::log("[INFO] Start of start");
+    Debug::commitLogLine();
+    
     processThread = std::thread(&MasterController::processLoop, this);
 
     //Open graphics window
@@ -76,10 +80,16 @@ void MasterController::start()
     Debug::commitLogLine();
 
     exit();
+    
+    Debug::log("[INFO] End of start");
+    Debug::commitLogLine();
 }
 
 void MasterController::inputLoop()
 {
+    Debug::log("[INFO] Start of inputLoop");
+    Debug::commitLogLine();
+    
     //Input thread requires no loading
     //Wait until output thread is loaded
     while (!threadsLoaded);
@@ -98,11 +108,17 @@ void MasterController::inputLoop()
 	    //If it's paused, do nothing
 	}
     }
+    
+    Debug::log("[INFO] End of inputLoop");
+    Debug::commitLogLine();
 }
 
 void MasterController::processLoop()
 {
 
+    Debug::log("[INFO] Start of processLoop");
+    Debug::commitLogLine();
+    
     //Calculating loop time
     std::chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
     std::chrono::high_resolution_clock::time_point startOfLoopTime;
@@ -144,10 +160,15 @@ void MasterController::processLoop()
 	}
     }
 
+    Debug::log("[INFO] End of processLoop");
+    Debug::commitLogLine();
 }
 
 void MasterController::exit()
 {
+    Debug::log("[INFO] Start of exit");
+    Debug::commitLogLine();
+    
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
@@ -170,6 +191,9 @@ void MasterController::exit()
 	Debug::logMemoryLeakInfo(); //Only log if there was a leak
 
     Debug::log("[INFO] Program ended successfully.");
+    Debug::commitLogLine();
+    
+    Debug::log("[INFO] End of exit");
     Debug::commitLogLine();
 }
 
