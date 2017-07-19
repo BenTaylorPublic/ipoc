@@ -16,11 +16,6 @@ bool Conversions::stringContains(const std::string& inputString, const std::stri
     return (inputString.find(containsString) != std::string::npos);
 }
 
-bool Conversions::stringContains(const std::string& inputString, const char& containsCharArray)
-{
-    return (inputString.find(containsCharArray) != std::string::npos);
-}
-
 std::string Conversions::convertKeyToString(const Key& inputKey)
 {
     return keyEnumStrings[(int) inputKey];
@@ -45,7 +40,7 @@ std::string Conversions::replaceStringInString(const std::string& inputString, c
     return result;
 }
 
-std::string Conversions::insertCommas(const int inputInt)
+std::string Conversions::insertCommas(const int& inputInt)
 {
     std::string numWithCommas = std::to_string(inputInt);
     int insertPosition = numWithCommas.length() - 3;
