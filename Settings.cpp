@@ -77,8 +77,7 @@ int Settings::getIntFromSettings(std::vector<std::string>& inputFile, const std:
         }
     }
 
-    Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString);
-    Debug::commitLogLine();
+    Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString + "\n");
     Debug::crash(104, "Settings.getIntFromSettings()");
 
     return -1;
@@ -93,8 +92,7 @@ std::string Settings::getStringFromSettings(std::vector<std::string>& inputFile,
         }
     }
 
-    Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString);
-    Debug::commitLogLine();
+    Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString + "\n");
     Debug::crash(105, "Settings.getStringFromSettings()");
 
     return "";
@@ -112,8 +110,7 @@ bool Settings::getBoolFromSettings(std::vector<std::string>& inputFile, const st
         }
     }
 
-    Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString);
-    Debug::commitLogLine();
+    Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString + "\n");
     Debug::crash(106, "Settings.getBoolFromSettings()");
 
     return false;

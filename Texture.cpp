@@ -12,14 +12,12 @@ Texture::Texture(const std::string& inputName, const std::string& fileName)
 	Debug::write(")\n");
 	Debug::log("[ERROR] SFML texture didn't load (");
 	Debug::log(inputName);
-	Debug::log(")");
-	Debug::commitLogLine();
+	Debug::log(")\n");
     } else
     {
 	Debug::log("[INFO] Loaded texture (");
 	Debug::log(inputName);
-	Debug::log(")");
-	Debug::commitLogLine();
+	Debug::log(")\n");
     }
     Debug::notifyOfConstruction(15);
 }

@@ -5,8 +5,7 @@ Color::Color(const int& inputR, const int& inputG, const int& inputB)
 {
     if (inputR > 255 || inputG > 255 || inputB > 255)
     {
-	Debug::log("[ERR] A color was made with R G or B over 255!");
-	Debug::commitLogLine();
+	Debug::log("[ERR] A color was made with R G or B over 255!\n");
     }
 
     r = inputR;

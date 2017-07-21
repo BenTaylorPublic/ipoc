@@ -7,9 +7,8 @@
 #include <chrono>
 
 //Defaults
-std::string Debug::toLog = "";
 int Debug::loopNumber = 0;
-MasterController *Debug::masterController = nullptr;
+MasterController* Debug::masterController = nullptr;
 std::string Debug::logPath = "blank";
 
 int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
@@ -33,24 +32,17 @@ void Debug::writeLoopNumber()
 
 void Debug::log(const int& input)
 {
-    toLog += std::to_string(input);
+    FileManager::writeToFile(logPath, input);
 }
 
 void Debug::log(const std::string& input)
 {
-    toLog += input;
+    FileManager::writeToFile(logPath, input);
 }
 
 void Debug::logLoopNumber()
 {
-    toLog += std::to_string(loopNumber);
-}
-
-void Debug::commitLogLine()
-{
-    toLog += "\n";
-    FileManager::writeToFile(logPath, toLog);
-    toLog = "";
+    FileManager::writeToFile(logPath, loopNumber);
 }
 
 void Debug::newLog()
@@ -64,7 +56,7 @@ void Debug::logTimeStamp()
     std::string timeStamp = "";
     timeStamp = ctime(&now);
     timeStamp.pop_back();
-    toLog += timeStamp;
+    FileManager::writeToFile(logPath, timeStamp);
 }
 
 void Debug::incrementLoopNumber()
@@ -79,9 +71,7 @@ void Debug::setMasterController(MasterController* input)
 
 void Debug::logStatusStrings()
 {
-    std::string temp = masterController->getStatusString();
-    log(temp);
-    commitLogLine();
+    FileManager::writeToFile(logPath, masterController->getStatusString());
 }
 
 void Debug::setFilePath(std::string inputPath)
@@ -109,12 +99,9 @@ void Debug::crash(const int& crashId, const std::string& callFrom)
     write("[CRASH] Program crashed. Crash ID " + std::to_string(crashId) + ".\n");
     write("[CRASH] Crash called from " + callFrom + "\n");
     write("[CRASH] Crashed on loop " + std::to_string(loopNumber));
-    log("[CRASH] Program crashed. Crash ID " + std::to_string(crashId) + ".");
-    commitLogLine();
-    log("[CRASH] Crash called from " + callFrom);
-    commitLogLine();
-    log("[CRASH] Crashed on loop " + std::to_string(loopNumber));
-    commitLogLine();
+    log("[CRASH] Program crashed. Crash ID " + std::to_string(crashId) + ".\n");
+    log("[CRASH] Crash called from " + callFrom + "\n");
+    log("[CRASH] Crashed on loop " + std::to_string(loopNumber) + "\n");
     exit(EXIT_FAILURE);
 
     /*
@@ -129,11 +116,9 @@ void Debug::crash(const int& crashId, const std::string& callFrom)
 
 void Debug::logClassAmountInfo()
 {
-    log("[INFO] Logging class amount info");
-    commitLogLine();
+    log("[INFO] Logging class amount info\n");
 
-    log("[INFO] ClassID 0, our benevolent overlord is exempt from this blasphemous scrutiny.");
-    commitLogLine();
+    log("[INFO] ClassID 0, our benevolent overlord is exempt from this blasphemous scrutiny.\n");
 
     for (int i = 1; i < AMOUNT_OF_CLASSES; i++)
     {
@@ -142,12 +127,10 @@ void Debug::logClassAmountInfo()
 	{
 	    log("MEMORY LEAK, ");
 	}
-	log("ClassID " + std::to_string(i) + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " + std::to_string(destructionAmount[i]) + ".");
-	commitLogLine();
+	log("ClassID " + std::to_string(i) + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " + std::to_string(destructionAmount[i]) + ".\n");
     }
 
-    log("[INFO] End of class amount info");
-    commitLogLine();
+    log("[INFO] End of class amount info\n");
 }
 
 void Debug::logMemoryLeakInfo()
@@ -172,14 +155,11 @@ void Debug::logMemoryLeakInfo()
 
     if (totalConstructionAmount + totalCopyAmount == totalDestructionAmount)
     {
-	log("[INFO] No memory leaks detected");
-	commitLogLine();
+	log("[INFO] No memory leaks detected\n");
     } else
     {
-	log("[WARNING] Memory leak detected.");
-	commitLogLine();
+	log("[WARNING] Memory leak detected.\n");
 	logClassAmountInfo();
-	log("[WARNING] End of memory leak information.");
-	commitLogLine();
+	log("[WARNING] End of memory leak information.\n");
     }
 }

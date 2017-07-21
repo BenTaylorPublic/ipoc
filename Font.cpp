@@ -13,14 +13,12 @@ Font::Font(const std::string& inputName, const std::string& fileName)
 	Debug::write(")\n");
 	Debug::log("[ERROR] SFML font didn't load (");
 	Debug::log(name);
-	Debug::log(")");
-	Debug::commitLogLine();
+	Debug::log(")\n");
     } else
     {
 	Debug::log("[INFO] Loaded font (");
 	Debug::log(name);
-	Debug::log(")");
-	Debug::commitLogLine();
+	Debug::log(")\n");
     }
 
     Debug::notifyOfConstruction(13);

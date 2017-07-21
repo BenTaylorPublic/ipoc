@@ -43,10 +43,8 @@ void Frame::addToFrame(Drawable* drawable)
     drawables.at(drawable->getZ()).push_back(drawable);
     if (frameIdsToGive.size() == 0)
     {
-	Debug::log("[CRASH] frameIdsToGive is empty.");
-	Debug::commitLogLine();
-	Debug::log("[CRASH] There are too many drawables.");
-	Debug::commitLogLine();
+	Debug::log("[CRASH] frameIdsToGive is empty.\n");
+	Debug::log("[CRASH] There are too many drawables.\n");
 	Debug::crash(103, "IPOCFrame.addToFrame()");
     }
 
@@ -96,11 +94,6 @@ Drawable* Frame::getNextDrawable()
 
 void Frame::markAsDrawable()
 {
-    //	if (isDrawableBool)//Output isn't keeping up (get a better GPU lmao)
-    //	{
-    //		Debug::write("!");
-    //	}
-
     isDrawableBool = true;
 }
 

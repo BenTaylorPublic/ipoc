@@ -41,8 +41,7 @@ std::vector<std::string> FileManager::readFile(const std::string& filePath)
 	file.close();
     } else
     {
-	Debug::log("[WARN] A text file could not be read.");
-	Debug::commitLogLine();
+	Debug::log("[WARN] A text file could not be read.\n");
     }
 
     return result;

@@ -25,13 +25,10 @@ void MasterController::IPOCLoad()
     Settings::loadSettings();
     Debug::newLog();
     Debug::log("[INFO] Launching IPOC V");
-    Debug::log(Settings::ipocVersion);
-    Debug::commitLogLine();
+    Debug::log(Settings::ipocVersion + "\n");
     Debug::log("[INFO] File path: ");
-    Debug::log(Settings::filePath);
-    Debug::commitLogLine();
-    Debug::log("[INFO] Loaded settings");
-    Debug::commitLogLine();
+    Debug::log(Settings::filePath + "\n");
+    Debug::log("[INFO] Loaded settings\n");
 
     Debug::setMasterController(this);
 
@@ -41,20 +38,19 @@ void MasterController::IPOCLoad()
     onscreenButtonManager->IPOCLoad(inputController);
     frame->IPOCLoad();
 
-    Debug::log("[INFO] Loaded controllers");
-    Debug::commitLogLine();
+    Debug::log("[INFO] Loaded controllers\n");
 
     inputThread = std::thread(&MasterController::inputLoop, this);
 
     Debug::log("[INFO] -------------------------------------------------------START OF PS LOAD: ");
     Debug::logTimeStamp();
-    Debug::commitLogLine();
+    Debug::log("\n");
     
     processController->load();
     
     Debug::log("[INFO] -------------------------------------------------------END OF PS LOAD: ");
     Debug::logTimeStamp();
-    Debug::commitLogLine();
+    Debug::log("\n");
 }
 
 void MasterController::start()
@@ -97,6 +93,7 @@ void MasterController::inputLoop()
 	}
     }
     
+    Debug::log("[INFO] Input thread finished\n");
     inputThreadJoinable = true;
     
 }
@@ -111,7 +108,7 @@ void MasterController::processLoop()
     //Initial writing to console
     Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
     Debug::logTimeStamp();
-    Debug::commitLogLine();
+    Debug::log("\n");
     
     startOfLoopTime = std::chrono::high_resolution_clock::now(); //Current time
     while (!processController->checkForExitProgram())
@@ -138,7 +135,7 @@ void MasterController::processLoop()
 	    Debug::write("[WARN] Loop went over time frame\n");
 	    Debug::log("[WARN] Overtime in loop ");
 	    Debug::logLoopNumber();
-	    Debug::commitLogLine();
+	    Debug::log("\n");
 	} else
 	{
 	    //Uncomment this to see how long the loop is sleeping for
@@ -153,27 +150,28 @@ void MasterController::processLoop()
     //End of program statements
     Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
     Debug::logTimeStamp();
-    Debug::commitLogLine();
+    Debug::log("\n");
     
+    Debug::log("[INFO] Process thread finished\n");
     processThreadJoinable = true;
 }
 
 void MasterController::exit()
 {
+    while (!processThreadJoinable);
+    processThread.join();
+    Debug::log("[INFO] Ended process thread\n");
+    
+    while (!inputThreadJoinable);
+    inputThread.join();
+    Debug::log("[INFO] Ended input thread\n");
     
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
     
-    while (!inputThreadJoinable);
-    inputThread.join();
-
-    while (!processThreadJoinable);
-    processThread.join();
-    
     //Finally log that everything went well
-    Debug::log("[INFO] Successfully ended threads");
-    Debug::commitLogLine();
+    Debug::log("[INFO] Successfully ended threads\n");
     delete inputController;
     delete processController;
     delete outputController;
@@ -185,8 +183,7 @@ void MasterController::exit()
     else
 	Debug::logMemoryLeakInfo(); //Only log if there was a leak
 
-    Debug::log("[INFO] Program ended successfully.");
-    Debug::commitLogLine();
+    Debug::log("[INFO] Program ended successfully.\n");
     
 }
 

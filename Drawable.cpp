@@ -2,20 +2,20 @@
 
 void Drawable::setFrameId(const int& inputFrameId)
 {
-	frameId = inputFrameId;
+    frameId = inputFrameId;
 }
 
 const int& Drawable::getFrameId()
 {
-	return frameId;
+    return frameId;
 }
 
 void Drawable::setZ(const int& inputZ)
 {
-	z = inputZ;
+    z = inputZ;
 }
 
 int Drawable::getZ()
 {
-	return z;
+    return z;
 }
