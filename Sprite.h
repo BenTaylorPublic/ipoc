@@ -15,7 +15,7 @@ public:
     Sprite(const std::string& inputName);
     Sprite(const std::string& inputName, Texture& inputTexture);
     Sprite(const std::string& inputName, Texture& inputTexture, const int& inputZ);
-    ~Sprite();
+    ~Sprite() override;
     void setTexture(Texture& inputTexture);
     std::string name; //Name that is mainly used for debugging
     void setPosition(const Point2D& newPoint) override; //Sets the position of the sprite, to the new provided position
