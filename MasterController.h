@@ -6,6 +6,7 @@
 #include "OnscreenButtonManager.h"
 #include "Frame.h"
 #include <thread>
+#include <atomic>
 
 class MasterController
 {

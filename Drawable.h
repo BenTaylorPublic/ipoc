@@ -6,7 +6,6 @@
 class Drawable
 {
 public:
-    virtual ~Drawable() {};
     int getZ();
     void setZ(const int& inputZ);
     void setFrameId(const int& inputFrameId);

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <thread>
+#include <atomic>
 #include "Storage.h"
 #include "Frame.h"
 #include "OnscreenButtonManager.h"
