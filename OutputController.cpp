@@ -6,50 +6,63 @@
 
 OutputController::OutputController()
 {
-	Debug::notifyOfConstruction(3);
+    Debug::notifyOfConstruction(3);
 }
 
 OutputController::~OutputController()
 {
-	Debug::notifyOfDestruction(3);
+    Debug::notifyOfDestruction(3);
 }
 
 void OutputController::IPOCLoad(Frame* inputFrame)
 {
-	window.load();
-	
-	frame = inputFrame;
+    window.load();
+
+    frame = inputFrame;
 }
 
 void OutputController::createGraphicsWindow(InputController* inputController)
 {
-	window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
-	inputController->setGraphicsWindow(&window);
+    window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
+    inputController->setGraphicsWindow(&window);
+}
+
+void OutputController::reloadGraphicsWindow()
+{
+    reloadWindow = true;
+    Settings::inputStatus = InputStatus::PauseRequested;
 }
 
 void OutputController::closeGraphicsWindow()
 {
-	window.closeWindow();
+    window.closeWindow();
 }
 
 void OutputController::output()
 {
-	while (!frame->isDrawable())
+    while (!frame->isDrawable())
+    {
+	window.handleEvents();
+
+	if (reloadWindow && Settings::inputStatus == Paused)
 	{
-		window.handleEvents();
+	    window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
+	    reloadWindow = false;
+	    Settings::inputStatus = Active;
 	}
+    }
 
-	window.clearWindow();
-	window.drawFrame(frame);
+    window.clearWindow();
+    window.drawFrame(frame);
 
-	window.renderWindow();
+    window.renderWindow();
 }
 
 std::string OutputController::getStatusString()
 {
-	std::string result = "OutputController:\n";
+    std::string result = "OutputController:\n";
 
-	result += window.getStatusString();
+    result += window.getStatusString();
 
-	return result;
+    return result;
 }

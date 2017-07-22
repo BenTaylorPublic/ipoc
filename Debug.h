@@ -37,12 +37,10 @@ public:
     It makes use of the masterController pointer defined below.
     */
     static void logStatusStrings();
-    static void commitLogLine(); //Adds the toLog variable to the log file. Look at the log() methods to see how to add to the toLog variable.
     static void incrementLoopNumber(); //Increments the loop number. Used for logging and writing loop numbers from anwywhere in the program.
     static void setMasterController(MasterController* input); //Used to received a pointer tot he MasterController. This pointer will then be used to logStatusStrings(), when requested.
     static void setFilePath(std::string inputPath); //used to receive the file path from the Settings class.
 private:
-    static std::string toLog; //String that is about to be written to the log file. All the caller needs to do is call commitLogLine()
     static int loopNumber; //Used for logging and writing loop numbers from anwywhere in the program.
     /*
     A pointer the the MasterController.

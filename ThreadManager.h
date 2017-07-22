@@ -17,12 +17,12 @@ public:
     //loadMainMenu
     void loadMainMenuStart();
     void loadMainMenuJoin();
-    bool loadMainMenuJoinable();
+    std::atomic<bool> loadMainMenuJoinable;
     
     //exitCleanUp
-    void exitCleanUpStart(const ProgramState& inputExitingFrom);
+    void exitCleanUpStart();
     void exitCleanUpJoin();
-    bool exitCleanUpJoinable();    
+    std::atomic<bool> exitCleanUpJoinable; 
     
 private:
     Storage* storage;
@@ -30,11 +30,11 @@ private:
     OnscreenButtonManager* onscreenButtonManager;
     
     //loadMainMenu
-    void loadMainMenuThread();
-    thread* loadMainMenu;
+    void loadMainMenu();
+    std::thread* loadMainMenuThread;
     
     //exitCleanUp
-    void exitCleanUpThread(const ProgramState& exitingFrom);
-    thread* exitCleanUp;
+    void exitCleanUp();
+    std::thread* exitCleanUpThread;
     
 };

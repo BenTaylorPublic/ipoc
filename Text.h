@@ -26,8 +26,8 @@ public:
     int getHeight(); //Returns an integer which represents the height of the text in pixels
     int getLength();
     void setPosition(const Point2D& newPosition) override; //Sets the position of the text, to the new provided position
-    void setText(const string& input); //Sets the string of the text, to the new provided string
-    void addText(const string& input); //Adds to the string of the text, to the new provided string
+    void setText(const std::string& input); //Sets the string of the text, to the new provided string
+    void addText(const std::string& input); //Adds to the string of the text, to the new provided string
     void draw(sf::RenderTarget& target) override; //Draws the SFML Text to the provided SFML Render Target
     /*
     Returns a string indicating this object's current status, and all objects it manages.

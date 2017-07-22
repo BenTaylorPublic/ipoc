@@ -2,8 +2,6 @@
 
 #include <string>
 
-using namespace std;
-
 /*
 Point2D is a Data Type
 Point2D is used to indicate a position on the screen

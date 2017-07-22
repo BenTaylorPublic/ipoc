@@ -21,11 +21,14 @@ private:
     OnscreenButtonManager* onscreenButtonManager;
     Frame* frame;
     
-    thread inputThread;
-    thread outputThread;
-    volatile bool threadsLoaded;
+    std::thread inputThread;
+    std::thread processThread;
+    std::atomic<bool> inputThreadJoinable;
+    std::atomic<bool> processThreadJoinable;
+    
+    std::atomic<bool> threadsLoaded;
     void inputLoop(); //Called by the inputThread. The inputLoop continuously checks user input
-    void outputLoop(); //Called by the outputThread. The outputLoop continuously renders/draws to the screen
+    void processLoop(); //Called by the outputThread. The outputLoop continuously renders/draws to the screen
     void onscreenButtonLoop(); //Called by the onscreenButtonsThread. The onscreenButtonLoop continuously checks if the onscreen buttons are triggered
      /*
      Method that is called on program exit. 

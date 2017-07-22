@@ -20,7 +20,7 @@ public:
     std::string getStatusString();
 private:
     InputController* inputController;
-    vector<OnscreenButton*> onscreenButtons;
-    queue<int> idsToGive;
-    queue<OnscreenButton*> toClear;
+    std::vector<OnscreenButton*> onscreenButtons;
+    std::queue<int> idsToGive;
+    std::queue<OnscreenButton*> toClear;
 };
