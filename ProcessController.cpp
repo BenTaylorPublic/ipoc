@@ -38,7 +38,6 @@ void ProcessController::load()
 void ProcessController::process()
 {
 
-    storage.sprCursor->setPosition(ic->getMousePoint());
 
     switch (storage.state)
     {
@@ -50,6 +49,7 @@ void ProcessController::process()
 	    }
 	    break;
 	case MainMenu:
+            storage.sprCursor->setPosition(ic->getMousePoint());
 	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
 	    {
 		storage.counter++;
