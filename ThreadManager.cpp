@@ -141,12 +141,7 @@ void ThreadManager::exitCleanUpJoin()
 }
 
 void ThreadManager::exitCleanUp()
-{
-    for (int i = 0; i < 999999999; i++)
-    {
-	
-    }
-    
+{   
     frame->removeFromFrame(storage->txtCounter);
     frame->removeFromFrame(storage->btnTriggerOnHold);
     frame->removeFromFrame(storage->btnTriggerOnDown);
