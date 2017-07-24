@@ -14,7 +14,7 @@
 #endif 
 
 //All the defaults
-std::string Settings::ipocVersion = "0.7.0";
+std::string Settings::ipocVersion = "0.7.0"; //Obligatory initial branch commit
 
 std::string Settings::imageFilePath = "default file path";
 std::string Settings::fontFilePath = "default file path";
