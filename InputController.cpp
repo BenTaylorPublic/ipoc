@@ -236,7 +236,7 @@ void InputController::markEndOfLoop()
     } while (true);
 }
 
-bool InputController::getKeyboardStatus(const Key& inputKey, const ButtonStatus& inputStatus)
+bool InputController::getKeyboardStatus(const PhysicalButton& inputKey, const ButtonStatus& inputStatus)
 {
     if ((inputStatus == ButtonDown || inputStatus == ButtonHold) && inputKeyboardArray[(int) inputKey] == ButtonDown)
 	return true;

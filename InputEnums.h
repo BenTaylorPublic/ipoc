@@ -5,17 +5,17 @@
 /*
 An enum used for every key on the keyboard
 */
-enum Key
+enum PhysicalButton
 {
-    A = 0, B = 1, C = 2, D = 3, E = 4, F = 5, G = 6, H = 7, I = 8, J = 9, K = 10, L = 11, M = 12, N = 13, O = 14, P = 15, Q = 16, R = 17, S = 18, T = 19, U = 20, V = 21, W = 22, X = 23, Y = 24, Z = 25,
-    Num0 = 26, Num1 = 27, Num2 = 28, Num3 = 29, Num4 = 30, Num5 = 31, Num6 = 32, Num7 = 33, Num8 = 34, Num9 = 35,
+    KeyA = 0, KeyB = 1, KeyC = 2, KeyD = 3, KeyE = 4, KeyF = 5, KeyG = 6, KeyH = 7, KeyI = 8, KeyJ = 9, KeyK = 10, KeyL = 11, KeyM = 12, KeyN = 13, KeyO = 14, KeyP = 15, KeyQ = 16, KeyR = 17, KeyS = 18, KeyT = 19, KeyU = 20, KeyV = 21, KeyW = 22, KeyX = 23, KeyY = 24, KeyZ = 25,
+    Key0 = 26, Key1 = 27, Key2 = 28, Key3 = 29, Key4 = 30, Key5 = 31, Key6 = 32, Key7 = 33, Key8 = 34, Key9 = 35,
     Numpad0 = 36, Numpad1 = 37, Numpad2 = 38, Numpad3 = 39, Numpad4 = 40, Numpad5 = 41, Numpad6 = 42, Numpad7 = 43, Numpad8 = 44, Numpad9 = 45,
-    ArrowLeft = 46, ArrowRight = 47, ArrowUp = 48, ArrowDown = 49,
-    F1 = 50, F2 = 51, F3 = 52, F4 = 53, F5 = 54, F6 = 55, F7 = 56, F8 = 57, F9 = 58, F10 = 59, F11 = 60, F12 = 61,
-    Add = 62, Subtract = 63, Divide = 64, Multiply = 65,
-    EscapeKey = 66, BackSlash = 67, BackSpace = 68, Comma = 69, Dash = 70, Delete = 71, Equal = 72, Home = 73, Insert = 74,
-    LAlt = 75, LBracket = 76, LControl = 77, LShift = 78, LSystem = 79, Menu = 80, PageUp = 81, PageDown = 82, Pause = 83, Period = 84, Quote = 85,
-    RAlt = 86, RBracket = 87, RControl = 88, Return = 89, RShift = 90, RSystem = 91, SemiColon = 92, Slash = 93, SpaceBar = 94, Tab = 95, Tilde = 96, End = 97
+    KeyArrowLeft = 46, KeyArrowRight = 47, KeyArrowUp = 48, KeyArrowDown = 49,
+    KeyF1 = 50, KeyF2 = 51, KeyF3 = 52, KeyF4 = 53, KeyF5 = 54, KeyF6 = 55, KeyF7 = 56, KeyF8 = 57, KeyF9 = 58, KeyF10 = 59, KeyF11 = 60, KeyF12 = 61,
+    KeyAdd = 62, KeySubtract = 63, KeyDivide = 64, KeyMultiply = 65,
+    KeyEscape = 66, KeyBackSlash = 67, KeyBackSpace = 68, KeyComma = 69, KeyDash = 70, KeyDelete = 71, KeyEqual = 72, KeyHome = 73, KeyInsert = 74,
+    KeyLAlt = 75, KeyLBracket = 76, KeyLControl = 77, KeyLShift = 78, KeyLSystem = 79, KeyMenu = 80, KeyPageUp = 81, KeyPageDown = 82, KeyPause = 83, KeyPeriod = 84, KeyQuote = 85,
+    KeyRAlt = 86, KeyRBracket = 87, KeyRControl = 88, KeyReturn = 89, KeyRShift = 90, KeyRSystem = 91, KeySemiColon = 92, KeySlash = 93, KeySpaceBar = 94, KeyTab = 95, KeyTilde = 96, KeyEnd = 97
 };
 
 /*

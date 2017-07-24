@@ -12,7 +12,7 @@ public:
     InputController();
     ~InputController();
     void IPOCLoad();
-    bool getKeyboardStatus(const Key& inputKey, const ButtonStatus& inputStatus);
+    bool getKeyboardStatus(const PhysicalButton& inputKey, const ButtonStatus& inputStatus);
     bool getMouseStatus(const Mouse& inputButton, const ButtonStatus& inputStatus);
     const Point2D& getMousePoint();
     void setGraphicsWindow(Window* inputWindow);

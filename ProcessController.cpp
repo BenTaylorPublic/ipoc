@@ -91,7 +91,7 @@ void ProcessController::process()
 
     if (storage.state != Exiting)
     {
-	if (ic->getKeyboardStatus(EscapeKey, ButtonDown))
+	if (ic->getKeyboardStatus(KeyEscape, ButtonDown))
 	{
 	    storage.state = Exiting;
 	    tm.exitCleanUpStart();
