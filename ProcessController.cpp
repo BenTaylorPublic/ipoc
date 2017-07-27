@@ -49,7 +49,7 @@ void ProcessController::process()
 	    }
 	    break;
 	case MainMenu:
-            storage.sprCursor->setPosition(ic->getMousePoint());
+	    storage.sprCursor->setPosition(ic->getMousePoint());
 	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
 	    {
 		storage.counter++;
@@ -91,7 +91,7 @@ void ProcessController::process()
 
     if (storage.state != Exiting)
     {
-	if (ic->getKeyboardStatus(KeyEscape, ButtonDown))
+	if (ic->getPhysicalButtonStatus(KeyEscape, ButtonDown))
 	{
 	    storage.state = Exiting;
 	    tm.exitCleanUpStart();
