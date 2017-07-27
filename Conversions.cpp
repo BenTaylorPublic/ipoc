@@ -16,7 +16,7 @@ bool Conversions::stringContains(const std::string& inputString, const std::stri
     return (inputString.find(containsString) != std::string::npos);
 }
 
-std::string Conversions::convertKeyToString(const Key& inputKey)
+std::string Conversions::convertKeyToString(const PhysicalButton& inputKey)
 {
     return keyEnumStrings[(int) inputKey];
 }
