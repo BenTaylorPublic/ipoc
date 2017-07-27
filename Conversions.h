@@ -9,7 +9,7 @@ class Conversions
 {
 public:
     static bool stringContains(const std::string& inputString, const std::string& containsString); //Returns true if a specified string contains a second specified string
-    static std::string convertKeyToString(const Key& inputKey); //Converts a keycode into a string, eg A to "A"
+    static std::string convertKeyToString(const PhysicalButton& inputKey); //Converts a keycode into a string, eg A to "A"
     static std::string replaceStringInString(const std::string& inputString, const std::string& stringToReplace, const std::string& stringToReplaceWith); //Replaces all occurances of a string, with a specified string
     static std::string insertCommas(const int& inputInt);
     /*

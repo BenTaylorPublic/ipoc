@@ -48,24 +48,24 @@ void OnscreenButtonManager::markStartOfLoop()
     Point2D mousePoint = inputController->getMousePoint();
     Debug::notifyOfCopy(12);
 
-    if (inputController->getMouseStatus(LeftButton, ButtonUntouched))
+    if (inputController->getPhysicalButtonStatus(MouseLeft, ButtonUntouched))
     {
 	return;
-    } else if (inputController->getMouseStatus(LeftButton, ButtonDown))
+    } else if (inputController->getPhysicalButtonStatus(MouseLeft, ButtonDown))
     {
 	for (OnscreenButton* it : onscreenButtons)
 	{
 	    if (it->mouseDown(mousePoint))
 		toClear.push(it);
 	}
-    } else if (inputController->getMouseStatus(LeftButton, ButtonHold))
+    } else if (inputController->getPhysicalButtonStatus(MouseLeft, ButtonHold))
     {
 	for (OnscreenButton* it : onscreenButtons)
 	{
 	    it->mouseHold(mousePoint);
 	}
 
-    } else if (inputController->getMouseStatus(LeftButton, ButtonUp))
+    } else if (inputController->getPhysicalButtonStatus(MouseLeft, ButtonUp))
     {
 	for (OnscreenButton* it : onscreenButtons)
 	{
