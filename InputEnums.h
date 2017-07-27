@@ -1,9 +1,9 @@
 #pragma once
 
-#define AMOUNT_OF_PHYSICAL_BUTTONS 98
+#define AMOUNT_OF_PHYSICAL_BUTTONS 103
 
 /*
-An enum used for every key on the keyboard
+An enum used for every physical button
 */
 enum PhysicalButton
 {
@@ -15,7 +15,8 @@ enum PhysicalButton
     KeyAdd = 62, KeySubtract = 63, KeyDivide = 64, KeyMultiply = 65,
     KeyEscape = 66, KeyBackSlash = 67, KeyBackSpace = 68, KeyComma = 69, KeyDash = 70, KeyDelete = 71, KeyEqual = 72, KeyHome = 73, KeyInsert = 74,
     KeyLAlt = 75, KeyLBracket = 76, KeyLControl = 77, KeyLShift = 78, KeyLSystem = 79, KeyMenu = 80, KeyPageUp = 81, KeyPageDown = 82, KeyPause = 83, KeyPeriod = 84, KeyQuote = 85,
-    KeyRAlt = 86, KeyRBracket = 87, KeyRControl = 88, KeyReturn = 89, KeyRShift = 90, KeyRSystem = 91, KeySemiColon = 92, KeySlash = 93, KeySpaceBar = 94, KeyTab = 95, KeyTilde = 96, KeyEnd = 97
+    KeyRAlt = 86, KeyRBracket = 87, KeyRControl = 88, KeyReturn = 89, KeyRShift = 90, KeyRSystem = 91, KeySemiColon = 92, KeySlash = 93, KeySpaceBar = 94, KeyTab = 95, KeyTilde = 96, KeyEnd = 97,
+    MouseLeft = 98, MouseRight = 99, MouseMiddle = 100, MouseXButton1 = 101, MouseXButton2 = 102
 };
 
 /*

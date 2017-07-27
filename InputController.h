@@ -25,7 +25,7 @@ private:
     void handleMouseButton(const sf::Mouse::Button& inputMouse, const int& index);
     Point2D mousePoint;
     void resetInputArrays();
-    ButtonStatus inputKeyboardArray[98];
+    ButtonStatus inputKeyboardArray[AMOUNT_OF_PHYSICAL_BUTTONS];
     ButtonStatus inputMouseArray[3];
     std::queue<int> buttonDownKeyboard; //Used to mark ButtonDown to ButtonHold
     std::queue<int> buttonDownMouse; //Used to mark ButtonDown to ButtonHold
