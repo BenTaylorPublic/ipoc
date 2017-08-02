@@ -14,7 +14,7 @@ Sprite::Sprite(const std::string& inputName, Texture& inputTexture)
     Debug::notifyOfConstruction(16);
 }
 
-Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const int& inputZ)
+Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const unsigned int& inputZ)
 {
     name = inputName;
     setZ(inputZ);

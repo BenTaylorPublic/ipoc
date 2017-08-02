@@ -1,16 +1,16 @@
 #include "Drawable.h"
 
-void Drawable::setFrameId(const int& inputFrameId)
+void Drawable::setFrameId(const unsigned int& inputFrameId)
 {
     frameId = inputFrameId;
 }
 
-const int& Drawable::getFrameId()
+const unsigned int& Drawable::getFrameId()
 {
     return frameId;
 }
 
-void Drawable::setZ(const int& inputZ)
+void Drawable::setZ(const unsigned int& inputZ)
 {
     z = inputZ;
 }

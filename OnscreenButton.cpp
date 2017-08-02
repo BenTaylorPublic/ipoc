@@ -7,14 +7,14 @@ OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType
     Debug::notifyOfConstruction(10);
 }
 
-OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const int& inputZ)
+OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ)
 {
     setZ(inputZ);
     onscreenButtonType = inputOnscreenButtonType;
     Debug::notifyOfConstruction(10);
 }
 
-OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const int& inputZ, const Point2D& point)
+OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point)
 {
     setZ(inputZ);
     setPosition(point);
@@ -170,12 +170,12 @@ bool OnscreenButton::mouseUp(const Point2D& mousePoint)
     return false;
 }
 
-void OnscreenButton::setOnscreenButtonManagerId(const int& newId)
+void OnscreenButton::setOnscreenButtonManagerId(const unsigned int& newId)
 {
     onscreenButtonManagerId = newId;
 }
 
-int& OnscreenButton::getOnscreenButtonManagerId()
+unsigned int& OnscreenButton::getOnscreenButtonManagerId()
 {
     return onscreenButtonManagerId;
 }

@@ -4,7 +4,7 @@
 
 OnscreenButtonManager::OnscreenButtonManager()
 {
-    for (int i = 0; i < 50; i++)
+    for (unsigned int i = 1; i <= 50; i++)
     {
 	idsToGive.push(i);
     }
@@ -30,7 +30,7 @@ void OnscreenButtonManager::addOnscreenButton(OnscreenButton* onscreenButtonToAd
 
 void OnscreenButtonManager::removeOnscreenButton(OnscreenButton* onscreenButtonToAdd)
 {
-    for (int i = 0; i < onscreenButtons.size(); i++)
+    for (unsigned int i = 0; i < onscreenButtons.size(); i++)
     {
 	if (onscreenButtons[i]->getOnscreenButtonManagerId() == onscreenButtonToAdd->getOnscreenButtonManagerId())
 	{

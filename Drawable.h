@@ -8,12 +8,12 @@ class Drawable
 public:
     virtual ~Drawable() {};
     int getZ();
-    void setZ(const int& inputZ);
-    void setFrameId(const int& inputFrameId);
-    const int& getFrameId();
+    void setZ(const unsigned int& inputZ);
+    void setFrameId(const unsigned int& inputFrameId);
+    const unsigned int& getFrameId();
     virtual void draw(sf::RenderTarget& target) = 0;
     virtual void setPosition(const Point2D& newPoint) = 0;
 private:
     int z = 0;
-    int frameId = -1;    
+    unsigned int frameId = 0;    
 };

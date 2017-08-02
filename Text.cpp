@@ -17,7 +17,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const std::string& inp
     Debug::notifyOfConstruction(14);
 }
 
-Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString)
+Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString)
 {
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
@@ -26,7 +26,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, con
     Debug::notifyOfConstruction(14);
 }
 
-Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ)
+Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ)
 {
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
@@ -44,7 +44,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const std::string& inp
     Debug::notifyOfConstruction(14);
 }
 
-Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point)
+Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point)
 {
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
@@ -54,7 +54,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, con
     Debug::notifyOfConstruction(14);
 }
 
-Text::Text(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point)
+Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const Point2D& point)
 {
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");

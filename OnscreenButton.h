@@ -15,8 +15,8 @@ class OnscreenButton : public Drawable
 {
 public:
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType);
-    OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const int& inputZ);
-    OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const int& inputZ, const Point2D& point);
+    OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ);
+    OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point);
     ~OnscreenButton();
     void addToUp(Drawable* drawable, const Point2D& offsetFromTopLeft);
     void addToDown(Drawable* drawable, const Point2D& offsetFromTopLeft);
@@ -27,8 +27,8 @@ public:
     bool mouseDown(const Point2D& mousePoint);
     void mouseHold(const Point2D& mousePoint);
     bool mouseUp(const Point2D& mousePoint);
-    void setOnscreenButtonManagerId(const int& newId);
-    int& getOnscreenButtonManagerId();
+    void setOnscreenButtonManagerId(const unsigned int& newId);
+    unsigned int& getOnscreenButtonManagerId();
     void clearTriggered();
     bool isTriggered();
     void draw(sf::RenderTarget& target) override;
@@ -36,7 +36,7 @@ public:
 private:
     bool triggered = false;
     bool stateUp = true;
-    int onscreenButtonManagerId = -1;
+    unsigned int onscreenButtonManagerId = 0;
     OnscreenButtonType onscreenButtonType;
     std::vector<Drawable*> stateUpDrawables;
     std::vector<Drawable*> stateDownDrawables;

@@ -29,7 +29,7 @@ public:
     static void logLoopNumber(); //Adds the loop to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
     static void logMemoryLeakInfo();
     static void logClassAmountInfo();
-    static void crash(const int& crashId, const std::string& callFrom);
+    static void crash(const unsigned int& crashId, const std::string& callFrom);
     /*
     Calls every object's getStatusString() method, and logs them immediately to the log file.
     This should be used for serious debugging issues.
@@ -41,7 +41,7 @@ public:
     static void setMasterController(MasterController* input); //Used to received a pointer tot he MasterController. This pointer will then be used to logStatusStrings(), when requested.
     static void setFilePath(std::string inputPath); //used to receive the file path from the Settings class.
 private:
-    static int loopNumber; //Used for logging and writing loop numbers from anwywhere in the program.
+    static unsigned int loopNumber; //Used for logging and writing loop numbers from anwywhere in the program.
     /*
     A pointer the the MasterController.
     The reason this exists, is because the master controller contains all the controllers below it, and those controllers contain all the objects below them.
@@ -49,8 +49,8 @@ private:
     This pointer is used by Debug::logStatusStrings()
     */
     static MasterController* masterController;
-    static int constructionAmount[AMOUNT_OF_CLASSES];
-    static int destructionAmount[AMOUNT_OF_CLASSES];
-    static int copyAmount[AMOUNT_OF_CLASSES];
+    static unsigned int constructionAmount[AMOUNT_OF_CLASSES];
+    static unsigned int destructionAmount[AMOUNT_OF_CLASSES];
+    static unsigned int copyAmount[AMOUNT_OF_CLASSES];
     static std::string logPath; //The filepath of the DebugLog.txt file.
 };

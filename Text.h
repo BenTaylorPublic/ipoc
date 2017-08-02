@@ -14,11 +14,11 @@ class Text : public Drawable
 public:
     Text(const std::string& inputName, Font& inputFont);
     Text(const std::string& inputName, Font& inputFont, const std::string& inputString);
-    Text(const std::string& inputName, Font& inputFont, const int& inputZ);
-    Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString);
+    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ);
+    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString);
     Text(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point);
-    Text(const std::string& inputName, Font& inputFont, const int& inputZ, const Point2D& point);
-    Text(const std::string& inputName, Font& inputFont, const int& inputZ, const std::string& inputString, const Point2D& point);
+    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const Point2D& point);
+    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point);
     ~Text();
     std::string name; //Name that is mainly used for debugging
     Point2D getPosition(); //Returns the current position of the text (TL)

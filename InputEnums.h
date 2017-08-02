@@ -20,14 +20,6 @@ enum PhysicalButton
 };
 
 /*
-An enum used for the different mouse inputs
-*/
-enum Mouse
-{
-    LeftButton = 0, MiddleButton = 1, RightButton = 2
-};
-
-/*
 An enum used for the different statuses a button can be
 */
 enum ButtonStatus

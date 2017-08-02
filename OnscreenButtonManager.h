@@ -21,6 +21,6 @@ public:
 private:
     InputController* inputController;
     std::vector<OnscreenButton*> onscreenButtons;
-    std::queue<int> idsToGive;
+    std::queue<unsigned int> idsToGive;
     std::queue<OnscreenButton*> toClear;
 };
