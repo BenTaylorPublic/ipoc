@@ -17,8 +17,8 @@ public:
     static std::string imageFilePath;
     static std::string fontFilePath;
     static std::string ipocVersion;
-    static int maxZ;
-    static int maxDrawables;
+    static unsigned int maxZ;
+    static unsigned int maxDrawables;
     static std::string windowType;
     static bool hideCursor;
     static bool logClassAmountInfo;

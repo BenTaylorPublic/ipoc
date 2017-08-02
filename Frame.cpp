@@ -16,12 +16,12 @@ Frame::~Frame()
 void Frame::IPOCLoad()
 {
     std::vector<Drawable*> toAdd;
-    for (int i = 0; i < Settings::maxZ; i++)
+    for (unsigned int i = 0; i < Settings::maxZ; i++)
     {
 	drawables.push_back(toAdd);
     }
 
-    for (int i = 0; i < Settings::maxDrawables; i++)
+    for (unsigned int i = 1; i <= Settings::maxDrawables; i++)
     {
 	frameIdsToGive.push(i);
     }
@@ -56,16 +56,13 @@ void Frame::removeFromFrame(Drawable* drawable)
 {
     int z = drawable->getZ();
 
-    if (z == -1)
-	return;
-
-    for (int i = 0; i < drawables.at(z).size(); i++)
+    for (unsigned int i = 0; i < drawables.at(z).size(); i++)
     {
 	if (drawables.at(z).at(i)->getFrameId() == drawable->getFrameId())
 	{
 	    drawables.at(z).erase(drawables.at(z).begin() + i);
 	    frameIdsToGive.push(drawable->getFrameId());
-	    drawable->setFrameId(-1);
+	    drawable->setFrameId(0);
 	    return;
 	}
     }

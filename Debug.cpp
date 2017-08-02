@@ -7,13 +7,13 @@
 #include <chrono>
 
 //Defaults
-int Debug::loopNumber = 0;
+unsigned int Debug::loopNumber = 0;
 MasterController* Debug::masterController = nullptr;
 std::string Debug::logPath = "blank";
 
-int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
-int Debug::destructionAmount[AMOUNT_OF_CLASSES] = {0};
-int Debug::copyAmount[AMOUNT_OF_CLASSES] = {0};
+unsigned int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
+unsigned int Debug::destructionAmount[AMOUNT_OF_CLASSES] = {0};
+unsigned int Debug::copyAmount[AMOUNT_OF_CLASSES] = {0};
 
 void Debug::write(const int& input)
 {
@@ -94,7 +94,7 @@ void Debug::notifyOfCopy(const int& classId)
     copyAmount[classId]++;
 }
 
-void Debug::crash(const int& crashId, const std::string& callFrom)
+void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
 {
     write("[CRASH] Program crashed. Crash ID " + std::to_string(crashId) + ".\n");
     write("[CRASH] Crash called from " + callFrom + "\n");

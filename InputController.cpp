@@ -205,7 +205,7 @@ const Point2D& InputController::getMousePoint()
     return mousePoint;
 }
 
-void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton, const int& index)
+void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton, const unsigned int& index)
 {
     if (sf::Keyboard::isKeyPressed(inputButton))
     {
@@ -226,7 +226,7 @@ void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton,
     }
 }
 
-void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton, const int& index)
+void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton, const unsigned int& index)
 {
     if (sf::Mouse::isButtonPressed(inputButton))
     {

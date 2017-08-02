@@ -21,7 +21,7 @@ public:
 private:
     Frame* frame;
     bool exitProgram;
-    int loopNumber;
+    unsigned int loopNumber;
     InputController* ic;
     OutputController* oc;
     OnscreenButtonManager* obm;
