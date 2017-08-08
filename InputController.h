@@ -20,13 +20,13 @@ public:
     void markEndOfLoop(); //Used to mark ButtonDown to ButtonHold, and ButtonUp to ButtonUntouched
     std::string getStatusString();
 private:
-    void handlePhysicalButton(const sf::Keyboard::Key& inputButton, const unsigned int& index);
-    void handlePhysicalButton(const sf::Mouse::Button& inputButton, const unsigned int& index);
+    void handlePhysicalButton(const sf::Keyboard::Key& inputButton, const int& index);
+    void handlePhysicalButton(const sf::Mouse::Button& inputButton, const int& index);
     Point2D mousePoint;
     void resetInputArrays();
     ButtonStatus physicalButtonStatusArray[AMOUNT_OF_PHYSICAL_BUTTONS];
-    std::queue<unsigned int> buttonDownKeyboard; //Used to mark ButtonDown to ButtonHold
-    std::queue<unsigned int> buttonUpKeyboard; //Used to mark ButtonUp to ButtonUntouched
+    std::queue<int> physicalButtonDown; //Used to mark ButtonDown to ButtonHold
+    std::queue<int> physicalButtonUp; //Used to mark ButtonUp to ButtonUntouched
     
     Window* window; //Needed for mouse location relative to window
 };

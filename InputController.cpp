@@ -147,8 +147,8 @@ void InputController::resetInputArrays()
 
 void InputController::markStartOfLoop()
 {
-    buttonDownKeyboard.push(-1);
-    buttonUpKeyboard.push(-1);
+    physicalButtonDown.push(-1);
+    physicalButtonUp.push(-1);
 }
 
 void InputController::markEndOfLoop()
@@ -159,8 +159,8 @@ void InputController::markEndOfLoop()
     //Keyboard Down to hold
     do
     {
-	currentIndex = buttonDownKeyboard.front();
-	buttonDownKeyboard.pop();
+	currentIndex = physicalButtonDown.front();
+	physicalButtonDown.pop();
 
 	if (currentIndex == -1) //Escape character
 	    break;
@@ -174,8 +174,8 @@ void InputController::markEndOfLoop()
     //Keyboard Up to Untouched
     do
     {
-	currentIndex = buttonUpKeyboard.front();
-	buttonUpKeyboard.pop();
+	currentIndex = physicalButtonUp.front();
+	physicalButtonUp.pop();
 
 	if (currentIndex == -1) //Escape character
 	    break;
@@ -205,14 +205,14 @@ const Point2D& InputController::getMousePoint()
     return mousePoint;
 }
 
-void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton, const unsigned int& index)
+void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton, const int& index)
 {
     if (sf::Keyboard::isKeyPressed(inputButton))
     {
 	//Key is currently DOWN according to SFML
 	if (physicalButtonStatusArray[index] == ButtonUntouched)
 	{
-	    buttonDownKeyboard.push(index);
+	    physicalButtonDown.push(index);
 	    physicalButtonStatusArray[index] = ButtonDown;
 	}
     } else
@@ -220,20 +220,20 @@ void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton,
 	//Key is currently UP according to SFML
 	if (physicalButtonStatusArray[index] == ButtonHold)
 	{
-	    buttonUpKeyboard.push(index);
+	    physicalButtonUp.push(index);
 	    physicalButtonStatusArray[index] = ButtonUp;
 	}
     }
 }
 
-void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton, const unsigned int& index)
+void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton, const int& index)
 {
     if (sf::Mouse::isButtonPressed(inputButton))
     {
 	//Key is currently DOWN according to SFML
 	if (physicalButtonStatusArray[index] == ButtonUntouched)
 	{
-	    buttonDownKeyboard.push(index);
+	    physicalButtonDown.push(index);
 	    physicalButtonStatusArray[index] = ButtonDown;
 	}
     } else
@@ -241,7 +241,7 @@ void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton,
 	//Key is currently UP according to SFML
 	if (physicalButtonStatusArray[index] == ButtonHold)
 	{
-	    buttonUpKeyboard.push(index);
+	    physicalButtonUp.push(index);
 	    physicalButtonStatusArray[index] = ButtonUp;
 	}
     }

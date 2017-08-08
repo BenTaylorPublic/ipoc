@@ -32,7 +32,7 @@ void Debug::writeLoopNumber()
 
 void Debug::log(const int& input)
 {
-    FileManager::writeToFile(logPath, input);
+    FileManager::writeToFile(logPath, std::to_string(input));
 }
 
 void Debug::log(const std::string& input)
@@ -42,7 +42,7 @@ void Debug::log(const std::string& input)
 
 void Debug::logLoopNumber()
 {
-    FileManager::writeToFile(logPath, loopNumber);
+    FileManager::writeToFile(logPath, std::to_string(loopNumber));
 }
 
 void Debug::newLog()

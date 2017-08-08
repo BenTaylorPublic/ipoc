@@ -93,7 +93,6 @@ void MasterController::inputLoop()
 	}
     }
     
-    Debug::log("[INFO] Input thread finished\n");
     inputThreadJoinable = true;
     
 }
@@ -152,7 +151,6 @@ void MasterController::processLoop()
     Debug::logTimeStamp();
     Debug::log("\n");
     
-    Debug::log("[INFO] Process thread finished\n");
     processThreadJoinable = true;
 }
 
@@ -170,8 +168,6 @@ void MasterController::exit()
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
     
-    //Finally log that everything went well
-    Debug::log("[INFO] Successfully ended threads\n");
     delete inputController;
     delete processController;
     delete outputController;
