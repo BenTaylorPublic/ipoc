@@ -23,6 +23,7 @@ public:
     static bool hideCursor;
     static bool logClassAmountInfo;
     static InputStatus inputStatus;
+    static bool debugMode;
 private:
     static int getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);
     static std::string getStringFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);

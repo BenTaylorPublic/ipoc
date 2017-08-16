@@ -30,6 +30,8 @@ std::string Settings::windowType = "windowed";
 bool Settings::hideCursor = true;
 bool Settings::logClassAmountInfo = false;
 
+bool Settings::debugMode = true;
+
 InputStatus Settings::inputStatus = Active;
 
 void Settings::loadSettings() 
