@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <queue>
 
-class InputController
-{
+class InputController {
 public:
     InputController();
     ~InputController();
@@ -27,6 +26,6 @@ private:
     ButtonStatus physicalButtonStatusArray[AMOUNT_OF_PHYSICAL_BUTTONS];
     std::queue<int> physicalButtonDown; //Used to mark ButtonDown to ButtonHold
     std::queue<int> physicalButtonUp; //Used to mark ButtonUp to ButtonUntouched
-    
+
     Window* window; //Needed for mouse location relative to window
 };

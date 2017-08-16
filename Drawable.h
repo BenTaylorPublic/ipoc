@@ -3,10 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include "Point2D.h"
 
-class Drawable
-{
+class Drawable {
 public:
-    virtual ~Drawable() {};
+
+    virtual ~Drawable() {
+    };
     int getZ();
     void setZ(const unsigned int& inputZ);
     void setFrameId(const unsigned int& inputFrameId);
@@ -15,5 +16,5 @@ public:
     virtual void setPosition(const Point2D& newPoint) = 0;
 private:
     int z = 0;
-    unsigned int frameId = 0;    
+    unsigned int frameId = 0;
 };

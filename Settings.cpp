@@ -35,7 +35,7 @@ bool Settings::debugMode = true;
 
 InputStatus Settings::inputStatus = Active;
 
-void Settings::loadSettings() 
+void Settings::loadSettings()
 {
     char buff[FILENAME_MAX];
     GetCurrentDir(buff, FILENAME_MAX);
@@ -45,8 +45,8 @@ void Settings::loadSettings()
 #else
     filePath = current_working_dir + "/files/";
 #endif
-    
-    
+
+
     Debug::setFilePath(filePath);
 
     std::string settingsFilePath = filePath + "Settings.ini";
@@ -71,14 +71,17 @@ void Settings::loadSettings()
     logClassAmountInfo = getBoolFromSettings(settingsFile, "log_class_amount_info");
 }
 
-int Settings::getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString) {
-    for (int i = 0; i < inputFile.size(); i++) {
-        if (Conversions::stringContains(inputFile[i], inputString)) {
-            std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
-            int resultI = atoi(resultS.c_str());
-            inputFile.erase(inputFile.begin() + i);
-            return resultI;
-        }
+int Settings::getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString)
+{
+    for (int i = 0; i < inputFile.size(); i++)
+    {
+	if (Conversions::stringContains(inputFile[i], inputString))
+	{
+	    std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
+	    int resultI = atoi(resultS.c_str());
+	    inputFile.erase(inputFile.begin() + i);
+	    return resultI;
+	}
     }
 
     Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString + "\n");
@@ -87,13 +90,16 @@ int Settings::getIntFromSettings(std::vector<std::string>& inputFile, const std:
     return -1;
 }
 
-std::string Settings::getStringFromSettings(std::vector<std::string>& inputFile, const std::string& inputString) {
-    for (int i = 0; i < inputFile.size(); i++) {
-        if (Conversions::stringContains(inputFile[i], inputString)) {
-            std::string result = inputFile[i].erase(0, inputString.length() + 2);
-            inputFile.erase(inputFile.begin() + i);
-            return result;
-        }
+std::string Settings::getStringFromSettings(std::vector<std::string>& inputFile, const std::string& inputString)
+{
+    for (int i = 0; i < inputFile.size(); i++)
+    {
+	if (Conversions::stringContains(inputFile[i], inputString))
+	{
+	    std::string result = inputFile[i].erase(0, inputString.length() + 2);
+	    inputFile.erase(inputFile.begin() + i);
+	    return result;
+	}
     }
 
     Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString + "\n");
@@ -102,16 +108,19 @@ std::string Settings::getStringFromSettings(std::vector<std::string>& inputFile,
     return "";
 }
 
-bool Settings::getBoolFromSettings(std::vector<std::string>& inputFile, const std::string& inputString) {
-    for (int i = 0; i < inputFile.size(); i++) {
-        if (Conversions::stringContains(inputFile[i], inputString)) {
-            std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
-            inputFile.erase(inputFile.begin() + i);
-            if (resultS == "true")
-                return true;
-            else if (resultS == "false")
-                return false;
-        }
+bool Settings::getBoolFromSettings(std::vector<std::string>& inputFile, const std::string& inputString)
+{
+    for (int i = 0; i < inputFile.size(); i++)
+    {
+	if (Conversions::stringContains(inputFile[i], inputString))
+	{
+	    std::string resultS = inputFile[i].erase(0, inputString.length() + 2);
+	    inputFile.erase(inputFile.begin() + i);
+	    if (resultS == "true")
+		return true;
+	    else if (resultS == "false")
+		return false;
+	}
     }
 
     Debug::log("[CRASH] Couldn't find a setting. Setting name " + inputString + "\n");
@@ -120,7 +129,8 @@ bool Settings::getBoolFromSettings(std::vector<std::string>& inputFile, const st
     return false;
 }
 
-std::string Settings::getStatusString() {
+std::string Settings::getStatusString()
+{
     return "N/A";
 }
 

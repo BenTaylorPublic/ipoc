@@ -7,13 +7,12 @@
 #include "ThreadManager.h"
 #include "OnscreenButtonManager.h"
 
-class ProcessController
-{
+class ProcessController {
 public:
     ProcessController();
     ~ProcessController();
     void IPOCLoad(InputController* inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame, OutputController* outputControllerPtr);
-    void load();//Program specific, called just before the start of the loop. Load textures and such in here
+    void load(); //Program specific, called just before the start of the loop. Load textures and such in here
     void process();
     bool checkForExitProgram();
     void incrementLoopNumber();

@@ -6,9 +6,8 @@
 Point2D is a Data Type
 Point2D is used to indicate a position on the screen
 Point2D contains 2 doubles to indicate the position
-*/
-class Point2D
-{
+ */
+class Point2D {
 public:
     Point2D(const double& inputX, const double& inputY); //Creates a new Point2D, with X and Y specified
     Point2D(const int& inputX, const int& inputY); //Creates a new Point2D, with X and Y specified
@@ -24,7 +23,7 @@ public:
     /*
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
-    */
+     */
     std::string getStatusString();
 private:
 };

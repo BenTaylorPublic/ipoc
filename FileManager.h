@@ -4,8 +4,8 @@
 #include <vector>
 
 //Used to read and write to text files
-class FileManager
-{
+
+class FileManager {
 public:
     static void writeToFile(const std::string& filePath, const std::string& input);
     static void writeToFile(const std::string& filePath, const char& input);
@@ -14,7 +14,7 @@ public:
     /*
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
-    */
+     */
     static std::string getStatusString();
 private:
 };

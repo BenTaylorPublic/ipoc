@@ -139,7 +139,7 @@ void MasterController::processLoop()
 	{
 	    if (Settings::debugMode)
 		Debug::noteLoopTime((std::chrono::high_resolution_clock::now() - startOfLoopTime).count());
-	
+
 	    //Uncomment this to see how long the loop is sleeping for
 	    //std::chrono::nanoseconds result = nanosecondsPerLoop - (std::chrono::high_resolution_clock::now() - startOfLoopTime);
 	    //Debug::write("Time left: " + Conversions::insertCommas(result.count()) + " nanoseconds\n");

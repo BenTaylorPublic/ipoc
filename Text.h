@@ -8,9 +8,8 @@
 
 /*
 IPOCText is a Data Type (Wrapper)
-*/
-class Text : public Drawable
-{
+ */
+class Text : public Drawable {
 public:
     Text(const std::string& inputName, Font& inputFont);
     Text(const std::string& inputName, Font& inputFont, const std::string& inputString);
@@ -32,7 +31,7 @@ public:
     /*
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
-    */
+     */
     std::string getStatusString();
 private:
     sf::Text text; //SFML Text object that this class wraps

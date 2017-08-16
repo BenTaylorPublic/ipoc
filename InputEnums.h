@@ -4,9 +4,8 @@
 
 /*
 An enum used for every physical button
-*/
-enum PhysicalButton
-{
+ */
+enum PhysicalButton {
     KeyA = 0, KeyB = 1, KeyC = 2, KeyD = 3, KeyE = 4, KeyF = 5, KeyG = 6, KeyH = 7, KeyI = 8, KeyJ = 9, KeyK = 10, KeyL = 11, KeyM = 12, KeyN = 13, KeyO = 14, KeyP = 15, KeyQ = 16, KeyR = 17, KeyS = 18, KeyT = 19, KeyU = 20, KeyV = 21, KeyW = 22, KeyX = 23, KeyY = 24, KeyZ = 25,
     Key0 = 26, Key1 = 27, Key2 = 28, Key3 = 29, Key4 = 30, Key5 = 31, Key6 = 32, Key7 = 33, Key8 = 34, Key9 = 35,
     Numpad0 = 36, Numpad1 = 37, Numpad2 = 38, Numpad3 = 39, Numpad4 = 40, Numpad5 = 41, Numpad6 = 42, Numpad7 = 43, Numpad8 = 44, Numpad9 = 45,
@@ -21,8 +20,7 @@ enum PhysicalButton
 
 /*
 An enum used for the different statuses a button can be
-*/
-enum ButtonStatus
-{
+ */
+enum ButtonStatus {
     ButtonUntouched = 0, ButtonDown = 1, ButtonHold = 2, ButtonUp = 3
 };

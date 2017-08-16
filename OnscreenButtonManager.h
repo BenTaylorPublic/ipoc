@@ -7,8 +7,7 @@
 #include "OnscreenButton.h"
 #include "InputController.h"
 
-class OnscreenButtonManager
-{
+class OnscreenButtonManager {
 public:
     OnscreenButtonManager();
     ~OnscreenButtonManager();

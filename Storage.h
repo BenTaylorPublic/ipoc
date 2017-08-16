@@ -9,25 +9,26 @@
 #include "Sprite.h"
 #include "OnscreenButton.h"
 
-enum ProgramState {LoadingMainMenu, MainMenu, Exiting};
+enum ProgramState {
+    LoadingMainMenu, MainMenu, Exiting
+};
 
-class Storage
-{
+class Storage {
 public:
     Storage();
     ~Storage();
     std::string getStatusString();
-    
+
     ProgramState state = LoadingMainMenu;
-    
+
     //GLOBAL    
     Font* font1;
     std::vector<Texture*> textures;
-    Text* txtLoading;    
+    Text* txtLoading;
     Text* txtProcessThreadUsage;
     int counterForThreadUsage;
     Sprite* sprCursor;
-    
+
     //state: MainMenu + LoadingMainMenu
     Text* txtCounter;
     unsigned int counter;

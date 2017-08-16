@@ -5,8 +5,7 @@
 #include "Storage.h"
 #include "Frame.h"
 
-class OutputController
-{
+class OutputController {
 public:
     OutputController();
     ~OutputController();

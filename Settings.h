@@ -2,10 +2,11 @@
 #include <string>
 #include "Storage.h"
 
-enum InputStatus {Active, PauseRequested, Paused};
+enum InputStatus {
+    Active, PauseRequested, Paused
+};
 
-class Settings
-{
+class Settings {
 public:
     static std::string getStatusString();
     static void loadSettings();

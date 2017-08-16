@@ -5,8 +5,7 @@
 #include <queue>
 #include "Drawable.h"
 
-class Frame
-{
+class Frame {
 public:
     Frame();
     ~Frame();

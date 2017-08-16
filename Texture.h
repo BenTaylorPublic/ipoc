@@ -5,9 +5,8 @@
 
 /*
 IPOCTexture is a Data Type (Wrapper)
-*/
-class Texture
-{
+ */
+class Texture {
 public:
     Texture(const std::string& inputName, const std::string& fileName);
     ~Texture();
@@ -16,7 +15,7 @@ public:
     /*
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
-    */
+     */
     std::string getStatusString();
 private:
     sf::Texture texture; //SFML Texture object that this class wraps

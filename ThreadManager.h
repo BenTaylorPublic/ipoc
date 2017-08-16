@@ -7,35 +7,34 @@
 #include "Frame.h"
 #include "OnscreenButtonManager.h"
 
-class ThreadManager
-{
+class ThreadManager {
 public:
     ThreadManager();
     ~ThreadManager();
     void IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager);
     std::string getStatusString();
-    
+
     //loadMainMenu
     void loadMainMenuStart();
     void loadMainMenuJoin();
     std::atomic<bool> loadMainMenuJoinable;
-    
+
     //exitCleanUp
     void exitCleanUpStart();
     void exitCleanUpJoin();
-    std::atomic<bool> exitCleanUpJoinable; 
-    
+    std::atomic<bool> exitCleanUpJoinable;
+
 private:
     Storage* storage;
     Frame* frame;
     OnscreenButtonManager* onscreenButtonManager;
-    
+
     //loadMainMenu
     void loadMainMenu();
     std::thread* loadMainMenuThread;
-    
+
     //exitCleanUp
     void exitCleanUp();
     std::thread* exitCleanUpThread;
-    
+
 };

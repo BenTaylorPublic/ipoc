@@ -6,13 +6,11 @@
 #include "Drawable.h"
 #include "Point2D.h"
 
-enum OnscreenButtonType
-{
+enum OnscreenButtonType {
     TriggerOnUp = 0, TriggerOnDown = 1, TriggerOnHold = 2
 };
 
-class OnscreenButton : public Drawable
-{
+class OnscreenButton : public Drawable {
 public:
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType);
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ);
@@ -23,7 +21,7 @@ public:
     void addToUp(Drawable* drawable);
     void addToDown(Drawable* drawable);
     void setHitBox(const Point2D& inputTopLeft, const Point2D& inputBottomRight);
-    void setPosition(const Point2D& newPoint) override;    
+    void setPosition(const Point2D& newPoint) override;
     bool mouseDown(const Point2D& mousePoint);
     void mouseHold(const Point2D& mousePoint);
     bool mouseUp(const Point2D& mousePoint);

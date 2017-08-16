@@ -49,7 +49,7 @@ std::string Conversions::insertCommas(const int& inputInt)
 	numWithCommas.insert(insertPosition, ",");
 	insertPosition -= 3;
     }
-    
+
     return numWithCommas;
 }
 

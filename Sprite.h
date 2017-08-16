@@ -8,9 +8,8 @@
 
 /*
 IPOCSprite is a Data Type (Wrapper)
-*/
-class Sprite : public Drawable
-{
+ */
+class Sprite : public Drawable {
 public:
     Sprite(const std::string& inputName);
     Sprite(const std::string& inputName, Texture& inputTexture);
@@ -26,8 +25,8 @@ public:
     /*
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
-    */
+     */
     std::string getStatusString();
-private:    
+private:
     sf::Sprite sprite; //SFML Sprite object that this class wraps
 };

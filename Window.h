@@ -6,8 +6,7 @@
 #include "Color.h"
 #include <vector>
 
-class Window
-{
+class Window {
 public:
     Window();
     ~Window();
