@@ -47,7 +47,7 @@ void ThreadManager::loadMainMenu()
     storage->txtLoading = new Text("loading text", *storage->font1, 0, "Loading...", Point2D(100, 700));
     frame->addToFrame(storage->txtLoading);
     frame->markAsDrawable();
-    
+
     storage->windowToggleMode = true;
 
     //Textures
@@ -59,6 +59,7 @@ void ThreadManager::loadMainMenu()
 
     //Texts
     storage->txtCounter = new Text("counter text", *storage->font1, 0, "0", Point2D(20, 20));
+    storage->txtProcessThreadUsage = new Text("process thread usage text", *storage->font1, 0, "0%", Point2D(500, 500));
     storage->counter = 0;
 
     //Sprites
@@ -91,7 +92,7 @@ void ThreadManager::loadMainMenu()
     storage->btnTriggerOnHold->addToDown(new Sprite("trigger on hold down sprite", *storage->textures[3]));
     storage->btnTriggerOnHold->addToDown(new Text("trigger on hold down text", *storage->font1, "Trigger On Hold"), Point2D(20, 37));
     onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnHold);
-    
+
     //Buttons - ToggleWindowMode
     storage->btnToggleWindowMode = new OnscreenButton(TriggerOnUp, 1, Point2D(340, 100));
     storage->btnToggleWindowMode->setHitBox(Point2D(0, 0), Point2D(300, 100));
@@ -121,8 +122,10 @@ void ThreadManager::loadMainMenu()
     frame->addToFrame(storage->btnTriggerOnHold);
     frame->addToFrame(storage->btnToggleWindowMode);
     frame->addToFrame(storage->btnExit);
+    if (Settings::debugMode)
+	frame->addToFrame(storage->txtProcessThreadUsage);
     storage->state = MainMenu;
-    
+
     loadMainMenuJoinable = true;
 }
 
@@ -141,19 +144,21 @@ void ThreadManager::exitCleanUpJoin()
 }
 
 void ThreadManager::exitCleanUp()
-{   
+{
     frame->removeFromFrame(storage->txtCounter);
     frame->removeFromFrame(storage->btnTriggerOnHold);
     frame->removeFromFrame(storage->btnTriggerOnDown);
     frame->removeFromFrame(storage->btnTriggerOnUp);
     frame->removeFromFrame(storage->btnToggleWindowMode);
     frame->removeFromFrame(storage->btnExit);
+    frame->removeFromFrame(storage->txtProcessThreadUsage);
     delete storage->txtCounter;
     delete storage->btnTriggerOnDown;
     delete storage->btnTriggerOnUp;
     delete storage->btnTriggerOnHold;
     delete storage->btnToggleWindowMode;
     delete storage->btnExit;
+    delete storage->txtProcessThreadUsage;
 
 
 
@@ -169,6 +174,6 @@ void ThreadManager::exitCleanUp()
     storage->textures.clear();
 
     delete storage->font1;
-    
+
     exitCleanUpJoinable = true;
 }

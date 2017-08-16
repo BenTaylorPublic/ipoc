@@ -10,6 +10,10 @@
 unsigned int Debug::loopNumber = 0;
 MasterController* Debug::masterController = nullptr;
 std::string Debug::logPath = "blank";
+unsigned int Debug::processThreadUsagePercent = 0;
+unsigned int Debug::processThreadUsageTotal = 0;
+unsigned int Debug::processThreadUsageDivideCounter = 0;
+const unsigned int PROCESS_THREAD_USAGE_DIVIDE_AT = 16;
 
 unsigned int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
 unsigned int Debug::destructionAmount[AMOUNT_OF_CLASSES] = {0};
@@ -92,6 +96,19 @@ void Debug::notifyOfDestruction(const int& classId)
 void Debug::notifyOfCopy(const int& classId)
 {
     copyAmount[classId]++;
+}
+
+void Debug::noteLoopTime(const int& loopDuration)
+{
+    processThreadUsageTotal += loopDuration;
+    processThreadUsageDivideCounter++;
+
+    if (processThreadUsageDivideCounter == PROCESS_THREAD_USAGE_DIVIDE_AT)
+    {
+	processThreadUsagePercent = (processThreadUsageTotal * 100) / (Settings::loopTimeInNanoseconds * PROCESS_THREAD_USAGE_DIVIDE_AT);
+	processThreadUsageDivideCounter = 0;
+	processThreadUsageTotal = 0;
+    }
 }
 
 void Debug::crash(const unsigned int& crashId, const std::string& callFrom)

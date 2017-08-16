@@ -38,7 +38,6 @@ void ProcessController::load()
 void ProcessController::process()
 {
 
-
     switch (storage.state)
     {
 	case Exiting:
@@ -50,6 +49,9 @@ void ProcessController::process()
 	    break;
 	case MainMenu:
 	    storage.sprCursor->setPosition(ic->getMousePoint());
+	    if (Settings::debugMode)
+		storage.txtProcessThreadUsage->setText(std::to_string(Debug::processThreadUsagePercent) + "%");
+
 	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
 	    {
 		storage.counter++;

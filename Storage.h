@@ -24,6 +24,8 @@ public:
     Font* font1;
     std::vector<Texture*> textures;
     Text* txtLoading;    
+    Text* txtProcessThreadUsage;
+    int counterForThreadUsage;
     Sprite* sprCursor;
     
     //state: MainMenu + LoadingMainMenu

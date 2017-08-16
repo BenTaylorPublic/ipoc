@@ -10,6 +10,7 @@ public:
     static std::string getStatusString();
     static void loadSettings();
     static int loopsPerSecond;
+    static int loopTimeInNanoseconds;
     static std::string filePath;
     static int screenWidth;
     static int screenHeight;

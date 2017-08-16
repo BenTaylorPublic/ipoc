@@ -21,7 +21,7 @@ void MasterController::IPOCLoad()
     threadsLoaded = false;
     inputThreadJoinable = false;
     processThreadJoinable = false;
-    
+
     Settings::loadSettings();
     Debug::newLog();
     Debug::log("[INFO] Launching IPOC V");
@@ -45,9 +45,9 @@ void MasterController::IPOCLoad()
     Debug::log("[INFO] -------------------------------------------------------START OF PS LOAD: ");
     Debug::logTimeStamp();
     Debug::log("\n");
-    
+
     processController->load();
-    
+
     Debug::log("[INFO] -------------------------------------------------------END OF PS LOAD: ");
     Debug::logTimeStamp();
     Debug::log("\n");
@@ -55,7 +55,7 @@ void MasterController::IPOCLoad()
 
 void MasterController::start()
 {
-    
+
     processThread = std::thread(&MasterController::processLoop, this);
 
     //Open graphics window
@@ -67,13 +67,13 @@ void MasterController::start()
     {
 	outputController->output();
     }
-    
+
     exit();
 }
 
 void MasterController::inputLoop()
 {
-    
+
     //Input thread requires no loading
     //Wait until output thread is loaded
     while (!threadsLoaded);
@@ -92,9 +92,9 @@ void MasterController::inputLoop()
 	    //If it's paused, do nothing
 	}
     }
-    
+
     inputThreadJoinable = true;
-    
+
 }
 
 void MasterController::processLoop()
@@ -108,8 +108,8 @@ void MasterController::processLoop()
     Debug::log("[INFO] -------------------------------------------------------START OF LOOP: ");
     Debug::logTimeStamp();
     Debug::log("\n");
-    
-    startOfLoopTime = std::chrono::high_resolution_clock::now(); //Current time
+
+    startOfLoopTime = std::chrono::high_resolution_clock::now() - nanosecondsPerLoop; //Current time
     while (!processController->checkForExitProgram())
     {
 	startOfLoopTime += nanosecondsPerLoop; //Current time
@@ -137,10 +137,13 @@ void MasterController::processLoop()
 	    Debug::log("\n");
 	} else
 	{
+	    if (Settings::debugMode)
+		Debug::noteLoopTime((std::chrono::high_resolution_clock::now() - startOfLoopTime).count());
+	
 	    //Uncomment this to see how long the loop is sleeping for
 	    //std::chrono::nanoseconds result = nanosecondsPerLoop - (std::chrono::high_resolution_clock::now() - startOfLoopTime);
 	    //Debug::write("Time left: " + Conversions::insertCommas(result.count()) + " nanoseconds\n");
-	    
+
 	    //Otherwise sleep until the next loop is required
 	    std::this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
 	}
@@ -150,7 +153,7 @@ void MasterController::processLoop()
     Debug::log("[INFO] -------------------------------------------------------END OF LOOP: ");
     Debug::logTimeStamp();
     Debug::log("\n");
-    
+
     processThreadJoinable = true;
 }
 
@@ -159,15 +162,15 @@ void MasterController::exit()
     while (!processThreadJoinable);
     processThread.join();
     Debug::log("[INFO] Ended process thread\n");
-    
+
     while (!inputThreadJoinable);
     inputThread.join();
     Debug::log("[INFO] Ended input thread\n");
-    
+
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
     outputController->closeGraphicsWindow();
-    
+
     delete inputController;
     delete processController;
     delete outputController;
@@ -180,7 +183,7 @@ void MasterController::exit()
 	Debug::logMemoryLeakInfo(); //Only log if there was a leak
 
     Debug::log("[INFO] Program ended successfully.\n");
-    
+
 }
 
 std::string MasterController::getStatusString()

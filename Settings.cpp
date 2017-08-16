@@ -19,6 +19,7 @@ std::string Settings::ipocVersion = "0.7.1-dev";
 std::string Settings::imageFilePath = "default file path";
 std::string Settings::fontFilePath = "default file path";
 int Settings::loopsPerSecond = 1;
+int Settings::loopTimeInNanoseconds = 1;
 std::string Settings::filePath = "default file path";
 
 int Settings::screenWidth = 1;
@@ -59,6 +60,7 @@ void Settings::loadSettings()
     imageFilePath += getStringFromSettings(settingsFile, "image_file_path");
     fontFilePath += getStringFromSettings(settingsFile, "font_file_path");
     loopsPerSecond = getIntFromSettings(settingsFile, "loops_per_second");
+    loopTimeInNanoseconds = 1000000000 / loopsPerSecond;
     screenWidth = getIntFromSettings(settingsFile, "screen_width");
     screenHeight = getIntFromSettings(settingsFile, "screen_height");
     screenTitle = getStringFromSettings(settingsFile, "screen_title");
