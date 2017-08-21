@@ -31,13 +31,12 @@ void ProcessController::load()
     tm.loadMainMenuStart();
 
     while (!tm.loadMainMenuJoinable);
-
+    storage.counterForThreadUsage = 0;
     tm.loadMainMenuJoin();
 }
 
 void ProcessController::process()
 {
-
     switch (storage.state)
     {
 	case Exiting:
@@ -50,7 +49,14 @@ void ProcessController::process()
 	case MainMenu:
 	    storage.sprCursor->setPosition(ic->getMousePoint());
 	    if (Settings::debugMode)
-		storage.txtProcessThreadUsage->setText(std::to_string(Debug::processThreadUsagePercent) + "%");
+	    {
+		storage.counterForThreadUsage++;
+		if (storage.counterForThreadUsage == 16)
+		{
+		    storage.counterForThreadUsage = 0;
+		    storage.txtProcessThreadUsage->setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
+		}
+	    }
 
 	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
 	    {

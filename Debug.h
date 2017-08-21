@@ -3,6 +3,7 @@
 #include "MasterController.h"
 
 #define AMOUNT_OF_CLASSES 20
+#define PROCESS_THREAD_USAGE_DURATIONS_STORED 8
 
 /*
 Debug is a Static Helper
@@ -24,11 +25,12 @@ public:
     static void newLog(); //Clears the log file
     static void log(const int& input); //Adds the input to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
     static void log(const std::string& input); //Adds the input to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
+    static void logUnsigned(const unsigned int& input);
     static void logTimeStamp(); //Adds the time stamp to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
     static void logLoopNumber(); //Adds the loop to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
     static void logMemoryLeakInfo();
     static void logClassAmountInfo();
-    static void noteLoopTime(const int& loopDuration);
+    static void noteLoopTime(const unsigned int& loopDuration);
     static void crash(const unsigned int& crashId, const std::string& callFrom);
     /*
     Calls every object's getStatusString() method, and logs them immediately to the log file.
@@ -38,13 +40,14 @@ public:
      */
     static void logStatusStrings();
     static void incrementLoopNumber(); //Increments the loop number. Used for logging and writing loop numbers from anwywhere in the program.
-    static void setMasterController(MasterController* input); //Used to received a pointer tot he MasterController. This pointer will then be used to logStatusStrings(), when requested.
+    static void IPOCLoad(MasterController* input); //Used to received a pointer tot he MasterController. This pointer will then be used to logStatusStrings(), when requested.
     static void setFilePath(std::string inputPath); //used to receive the file path from the Settings class.
-    static unsigned int processThreadUsagePercent;
+    static double processThreadUsagePercent;
 private:
     static unsigned int loopNumber; //Used for logging and writing loop numbers from anwywhere in the program.
-    static unsigned int processThreadUsageDivideCounter;
-    static unsigned int processThreadUsageTotal;
+    static unsigned int processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED];
+    static unsigned int processThreadUsageIndex;
+
     /*
     A pointer the the MasterController.
     The reason this exists, is because the master controller contains all the controllers below it, and those controllers contain all the objects below them.

@@ -10,10 +10,9 @@
 unsigned int Debug::loopNumber = 0;
 MasterController* Debug::masterController = nullptr;
 std::string Debug::logPath = "blank";
-unsigned int Debug::processThreadUsagePercent = 0;
-unsigned int Debug::processThreadUsageTotal = 0;
-unsigned int Debug::processThreadUsageDivideCounter = 0;
-const unsigned int PROCESS_THREAD_USAGE_DIVIDE_AT = 16;
+double Debug::processThreadUsagePercent = 0;
+unsigned int Debug::processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED] = {0};
+unsigned int Debug::processThreadUsageIndex = 0;
 
 unsigned int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
 unsigned int Debug::destructionAmount[AMOUNT_OF_CLASSES] = {0};
@@ -44,6 +43,11 @@ void Debug::log(const std::string& input)
     FileManager::writeToFile(logPath, input);
 }
 
+void Debug::logUnsigned(const unsigned int& input)
+{
+    FileManager::writeToFile(logPath, std::to_string(input));
+}
+
 void Debug::logLoopNumber()
 {
     FileManager::writeToFile(logPath, std::to_string(loopNumber));
@@ -68,8 +72,12 @@ void Debug::incrementLoopNumber()
     loopNumber++;
 }
 
-void Debug::setMasterController(MasterController* input)
+void Debug::IPOCLoad(MasterController* input)
 {
+    for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
+    {
+	processThreadUsage[0] = 0;
+    }
     masterController = input;
 }
 
@@ -98,17 +106,25 @@ void Debug::notifyOfCopy(const int& classId)
     copyAmount[classId]++;
 }
 
-void Debug::noteLoopTime(const int& loopDuration)
+void Debug::noteLoopTime(const unsigned int& loopDuration)
 {
-    processThreadUsageTotal += loopDuration;
-    processThreadUsageDivideCounter++;
-
-    if (processThreadUsageDivideCounter == PROCESS_THREAD_USAGE_DIVIDE_AT)
+    processThreadUsageIndex++;
+    if (processThreadUsageIndex == PROCESS_THREAD_USAGE_DURATIONS_STORED)
+	processThreadUsageIndex = 0;
+    processThreadUsage[processThreadUsageIndex] = loopDuration;
+    
+    
+    
+    //Average the array
+    double sum = 0;
+    
+    for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
     {
-	processThreadUsagePercent = (processThreadUsageTotal * 100) / (Settings::loopTimeInNanoseconds * PROCESS_THREAD_USAGE_DIVIDE_AT);
-	processThreadUsageDivideCounter = 0;
-	processThreadUsageTotal = 0;
+	sum += processThreadUsage[i];
     }
+    
+    processThreadUsagePercent = (sum * 100) / (PROCESS_THREAD_USAGE_DURATIONS_STORED * Settings::loopTimeInNanoseconds);
+    
 }
 
 void Debug::crash(const unsigned int& crashId, const std::string& callFrom)

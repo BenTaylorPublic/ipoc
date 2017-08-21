@@ -30,7 +30,7 @@ void MasterController::IPOCLoad()
     Debug::log(Settings::filePath + "\n");
     Debug::log("[INFO] Loaded settings\n");
 
-    Debug::setMasterController(this);
+    Debug::IPOCLoad(this);
 
     inputController->IPOCLoad();
     processController->IPOCLoad(inputController, onscreenButtonManager, frame, outputController);
@@ -99,7 +99,7 @@ void MasterController::inputLoop()
 
 void MasterController::processLoop()
 {
-
+    unsigned int loopNumber = 0;
     //Calculating loop time
     std::chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
     std::chrono::high_resolution_clock::time_point startOfLoopTime;
@@ -119,31 +119,33 @@ void MasterController::processLoop()
 	//But alteast the Debug class knows the loop number without having to point to the ProcessController
 	Debug::incrementLoopNumber();
 	processController->incrementLoopNumber();
+	loopNumber++;
 
 	inputController->markStartOfLoop();
 	onscreenButtonManager->markStartOfLoop();
+	
 	processController->process(); //Executes all program specific code
+	
 	onscreenButtonManager->markEndOfLoop();
 	frame->markAsDrawable();
 	inputController->markEndOfLoop();
 
+	if (Settings::debugMode)
+	{
+	    Debug::noteLoopTime((std::chrono::high_resolution_clock::now() - startOfLoopTime).count());
+	}
+
 	//Checks if the loop went overtime
 	if (std::chrono::high_resolution_clock::now() >= (startOfLoopTime + nanosecondsPerLoop))
 	{
+
 	    //If it did, log and write a warning
-	    Debug::write("[WARN] Loop went over time frame\n");
+	    Debug::write("[WARN] Loop went over time frame " +std::to_string(loopNumber) + "\n");
 	    Debug::log("[WARN] Overtime in loop ");
 	    Debug::logLoopNumber();
 	    Debug::log("\n");
 	} else
 	{
-	    if (Settings::debugMode)
-		Debug::noteLoopTime((std::chrono::high_resolution_clock::now() - startOfLoopTime).count());
-
-	    //Uncomment this to see how long the loop is sleeping for
-	    //std::chrono::nanoseconds result = nanosecondsPerLoop - (std::chrono::high_resolution_clock::now() - startOfLoopTime);
-	    //Debug::write("Time left: " + Conversions::insertCommas(result.count()) + " nanoseconds\n");
-
 	    //Otherwise sleep until the next loop is required
 	    std::this_thread::sleep_until(startOfLoopTime + nanosecondsPerLoop);
 	}
