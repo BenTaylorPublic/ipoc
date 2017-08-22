@@ -14,7 +14,6 @@ void MasterController::IPOCLoad()
     inputController = new InputController();
     processController = new ProcessController();
     outputController = new OutputController();
-    onscreenButtonManager = new OnscreenButtonManager();
     frame = new Frame();
 
 
@@ -31,9 +30,8 @@ void MasterController::IPOCLoad()
     Debug::IPOCLoad(this);
 
     inputController->IPOCLoad();
-    processController->IPOCLoad(inputController, onscreenButtonManager, frame, outputController);
+    processController->IPOCLoad(inputController, frame, outputController);
     outputController->IPOCLoad(frame);
-    onscreenButtonManager->IPOCLoad(inputController);
     frame->IPOCLoad();
 
     Debug::logLine("[INFO] Loaded controllers");
@@ -120,13 +118,12 @@ void MasterController::processLoop()
 	loopNumber++;
 
 	inputController->markStartOfLoop();
-	onscreenButtonManager->markStartOfLoop();
 	
 	processController->process(); //Executes all program specific code
 	
-	onscreenButtonManager->markEndOfLoop();
-	frame->markAsDrawable();
 	inputController->markEndOfLoop();
+	
+	frame->markAsDrawable();
 
 	if (Settings::debugMode)
 	{
@@ -174,7 +171,6 @@ void MasterController::exit()
     delete inputController;
     delete processController;
     delete outputController;
-    delete onscreenButtonManager;
     delete frame;
 
     if (Settings::logClassAmountInfo)

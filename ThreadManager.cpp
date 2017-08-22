@@ -12,11 +12,11 @@ ThreadManager::~ThreadManager()
     Debug::notifyOfDestruction(19);
 }
 
-void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager)
+void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController)
 {
     storage = inputStorage;
     frame = inputFrame;
-    onscreenButtonManager = inputOnscreenButtonManager;
+    inputController = inputInputController;
 }
 
 std::string ThreadManager::getStatusString()
@@ -73,7 +73,7 @@ void ThreadManager::loadMainMenu()
     storage->btnTriggerOnUp->addToUp(new Text("trigger on up up text", *storage->font1, "Trigger On Up"), Point2D(20, 30));
     storage->btnTriggerOnUp->addToDown(new Sprite("trigger on up down sprite", *storage->textures[3]));
     storage->btnTriggerOnUp->addToDown(new Text("trigger on up down text", *storage->font1, "Trigger On Up"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnUp);
+    inputController->addOnscreenButton(storage->btnTriggerOnUp);
 
     //Buttons - TriggerOnDown
     storage->btnTriggerOnDown = new OnscreenButton(TriggerOnDown, 1, Point2D(20, 260));
@@ -82,7 +82,7 @@ void ThreadManager::loadMainMenu()
     storage->btnTriggerOnDown->addToUp(new Text("trigger on down up text", *storage->font1, "Trigger On Down"), Point2D(20, 30));
     storage->btnTriggerOnDown->addToDown(new Sprite("trigger on down down sprite", *storage->textures[3]));
     storage->btnTriggerOnDown->addToDown(new Text("trigger on down down text", *storage->font1, "Trigger On Down"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnDown);
+    inputController->addOnscreenButton(storage->btnTriggerOnDown);
 
     //Buttons - TriggerOnHold
     storage->btnTriggerOnHold = new OnscreenButton(TriggerOnHold, 1, Point2D(20, 420));
@@ -91,7 +91,7 @@ void ThreadManager::loadMainMenu()
     storage->btnTriggerOnHold->addToUp(new Text("trigger on hold up text", *storage->font1, "Trigger On Hold"), Point2D(20, 30));
     storage->btnTriggerOnHold->addToDown(new Sprite("trigger on hold down sprite", *storage->textures[3]));
     storage->btnTriggerOnHold->addToDown(new Text("trigger on hold down text", *storage->font1, "Trigger On Hold"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnHold);
+    inputController->addOnscreenButton(storage->btnTriggerOnHold);
 
     //Buttons - ToggleWindowMode
     storage->btnToggleWindowMode = new OnscreenButton(TriggerOnUp, 1, Point2D(340, 100));
@@ -100,7 +100,7 @@ void ThreadManager::loadMainMenu()
     storage->btnToggleWindowMode->addToUp(new Text("toggle window mode up text", *storage->font1, "Toggle Window"), Point2D(20, 30));
     storage->btnToggleWindowMode->addToDown(new Sprite("toggle window mode down sprite", *storage->textures[3]));
     storage->btnToggleWindowMode->addToDown(new Text("toggle window mode down text", *storage->font1, "Toggle Window"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnToggleWindowMode);
+    inputController->addOnscreenButton(storage->btnToggleWindowMode);
 
     //Buttons - Exit
     storage->btnExit = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 580));
@@ -109,7 +109,7 @@ void ThreadManager::loadMainMenu()
     storage->btnExit->addToUp(new Text("exit button up text", *storage->font1, "Exit"), Point2D(20, 30));
     storage->btnExit->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
     storage->btnExit->addToDown(new Text("exit button down text", *storage->font1, "Exit"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnExit);
+    inputController->addOnscreenButton(storage->btnExit);
 
     //Remove loading screen
     frame->removeFromFrame(storage->txtLoading);
