@@ -43,8 +43,8 @@ void Frame::addToFrame(Drawable* drawable)
     drawables.at(drawable->getZ()).push_back(drawable);
     if (frameIdsToGive.size() == 0)
     {
-	Debug::log("[CRASH] frameIdsToGive is empty.\n");
-	Debug::log("[CRASH] There are too many drawables.\n");
+	Debug::logLine("[CRASH] frameIdsToGive is empty.");
+	Debug::logLine("[CRASH] There are too many drawables.");
 	Debug::crash(103, "IPOCFrame.addToFrame()");
     }
 

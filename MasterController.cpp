@@ -24,11 +24,9 @@ void MasterController::IPOCLoad()
 
     Settings::loadSettings();
     Debug::newLog();
-    Debug::log("[INFO] Launching IPOC V");
-    Debug::log(Settings::ipocVersion + "\n");
-    Debug::log("[INFO] File path: ");
-    Debug::log(Settings::filePath + "\n");
-    Debug::log("[INFO] Loaded settings\n");
+    Debug::logLine("[INFO] Launching IPOC V" + Settings::ipocVersion);
+    Debug::logLine("[INFO] File path: " + Settings::filePath);
+    Debug::logLine("[INFO] Loaded settings");
 
     Debug::IPOCLoad(this);
 
@@ -38,7 +36,7 @@ void MasterController::IPOCLoad()
     onscreenButtonManager->IPOCLoad(inputController);
     frame->IPOCLoad();
 
-    Debug::log("[INFO] Loaded controllers\n");
+    Debug::logLine("[INFO] Loaded controllers");
 
     inputThread = std::thread(&MasterController::inputLoop, this);
 
@@ -140,7 +138,7 @@ void MasterController::processLoop()
 	{
 
 	    //If it did, log and write a warning
-	    Debug::write("[WARN] Loop went over time frame " +std::to_string(loopNumber) + "\n");
+	    Debug::writeLine("[WARN] Loop went over time frame " +std::to_string(loopNumber));
 	    Debug::log("[WARN] Overtime in loop ");
 	    Debug::logLoopNumber();
 	    Debug::log("\n");
@@ -163,11 +161,11 @@ void MasterController::exit()
 {
     while (!processThreadJoinable);
     processThread.join();
-    Debug::log("[INFO] Ended process thread\n");
+    Debug::logLine("[INFO] Ended process thread");
 
     while (!inputThreadJoinable);
     inputThread.join();
-    Debug::log("[INFO] Ended input thread\n");
+    Debug::logLine("[INFO] Ended input thread");
 
     //Program specific saving should be done by now, and the input + output should have ended
     //Just need to close the window, and join the threads
@@ -184,7 +182,7 @@ void MasterController::exit()
     else
 	Debug::logMemoryLeakInfo(); //Only log if there was a leak
 
-    Debug::log("[INFO] Program ended successfully.\n");
+    Debug::logLine("[INFO] Program ended successfully.");
 
 }
 

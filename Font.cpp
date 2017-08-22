@@ -8,17 +8,11 @@ Font::Font(const std::string& inputName, const std::string& fileName)
 
     if (!font.loadFromFile(Settings::fontFilePath + fileName))
     {
-	Debug::write("[ERROR] SFML font didn't load (");
-	Debug::write(name);
-	Debug::write(")\n");
-	Debug::log("[ERROR] SFML font didn't load (");
-	Debug::log(name);
-	Debug::log(")\n");
+	Debug::writeLine("[ERROR] SFML font didn't load (" + name + ")");
+	Debug::logLine("[ERROR] SFML font didn't load (" + name + ")");
     } else
     {
-	Debug::log("[INFO] Loaded font (");
-	Debug::log(name);
-	Debug::log(")\n");
+	Debug::logLine("[INFO] Loaded font (" + name + ")");
     }
 
     Debug::notifyOfConstruction(13);

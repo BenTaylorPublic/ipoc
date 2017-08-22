@@ -7,17 +7,11 @@ Texture::Texture(const std::string& inputName, const std::string& fileName)
     name = inputName;
     if (!texture.loadFromFile(Settings::imageFilePath + fileName))
     {
-	Debug::write("[ERROR] SFML texture didn't load (");
-	Debug::write(inputName);
-	Debug::write(")\n");
-	Debug::log("[ERROR] SFML texture didn't load (");
-	Debug::log(inputName);
-	Debug::log(")\n");
+	Debug::writeLine("[ERROR] SFML texture didn't load (" + inputName + ")");
+	Debug::logLine("[ERROR] SFML texture didn't load (" + inputName + ")");
     } else
     {
-	Debug::log("[INFO] Loaded texture (");
-	Debug::log(inputName);
-	Debug::log(")\n");
+	Debug::logLine("[INFO] Loaded texture (" + inputName + ")");
     }
     Debug::notifyOfConstruction(15);
 }

@@ -28,14 +28,14 @@ void ThreadManager::loadMainMenuStart()
 {
     loadMainMenuJoinable = false;
     loadMainMenuThread = new std::thread(&ThreadManager::loadMainMenu, this);
-    Debug::log("[INFO] loadMainMenuThread started\n");
+    Debug::logLine("[INFO] loadMainMenuThread started");
 }
 
 void ThreadManager::loadMainMenuJoin()
 {
     loadMainMenuThread->join();
     delete loadMainMenuThread;
-    Debug::log("[INFO] loadMainMenuThread joined\n");
+    Debug::logLine("[INFO] loadMainMenuThread joined");
 }
 
 void ThreadManager::loadMainMenu()
@@ -133,14 +133,14 @@ void ThreadManager::exitCleanUpStart()
 {
     exitCleanUpJoinable = false;
     exitCleanUpThread = new std::thread(&ThreadManager::exitCleanUp, this);
-    Debug::log("[INFO] exitCleanUpThread started\n");
+    Debug::logLine("[INFO] exitCleanUpThread started");
 }
 
 void ThreadManager::exitCleanUpJoin()
 {
     exitCleanUpThread->join();
     delete exitCleanUpThread;
-    Debug::log("[INFO] exitCleanUpThread joined\n");
+    Debug::logLine("[INFO] exitCleanUpThread joined");
 }
 
 void ThreadManager::exitCleanUp()
