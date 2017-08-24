@@ -30,7 +30,7 @@ void ProcessController::load()
     tm.loadMainMenuStart();
 
     while (!tm.loadMainMenuJoinable);
-    storage.counterForThreadUsage = 0;
+    storage.global->counterForThreadUsage = 0;
     tm.loadMainMenuJoin();
 }
 
@@ -46,14 +46,14 @@ void ProcessController::process()
 	    }
 	    break;
 	case MainMenu:
-	    storage.sprCursor->setPosition(ic->getMousePoint());
+	    storage.global->sprCursor->setPosition(ic->getMousePoint());
 	    if (Settings::debugMode)
 	    {
-		storage.counterForThreadUsage++;
-		if (storage.counterForThreadUsage == 16)
+		storage.global->counterForThreadUsage++;
+		if (storage.global->counterForThreadUsage == 16)
 		{
-		    storage.counterForThreadUsage = 0;
-		    storage.txtProcessThreadUsage->setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
+		    storage.global->counterForThreadUsage = 0;
+		    storage.global->txtProcessThreadUsage->setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
 		}
 	    }
 

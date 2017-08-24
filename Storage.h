@@ -13,6 +13,15 @@ enum ProgramState {
     LoadingMainMenu, MainMenu, Exiting
 };
 
+struct StorageGlobal {
+    Font* font1;
+    std::vector<Texture*> textures;
+    Text* txtLoading;
+    Text* txtProcessThreadUsage;
+    int counterForThreadUsage;
+    Sprite* sprCursor;
+};
+
 class Storage {
 public:
     Storage();
@@ -22,12 +31,7 @@ public:
     ProgramState state = LoadingMainMenu;
 
     //GLOBAL    
-    Font* font1;
-    std::vector<Texture*> textures;
-    Text* txtLoading;
-    Text* txtProcessThreadUsage;
-    int counterForThreadUsage;
-    Sprite* sprCursor;
+    StorageGlobal* global;
 
     //state: MainMenu + LoadingMainMenu
     Text* txtCounter;
