@@ -10,7 +10,7 @@
 #include "OnscreenButton.h"
 
 enum ProgramState {
-    LoadingMainMenu, MainMenu, Exiting
+    FirstLoad, ButtonTesting, Exiting
 };
 
 struct StorageGlobal {
@@ -22,13 +22,17 @@ struct StorageGlobal {
     Sprite* sprCursor;
 };
 
+struct StorageButtonTesting {
+    
+};
+
 class Storage {
 public:
     Storage();
     ~Storage();
     std::string getStatusString();
 
-    ProgramState state = LoadingMainMenu;
+    ProgramState state = FirstLoad;
 
     //GLOBAL    
     StorageGlobal* global;

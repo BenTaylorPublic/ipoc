@@ -127,7 +127,8 @@ void ThreadManager::loadMainMenu()
     frame->addToFrame(storage->btnExit);
     if (Settings::debugMode)
 	frame->addToFrame(storage->global->txtProcessThreadUsage);
-    storage->state = MainMenu;
+    
+    storage->global->counterForThreadUsage = 0;
 
     loadMainMenuJoinable = true;
 }

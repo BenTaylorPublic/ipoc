@@ -30,7 +30,7 @@ void ProcessController::load()
     tm.loadMainMenuStart();
 
     while (!tm.loadMainMenuJoinable);
-    storage.global->counterForThreadUsage = 0;
+    storage.state = ButtonTesting;
     tm.loadMainMenuJoin();
 }
 
@@ -45,7 +45,7 @@ void ProcessController::process()
 		exitProgram = true;
 	    }
 	    break;
-	case MainMenu:
+	case ButtonTesting:
 	    storage.global->sprCursor->setPosition(ic->getMousePoint());
 	    if (Settings::debugMode)
 	    {
