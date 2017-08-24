@@ -5,13 +5,13 @@
 #include <atomic>
 #include "Storage.h"
 #include "Frame.h"
-#include "OnscreenButtonManager.h"
+#include "InputController.h"
 
 class ThreadManager {
 public:
     ThreadManager();
     ~ThreadManager();
-    void IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager);
+    void IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputController);
     std::string getStatusString();
 
     //loadMainMenu
@@ -27,8 +27,8 @@ public:
 private:
     Storage* storage;
     Frame* frame;
-    OnscreenButtonManager* onscreenButtonManager;
-
+    InputController* inputController;
+    
     //loadMainMenu
     void loadMainMenu();
     std::thread* loadMainMenuThread;

@@ -3,7 +3,6 @@
 #include "InputController.h"
 #include "ProcessController.h"
 #include "OutputController.h"
-#include "OnscreenButtonManager.h"
 #include "Frame.h"
 #include <thread>
 #include <atomic>
@@ -18,7 +17,6 @@ private:
     InputController* inputController;
     ProcessController* processController;
     OutputController* outputController;
-    OnscreenButtonManager* onscreenButtonManager;
     Frame* frame;
 
     std::thread inputThread;

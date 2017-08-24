@@ -15,15 +15,14 @@ ProcessController::~ProcessController()
     Debug::notifyOfDestruction(2);
 }
 
-void ProcessController::IPOCLoad(InputController *inputControllerPtr, OnscreenButtonManager* inputOnscreenButtonManager, Frame* inputFrame, OutputController* outputControllerPtr)
+void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr)
 {
     ic = inputControllerPtr;
     oc = outputControllerPtr;
-    obm = inputOnscreenButtonManager;
     exitProgram = false;
     loopNumber = 0;
     frame = inputFrame;
-    tm.IPOCLoad(&storage, frame, obm);
+    tm.IPOCLoad(&storage, frame, ic);
 }
 
 void ProcessController::load()
