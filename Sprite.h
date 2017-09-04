@@ -11,6 +11,7 @@ IPOCSprite is a Data Type (Wrapper)
  */
 class Sprite : public Drawable {
 public:
+    Sprite();
     Sprite(const std::string& inputName);
     Sprite(const std::string& inputName, Texture& inputTexture);
     Sprite(const std::string& inputName, Texture& inputTexture, const unsigned int& inputZ);

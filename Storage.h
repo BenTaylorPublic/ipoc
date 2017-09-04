@@ -14,12 +14,12 @@ enum ProgramState {
 };
 
 struct StorageGlobal {
-    Font* font1;
+    Font font1;
     std::vector<Texture*> textures;
-    Text* txtLoading;
-    Text* txtProcessThreadUsage;
+    Text txtLoading;
+    Text txtProcessThreadUsage;
     int counterForThreadUsage;
-    Sprite* sprCursor;
+    Sprite sprCursor;
 };
 
 struct StorageButtonTesting {
@@ -36,8 +36,9 @@ public:
 
     //GLOBAL    
     StorageGlobal* global;
-
-    //state: MainMenu + LoadingMainMenu
+    
+    StorageButtonTesting* buttonTesting;
+    
     Text* txtCounter;
     unsigned int counter;
     bool windowToggleMode;

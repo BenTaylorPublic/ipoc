@@ -1,6 +1,12 @@
 #include "Sprite.h"
 #include "Debug.h"
 
+Sprite::Sprite()
+{
+    name = "";
+    Debug::notifyOfConstruction(16);
+}
+
 Sprite::Sprite(const std::string& inputName)
 {
     name = inputName;

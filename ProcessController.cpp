@@ -46,14 +46,14 @@ void ProcessController::process()
 	    }
 	    break;
 	case ButtonTesting:
-	    storage.global->sprCursor->setPosition(ic->getMousePoint());
+	    storage.global->sprCursor.setPosition(ic->getMousePoint());
 	    if (Settings::debugMode)
 	    {
 		storage.global->counterForThreadUsage++;
 		if (storage.global->counterForThreadUsage == 16)
 		{
 		    storage.global->counterForThreadUsage = 0;
-		    storage.global->txtProcessThreadUsage->setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
+		    storage.global->txtProcessThreadUsage.setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
 		}
 	    }
 

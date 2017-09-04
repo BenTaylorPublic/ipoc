@@ -1,6 +1,13 @@
 #include "Text.h"
 #include "Debug.h"
 
+Text::Text()
+{
+    text.setString("SAMPLE TEXT");
+    name = "";
+    Debug::notifyOfConstruction(14);
+}
+
 Text::Text(const std::string& inputName, Font& inputFont)
 {
     text.setFont(*inputFont.getFont());
@@ -95,6 +102,11 @@ int Text::getLength()
 void Text::setPosition(const Point2D& newPosition)
 {
     text.setPosition(sf::Vector2f(newPosition.x, newPosition.y));
+}
+
+void Text::setFont(Font& inputFont)
+{
+    text.setFont(*inputFont.getFont());
 }
 
 void Text::setText(const std::string& input)
