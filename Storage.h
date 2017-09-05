@@ -23,6 +23,14 @@ struct StorageGlobal {
 };
 
 struct StorageButtonTesting {
+    Text txtCounter;
+    unsigned int counter;
+    bool windowToggleMode;
+    OnscreenButton btnTriggerOnUp;
+    OnscreenButton btnTriggerOnDown;
+    OnscreenButton btnTriggerOnHold;
+    OnscreenButton btnToggleWindowMode;
+    OnscreenButton btnExit;
     
 };
 
@@ -39,12 +47,4 @@ public:
     
     StorageButtonTesting* buttonTesting;
     
-    Text* txtCounter;
-    unsigned int counter;
-    bool windowToggleMode;
-    OnscreenButton* btnTriggerOnUp;
-    OnscreenButton* btnTriggerOnDown;
-    OnscreenButton* btnTriggerOnHold;
-    OnscreenButton* btnToggleWindowMode;
-    OnscreenButton* btnExit;
 };

@@ -1,6 +1,11 @@
 #include "OnscreenButton.h"
 #include "Debug.h"
 
+OnscreenButton::OnscreenButton()
+{
+    Debug::notifyOfConstruction(10);
+}
+
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType)
 {
     onscreenButtonType = inputOnscreenButtonType;
@@ -173,6 +178,11 @@ bool OnscreenButton::mouseUp(const Point2D& mousePoint)
 void OnscreenButton::setOnscreenButtonManagerId(const unsigned int& newId)
 {
     onscreenButtonManagerId = newId;
+}
+
+void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType)
+{
+    onscreenButtonType = inputOnscreenButtonType;
 }
 
 unsigned int& OnscreenButton::getOnscreenButtonManagerId()

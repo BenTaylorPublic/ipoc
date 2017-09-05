@@ -57,15 +57,15 @@ void ProcessController::process()
 		}
 	    }
 
-	    if (storage.btnTriggerOnDown->isTriggered() || storage.btnTriggerOnUp->isTriggered() || storage.btnTriggerOnHold->isTriggered())
+	    if (storage.buttonTesting->btnTriggerOnDown.isTriggered() || storage.buttonTesting->btnTriggerOnUp.isTriggered() || storage.buttonTesting->btnTriggerOnHold.isTriggered())
 	    {
-		storage.counter++;
-		storage.txtCounter->setText(std::to_string(storage.counter));
+		storage.buttonTesting->counter++;
+		storage.buttonTesting->txtCounter.setText(std::to_string(storage.buttonTesting->counter));
 	    }
 
-	    if (storage.btnToggleWindowMode->isTriggered())
+	    if (storage.buttonTesting->btnToggleWindowMode.isTriggered())
 	    {
-		if (!storage.windowToggleMode)
+		if (!storage.buttonTesting->windowToggleMode)
 		{
 		    Settings::screenWidth = 1600;
 		    Settings::screenHeight = 900;
@@ -73,7 +73,7 @@ void ProcessController::process()
 		    Settings::windowType = "borderless window";
 		    Settings::hideCursor = true;
 
-		    storage.windowToggleMode = true;
+		    storage.buttonTesting->windowToggleMode = true;
 		} else
 		{
 		    Settings::screenWidth = 800;
@@ -82,12 +82,12 @@ void ProcessController::process()
 		    Settings::windowType = "windowed";
 		    Settings::hideCursor = false;
 
-		    storage.windowToggleMode = false;
+		    storage.buttonTesting->windowToggleMode = false;
 		}
 		oc->reloadGraphicsWindow();
 	    }
 
-	    if (storage.btnExit->isTriggered())
+	    if (storage.buttonTesting->btnExit.isTriggered())
 	    {
 		storage.state = Exiting;
 		tm.exitCleanUpStart();
