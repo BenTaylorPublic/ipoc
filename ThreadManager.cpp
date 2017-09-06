@@ -24,46 +24,45 @@ std::string ThreadManager::getStatusString()
     return "N/A";
 }
 
-void ThreadManager::loadMainMenuStart()
+void ThreadManager::loadGlobalStart()
 {
-    loadMainMenuJoinable = false;
-    loadMainMenuThread = new std::thread(&ThreadManager::loadMainMenu, this);
+    loadGlobalJoinable = false;
+    loadGlobalThread = new std::thread(&ThreadManager::loadGlobal, this);
     Debug::logLine("[INFO] loadMainMenuThread started");
 }
 
-void ThreadManager::loadMainMenuJoin()
+void ThreadManager::loadGlobalJoin()
 {
-    loadMainMenuThread->join();
-    delete loadMainMenuThread;
+    loadGlobalThread->join();
+    delete loadGlobalThread;
+    loadGlobalJoinable = false;
     Debug::logLine("[INFO] loadMainMenuThread joined");
 }
 
-void ThreadManager::loadMainMenu()
+void ThreadManager::loadGlobal()
 {
-
-    //-----------------------------------------------------------------GLOBAL
     storage->global = new StorageGlobal;
-    
+
     //Fonts
     storage->global->font1.loadFont("test font", "courier new.ttf");
-    
+
     //Loading screen
     storage->global->txtLoading.name = "loading text";
     storage->global->txtLoading.setFont(storage->global->font1);
     storage->global->txtLoading.setPosition(Point2D(100, 700));
     frame->addToFrame(&storage->global->txtLoading);
     frame->markAsDrawable();
-    
+
     //Variables
     storage->global->counterForThreadUsage = 0;
-    
+
     //Textures
     storage->global->textures.push_back(new Texture("test texture", "default texture.png"));
     storage->global->textures.push_back(new Texture("circle texture", "mouse circle.png"));
     storage->global->textures.push_back(new Texture("button up texture", "button up.png"));
     storage->global->textures.push_back(new Texture("button down texture", "button down.png"));
     storage->global->textures.push_back(new Texture("cursor texture", "cursor.png"));
-    
+
     storage->global->txtProcessThreadUsage.name = "process thread usage text";
     storage->global->txtProcessThreadUsage.setFont(storage->global->font1);
     storage->global->txtProcessThreadUsage.setPosition(Point2D(500, 500));
@@ -72,20 +71,79 @@ void ThreadManager::loadMainMenu()
     storage->global->sprCursor.name = "cursor sprite";
     storage->global->sprCursor.setTexture(*storage->global->textures[4]);
     storage->global->sprCursor.setZ(2);
-    
-    //-----------------------------------------------------------------BUTTON TESTING
+
+    //Remove loading screen
+    frame->removeFromFrame(&storage->global->txtLoading);
+
+    //Adding to frame
+    frame->addToFrame(&storage->global->sprCursor);
+    if (Settings::debugMode)
+	frame->addToFrame(&storage->global->txtProcessThreadUsage);
+
+    loadGlobalJoinable = true;
+}
+
+void ThreadManager::unloadGlobalStart()
+{
+    unloadGlobalJoinable = false;
+    unloadGlobalThread = new std::thread(&ThreadManager::unloadGlobal, this);
+    Debug::logLine("[INFO] unloadGlobalThread started");
+}
+
+void ThreadManager::unloadGlobalJoin()
+{
+    unloadGlobalThread->join();
+    delete unloadGlobalThread;
+    unloadGlobalJoinable = false;
+    Debug::logLine("[INFO] unloadGlobalThread joined");
+}
+
+void ThreadManager::unloadGlobal()
+{
+    frame->removeFromFrame(&storage->global->txtProcessThreadUsage);
+    frame->removeFromFrame(&storage->global->txtLoading);
+    frame->removeFromFrame(&storage->global->sprCursor);
+
+    for (Texture* it : storage->global->textures)
+    {
+	delete it;
+    }
+    storage->global->textures.clear();
+
+    delete storage->global;
+
+    unloadGlobalJoinable = true;
+}
+
+void ThreadManager::loadButtonTestingStart()
+{
+    loadButtonTestingJoinable = false;
+    loadButtonTestingThread = new std::thread(&ThreadManager::loadButtonTesting, this);
+    Debug::logLine("[INFO] loadButtonTestingThread started");
+}
+
+void ThreadManager::loadButtonTestingJoin()
+{
+    loadButtonTestingThread->join();
+    delete loadButtonTestingThread;
+    loadButtonTestingJoinable = false;
+    Debug::logLine("[INFO] loadButtonTestingThread joined");
+}
+
+void ThreadManager::loadButtonTesting()
+{
     storage->buttonTesting = new StorageButtonTesting;
-    
+
     //Variables
     storage->buttonTesting->counter = 0;
     storage->buttonTesting->windowToggleMode = true;
-    
+
     //Texts
     storage->buttonTesting->txtCounter.name = "counter text";
     storage->buttonTesting->txtCounter.setFont(storage->global->font1);
     storage->buttonTesting->txtCounter.setZ(0);
     storage->buttonTesting->txtCounter.setText("0");
-    storage->buttonTesting->txtCounter.setPosition(Point2D(20,20));
+    storage->buttonTesting->txtCounter.setPosition(Point2D(20, 20));
     //Buttons
     //Buttons - TriggerOnUp
     storage->buttonTesting->btnTriggerOnUp.setButtonTriggerType(TriggerOnUp);
@@ -142,40 +200,33 @@ void ThreadManager::loadMainMenu()
     storage->buttonTesting->btnExit.addToDown(new Text("exit button down text", storage->global->font1, "Exit"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->buttonTesting->btnExit);
 
-
-    
-    //-----------------------------------------------------------------ADDING TO FRAME
-    //Remove loading screen
-    frame->removeFromFrame(&storage->global->txtLoading);
-    //Add button testing
-    frame->addToFrame(&storage->buttonTesting->txtCounter);
-    frame->addToFrame(&storage->global->sprCursor);
+    //Adding to frame
     frame->addToFrame(&storage->buttonTesting->btnTriggerOnUp);
     frame->addToFrame(&storage->buttonTesting->btnTriggerOnDown);
     frame->addToFrame(&storage->buttonTesting->btnTriggerOnHold);
     frame->addToFrame(&storage->buttonTesting->btnToggleWindowMode);
     frame->addToFrame(&storage->buttonTesting->btnExit);
-    if (Settings::debugMode)
-	frame->addToFrame(&storage->global->txtProcessThreadUsage);
+    frame->addToFrame(&storage->buttonTesting->txtCounter);
 
-    loadMainMenuJoinable = true;
+    loadButtonTestingJoinable = true;
 }
 
-void ThreadManager::exitCleanUpStart()
+void ThreadManager::unloadButtonTestingStart()
 {
-    exitCleanUpJoinable = false;
-    exitCleanUpThread = new std::thread(&ThreadManager::exitCleanUp, this);
-    Debug::logLine("[INFO] exitCleanUpThread started");
+    unloadButtonTestingJoinable = false;
+    unloadButtonTestingThread = new std::thread(&ThreadManager::unloadButtonTesting, this);
+    Debug::logLine("[INFO] unloadButtonTestingThread started");
 }
 
-void ThreadManager::exitCleanUpJoin()
+void ThreadManager::unloadButtonTestingJoin()
 {
-    exitCleanUpThread->join();
-    delete exitCleanUpThread;
-    Debug::logLine("[INFO] exitCleanUpThread joined");
+    unloadButtonTestingThread->join();
+    delete unloadButtonTestingThread;
+    unloadButtonTestingJoinable = false;
+    Debug::logLine("[INFO] unloadButtonTestingThread joined");
 }
 
-void ThreadManager::exitCleanUp()
+void ThreadManager::unloadButtonTesting()
 {
     frame->removeFromFrame(&storage->buttonTesting->txtCounter);
     frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnHold);
@@ -183,19 +234,8 @@ void ThreadManager::exitCleanUp()
     frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnUp);
     frame->removeFromFrame(&storage->buttonTesting->btnToggleWindowMode);
     frame->removeFromFrame(&storage->buttonTesting->btnExit);
-    frame->removeFromFrame(&storage->global->txtProcessThreadUsage);
-
-    frame->removeFromFrame(&storage->global->txtLoading);
-    frame->removeFromFrame(&storage->global->sprCursor);
-    
-    for (Texture* it : storage->global->textures)
-    {
-	delete it;
-    }
-    storage->global->textures.clear();
 
     delete storage->buttonTesting;
-    delete storage->global;
-
-    exitCleanUpJoinable = true;
+    
+    unloadButtonTestingJoinable = true;
 }

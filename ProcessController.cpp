@@ -27,11 +27,18 @@ void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inp
 
 void ProcessController::load()
 {
-    tm.loadMainMenuStart();
+    storage.state = FirstLoad;
 
-    while (!tm.loadMainMenuJoinable);
+    tm.loadGlobalStart();
+
+    while (!tm.loadGlobalJoinable);
+    tm.loadGlobalJoin();
+
+    tm.loadButtonTestingStart();
+
+    while (!tm.loadButtonTestingJoinable);
+    tm.loadButtonTestingJoin();
     storage.state = ButtonTesting;
-    tm.loadMainMenuJoin();
 }
 
 void ProcessController::process()
@@ -39,9 +46,13 @@ void ProcessController::process()
     switch (storage.state)
     {
 	case Exiting:
-	    if (tm.exitCleanUpJoinable)
+	    if (tm.unloadButtonTestingJoinable)
 	    {
-		tm.exitCleanUpJoin();
+		tm.unloadButtonTestingJoin();
+		tm.unloadGlobalStart();
+	    } else if (tm.unloadGlobalJoinable)
+	    {
+		tm.unloadGlobalJoin();
 		exitProgram = true;
 	    }
 	    break;
@@ -87,22 +98,13 @@ void ProcessController::process()
 		oc->reloadGraphicsWindow();
 	    }
 
-	    if (storage.buttonTesting->btnExit.isTriggered())
+	    if (storage.buttonTesting->btnExit.isTriggered() || ic->getPhysicalButtonStatus(KeyEscape, ButtonDown))
 	    {
 		storage.state = Exiting;
-		tm.exitCleanUpStart();
+		tm.unloadButtonTestingStart();
 	    }
 	    break;
 
-    }
-
-    if (storage.state != Exiting)
-    {
-	if (ic->getPhysicalButtonStatus(KeyEscape, ButtonDown))
-	{
-	    storage.state = Exiting;
-	    tm.exitCleanUpStart();
-	}
     }
 }
 

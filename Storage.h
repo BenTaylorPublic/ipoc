@@ -40,11 +40,9 @@ public:
     ~Storage();
     std::string getStatusString();
 
-    ProgramState state = FirstLoad;
+    ProgramState state;
 
-    //GLOBAL    
     StorageGlobal* global;
-    
     StorageButtonTesting* buttonTesting;
     
 };
