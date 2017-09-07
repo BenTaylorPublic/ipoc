@@ -1,8 +1,7 @@
 #pragma once
 #include <string>
 #include "MasterController.h"
-
-#define AMOUNT_OF_CLASSES 20
+#include "TrackedClasses.h"
 #define PROCESS_THREAD_USAGE_DURATIONS_STORED 8
 
 /*
@@ -62,8 +61,8 @@ private:
     This pointer is used by Debug::logStatusStrings()
      */
     static MasterController* masterController;
-    static unsigned int constructionAmount[AMOUNT_OF_CLASSES];
-    static unsigned int destructionAmount[AMOUNT_OF_CLASSES];
-    static unsigned int copyAmount[AMOUNT_OF_CLASSES];
+    static unsigned int constructionAmount[AMOUNT_OF_TRACKED_CLASSES];
+    static unsigned int destructionAmount[AMOUNT_OF_TRACKED_CLASSES];
+    static unsigned int copyAmount[AMOUNT_OF_TRACKED_CLASSES];
     static std::string logPath; //The filepath of the DebugLog.txt file.
 };

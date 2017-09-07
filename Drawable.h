@@ -5,9 +5,8 @@
 
 class Drawable {
 public:
-
-    virtual ~Drawable() {
-    };
+    Drawable();
+    virtual ~Drawable();
     int getZ();
     void setZ(const unsigned int& inputZ);
     void setFrameId(const unsigned int& inputFrameId);

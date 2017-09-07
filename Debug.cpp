@@ -14,9 +14,9 @@ double Debug::processThreadUsagePercent = 0;
 unsigned int Debug::processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED] = {0};
 unsigned int Debug::processThreadUsageIndex = 0;
 
-unsigned int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
-unsigned int Debug::destructionAmount[AMOUNT_OF_CLASSES] = {0};
-unsigned int Debug::copyAmount[AMOUNT_OF_CLASSES] = {0};
+unsigned int Debug::constructionAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
+unsigned int Debug::destructionAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
+unsigned int Debug::copyAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
 
 void Debug::write(const int& input)
 {
@@ -147,19 +147,19 @@ void Debug::noteLoopTime(const unsigned int& loopDuration)
     if (processThreadUsageIndex == PROCESS_THREAD_USAGE_DURATIONS_STORED)
 	processThreadUsageIndex = 0;
     processThreadUsage[processThreadUsageIndex] = loopDuration;
-    
-    
-    
+
+
+
     //Average the array
     double sum = 0;
-    
+
     for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
     {
 	sum += processThreadUsage[i];
     }
-    
+
     processThreadUsagePercent = (sum * 100) / (PROCESS_THREAD_USAGE_DURATIONS_STORED * Settings::loopTimeInNanoseconds);
-    
+
 }
 
 void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
@@ -186,16 +186,16 @@ void Debug::logClassAmountInfo()
 {
     logLine("[INFO] Logging class amount info");
 
-    logLine("[INFO] ClassID 0, our benevolent overlord is exempt from this blasphemous scrutiny.");
+    logLine("[INFO] Class MasterController, our benevolent overlord is exempt from this blasphemous scrutiny.");
 
-    for (int i = 1; i < AMOUNT_OF_CLASSES; i++)
+    for (int i = 1; i < AMOUNT_OF_TRACKED_CLASSES; i++)
     {
 	log("[INFO] ");
 	if (constructionAmount[i] + copyAmount[i] != destructionAmount[i])
 	{
 	    log("MEMORY LEAK, ");
 	}
-	logLine("ClassID " + std::to_string(i) + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " + std::to_string(destructionAmount[i]) + ".");
+	logLine("Class " + TrackedClasses::classNames[i] + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " + std::to_string(destructionAmount[i]) + ".");
     }
 
     logLine("[INFO] End of class amount info");
