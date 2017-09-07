@@ -186,9 +186,7 @@ void Debug::logClassAmountInfo()
 {
     logLine("[INFO] Logging class amount info");
 
-    logLine("[INFO] Class MasterController, our benevolent overlord is exempt from this blasphemous scrutiny.");
-
-    for (int i = 1; i < AMOUNT_OF_TRACKED_CLASSES; i++)
+    for (int i = 0; i < AMOUNT_OF_TRACKED_CLASSES; i++)
     {
 	log("[INFO] ");
 	if (constructionAmount[i] + copyAmount[i] != destructionAmount[i])

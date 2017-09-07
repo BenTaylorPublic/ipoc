@@ -6,7 +6,7 @@ Font::Font()
 {
     name = "";
 
-    Debug::notifyOfConstruction(13);
+    Debug::notifyOfConstruction(0);
 }
 
 Font::Font(const std::string& inputName, const std::string& fileName)
@@ -22,12 +22,12 @@ Font::Font(const std::string& inputName, const std::string& fileName)
 	Debug::logLine("[INFO] Loaded font (" + name + ")");
     }
 
-    Debug::notifyOfConstruction(13);
+    Debug::notifyOfConstruction(0);
 }
 
 Font::~Font()
 {
-    Debug::notifyOfDestruction(13);
+    Debug::notifyOfDestruction(0);
 }
 
 void Font::loadFont(const std::string& inputName, const std::string& fileName)

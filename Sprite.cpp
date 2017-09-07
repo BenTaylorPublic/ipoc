@@ -4,20 +4,20 @@
 Sprite::Sprite()
 {
     name = "";
-    Debug::notifyOfConstruction(16);
+    Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(const std::string& inputName)
 {
     name = inputName;
-    Debug::notifyOfConstruction(16);
+    Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(const std::string& inputName, Texture& inputTexture)
 {
     name = inputName;
     sprite.setTexture(*inputTexture.getTexture());
-    Debug::notifyOfConstruction(16);
+    Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const unsigned int& inputZ)
@@ -25,12 +25,12 @@ Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const unsign
     name = inputName;
     setZ(inputZ);
     sprite.setTexture(*inputTexture.getTexture());
-    Debug::notifyOfConstruction(16);
+    Debug::notifyOfConstruction(3);
 }
 
 Sprite::~Sprite()
 {
-    Debug::notifyOfDestruction(16);
+    Debug::notifyOfDestruction(3);
 }
 
 void Sprite::setTexture(Texture& inputTexture)

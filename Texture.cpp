@@ -13,12 +13,12 @@ Texture::Texture(const std::string& inputName, const std::string& fileName)
     {
 	Debug::logLine("[INFO] Loaded texture (" + inputName + ")");
     }
-    Debug::notifyOfConstruction(15);
+    Debug::notifyOfConstruction(1);
 }
 
 Texture::~Texture()
 {
-    Debug::notifyOfDestruction(15);
+    Debug::notifyOfDestruction(1);
 }
 
 sf::Texture* Texture::getTexture()

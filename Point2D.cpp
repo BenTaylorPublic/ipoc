@@ -5,26 +5,26 @@ Point2D::Point2D(const double& inputX, const double& inputY)
 {
     x = inputX;
     y = inputY;
-    Debug::notifyOfConstruction(12);
+    Debug::notifyOfConstruction(4);
 }
 
 Point2D::Point2D(const int& inputX, const int& inputY)
 {
     x = inputX;
     y = inputY;
-    Debug::notifyOfConstruction(12);
+    Debug::notifyOfConstruction(4);
 }
 
 Point2D::Point2D()
 {
     x = 0;
     y = 0;
-    Debug::notifyOfConstruction(12);
+    Debug::notifyOfConstruction(4);
 }
 
 Point2D::~Point2D()
 {
-    Debug::notifyOfDestruction(12);
+    Debug::notifyOfDestruction(4);
 }
 
 Point2D Point2D::operator+(const Point2D& rhs)

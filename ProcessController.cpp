@@ -7,12 +7,10 @@
 
 ProcessController::ProcessController()
 {
-    Debug::notifyOfConstruction(2);
 }
 
 ProcessController::~ProcessController()
 {
-    Debug::notifyOfDestruction(2);
 }
 
 void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr)

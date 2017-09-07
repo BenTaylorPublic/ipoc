@@ -4,12 +4,10 @@
 
 ThreadManager::ThreadManager()
 {
-    Debug::notifyOfConstruction(19);
 }
 
 ThreadManager::~ThreadManager()
 {
-    Debug::notifyOfDestruction(19);
 }
 
 void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController)

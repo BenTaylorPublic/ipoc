@@ -5,7 +5,7 @@ Text::Text()
 {
     text.setString("SAMPLE TEXT");
     name = "";
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont)
@@ -13,7 +13,7 @@ Text::Text(const std::string& inputName, Font& inputFont)
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont, const std::string& inputString)
@@ -21,7 +21,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const std::string& inp
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString)
@@ -30,7 +30,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& in
     text.setString(inputString);
     setZ(inputZ);
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ)
@@ -39,7 +39,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& in
     text.setString("SAMPLE TEXT");
     setZ(inputZ);
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point)
@@ -48,7 +48,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const std::string& inp
     text.setString(inputString);
     setPosition(point);
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point)
@@ -58,7 +58,7 @@ Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& in
     setPosition(point);
     setZ(inputZ);
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const Point2D& point)
@@ -68,12 +68,12 @@ Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& in
     setPosition(point);
     setZ(inputZ);
     name = inputName;
-    Debug::notifyOfConstruction(14);
+    Debug::notifyOfConstruction(2);
 }
 
 Text::~Text()
 {
-    Debug::notifyOfDestruction(14);
+    Debug::notifyOfDestruction(2);
 }
 
 Point2D Text::getPosition()

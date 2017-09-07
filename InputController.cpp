@@ -8,12 +8,10 @@ InputController::InputController()
     {
 	onscreenButtonIdsToGive.push(i);
     }
-    Debug::notifyOfConstruction(1);
 }
 
 InputController::~InputController()
 {
-    Debug::notifyOfDestruction(1);
 }
 
 void InputController::IPOCLoad()

@@ -3,12 +3,12 @@
 
 Drawable::Drawable()
 {
-    Debug::notifyOfConstruction(20);
+    Debug::notifyOfConstruction(7);
 }
 
 Drawable::~Drawable()
 {
-    Debug::notifyOfDestruction(20);
+    Debug::notifyOfDestruction(7);
 }
 
 void Drawable::setFrameId(const unsigned int& inputFrameId)
