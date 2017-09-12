@@ -8,9 +8,10 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "OnscreenButton.h"
+#include "Rectangle.h"
 
 enum ProgramState {
-    FirstLoad, ButtonTesting, Exiting
+    FirstLoad, ButtonTesting, ShapeFun, Exiting
 };
 
 struct StorageGlobal {
@@ -20,6 +21,8 @@ struct StorageGlobal {
     Text txtProcessThreadUsage;
     int counterForThreadUsage;
     Sprite sprCursor;
+    OnscreenButton btnButtonTesting;
+    OnscreenButton btnShapeFun;
 };
 
 struct StorageButtonTesting {
@@ -31,7 +34,10 @@ struct StorageButtonTesting {
     OnscreenButton btnTriggerOnHold;
     OnscreenButton btnToggleWindowMode;
     OnscreenButton btnExit;
-    
+};
+
+struct StorageShapeFun {
+    Rectangle rectangle;
 };
 
 class Storage {
@@ -44,5 +50,6 @@ public:
 
     StorageGlobal* global;
     StorageButtonTesting* buttonTesting;
+    StorageShapeFun* shapeFun;
     
 };
