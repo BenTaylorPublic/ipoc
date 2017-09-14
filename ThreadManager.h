@@ -33,6 +33,16 @@ public:
     void unloadButtonTestingStart();
     void unloadButtonTestingJoin();
     std::atomic<bool> unloadButtonTestingJoinable{false};
+    
+    //loadShapeFun
+    void loadShapeFunStart();
+    void loadShapeFunJoin();
+    std::atomic<bool> loadShapeFunJoinable{false};
+    
+    //unloadoadShapeFun
+    void unloadShapeFunStart();
+    void unloadShapeFunJoin();
+    std::atomic<bool> unloadShapeFunJoinable{false};
 
 private:
     Storage* storage;
@@ -54,5 +64,13 @@ private:
     //unloadButtonTesting
     void unloadButtonTesting();
     std::thread* unloadButtonTestingThread;
+    
+    //loadShapeFun
+    void loadShapeFun();
+    std::thread* loadShapeFunThread;
+    
+    //unloadShapeFun
+    void unloadShapeFun();
+    std::thread* unloadShapeFunThread;
 
 };

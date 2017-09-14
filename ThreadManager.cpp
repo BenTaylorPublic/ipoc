@@ -129,6 +129,9 @@ void ThreadManager::unloadGlobal()
     frame->removeFromFrame(&storage->global->btnButtonTesting);
     frame->removeFromFrame(&storage->global->btnShapeFun);
 
+    inputController->removeOnscreenButton(&storage->global->btnButtonTesting);
+    inputController->removeOnscreenButton(&storage->global->btnShapeFun);
+    
     for (Texture* it : storage->global->textures)
     {
 	delete it;
@@ -214,23 +217,11 @@ void ThreadManager::loadButtonTesting()
     storage->buttonTesting->btnToggleWindowMode.addToDown(new Text("toggle window mode down text", storage->global->font1, "Toggle Window"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->buttonTesting->btnToggleWindowMode);
 
-    //Buttons - Exit
-    storage->buttonTesting->btnExit.setButtonTriggerType(TriggerOnUp);
-    storage->buttonTesting->btnExit.setZ(1);
-    storage->buttonTesting->btnExit.setPosition(Point2D(20, 620));
-    storage->buttonTesting->btnExit.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonTesting->btnExit.addToUp(new Sprite("exit button up sprite", *storage->global->textures[2]));
-    storage->buttonTesting->btnExit.addToUp(new Text("exit button up text", storage->global->font1, "Exit"), Point2D(20, 30));
-    storage->buttonTesting->btnExit.addToDown(new Sprite("exit button down sprite", *storage->global->textures[3]));
-    storage->buttonTesting->btnExit.addToDown(new Text("exit button down text", storage->global->font1, "Exit"), Point2D(20, 37));
-    inputController->addOnscreenButton(&storage->buttonTesting->btnExit);
-
     //Adding to frame
     frame->addToFrame(&storage->buttonTesting->btnTriggerOnUp);
     frame->addToFrame(&storage->buttonTesting->btnTriggerOnDown);
     frame->addToFrame(&storage->buttonTesting->btnTriggerOnHold);
     frame->addToFrame(&storage->buttonTesting->btnToggleWindowMode);
-    frame->addToFrame(&storage->buttonTesting->btnExit);
     frame->addToFrame(&storage->buttonTesting->txtCounter);
 
     loadButtonTestingJoinable = true;
@@ -258,9 +249,53 @@ void ThreadManager::unloadButtonTesting()
     frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnDown);
     frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnUp);
     frame->removeFromFrame(&storage->buttonTesting->btnToggleWindowMode);
-    frame->removeFromFrame(&storage->buttonTesting->btnExit);
-
+    
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnDown);
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnHold);
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnUp);
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnToggleWindowMode);
+    
     delete storage->buttonTesting;
     
     unloadButtonTestingJoinable = true;
+}
+
+void ThreadManager::loadShapeFunStart()
+{
+    loadShapeFunJoinable = false;
+    loadShapeFunThread = new std::thread(&ThreadManager::loadShapeFun, this);
+    Debug::logLine("[INFO] loadShapeFunThread started");
+}
+
+void ThreadManager::loadShapeFunJoin()
+{
+    loadShapeFunThread->join();
+    delete loadShapeFunThread;
+    loadShapeFunJoinable = false;
+    Debug::logLine("[INFO] loadShapeFunThread joined");
+}
+
+void ThreadManager::loadShapeFun()
+{
+    loadShapeFunJoinable = true;
+}
+
+void ThreadManager::unloadShapeFunStart()
+{
+    unloadShapeFunJoinable = false;
+    unloadShapeFunThread = new std::thread(&ThreadManager::unloadShapeFun, this);
+    Debug::logLine("[INFO] unloadShapeFunThread started");
+}
+
+void ThreadManager::unloadShapeFunJoin()
+{
+    unloadShapeFunThread->join();
+    delete unloadShapeFunThread;
+    unloadShapeFunJoinable = false;
+    Debug::logLine("[INFO] unloadShapeFunThread joined");
+}
+
+void ThreadManager::unloadShapeFun()
+{
+    unloadShapeFunJoinable = true;
 }

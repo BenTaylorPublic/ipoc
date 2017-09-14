@@ -37,35 +37,67 @@ void ProcessController::load()
     while (!tm.loadButtonTestingJoinable);
     tm.loadButtonTestingJoin();
     storage.state = ButtonTesting;
+    storage.state2 = Safe;
 }
 
 void ProcessController::process()
 {
-    switch (storage.state)
+
+    if (storage.state != Exiting)
     {
-	case Exiting:
+	storage.global->sprCursor.setPosition(ic->getMousePoint());
+	if (ic->getPhysicalButtonStatus(KeyEscape, ButtonDown))
+	{
+	    if (storage.state == ButtonTesting)
+	    {
+		tm.unloadButtonTestingStart();
+	    } else if (storage.state == ShapeFun)
+	    {
+		tm.unloadShapeFunStart();
+	    }
+	    storage.state = Exiting;
+	    storage.state2 = Loading;
+	}
+
+
+	if (Settings::debugMode)
+	{
+	    storage.global->counterForThreadUsage++;
+	    if (storage.global->counterForThreadUsage == 16)
+	    {
+		storage.global->counterForThreadUsage = 0;
+		storage.global->txtProcessThreadUsage.setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
+	    }
+	}
+    } else if (storage.state == Exiting)
+    {
+	if (storage.state2 == Loading)
+	{
 	    if (tm.unloadButtonTestingJoinable)
 	    {
 		tm.unloadButtonTestingJoin();
-		tm.unloadGlobalStart();
+		storage.state2 = Safe;
+	    } else if (tm.unloadShapeFunJoinable)
+	    {
+		tm.unloadShapeFunJoin();
+		storage.state2 = Safe;
 	    } else if (tm.unloadGlobalJoinable)
 	    {
 		tm.unloadGlobalJoin();
 		exitProgram = true;
 	    }
-	    break;
-	case ButtonTesting:
-	    storage.global->sprCursor.setPosition(ic->getMousePoint());
-	    if (Settings::debugMode)
-	    {
-		storage.global->counterForThreadUsage++;
-		if (storage.global->counterForThreadUsage == 16)
-		{
-		    storage.global->counterForThreadUsage = 0;
-		    storage.global->txtProcessThreadUsage.setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
-		}
-	    }
+	} else
+	{
+	    tm.unloadGlobalStart();
+	    storage.state2 = Loading;
+	}
+    }
 
+
+    if (storage.state == ButtonTesting)
+    {
+	if (storage.state2 == Safe)
+	{
 	    if (storage.buttonTesting->btnTriggerOnDown.isTriggered() || storage.buttonTesting->btnTriggerOnUp.isTriggered() || storage.buttonTesting->btnTriggerOnHold.isTriggered())
 	    {
 		storage.buttonTesting->counter++;
@@ -96,13 +128,44 @@ void ProcessController::process()
 		oc->reloadGraphicsWindow();
 	    }
 
-	    if (storage.buttonTesting->btnExit.isTriggered() || ic->getPhysicalButtonStatus(KeyEscape, ButtonDown))
+	    if (storage.global->btnShapeFun.isTriggered())
 	    {
-		storage.state = Exiting;
 		tm.unloadButtonTestingStart();
+		tm.loadShapeFunStart();
+		storage.state = ShapeFun;
+		storage.state2 = Loading;
 	    }
-	    break;
+	} else //NOT SAFE, LOADING
+	{
 
+	    if (tm.unloadShapeFunJoinable && tm.loadButtonTestingJoinable)
+	    {
+		tm.unloadShapeFunJoin();
+		tm.loadButtonTestingJoin();
+		storage.state2 = Safe;
+	    }
+	}
+    } else if (storage.state == ShapeFun)
+    {
+	if (storage.state2 == Safe)
+	{
+
+	    if (storage.global->btnButtonTesting.isTriggered())
+	    {
+		tm.unloadShapeFunStart();
+		tm.loadButtonTestingStart();
+		storage.state = ButtonTesting;
+		storage.state2 = Loading;
+	    }
+	} else //NOT SAFE, LOADING
+	{
+	    if (tm.unloadButtonTestingJoinable && tm.loadShapeFunJoinable)
+	    {
+		tm.unloadButtonTestingJoin();
+		tm.loadShapeFunJoin();
+		storage.state2 = Safe;
+	    }
+	}
     }
 }
 

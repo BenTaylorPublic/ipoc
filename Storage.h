@@ -14,6 +14,10 @@ enum ProgramState {
     FirstLoad, ButtonTesting, ShapeFun, Exiting
 };
 
+enum ProgramStateLevel2 {
+    Safe, Loading
+};
+
 struct StorageGlobal {
     Font font1;
     std::vector<Texture*> textures;
@@ -33,7 +37,6 @@ struct StorageButtonTesting {
     OnscreenButton btnTriggerOnDown;
     OnscreenButton btnTriggerOnHold;
     OnscreenButton btnToggleWindowMode;
-    OnscreenButton btnExit;
 };
 
 struct StorageShapeFun {
@@ -47,6 +50,7 @@ public:
     std::string getStatusString();
 
     ProgramState state;
+    ProgramStateLevel2 state2;
 
     StorageGlobal* global;
     StorageButtonTesting* buttonTesting;
