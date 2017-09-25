@@ -28,7 +28,12 @@ Color::~Color()
     Debug::notifyOfDestruction(5);
 }
 
-void Color::random()
+Color Color::Random()
+{
+    return Color(rand() % 256, rand() % 256, rand() % 256);
+}
+
+void Color::randomize()
 {
     r = rand() % 256;
     g = rand() % 256;
