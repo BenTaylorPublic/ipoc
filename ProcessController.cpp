@@ -150,6 +150,27 @@ void ProcessController::process()
 	if (storage.state2 == Safe)
 	{
 
+	    if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
+	    {
+		if (!storage.shapeFun->settingSquareSizeState)
+		{
+		    storage.shapeFun->settingSquareSizeState = true;
+		    storage.shapeFun->rectangle.setCornerOne(ic->getMousePoint());
+		    storage.shapeFun->rectangle.setSize(0, 0);
+		} else
+		{
+		    storage.shapeFun->settingSquareSizeState = false;
+		    storage.shapeFun->rectangle.setCornerTwo(ic->getMousePoint());
+		}
+
+	    }
+
+	    if (storage.shapeFun->settingSquareSizeState)
+	    {
+		//set corner two not permenantly
+		storage.shapeFun->rectangle.setCornerTwo(ic->getMousePoint());
+	    }
+
 	    if (storage.global->btnButtonTesting.isTriggered())
 	    {
 		tm.unloadShapeFunStart();

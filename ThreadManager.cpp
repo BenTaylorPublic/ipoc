@@ -280,8 +280,8 @@ void ThreadManager::loadShapeFun()
 {
     storage->shapeFun = new StorageShapeFun;
    
-    storage->shapeFun->rectangle.setCornerOne(Point2D(600,300));
-    storage->shapeFun->rectangle.setCornerTwo(Point2D(1150,850));
+    storage->shapeFun->settingSquareSizeState = false;
+    
     storage->shapeFun->rectangle.setColor(Color::Random());
     
     frame->addToFrame(&storage->shapeFun->rectangle);
