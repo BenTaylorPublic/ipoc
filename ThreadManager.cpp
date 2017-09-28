@@ -70,7 +70,7 @@ void ThreadManager::loadGlobal()
     storage->global->sprCursor.name = "cursor sprite";
     storage->global->sprCursor.setTexture(*storage->global->textures[4]);
     storage->global->sprCursor.setZ(2);
-    
+
     //Buttons
     //Buttons - ButtonTesting
     storage->global->btnButtonTesting.setButtonTriggerType(TriggerOnUp);
@@ -82,7 +82,7 @@ void ThreadManager::loadGlobal()
     storage->global->btnButtonTesting.addToDown(new Sprite("button testing down sprite", *storage->global->textures[3]));
     storage->global->btnButtonTesting.addToDown(new Text("button testing down text", storage->global->font1, "Buttons"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->global->btnButtonTesting);
-    
+
     //Buttons - ShapeFun
     storage->global->btnShapeFun.setButtonTriggerType(TriggerOnUp);
     storage->global->btnShapeFun.setZ(1);
@@ -132,7 +132,7 @@ void ThreadManager::unloadGlobal()
 
     inputController->removeOnscreenButton(&storage->global->btnButtonTesting);
     inputController->removeOnscreenButton(&storage->global->btnShapeFun);
-    
+
     for (Texture* it : storage->global->textures)
     {
 	delete it;
@@ -250,14 +250,14 @@ void ThreadManager::unloadButtonTesting()
     frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnDown);
     frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnUp);
     frame->removeFromFrame(&storage->buttonTesting->btnToggleWindowMode);
-    
+
     inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnDown);
     inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnHold);
     inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnUp);
     inputController->removeOnscreenButton(&storage->buttonTesting->btnToggleWindowMode);
-    
+
     delete storage->buttonTesting;
-    
+
     unloadButtonTestingJoinable = true;
 }
 
@@ -279,12 +279,10 @@ void ThreadManager::loadShapeFunJoin()
 void ThreadManager::loadShapeFun()
 {
     storage->shapeFun = new StorageShapeFun;
-   
+    storage->shapeFun->rectangle = nullptr;
+
     storage->shapeFun->settingSquareSizeState = false;
-    
-    storage->shapeFun->rectangle.setColor(Color::Random());
-    
-    frame->addToFrame(&storage->shapeFun->rectangle);
+
     loadShapeFunJoinable = true;
 }
 
@@ -305,9 +303,21 @@ void ThreadManager::unloadShapeFunJoin()
 
 void ThreadManager::unloadShapeFun()
 {
-    frame->removeFromFrame(&storage->shapeFun->rectangle);
-    
+
+    if (storage->shapeFun->rectangle != nullptr)
+    {
+	frame->removeFromFrame(storage->shapeFun->rectangle);
+	delete storage->shapeFun->rectangle;
+    }
+
+    for (Rectangle* it : storage->shapeFun->rectangles)
+    {
+	frame->removeFromFrame(it);
+	delete it;
+    }
+    storage->shapeFun->rectangles.clear();
+
     delete storage->shapeFun;
-    
+
     unloadShapeFunJoinable = true;
 }

@@ -40,9 +40,8 @@ struct StorageButtonTesting {
 };
 
 struct StorageShapeFun {
-    Rectangle rectangle;
-    Point2D newRectangleCornerOne;
-    Point2D newRectangleCornerTwo;
+    Rectangle* rectangle;
+    std::vector<Rectangle*> rectangles;
     bool settingSquareSizeState;
 };
 

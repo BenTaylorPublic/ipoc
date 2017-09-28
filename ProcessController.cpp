@@ -154,13 +154,17 @@ void ProcessController::process()
 	    {
 		if (!storage.shapeFun->settingSquareSizeState)
 		{
+		    storage.shapeFun->rectangle = new Rectangle();
 		    storage.shapeFun->settingSquareSizeState = true;
-		    storage.shapeFun->rectangle.setCornerOne(ic->getMousePoint());
-		    storage.shapeFun->rectangle.setSize(0, 0);
+		    storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
+		    storage.shapeFun->rectangle->setSize(0, 0);
+		    storage.shapeFun->rectangle->setColor(Color::Random());
+		    frame->addToFrame(storage.shapeFun->rectangle);
 		} else
 		{
+		    storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
 		    storage.shapeFun->settingSquareSizeState = false;
-		    storage.shapeFun->rectangle.setCornerTwo(ic->getMousePoint());
+		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
 		}
 
 	    }
@@ -168,7 +172,7 @@ void ProcessController::process()
 	    if (storage.shapeFun->settingSquareSizeState)
 	    {
 		//set corner two not permenantly
-		storage.shapeFun->rectangle.setCornerTwo(ic->getMousePoint());
+		storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
 	    }
 
 	    if (storage.global->btnButtonTesting.isTriggered())
