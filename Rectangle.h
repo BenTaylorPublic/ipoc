@@ -12,6 +12,8 @@ public:
     void setColor(const Color& color);
     void draw(sf::RenderTarget& target) override;
     void setPosition(const Point2D& newPoint) override;
+    void setCornerOne(const Point2D& newPoint);
+    void setCornerTwo(const Point2D& newPoint);
 private:
     sf::RectangleShape rectangle;
 };

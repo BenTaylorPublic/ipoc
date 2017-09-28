@@ -30,3 +30,13 @@ void Rectangle::setPosition(const Point2D& newPoint)
 {
     rectangle.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
 }
+
+void Rectangle::setCornerOne(const Point2D& newPoint)
+{
+    rectangle.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
+}
+
+void Rectangle::setCornerTwo(const Point2D& newPoint)
+{
+    rectangle.setSize(sf::Vector2f(newPoint.x - rectangle.getPosition().x, newPoint.y - rectangle.getPosition().y));
+}

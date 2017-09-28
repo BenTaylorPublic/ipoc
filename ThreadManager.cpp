@@ -279,9 +279,9 @@ void ThreadManager::loadShapeFunJoin()
 void ThreadManager::loadShapeFun()
 {
     storage->shapeFun = new StorageShapeFun;
-    
-    storage->shapeFun->rectangle.setPosition(Point2D(600,300));
-    storage->shapeFun->rectangle.setSize(600, 550);
+   
+    storage->shapeFun->rectangle.setCornerOne(Point2D(600,300));
+    storage->shapeFun->rectangle.setCornerTwo(Point2D(1150,850));
     storage->shapeFun->rectangle.setColor(Color::Random());
     
     frame->addToFrame(&storage->shapeFun->rectangle);
