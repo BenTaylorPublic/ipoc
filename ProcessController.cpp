@@ -158,6 +158,7 @@ void ProcessController::process()
 		    storage.shapeFun->settingRectangleSize = true;
 		    storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
 		    storage.shapeFun->rectangle->setSize(0, 0);
+		    storage.shapeFun->rectangle->setZ(1);
 		    storage.shapeFun->rectangle->setColor(Color::Random());
 		    frame->addToFrame(storage.shapeFun->rectangle);
 		} else

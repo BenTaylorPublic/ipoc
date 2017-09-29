@@ -64,7 +64,8 @@ void ThreadManager::loadGlobal()
 
     storage->global->txtProcessThreadUsage.name = "process thread usage text";
     storage->global->txtProcessThreadUsage.setFont(storage->global->font1);
-    storage->global->txtProcessThreadUsage.setPosition(Point2D(500, 500));
+    storage->global->txtProcessThreadUsage.setPosition(Point2D(1530, 5));
+    storage->global->txtProcessThreadUsage.setZ(1);
 
     //Sprites
     storage->global->sprCursor.name = "cursor sprite";
@@ -170,7 +171,7 @@ void ThreadManager::loadButtonTesting()
     //Texts
     storage->buttonTesting->txtCounter.name = "counter text";
     storage->buttonTesting->txtCounter.setFont(storage->global->font1);
-    storage->buttonTesting->txtCounter.setZ(0);
+    storage->buttonTesting->txtCounter.setZ(1);
     storage->buttonTesting->txtCounter.setText("0");
     storage->buttonTesting->txtCounter.setPosition(Point2D(400, 345));
     //Buttons
@@ -279,9 +280,18 @@ void ThreadManager::loadShapeFunJoin()
 void ThreadManager::loadShapeFun()
 {
     storage->shapeFun = new StorageShapeFun;
+    
     storage->shapeFun->rectangle = nullptr;
-
     storage->shapeFun->settingRectangleSize = false;
+    
+    storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
+    storage->shapeFun->btnClear.setZ(1);
+    storage->shapeFun->btnClear.setPosition(Point2D(340, 10));
+    storage->shapeFun->btnClear.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->shapeFun->btnClear.addToUp(new Sprite("shape fun up sprite", *storage->global->textures[2]));
+    storage->shapeFun->btnClear.addToUp(new Text("shape fun up text", storage->global->font1, "Shapes"), Point2D(20, 30));
+    storage->shapeFun->btnClear.addToDown(new Sprite("shape fun down sprite", *storage->global->textures[3]));
+    storage->shapeFun->btnClear.addToDown(new Text("shape fun down text", storage->global->font1, "Shapes"), Point2D(20, 37));
 
     loadShapeFunJoinable = true;
 }

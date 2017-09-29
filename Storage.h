@@ -43,6 +43,7 @@ struct StorageShapeFun {
     Rectangle* rectangle;
     std::vector<Rectangle*> rectangles;
     bool settingRectangleSize;
+    OnscreenButton btnClear;
 };
 
 class Storage {
