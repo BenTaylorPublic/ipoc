@@ -165,6 +165,7 @@ void ProcessController::process()
 		    storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
 		    storage.shapeFun->settingSquareSizeState = false;
 		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+		    storage.shapeFun->rectangle = nullptr;
 		}
 
 	    }
