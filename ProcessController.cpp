@@ -152,10 +152,10 @@ void ProcessController::process()
 
 	    if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
 	    {
-		if (!storage.shapeFun->settingSquareSizeState)
+		if (!storage.shapeFun->settingRectangleSize)
 		{
 		    storage.shapeFun->rectangle = new Rectangle();
-		    storage.shapeFun->settingSquareSizeState = true;
+		    storage.shapeFun->settingRectangleSize = true;
 		    storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
 		    storage.shapeFun->rectangle->setSize(0, 0);
 		    storage.shapeFun->rectangle->setColor(Color::Random());
@@ -163,14 +163,14 @@ void ProcessController::process()
 		} else
 		{
 		    storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
-		    storage.shapeFun->settingSquareSizeState = false;
+		    storage.shapeFun->settingRectangleSize = false;
 		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
 		    storage.shapeFun->rectangle = nullptr;
 		}
 
 	    }
 
-	    if (storage.shapeFun->settingSquareSizeState)
+	    if (storage.shapeFun->settingRectangleSize)
 	    {
 		//set corner two not permenantly
 		storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());

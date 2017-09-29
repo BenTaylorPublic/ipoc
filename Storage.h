@@ -42,7 +42,7 @@ struct StorageButtonTesting {
 struct StorageShapeFun {
     Rectangle* rectangle;
     std::vector<Rectangle*> rectangles;
-    bool settingSquareSizeState;
+    bool settingRectangleSize;
 };
 
 class Storage {

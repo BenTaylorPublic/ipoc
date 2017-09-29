@@ -281,7 +281,7 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun = new StorageShapeFun;
     storage->shapeFun->rectangle = nullptr;
 
-    storage->shapeFun->settingSquareSizeState = false;
+    storage->shapeFun->settingRectangleSize = false;
 
     loadShapeFunJoinable = true;
 }
