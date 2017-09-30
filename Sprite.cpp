@@ -1,21 +1,25 @@
 #include "Sprite.h"
 #include "Debug.h"
+#include "Settings.h"
 
 Sprite::Sprite()
 {
     name = "";
+    setZ(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(const std::string& inputName)
 {
     name = inputName;
+    setZ(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(const std::string& inputName, Texture& inputTexture)
 {
     name = inputName;
+    setZ(DEFAULT_Z_VALUE);
     sprite.setTexture(*inputTexture.getTexture());
     Debug::notifyOfConstruction(3);
 }
@@ -24,6 +28,14 @@ Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const unsign
 {
     name = inputName;
     setZ(inputZ);
+    sprite.setTexture(*inputTexture.getTexture());
+    Debug::notifyOfConstruction(3);
+}
+
+Sprite::Sprite(Texture& inputTexture)
+{
+    name = "";
+    setZ(DEFAULT_Z_VALUE);
     sprite.setTexture(*inputTexture.getTexture());
     Debug::notifyOfConstruction(3);
 }

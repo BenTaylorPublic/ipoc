@@ -1,8 +1,10 @@
 #include "Rectangle.h"
 #include "Debug.h"
+#include "Settings.h"
 
 Rectangle::Rectangle()
 {
+    setZ(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(8);
 }
 

@@ -286,12 +286,12 @@ void ThreadManager::loadShapeFun()
     
     storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
     storage->shapeFun->btnClear.setZ(1);
-    storage->shapeFun->btnClear.setPosition(Point2D(340, 10));
+    storage->shapeFun->btnClear.setPosition(Point2D(20, 140));
     storage->shapeFun->btnClear.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->shapeFun->btnClear.addToUp(new Sprite("shape fun up sprite", *storage->global->textures[2]));
-    storage->shapeFun->btnClear.addToUp(new Text("shape fun up text", storage->global->font1, "Shapes"), Point2D(20, 30));
-    storage->shapeFun->btnClear.addToDown(new Sprite("shape fun down sprite", *storage->global->textures[3]));
-    storage->shapeFun->btnClear.addToDown(new Text("shape fun down text", storage->global->font1, "Shapes"), Point2D(20, 37));
+    storage->shapeFun->btnClear.addToUp(new Sprite("clear up sprite", *storage->global->textures[2]));
+    storage->shapeFun->btnClear.addToUp(new Text("clear up text", storage->global->font1, "Clear"), Point2D(20, 30));
+    storage->shapeFun->btnClear.addToDown(new Sprite("clear down sprite", *storage->global->textures[3]));
+    storage->shapeFun->btnClear.addToDown(new Text("clear down text", storage->global->font1, "Clear"), Point2D(20, 37));
 
     loadShapeFunJoinable = true;
 }

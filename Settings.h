@@ -2,6 +2,8 @@
 #include <string>
 #include "Storage.h"
 
+#define DEFAULT_Z_VALUE 1
+
 enum InputStatus {
     Active, PauseRequested, Paused
 };
