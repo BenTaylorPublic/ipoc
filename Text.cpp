@@ -76,6 +76,15 @@ Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& in
     Debug::notifyOfConstruction(2);
 }
 
+Text::Text(Font& inputFont, const std::string& inputString)
+{
+    text.setFont(*inputFont.getFont());
+    text.setString(inputString);
+    setZ(DEFAULT_Z_VALUE);
+    name = "";
+    Debug::notifyOfConstruction(2);
+}
+
 Text::~Text()
 {
     Debug::notifyOfDestruction(2);
