@@ -4,38 +4,20 @@
 
 Sprite::Sprite()
 {
-    name = "";
     setZ(DEFAULT_Z_VALUE);
-    Debug::notifyOfConstruction(3);
-}
-
-Sprite::Sprite(const std::string& inputName)
-{
-    name = inputName;
-    setZ(DEFAULT_Z_VALUE);
-    Debug::notifyOfConstruction(3);
-}
-
-Sprite::Sprite(const std::string& inputName, Texture& inputTexture)
-{
-    name = inputName;
-    setZ(DEFAULT_Z_VALUE);
-    sprite.setTexture(*inputTexture.getTexture());
-    Debug::notifyOfConstruction(3);
-}
-
-Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const unsigned int& inputZ)
-{
-    name = inputName;
-    setZ(inputZ);
-    sprite.setTexture(*inputTexture.getTexture());
     Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(Texture& inputTexture)
 {
-    name = "";
     setZ(DEFAULT_Z_VALUE);
+    sprite.setTexture(*inputTexture.getTexture());
+    Debug::notifyOfConstruction(3);
+}
+
+Sprite::Sprite(Texture& inputTexture, const unsigned int& inputZ)
+{
+    setZ(inputZ);
     sprite.setTexture(*inputTexture.getTexture());
     Debug::notifyOfConstruction(3);
 }
@@ -80,5 +62,5 @@ void Sprite::draw(sf::RenderTarget& target)
 
 std::string Sprite::getStatusString()
 {
-    return "Sprite name=" + name;
+    return "N/A";
 }

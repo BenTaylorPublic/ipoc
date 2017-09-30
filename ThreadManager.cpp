@@ -68,7 +68,6 @@ void ThreadManager::loadGlobal()
     storage->global->txtProcessThreadUsage.setZ(1);
 
     //Sprites
-    storage->global->sprCursor.name = "cursor sprite";
     storage->global->sprCursor.setTexture(*storage->global->textures[4]);
     storage->global->sprCursor.setZ(2);
 
@@ -78,10 +77,10 @@ void ThreadManager::loadGlobal()
     storage->global->btnButtonTesting.setZ(1);
     storage->global->btnButtonTesting.setPosition(Point2D(20, 10));
     storage->global->btnButtonTesting.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->global->btnButtonTesting.addToUp(new Sprite("button testing up sprite", *storage->global->textures[2]));
-    storage->global->btnButtonTesting.addToUp(new Text("button testing up text", storage->global->font1, "Buttons"), Point2D(20, 30));
-    storage->global->btnButtonTesting.addToDown(new Sprite("button testing down sprite", *storage->global->textures[3]));
-    storage->global->btnButtonTesting.addToDown(new Text("button testing down text", storage->global->font1, "Buttons"), Point2D(20, 37));
+    storage->global->btnButtonTesting.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->global->btnButtonTesting.addToUp(new Text(storage->global->font1, "Buttons"), Point2D(20, 30));
+    storage->global->btnButtonTesting.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->global->btnButtonTesting.addToDown(new Text(storage->global->font1, "Buttons"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->global->btnButtonTesting);
 
     //Buttons - ShapeFun
@@ -89,10 +88,10 @@ void ThreadManager::loadGlobal()
     storage->global->btnShapeFun.setZ(1);
     storage->global->btnShapeFun.setPosition(Point2D(340, 10));
     storage->global->btnShapeFun.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->global->btnShapeFun.addToUp(new Sprite("shape fun up sprite", *storage->global->textures[2]));
-    storage->global->btnShapeFun.addToUp(new Text("shape fun up text", storage->global->font1, "Shapes"), Point2D(20, 30));
-    storage->global->btnShapeFun.addToDown(new Sprite("shape fun down sprite", *storage->global->textures[3]));
-    storage->global->btnShapeFun.addToDown(new Text("shape fun down text", storage->global->font1, "Shapes"), Point2D(20, 37));
+    storage->global->btnShapeFun.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->global->btnShapeFun.addToUp(new Text(storage->global->font1, "Shapes"), Point2D(20, 30));
+    storage->global->btnShapeFun.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->global->btnShapeFun.addToDown(new Text(storage->global->font1, "Shapes"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->global->btnShapeFun);
 
     //Remove loading screen
@@ -180,10 +179,10 @@ void ThreadManager::loadButtonTesting()
     storage->buttonTesting->btnTriggerOnUp.setZ(1);
     storage->buttonTesting->btnTriggerOnUp.setPosition(Point2D(20, 140));
     storage->buttonTesting->btnTriggerOnUp.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonTesting->btnTriggerOnUp.addToUp(new Sprite("trigger on up up sprite", *storage->global->textures[2]));
-    storage->buttonTesting->btnTriggerOnUp.addToUp(new Text("trigger on up up text", storage->global->font1, "Trigger On Up"), Point2D(20, 30));
-    storage->buttonTesting->btnTriggerOnUp.addToDown(new Sprite("trigger on up down sprite", *storage->global->textures[3]));
-    storage->buttonTesting->btnTriggerOnUp.addToDown(new Text("trigger on up down text", storage->global->font1, "Trigger On Up"), Point2D(20, 37));
+    storage->buttonTesting->btnTriggerOnUp.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnTriggerOnUp.addToUp(new Text(storage->global->font1, "Trigger On Up"), Point2D(20, 30));
+    storage->buttonTesting->btnTriggerOnUp.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnTriggerOnUp.addToDown(new Text(storage->global->font1, "Trigger On Up"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->buttonTesting->btnTriggerOnUp);
 
     //Buttons - TriggerOnDown
@@ -191,10 +190,10 @@ void ThreadManager::loadButtonTesting()
     storage->buttonTesting->btnTriggerOnDown.setZ(1);
     storage->buttonTesting->btnTriggerOnDown.setPosition(Point2D(20, 300));
     storage->buttonTesting->btnTriggerOnDown.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonTesting->btnTriggerOnDown.addToUp(new Sprite("trigger on down up sprite", *storage->global->textures[2]));
-    storage->buttonTesting->btnTriggerOnDown.addToUp(new Text("trigger on down up text", storage->global->font1, "Trigger On Down"), Point2D(20, 30));
-    storage->buttonTesting->btnTriggerOnDown.addToDown(new Sprite("trigger on down down sprite", *storage->global->textures[3]));
-    storage->buttonTesting->btnTriggerOnDown.addToDown(new Text("trigger on down down text", storage->global->font1, "Trigger On Down"), Point2D(20, 37));
+    storage->buttonTesting->btnTriggerOnDown.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnTriggerOnDown.addToUp(new Text(storage->global->font1, "Trigger On Down"), Point2D(20, 30));
+    storage->buttonTesting->btnTriggerOnDown.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnTriggerOnDown.addToDown(new Text(storage->global->font1, "Trigger On Down"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->buttonTesting->btnTriggerOnDown);
 
     //Buttons - TriggerOnHold
@@ -202,10 +201,10 @@ void ThreadManager::loadButtonTesting()
     storage->buttonTesting->btnTriggerOnHold.setZ(1);
     storage->buttonTesting->btnTriggerOnHold.setPosition(Point2D(20, 460));
     storage->buttonTesting->btnTriggerOnHold.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonTesting->btnTriggerOnHold.addToUp(new Sprite("trigger on hold up sprite", *storage->global->textures[2]));
-    storage->buttonTesting->btnTriggerOnHold.addToUp(new Text("trigger on hold up text", storage->global->font1, "Trigger On Hold"), Point2D(20, 30));
-    storage->buttonTesting->btnTriggerOnHold.addToDown(new Sprite("trigger on hold down sprite", *storage->global->textures[3]));
-    storage->buttonTesting->btnTriggerOnHold.addToDown(new Text("trigger on hold down text", storage->global->font1, "Trigger On Hold"), Point2D(20, 37));
+    storage->buttonTesting->btnTriggerOnHold.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnTriggerOnHold.addToUp(new Text(storage->global->font1, "Trigger On Hold"), Point2D(20, 30));
+    storage->buttonTesting->btnTriggerOnHold.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnTriggerOnHold.addToDown(new Text(storage->global->font1, "Trigger On Hold"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->buttonTesting->btnTriggerOnHold);
 
     //Buttons - ToggleWindowMode
@@ -213,10 +212,10 @@ void ThreadManager::loadButtonTesting()
     storage->buttonTesting->btnToggleWindowMode.setZ(1);
     storage->buttonTesting->btnToggleWindowMode.setPosition(Point2D(340, 140));
     storage->buttonTesting->btnToggleWindowMode.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->buttonTesting->btnToggleWindowMode.addToUp(new Sprite("toggle window mode up sprite", *storage->global->textures[2]));
-    storage->buttonTesting->btnToggleWindowMode.addToUp(new Text("toggle window mode up text", storage->global->font1, "Toggle Window"), Point2D(20, 30));
-    storage->buttonTesting->btnToggleWindowMode.addToDown(new Sprite("toggle window mode down sprite", *storage->global->textures[3]));
-    storage->buttonTesting->btnToggleWindowMode.addToDown(new Text("toggle window mode down text", storage->global->font1, "Toggle Window"), Point2D(20, 37));
+    storage->buttonTesting->btnToggleWindowMode.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnToggleWindowMode.addToUp(new Text(storage->global->font1, "Toggle Window"), Point2D(20, 30));
+    storage->buttonTesting->btnToggleWindowMode.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnToggleWindowMode.addToDown(new Text(storage->global->font1, "Toggle Window"), Point2D(20, 37));
     inputController->addOnscreenButton(&storage->buttonTesting->btnToggleWindowMode);
 
     //Adding to frame
@@ -288,10 +287,10 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->btnClear.setZ(1);
     storage->shapeFun->btnClear.setPosition(Point2D(20, 140));
     storage->shapeFun->btnClear.setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->shapeFun->btnClear.addToUp(new Sprite("clear up sprite", *storage->global->textures[2]));
-    storage->shapeFun->btnClear.addToUp(new Text("clear up text", storage->global->font1, "Clear"), Point2D(20, 30));
-    storage->shapeFun->btnClear.addToDown(new Sprite("clear down sprite", *storage->global->textures[3]));
-    storage->shapeFun->btnClear.addToDown(new Text("clear down text", storage->global->font1, "Clear"), Point2D(20, 37));
+    storage->shapeFun->btnClear.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->shapeFun->btnClear.addToUp(new Text(storage->global->font1, "Clear"), Point2D(20, 30));
+    storage->shapeFun->btnClear.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->shapeFun->btnClear.addToDown(new Text(storage->global->font1, "Clear"), Point2D(20, 37));
 
     loadShapeFunJoinable = true;
 }
