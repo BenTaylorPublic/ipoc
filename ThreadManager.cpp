@@ -46,7 +46,6 @@ void ThreadManager::loadGlobal()
     storage->global->font1.loadFont("test font", "courier new.ttf");
 
     //Loading screen
-    storage->global->txtLoading.name = "loading text";
     storage->global->txtLoading.setFont(storage->global->font1);
     storage->global->txtLoading.setPosition(Point2D(100, 700));
     frame->addToFrame(&storage->global->txtLoading);
@@ -62,7 +61,6 @@ void ThreadManager::loadGlobal()
     storage->global->textures.push_back(new Texture("button down texture", "button down.png"));
     storage->global->textures.push_back(new Texture("cursor texture", "cursor.png"));
 
-    storage->global->txtProcessThreadUsage.name = "process thread usage text";
     storage->global->txtProcessThreadUsage.setFont(storage->global->font1);
     storage->global->txtProcessThreadUsage.setPosition(Point2D(1530, 5));
     storage->global->txtProcessThreadUsage.setZ(1);
@@ -168,7 +166,6 @@ void ThreadManager::loadButtonTesting()
     storage->buttonTesting->windowToggleMode = true;
 
     //Texts
-    storage->buttonTesting->txtCounter.name = "counter text";
     storage->buttonTesting->txtCounter.setFont(storage->global->font1);
     storage->buttonTesting->txtCounter.setZ(1);
     storage->buttonTesting->txtCounter.setText("0");

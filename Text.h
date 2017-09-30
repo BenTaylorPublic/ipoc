@@ -12,16 +12,14 @@ IPOCText is a Data Type (Wrapper)
 class Text : public Drawable {
 public:
     Text();
-    Text(const std::string& inputName, Font& inputFont);
-    Text(const std::string& inputName, Font& inputFont, const std::string& inputString);
-    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ);
-    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString);
-    Text(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point);
-    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const Point2D& point);
-    Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point);
+    Text(Font& inputFont);
     Text(Font& inputFont, const std::string& inputString);
+    Text(Font& inputFont, const unsigned int& inputZ);
+    Text(Font& inputFont, const unsigned int& inputZ, const std::string& inputString);
+    Text(Font& inputFont, const std::string& inputString, const Point2D& point);
+    Text(Font& inputFont, const unsigned int& inputZ, const Point2D& point);
+    Text(Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point);
     ~Text();
-    std::string name; //Name that is mainly used for debugging
     Point2D getPosition(); //Returns the current position of the text (TL)
     int getWidth(); //Returns an integer which represents the width of the text in pixels
     int getHeight(); //Returns an integer which represents the height of the text in pixels

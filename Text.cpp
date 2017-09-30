@@ -6,82 +6,65 @@ Text::Text()
 {
     setZ(DEFAULT_Z_VALUE);
     text.setString("SAMPLE TEXT");
-    name = "";
     Debug::notifyOfConstruction(2);
 }
 
-Text::Text(const std::string& inputName, Font& inputFont)
+Text::Text(Font& inputFont)
 {
     setZ(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
-    name = inputName;
-    Debug::notifyOfConstruction(2);
-}
-
-Text::Text(const std::string& inputName, Font& inputFont, const std::string& inputString)
-{
-    setZ(DEFAULT_Z_VALUE);
-    text.setFont(*inputFont.getFont());
-    text.setString(inputString);
-    name = inputName;
-    Debug::notifyOfConstruction(2);
-}
-
-Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString)
-{
-    text.setFont(*inputFont.getFont());
-    text.setString(inputString);
-    setZ(inputZ);
-    name = inputName;
-    Debug::notifyOfConstruction(2);
-}
-
-Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ)
-{
-    text.setFont(*inputFont.getFont());
-    text.setString("SAMPLE TEXT");
-    setZ(inputZ);
-    name = inputName;
-    Debug::notifyOfConstruction(2);
-}
-
-Text::Text(const std::string& inputName, Font& inputFont, const std::string& inputString, const Point2D& point)
-{
-    setZ(DEFAULT_Z_VALUE);
-    text.setFont(*inputFont.getFont());
-    text.setString(inputString);
-    setPosition(point);
-    name = inputName;
-    Debug::notifyOfConstruction(2);
-}
-
-Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point)
-{
-    text.setFont(*inputFont.getFont());
-    text.setString(inputString);
-    setPosition(point);
-    setZ(inputZ);
-    name = inputName;
-    Debug::notifyOfConstruction(2);
-}
-
-Text::Text(const std::string& inputName, Font& inputFont, const unsigned int& inputZ, const Point2D& point)
-{
-    text.setFont(*inputFont.getFont());
-    text.setString("SAMPLE TEXT");
-    setPosition(point);
-    setZ(inputZ);
-    name = inputName;
     Debug::notifyOfConstruction(2);
 }
 
 Text::Text(Font& inputFont, const std::string& inputString)
 {
+    setZ(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
+    Debug::notifyOfConstruction(2);
+}
+
+Text::Text(Font& inputFont, const unsigned int& inputZ, const std::string& inputString)
+{
+    text.setFont(*inputFont.getFont());
+    text.setString(inputString);
+    setZ(inputZ);
+    Debug::notifyOfConstruction(2);
+}
+
+Text::Text(Font& inputFont, const unsigned int& inputZ)
+{
+    text.setFont(*inputFont.getFont());
+    text.setString("SAMPLE TEXT");
+    setZ(inputZ);
+    Debug::notifyOfConstruction(2);
+}
+
+Text::Text(Font& inputFont, const std::string& inputString, const Point2D& point)
+{
     setZ(DEFAULT_Z_VALUE);
-    name = "";
+    text.setFont(*inputFont.getFont());
+    text.setString(inputString);
+    setPosition(point);
+    Debug::notifyOfConstruction(2);
+}
+
+Text::Text(Font& inputFont, const unsigned int& inputZ, const std::string& inputString, const Point2D& point)
+{
+    text.setFont(*inputFont.getFont());
+    text.setString(inputString);
+    setPosition(point);
+    setZ(inputZ);
+    Debug::notifyOfConstruction(2);
+}
+
+Text::Text(Font& inputFont, const unsigned int& inputZ, const Point2D& point)
+{
+    text.setFont(*inputFont.getFont());
+    text.setString("SAMPLE TEXT");
+    setPosition(point);
+    setZ(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
@@ -140,5 +123,5 @@ void Text::draw(sf::RenderTarget& target)
 
 std::string Text::getStatusString()
 {
-    return "Sprite name=" + name + " text=" + text.getString();
+    return "Text=" + text.getString();
 }
