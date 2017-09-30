@@ -150,39 +150,56 @@ void ProcessController::process()
 	if (storage.state2 == Safe)
 	{
 
-	    if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
-	    {
-		if (!storage.shapeFun->settingRectangleSize)
-		{
-		    storage.shapeFun->rectangle = new Rectangle();
-		    storage.shapeFun->settingRectangleSize = true;
-		    storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
-		    storage.shapeFun->rectangle->setSize(0, 0);
-		    storage.shapeFun->rectangle->setZ(1);
-		    storage.shapeFun->rectangle->setColor(Color::Random());
-		    frame->addToFrame(storage.shapeFun->rectangle);
-		} else
-		{
-		    storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
-		    storage.shapeFun->settingRectangleSize = false;
-		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
-		    storage.shapeFun->rectangle = nullptr;
-		}
-
-	    }
-
-	    if (storage.shapeFun->settingRectangleSize)
-	    {
-		//set corner two not permenantly
-		storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
-	    }
-
 	    if (storage.global->btnButtonTesting.isTriggered())
 	    {
 		tm.unloadShapeFunStart();
 		tm.loadButtonTestingStart();
 		storage.state = ButtonTesting;
 		storage.state2 = Loading;
+	    } else if (storage.shapeFun->btnClear.isTriggered())
+	    {
+		if (storage.shapeFun->rectangle != nullptr)
+		{
+		    frame->removeFromFrame(storage.shapeFun->rectangle);
+		    delete storage.shapeFun->rectangle;
+		    storage.shapeFun->rectangle = nullptr;
+		    storage.shapeFun->settingRectangleSize = false;
+		}
+
+		for (Rectangle* it : storage.shapeFun->rectangles)
+		{
+		    frame->removeFromFrame(it);
+		    delete it;
+		}
+		storage.shapeFun->rectangles.clear();
+	    } else
+	    {
+		if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
+		{
+		    if (!storage.shapeFun->settingRectangleSize)
+		    {
+			storage.shapeFun->rectangle = new Rectangle();
+			storage.shapeFun->settingRectangleSize = true;
+			storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
+			storage.shapeFun->rectangle->setSize(0, 0);
+			storage.shapeFun->rectangle->setZ(1);
+			storage.shapeFun->rectangle->setColor(Color::Random());
+			frame->addToFrame(storage.shapeFun->rectangle);
+		    } else
+		    {
+			storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
+			storage.shapeFun->settingRectangleSize = false;
+			storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+			storage.shapeFun->rectangle = nullptr;
+		    }
+
+		}
+
+		if (storage.shapeFun->settingRectangleSize)
+		{
+		    //set corner two not permenantly
+		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+		}
 	    }
 	} else //NOT SAFE, LOADING
 	{

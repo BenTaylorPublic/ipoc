@@ -288,6 +288,9 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->btnClear.addToUp(new Text(storage->global->font1, "Clear"), Point2D(20, 30));
     storage->shapeFun->btnClear.addToDown(new Sprite(*storage->global->textures[3]));
     storage->shapeFun->btnClear.addToDown(new Text(storage->global->font1, "Clear"), Point2D(20, 37));
+    
+    frame->addToFrame(&storage->shapeFun->btnClear);
+    inputController->addOnscreenButton(&storage->shapeFun->btnClear);
 
     loadShapeFunJoinable = true;
 }
@@ -310,6 +313,9 @@ void ThreadManager::unloadShapeFunJoin()
 void ThreadManager::unloadShapeFun()
 {
 
+    inputController->removeOnscreenButton(&storage->shapeFun->btnClear);
+    frame->removeFromFrame(&storage->shapeFun->btnClear);
+    
     if (storage->shapeFun->rectangle != nullptr)
     {
 	frame->removeFromFrame(storage->shapeFun->rectangle);
