@@ -2,7 +2,7 @@
 
 #include <string>
 //increment this number when adding to the array
-#define AMOUNT_OF_TRACKED_CLASSES 9
+#define AMOUNT_OF_TRACKED_CLASSES 10
 
 class TrackedClasses {
 public:
@@ -19,6 +19,7 @@ public:
         TrackedClasses::classNames[6] = "OnscreenButton";
         TrackedClasses::classNames[7] = "Drawable";
         TrackedClasses::classNames[8] = "Rectangle";
+        TrackedClasses::classNames[9] = "Circle";
     };
 private:
 

@@ -9,6 +9,7 @@
 #include "Sprite.h"
 #include "OnscreenButton.h"
 #include "Rectangle.h"
+#include "Circle.h"
 
 enum ProgramState {
     FirstLoad, ButtonTesting, ShapeFun, Exiting
@@ -42,6 +43,7 @@ struct StorageButtonTesting {
 struct StorageShapeFun {
     Rectangle* rectangle;
     std::vector<Rectangle*> rectangles;
+    Circle* circle;
     bool settingRectangleSize;
     OnscreenButton btnClear;
 };
