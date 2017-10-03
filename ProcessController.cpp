@@ -158,6 +158,7 @@ void ProcessController::process()
 		storage.state2 = Loading;
 	    } else if (storage.shapeFun->btnClear.isTriggered())
 	    {
+		//Rectangles
 		if (storage.shapeFun->rectangle != nullptr)
 		{
 		    frame->removeFromFrame(storage.shapeFun->rectangle);
@@ -172,33 +173,99 @@ void ProcessController::process()
 		    delete it;
 		}
 		storage.shapeFun->rectangles.clear();
+
+		//Circles
+		if (storage.shapeFun->circle != nullptr)
+		{
+		    frame->removeFromFrame(storage.shapeFun->circle);
+		    delete storage.shapeFun->circle;
+		    storage.shapeFun->circle = nullptr;
+		    storage.shapeFun->settingCircleSize = false;
+		}
+
+		for (Circle* it : storage.shapeFun->circles)
+		{
+		    frame->removeFromFrame(it);
+		    delete it;
+		}
+		storage.shapeFun->circles.clear();
 	    } else
 	    {
 		if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
 		{
-		    if (!storage.shapeFun->settingRectangleSize)
+		    if (!storage.shapeFun->circleMode)
 		    {
-			storage.shapeFun->rectangle = new Rectangle();
-			storage.shapeFun->settingRectangleSize = true;
-			storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
-			storage.shapeFun->rectangle->setSize(0, 0);
-			storage.shapeFun->rectangle->setZ(1);
-			storage.shapeFun->rectangle->setColor(Color::Random());
-			frame->addToFrame(storage.shapeFun->rectangle);
+			//RECTANGLES
+			if (!storage.shapeFun->settingRectangleSize)
+			{
+			    storage.shapeFun->rectangle = new Rectangle();
+			    storage.shapeFun->settingRectangleSize = true;
+			    storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
+			    storage.shapeFun->rectangle->setSize(0, 0);
+			    storage.shapeFun->rectangle->setZ(1);
+			    storage.shapeFun->rectangle->setColor(Color::Random());
+			    frame->addToFrame(storage.shapeFun->rectangle);
+			} else
+			{
+			    storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
+			    storage.shapeFun->settingRectangleSize = false;
+			    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+			    storage.shapeFun->rectangle = nullptr;
+			}
 		    } else
 		    {
-			storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
-			storage.shapeFun->settingRectangleSize = false;
-			storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
-			storage.shapeFun->rectangle = nullptr;
+			//CIRCLES
+			if (!storage.shapeFun->settingCircleSize)
+			{
+			    storage.shapeFun->circle = new Circle();
+			    storage.shapeFun->settingCircleSize = true;
+			    storage.shapeFun->circle->setPointCount(50);
+			    storage.shapeFun->circle->setRadius(0);
+			    storage.shapeFun->circleCenter = ic->getMousePoint();
+			    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
+			    storage.shapeFun->circle->setZ(1);
+			    storage.shapeFun->circle->setColor(Color::Random());
+			    frame->addToFrame(storage.shapeFun->circle);
+
+			} else
+			{
+			    int radius = 0;
+			    int diffX = abs(storage.shapeFun->circleCenter.x - ic->getMousePoint().x);
+			    int diffY = abs(storage.shapeFun->circleCenter.y - ic->getMousePoint().y);
+
+			    if (diffX >= diffY)
+				radius = diffX;
+			    else
+				radius = diffY;
+
+			    storage.shapeFun->circle->setRadius(radius);
+			    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
+			    storage.shapeFun->circles.push_back(storage.shapeFun->circle);
+			    storage.shapeFun->settingCircleSize = false;
+			    storage.shapeFun->circle = nullptr;
+			}
 		    }
 
 		}
 
 		if (storage.shapeFun->settingRectangleSize)
 		{
-		    //set corner two not permenantly
+		    //set corner two, not permenantly
 		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+		} else if (storage.shapeFun->settingCircleSize)
+		{
+		    //set radius, not permenantly
+		    int radius = 0;
+		    int diffX = abs(storage.shapeFun->circleCenter.x - ic->getMousePoint().x);
+		    int diffY = abs(storage.shapeFun->circleCenter.y - ic->getMousePoint().y);
+
+		    if (diffX >= diffY)
+			radius = diffX;
+		    else
+			radius = diffY;
+
+		    storage.shapeFun->circle->setRadius(radius);
+		    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
 		}
 	    }
 	} else //NOT SAFE, LOADING

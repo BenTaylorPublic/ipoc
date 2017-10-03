@@ -43,8 +43,15 @@ struct StorageButtonTesting {
 struct StorageShapeFun {
     Rectangle* rectangle;
     std::vector<Rectangle*> rectangles;
-    Circle* circle;
     bool settingRectangleSize;
+    
+    Circle* circle;
+    std::vector<Circle*> circles;
+    bool settingCircleSize;
+    Point2D circleCenter;
+    
+    bool circleMode; //True for rectangle mode
+    
     OnscreenButton btnClear;
 };
 

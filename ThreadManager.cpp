@@ -280,14 +280,10 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->rectangle = nullptr;
     storage->shapeFun->settingRectangleSize = false;
     
-    storage->shapeFun->circle = new Circle();
-    storage->shapeFun->circle->setZ(1);
-    storage->shapeFun->circle->setRadius(300);
-    storage->shapeFun->circle->setCenter(Point2D(500, 500));
-    storage->shapeFun->circle->setPointCount(50);
-    storage->shapeFun->circle->setColor(Color::Random());
+    storage->shapeFun->circle = nullptr;
+    storage->shapeFun->settingCircleSize = false;
     
-    frame->addToFrame(storage->shapeFun->circle);
+    storage->shapeFun->circleMode = true; //false for rectangle mode
     
     storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
     storage->shapeFun->btnClear.setZ(1);
@@ -343,6 +339,13 @@ void ThreadManager::unloadShapeFun()
 	delete it;
     }
     storage->shapeFun->rectangles.clear();
+    
+    for (Circle* it : storage->shapeFun->circles)
+    {
+	frame->removeFromFrame(it);
+	delete it;
+    }
+    storage->shapeFun->circles.clear();
 
     delete storage->shapeFun;
 
