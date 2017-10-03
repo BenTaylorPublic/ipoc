@@ -284,6 +284,7 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->circle->setZ(1);
     storage->shapeFun->circle->setRadius(300);
     storage->shapeFun->circle->setCenter(Point2D(500, 500));
+    storage->shapeFun->circle->setPointCount(50);
     storage->shapeFun->circle->setColor(Color::Random());
     
     frame->addToFrame(storage->shapeFun->circle);

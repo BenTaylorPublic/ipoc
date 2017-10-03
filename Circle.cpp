@@ -37,3 +37,8 @@ void Circle::setColor(const Color& color)
 {
     circle.setFillColor(sf::Color(color.r, color.g, color.b));
 }
+
+void Circle::setPointCount(const int& pointCount)
+{
+    circle.setPointCount(pointCount);
+}

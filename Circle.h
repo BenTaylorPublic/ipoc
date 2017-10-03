@@ -13,6 +13,7 @@ public:
     void setCenter(const Point2D& newPoint);
     void setRadius(const int& radius);
     void setColor(const Color& color);
+    void setPointCount(const int& pointCount);
 private:
     sf::CircleShape circle;
 };
