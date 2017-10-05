@@ -4,6 +4,7 @@
 #include "Settings.h"
 #include "InputEnums.h"
 #include "Color.h"
+#include <cmath>
 
 ProcessController::ProcessController()
 {
@@ -229,14 +230,7 @@ void ProcessController::process()
 
 			} else
 			{
-			    int radius = 0;
-			    int diffX = abs(storage.shapeFun->circleCenter.x - ic->getMousePoint().x);
-			    int diffY = abs(storage.shapeFun->circleCenter.y - ic->getMousePoint().y);
-
-			    if (diffX >= diffY)
-				radius = diffX;
-			    else
-				radius = diffY;
+			    int radius = storage.shapeFun->circleCenter.distanceTo(ic->getMousePoint());
 
 			    storage.shapeFun->circle->setRadius(radius);
 			    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
@@ -255,17 +249,13 @@ void ProcessController::process()
 		} else if (storage.shapeFun->settingCircleSize)
 		{
 		    //set radius, not permenantly
-		    int radius = 0;
-		    int diffX = abs(storage.shapeFun->circleCenter.x - ic->getMousePoint().x);
-		    int diffY = abs(storage.shapeFun->circleCenter.y - ic->getMousePoint().y);
-
-		    if (diffX >= diffY)
-			radius = diffX;
-		    else
-			radius = diffY;
+		    int radius = storage.shapeFun->circleCenter.distanceTo(ic->getMousePoint());
 
 		    storage.shapeFun->circle->setRadius(radius);
 		    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
+		} else if (ic->getPhysicalButtonStatus(KeyTab, ButtonDown))
+		{
+		    storage.shapeFun->circleMode = !storage.shapeFun->circleMode;
 		}
 	    }
 	} else //NOT SAFE, LOADING
