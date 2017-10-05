@@ -1,5 +1,6 @@
 #include "Point2D.h"
 #include "Debug.h"
+#include <cmath>
 
 Point2D::Point2D(const double& inputX, const double& inputY)
 {
@@ -47,6 +48,13 @@ Point2D& Point2D::operator+=(const Point2D& rhs)
 Point2D Point2D::getRelative(const Point2D& otherPoint)
 {
     return Point2D(otherPoint.x - x, otherPoint.y - y);
+}
+
+double Point2D::distanceTo(const Point2D& otherPoint)
+{
+    int aSquared = std::pow(otherPoint.x - x, 2);
+    int bSquared = std::pow(otherPoint.y - y, 2);
+    return sqrt(aSquared + bSquared);
 }
 
 void Point2D::random(const int& maxX, const int& maxY)

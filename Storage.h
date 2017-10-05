@@ -8,9 +8,15 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "OnscreenButton.h"
+#include "Rectangle.h"
+#include "Circle.h"
 
 enum ProgramState {
-    FirstLoad, ButtonTesting, Exiting
+    FirstLoad, ButtonTesting, ShapeFun, Exiting
+};
+
+enum ProgramStateLevel2 {
+    Safe, Loading
 };
 
 struct StorageGlobal {
@@ -20,6 +26,8 @@ struct StorageGlobal {
     Text txtProcessThreadUsage;
     int counterForThreadUsage;
     Sprite sprCursor;
+    OnscreenButton btnButtonTesting;
+    OnscreenButton btnShapeFun;
 };
 
 struct StorageButtonTesting {
@@ -30,8 +38,21 @@ struct StorageButtonTesting {
     OnscreenButton btnTriggerOnDown;
     OnscreenButton btnTriggerOnHold;
     OnscreenButton btnToggleWindowMode;
-    OnscreenButton btnExit;
+};
+
+struct StorageShapeFun {
+    Rectangle* rectangle;
+    std::vector<Rectangle*> rectangles;
+    bool settingRectangleSize;
     
+    Circle* circle;
+    std::vector<Circle*> circles;
+    bool settingCircleSize;
+    Point2D circleCenter;
+    
+    bool circleMode; //True for rectangle mode
+    
+    OnscreenButton btnClear;
 };
 
 class Storage {
@@ -41,8 +62,10 @@ public:
     std::string getStatusString();
 
     ProgramState state;
+    ProgramStateLevel2 state2;
 
     StorageGlobal* global;
     StorageButtonTesting* buttonTesting;
+    StorageShapeFun* shapeFun;
     
 };

@@ -12,6 +12,9 @@ MasterController::MasterController()
 
 void MasterController::IPOCLoad()
 {
+    //To seed random numbers across the whole application
+    srand(time(NULL));
+    
     inputController = new InputController();
     processController = new ProcessController();
     outputController = new OutputController();

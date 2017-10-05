@@ -17,7 +17,7 @@ public:
     void setGraphicsWindow(Window* inputWindow);
     void input();
     void addOnscreenButton(OnscreenButton* onscreenButtonToAdd);
-    void removeOnscreenButton(OnscreenButton* onscreenButtonToAdd);
+    void removeOnscreenButton(OnscreenButton* onscreenButtonToRemove);
     void markStartOfLoop(); //Used to mark ButtonDown to ButtonHold, and ButtonUp to ButtonUntouched
     void markEndOfLoop(); //Used to mark ButtonDown to ButtonHold, and ButtonUp to ButtonUntouched
     std::string getStatusString();
