@@ -1,30 +1,30 @@
 #include "Sprite.h"
 #include "Debug.h"
+#include "Settings.h"
 
-Sprite::Sprite(const std::string& inputName)
+Sprite::Sprite()
 {
-    name = inputName;
-    Debug::notifyOfConstruction(16);
+    setZ(DEFAULT_Z_VALUE);
+    Debug::notifyOfConstruction(3);
 }
 
-Sprite::Sprite(const std::string& inputName, Texture& inputTexture)
+Sprite::Sprite(Texture& inputTexture)
 {
-    name = inputName;
+    setZ(DEFAULT_Z_VALUE);
     sprite.setTexture(*inputTexture.getTexture());
-    Debug::notifyOfConstruction(16);
+    Debug::notifyOfConstruction(3);
 }
 
-Sprite::Sprite(const std::string& inputName, Texture& inputTexture, const unsigned int& inputZ)
+Sprite::Sprite(Texture& inputTexture, const unsigned int& inputZ)
 {
-    name = inputName;
     setZ(inputZ);
     sprite.setTexture(*inputTexture.getTexture());
-    Debug::notifyOfConstruction(16);
+    Debug::notifyOfConstruction(3);
 }
 
 Sprite::~Sprite()
 {
-    Debug::notifyOfDestruction(16);
+    Debug::notifyOfDestruction(3);
 }
 
 void Sprite::setTexture(Texture& inputTexture)
@@ -62,5 +62,5 @@ void Sprite::draw(sf::RenderTarget& target)
 
 std::string Sprite::getStatusString()
 {
-    return "Sprite name=" + name;
+    return "N/A";
 }

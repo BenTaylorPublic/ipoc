@@ -5,12 +5,10 @@
 Frame::Frame() : drawables(1, std::vector<Drawable*>(0))
 {
     isDrawableBool = false;
-    Debug::notifyOfConstruction(17);
 }
 
 Frame::~Frame()
 {
-    Debug::notifyOfDestruction(17);
 }
 
 void Frame::IPOCLoad()

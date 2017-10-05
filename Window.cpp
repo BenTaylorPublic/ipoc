@@ -5,12 +5,10 @@
 
 Window::Window()
 {
-    Debug::notifyOfConstruction(9);
 }
 
 Window::~Window()
 {
-    Debug::notifyOfDestruction(9);
 }
 
 void Window::load()

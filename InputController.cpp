@@ -8,12 +8,10 @@ InputController::InputController()
     {
 	onscreenButtonIdsToGive.push(i);
     }
-    Debug::notifyOfConstruction(1);
 }
 
 InputController::~InputController()
 {
-    Debug::notifyOfDestruction(1);
 }
 
 void InputController::IPOCLoad()
@@ -322,18 +320,18 @@ void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
     onscreenButtonIdsToGive.pop();
 }
 
-void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToAdd)
+void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
 {
-    //    for (unsigned int i = 0; i < onscreenButtons.size(); i++)
-    //    {
-    //	if (onscreenButtons[i]->getOnscreenButtonManagerId() == onscreenButtonToAdd->getOnscreenButtonManagerId())
-    //	{
-    //	    onscreenButtons.erase(onscreenButtons.begin() + i);
-    //	    idsToGive.push(onscreenButtonToAdd->getOnscreenButtonManagerId());
-    //	    onscreenButtonToAdd->setOnscreenButtonManagerId(-1);
-    //	    return;
-    //	}
-    //    }
+    for (unsigned int i = 0; i < onscreenButtons.size(); i++)
+    {
+	if (onscreenButtons[i]->getOnscreenButtonManagerId() == onscreenButtonToRemove->getOnscreenButtonManagerId())
+	{
+	    onscreenButtons.erase(onscreenButtons.begin() + i);
+	    onscreenButtonIdsToGive.push(onscreenButtonToRemove->getOnscreenButtonManagerId());
+	    onscreenButtonToRemove->setOnscreenButtonManagerId(0);
+	    return;
+	}
+    }
 }
 
 void InputController::setGraphicsWindow(Window* inputWindow)

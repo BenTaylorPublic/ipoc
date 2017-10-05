@@ -8,22 +8,51 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "OnscreenButton.h"
+#include "Rectangle.h"
+#include "Circle.h"
 
 enum ProgramState {
-    FirstLoad, ButtonTesting, Exiting
+    FirstLoad, ButtonTesting, ShapeFun, Exiting
+};
+
+enum ProgramStateLevel2 {
+    Safe, Loading
 };
 
 struct StorageGlobal {
-    Font* font1;
+    Font font1;
     std::vector<Texture*> textures;
-    Text* txtLoading;
-    Text* txtProcessThreadUsage;
+    Text txtLoading;
+    Text txtProcessThreadUsage;
     int counterForThreadUsage;
-    Sprite* sprCursor;
+    Sprite sprCursor;
+    OnscreenButton btnButtonTesting;
+    OnscreenButton btnShapeFun;
 };
 
 struct StorageButtonTesting {
+    Text txtCounter;
+    unsigned int counter;
+    bool windowToggleMode;
+    OnscreenButton btnTriggerOnUp;
+    OnscreenButton btnTriggerOnDown;
+    OnscreenButton btnTriggerOnHold;
+    OnscreenButton btnToggleWindowMode;
+};
+
+struct StorageShapeFun {
+    Rectangle* rectangle;
+    std::vector<Rectangle*> rectangles;
+    bool settingRectangleSize;
     
+    Circle* circle;
+    std::vector<Circle*> circles;
+    bool settingCircleSize;
+    Point2D circleCenter;
+    
+    bool circleMode; //True for rectangle mode
+    
+    OnscreenButton btnClear;
 };
 
 class Storage {
@@ -32,18 +61,11 @@ public:
     ~Storage();
     std::string getStatusString();
 
-    ProgramState state = FirstLoad;
+    ProgramState state;
+    ProgramStateLevel2 state2;
 
-    //GLOBAL    
     StorageGlobal* global;
-
-    //state: MainMenu + LoadingMainMenu
-    Text* txtCounter;
-    unsigned int counter;
-    bool windowToggleMode;
-    OnscreenButton* btnTriggerOnUp;
-    OnscreenButton* btnTriggerOnDown;
-    OnscreenButton* btnTriggerOnHold;
-    OnscreenButton* btnToggleWindowMode;
-    OnscreenButton* btnExit;
+    StorageButtonTesting* buttonTesting;
+    StorageShapeFun* shapeFun;
+    
 };

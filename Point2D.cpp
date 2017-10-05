@@ -1,30 +1,31 @@
 #include "Point2D.h"
 #include "Debug.h"
+#include <cmath>
 
 Point2D::Point2D(const double& inputX, const double& inputY)
 {
     x = inputX;
     y = inputY;
-    Debug::notifyOfConstruction(12);
+    Debug::notifyOfConstruction(4);
 }
 
 Point2D::Point2D(const int& inputX, const int& inputY)
 {
     x = inputX;
     y = inputY;
-    Debug::notifyOfConstruction(12);
+    Debug::notifyOfConstruction(4);
 }
 
 Point2D::Point2D()
 {
     x = 0;
     y = 0;
-    Debug::notifyOfConstruction(12);
+    Debug::notifyOfConstruction(4);
 }
 
 Point2D::~Point2D()
 {
-    Debug::notifyOfDestruction(12);
+    Debug::notifyOfDestruction(4);
 }
 
 Point2D Point2D::operator+(const Point2D& rhs)
@@ -47,6 +48,13 @@ Point2D& Point2D::operator+=(const Point2D& rhs)
 Point2D Point2D::getRelative(const Point2D& otherPoint)
 {
     return Point2D(otherPoint.x - x, otherPoint.y - y);
+}
+
+double Point2D::distanceTo(const Point2D& otherPoint)
+{
+    int aSquared = std::pow(otherPoint.x - x, 2);
+    int bSquared = std::pow(otherPoint.y - y, 2);
+    return sqrt(aSquared + bSquared);
 }
 
 void Point2D::random(const int& maxX, const int& maxY)

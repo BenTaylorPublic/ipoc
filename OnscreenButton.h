@@ -12,6 +12,7 @@ enum OnscreenButtonType {
 
 class OnscreenButton : public Drawable {
 public:
+    OnscreenButton();
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType);
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ);
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point);
@@ -26,6 +27,7 @@ public:
     void mouseHold(const Point2D& mousePoint);
     bool mouseUp(const Point2D& mousePoint);
     void setOnscreenButtonManagerId(const unsigned int& newId);
+    void setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType);
     unsigned int& getOnscreenButtonManagerId();
     void clearTriggered();
     bool isTriggered();

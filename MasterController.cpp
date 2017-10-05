@@ -4,6 +4,7 @@
 #include "FileManager.h"
 #include "Conversions.h"
 #include <chrono>
+#include "TrackedClasses.h"
 
 MasterController::MasterController()
 {
@@ -11,11 +12,13 @@ MasterController::MasterController()
 
 void MasterController::IPOCLoad()
 {
+    //To seed random numbers across the whole application
+    srand(time(NULL));
+    
     inputController = new InputController();
     processController = new ProcessController();
     outputController = new OutputController();
     frame = new Frame();
-
 
     threadsLoaded = false;
     inputThreadJoinable = false;
@@ -33,6 +36,7 @@ void MasterController::IPOCLoad()
     processController->IPOCLoad(inputController, frame, outputController);
     outputController->IPOCLoad(frame);
     frame->IPOCLoad();
+    TrackedClasses::loadClassNames();
 
     Debug::logLine("[INFO] Loaded controllers");
 

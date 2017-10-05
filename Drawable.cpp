@@ -1,4 +1,15 @@
 #include "Drawable.h"
+#include "Debug.h"
+
+Drawable::Drawable()
+{
+    Debug::notifyOfConstruction(7);
+}
+
+Drawable::~Drawable()
+{
+    Debug::notifyOfDestruction(7);
+}
 
 void Drawable::setFrameId(const unsigned int& inputFrameId)
 {

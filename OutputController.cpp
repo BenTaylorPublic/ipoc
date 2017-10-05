@@ -6,12 +6,10 @@
 
 OutputController::OutputController()
 {
-    Debug::notifyOfConstruction(3);
 }
 
 OutputController::~OutputController()
 {
-    Debug::notifyOfDestruction(3);
 }
 
 void OutputController::IPOCLoad(Frame* inputFrame)

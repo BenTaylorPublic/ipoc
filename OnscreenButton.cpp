@@ -1,17 +1,22 @@
 #include "OnscreenButton.h"
 #include "Debug.h"
 
+OnscreenButton::OnscreenButton()
+{
+    Debug::notifyOfConstruction(6);
+}
+
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType)
 {
     onscreenButtonType = inputOnscreenButtonType;
-    Debug::notifyOfConstruction(10);
+    Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ)
 {
     setZ(inputZ);
     onscreenButtonType = inputOnscreenButtonType;
-    Debug::notifyOfConstruction(10);
+    Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point)
@@ -19,7 +24,7 @@ OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType
     setZ(inputZ);
     setPosition(point);
     onscreenButtonType = inputOnscreenButtonType;
-    Debug::notifyOfConstruction(10);
+    Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::~OnscreenButton()
@@ -38,13 +43,13 @@ OnscreenButton::~OnscreenButton()
     stateDownDrawables.clear();
     stateDownOffset.clear();
 
-    Debug::notifyOfDestruction(10);
+    Debug::notifyOfDestruction(6);
 }
 
 void OnscreenButton::addToUp(Drawable* drawable, const Point2D& offsetFromTopLeft)
 {
-    Debug::notifyOfCopy(12);
-    Debug::notifyOfCopy(12);
+    Debug::notifyOfCopy(4);
+    Debug::notifyOfCopy(4);
     drawable->setPosition(drawingPosition + offsetFromTopLeft);
     stateUpDrawables.push_back(drawable);
     stateUpOffset.push_back(offsetFromTopLeft);
@@ -52,8 +57,8 @@ void OnscreenButton::addToUp(Drawable* drawable, const Point2D& offsetFromTopLef
 
 void OnscreenButton::addToDown(Drawable* drawable, const Point2D& offsetFromTopLeft)
 {
-    Debug::notifyOfCopy(12);
-    Debug::notifyOfCopy(12);
+    Debug::notifyOfCopy(4);
+    Debug::notifyOfCopy(4);
     drawable->setPosition(drawingPosition + offsetFromTopLeft);
     stateDownDrawables.push_back(drawable);
     stateDownOffset.push_back(offsetFromTopLeft);
@@ -61,7 +66,7 @@ void OnscreenButton::addToDown(Drawable* drawable, const Point2D& offsetFromTopL
 
 void OnscreenButton::addToUp(Drawable* drawable)
 {
-    Debug::notifyOfCopy(12);
+    Debug::notifyOfCopy(4);
     drawable->setPosition(drawingPosition);
     stateUpDrawables.push_back(drawable);
     stateUpOffset.push_back(Point2D(0, 0));
@@ -69,7 +74,7 @@ void OnscreenButton::addToUp(Drawable* drawable)
 
 void OnscreenButton::addToDown(Drawable* drawable)
 {
-    Debug::notifyOfCopy(12);
+    Debug::notifyOfCopy(4);
     drawable->setPosition(drawingPosition);
     stateDownDrawables.push_back(drawable);
     stateDownOffset.push_back(Point2D(0, 0));
@@ -173,6 +178,11 @@ bool OnscreenButton::mouseUp(const Point2D& mousePoint)
 void OnscreenButton::setOnscreenButtonManagerId(const unsigned int& newId)
 {
     onscreenButtonManagerId = newId;
+}
+
+void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType)
+{
+    onscreenButtonType = inputOnscreenButtonType;
 }
 
 unsigned int& OnscreenButton::getOnscreenButtonManagerId()
