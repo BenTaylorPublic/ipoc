@@ -16,6 +16,11 @@ public:
     bool checkForExitProgram();
     void incrementLoopNumber();
     std::string getStatusString();
+    //Program specific methods below
+    void global();
+    void exiting();
+    void buttonTestingSafe();
+    void shapeFunSafe();
 private:
     Frame* frame;
     bool exitProgram;
