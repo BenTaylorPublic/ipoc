@@ -283,7 +283,10 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->circle = nullptr;
     storage->shapeFun->settingCircleSize = false;
     
-    storage->shapeFun->circleMode = true; //false for rectangle mode
+    storage->shapeFun->line = nullptr;
+    storage->shapeFun->settingLineSize = false;
+    
+    storage->shapeFun->mode = LineMode;
     
     storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
     storage->shapeFun->btnClear.setZ(1);

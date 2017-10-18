@@ -225,7 +225,7 @@ void ProcessController::shapeFunSafe()
     {
 	if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
 	{
-	    if (!storage.shapeFun->circleMode)
+	    if (storage.shapeFun->mode == RectangleMode)
 	    {
 		//RECTANGLES
 		if (!storage.shapeFun->settingRectangleSize)
@@ -244,7 +244,7 @@ void ProcessController::shapeFunSafe()
 		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
 		    storage.shapeFun->rectangle = nullptr;
 		}
-	    } else
+	    } else if (storage.shapeFun->mode == CircleMode)
 	    {
 		//CIRCLES
 		if (!storage.shapeFun->settingCircleSize)
@@ -269,6 +269,17 @@ void ProcessController::shapeFunSafe()
 		    storage.shapeFun->settingCircleSize = false;
 		    storage.shapeFun->circle = nullptr;
 		}
+	    } else if (storage.shapeFun->mode == LineMode)
+	    {
+		if (!storage.shapeFun->settingLineSize)
+		{
+		    storage.shapeFun->line = new Line();
+		    storage.shapeFun->settingLineSize = true;
+		    storage.shapeFun->line->setPosition(ic->getMousePoint());
+		    storage.shapeFun->line->setZ(1);
+		    storage.shapeFun->line->setColor(Color::Random());
+		    frame->addToFrame(storage.shapeFun->line);
+		}
 	    }
 
 	}
@@ -284,9 +295,17 @@ void ProcessController::shapeFunSafe()
 
 	    storage.shapeFun->circle->setRadius(radius);
 	    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
+	} else if (storage.shapeFun->settingLineSize)
+	{
+	    storage.shapeFun->line->setPosition2(ic->getMousePoint());
 	} else if (ic->getPhysicalButtonStatus(KeyTab, ButtonDown))
 	{
-	    storage.shapeFun->circleMode = !storage.shapeFun->circleMode;
+	    if (storage.shapeFun->mode == RectangleMode)
+		storage.shapeFun->mode = CircleMode;
+	    else if (storage.shapeFun->mode == CircleMode)
+		storage.shapeFun->mode = LineMode;
+	    else if (storage.shapeFun->mode == LineMode)
+		storage.shapeFun->mode = RectangleMode;
 	}
     }
 }

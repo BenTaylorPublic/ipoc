@@ -10,6 +10,7 @@
 #include "OnscreenButton.h"
 #include "Rectangle.h"
 #include "Circle.h"
+#include "Line.h"
 
 enum ProgramState {
     FirstLoad, ButtonTesting, ShapeFun, Exiting
@@ -40,18 +41,25 @@ struct StorageButtonTesting {
     OnscreenButton btnToggleWindowMode;
 };
 
+enum shapeFunMode {
+    RectangleMode, CircleMode, LineMode
+};
+
 struct StorageShapeFun {
     Rectangle* rectangle;
     std::vector<Rectangle*> rectangles;
     bool settingRectangleSize;
-    
+
     Circle* circle;
     std::vector<Circle*> circles;
     bool settingCircleSize;
     Point2D circleCenter;
-    
-    bool circleMode; //True for rectangle mode
-    
+
+    Line* line;
+    bool settingLineSize;
+
+    shapeFunMode mode;
+
     OnscreenButton btnClear;
 };
 
@@ -67,5 +75,5 @@ public:
     StorageGlobal* global;
     StorageButtonTesting* buttonTesting;
     StorageShapeFun* shapeFun;
-    
+
 };
