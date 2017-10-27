@@ -221,6 +221,22 @@ void ProcessController::shapeFunSafe()
 	    delete it;
 	}
 	storage.shapeFun->circles.clear();
+
+	//Lines
+	if (storage.shapeFun->line != nullptr)
+	{
+	    frame->removeFromFrame(storage.shapeFun->line);
+	    delete storage.shapeFun->line;
+	    storage.shapeFun->line = nullptr;
+	    storage.shapeFun->settingLineSize = false;
+	}
+
+	for (Line* it : storage.shapeFun->lines)
+	{
+	    frame->removeFromFrame(it);
+	    delete it;
+	}
+	storage.shapeFun->lines.clear();
     } else
     {
 	if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
@@ -279,6 +295,12 @@ void ProcessController::shapeFunSafe()
 		    storage.shapeFun->line->setZ(1);
 		    storage.shapeFun->line->setColor(Color::Random());
 		    frame->addToFrame(storage.shapeFun->line);
+		} else
+		{
+		    storage.shapeFun->line->setPosition2(ic->getMousePoint());
+		    storage.shapeFun->lines.push_back(storage.shapeFun->line);
+		    storage.shapeFun->settingLineSize = false;
+		    storage.shapeFun->line = nullptr;
 		}
 	    }
 
@@ -286,17 +308,18 @@ void ProcessController::shapeFunSafe()
 
 	if (storage.shapeFun->settingRectangleSize)
 	{
-	    //set corner two, not permenantly
+	    //set corner two, not permanently
 	    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
 	} else if (storage.shapeFun->settingCircleSize)
 	{
-	    //set radius, not permenantly
+	    //set radius, not permanently
 	    int radius = storage.shapeFun->circleCenter.distanceTo(ic->getMousePoint());
 
 	    storage.shapeFun->circle->setRadius(radius);
 	    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
 	} else if (storage.shapeFun->settingLineSize)
 	{
+	    //set point 2, not permanently
 	    storage.shapeFun->line->setPosition2(ic->getMousePoint());
 	} else if (ic->getPhysicalButtonStatus(KeyTab, ButtonDown))
 	{

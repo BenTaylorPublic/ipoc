@@ -20,15 +20,20 @@ void Line::draw(sf::RenderTarget& target)
 
 void Line::setPosition(const Point2D& newPoint)
 {
-    line[0] = sf::Vector2f(newPoint.x, newPoint.y);
+    line[0].position.x = newPoint.x;
+    line[0].position.y = newPoint.y;
 }
 
 void Line::setPosition2(const Point2D& newPoint)
 {
-    line[1] = sf::Vector2f(newPoint.x, newPoint.y);
+    line[1].position.x = newPoint.x;
+    line[1].position.y = newPoint.y;
 }
 
 void Line::setColor(const Color& color)
 {
-//    line.Color = sf::Color(color.r, color.g, color.b);
+    sf::Color newColor(color.r, color.g, color.b);
+
+    line[0].color = newColor;
+    line[1].color = newColor;
 }

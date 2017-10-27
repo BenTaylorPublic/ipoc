@@ -56,6 +56,7 @@ struct StorageShapeFun {
     Point2D circleCenter;
 
     Line* line;
+    std::vector<Line*> lines;
     bool settingLineSize;
 
     shapeFunMode mode;

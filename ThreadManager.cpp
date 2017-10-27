@@ -335,6 +335,12 @@ void ThreadManager::unloadShapeFun()
 	frame->removeFromFrame(storage->shapeFun->circle);
 	delete storage->shapeFun->circle;
     }
+    
+    if (storage->shapeFun->line != nullptr)
+    {
+	frame->removeFromFrame(storage->shapeFun->line);
+	delete storage->shapeFun->line;
+    }
 
     for (Rectangle* it : storage->shapeFun->rectangles)
     {
@@ -349,6 +355,13 @@ void ThreadManager::unloadShapeFun()
 	delete it;
     }
     storage->shapeFun->circles.clear();
+    
+    for (Line* it : storage->shapeFun->lines)
+    {
+	frame->removeFromFrame(it);
+	delete it;
+    }
+    storage->shapeFun->lines.clear();
 
     delete storage->shapeFun;
 
