@@ -14,12 +14,12 @@ Frame::~Frame()
 void Frame::IPOCLoad()
 {
     std::vector<Drawable*> toAdd;
-    for (unsigned int i = 0; i < Settings::maxZ; i++)
+    for (unsigned int i = 0; i < MAX_Z; i++)
     {
 	drawables.push_back(toAdd);
     }
 
-    for (unsigned int i = 1; i <= Settings::maxDrawables; i++)
+    for (unsigned int i = 1; i <= MAX_DRAWABLES; i++)
     {
 	frameIdsToGive.push(i);
     }

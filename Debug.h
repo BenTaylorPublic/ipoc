@@ -2,7 +2,6 @@
 #include <string>
 #include "MasterController.h"
 #include "TrackedClasses.h"
-#define PROCESS_THREAD_USAGE_DURATIONS_STORED 8
 
 /*
 Debug is a Static Helper
@@ -33,10 +32,9 @@ public:
     static void logLine(const std::string& input);
     static void logLineUnsigned(const unsigned int& input);
     static void logTimeStamp();
-    static void logLoopNumber(); 
+    static void logLoopNumber();
     static void logMemoryLeakInfo();
     static void logClassAmountInfo();
-    static void noteLoopTime(const unsigned int& loopDuration);
     static void crash(const unsigned int& crashId, const std::string& callFrom);
     /*
     Calls every object's getStatusString() method, and logs them immediately to the log file.
@@ -48,11 +46,8 @@ public:
     static void incrementLoopNumber(); //Increments the loop number. Used for logging and writing loop numbers from anwywhere in the program.
     static void IPOCLoad(MasterController* input); //Used to received a pointer tot he MasterController. This pointer will then be used to logStatusStrings(), when requested.
     static void setFilePath(std::string inputPath); //used to receive the file path from the Settings class.
-    static double processThreadUsagePercent;
 private:
     static unsigned int loopNumber; //Used for logging and writing loop numbers from anwywhere in the program.
-    static unsigned int processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED];
-    static unsigned int processThreadUsageIndex;
 
     /*
     A pointer the the MasterController.

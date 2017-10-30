@@ -1,4 +1,5 @@
 #include "Settings.h"
+#include "IPOCSettings.h"
 #include "Debug.h"
 #include <string>
 #include "FileManager.h"
@@ -14,24 +15,16 @@
 #endif 
 
 //All the defaults
-std::string Settings::ipocVersion = "0.7.1-dev";
 
 std::string Settings::imageFilePath = "default file path";
 std::string Settings::fontFilePath = "default file path";
-int Settings::loopsPerSecond = 1;
-int Settings::loopTimeInNanoseconds = 1;
 std::string Settings::filePath = "default file path";
 
 int Settings::screenWidth = 1;
 int Settings::screenHeight = 1;
-std::string Settings::screenTitle = "default screen title";
-unsigned int Settings::maxZ = 0;
-unsigned int Settings::maxDrawables = 0;
+std::string Settings::screenTitle = "default window title";
 std::string Settings::windowType = "windowed";
 bool Settings::hideCursor = true;
-bool Settings::logClassAmountInfo = false;
-
-bool Settings::debugMode = true;
 
 InputStatus Settings::inputStatus = Active;
 
@@ -51,24 +44,29 @@ void Settings::loadSettings()
 
     std::string settingsFilePath = filePath + "Settings.ini";
 
-    //Need a standard way to deal with windows stupid backslashes. This will do for now
-    imageFilePath = Conversions::replaceStringInString(filePath, "\\", "/");
-    fontFilePath = Conversions::replaceStringInString(filePath, "\\", "/");
 
+    Debug::newLog();
     std::vector<std::string> settingsFile = FileManager::readFile(settingsFilePath);
+    if (settingsFile.size() == 0)
+    {
+	//Settings.ini file doesn't exist, create a severe crash report
+	Debug::logLine("[CRASH] The IPOC framework was unable to find the Settings.ini file required to start.");
+	Debug::logLine("[CRASH] This is a severe issue, as IPOC cannot start.");
+	Debug::logLine("[CRASH] Ensure that Settings.ini is in the files directory.");
+	Debug::crash(107, "Settings.loadSettings()");
+    }
 
-    imageFilePath += getStringFromSettings(settingsFile, "image_file_path");
-    fontFilePath += getStringFromSettings(settingsFile, "font_file_path");
-    loopsPerSecond = getIntFromSettings(settingsFile, "loops_per_second");
-    loopTimeInNanoseconds = 1000000000 / loopsPerSecond;
+    imageFilePath = filePath + IMAGE_DIRECTORY;
+    fontFilePath = filePath + FONT_DIRECTORY;
+    //Need a standard way to deal with windows stupid backslashes. This will do for now
+    imageFilePath = Conversions::replaceStringInString(imageFilePath, "\\", "/");
+    fontFilePath = Conversions::replaceStringInString(fontFilePath, "\\", "/");
+
     screenWidth = getIntFromSettings(settingsFile, "screen_width");
     screenHeight = getIntFromSettings(settingsFile, "screen_height");
     screenTitle = getStringFromSettings(settingsFile, "screen_title");
-    maxZ = getIntFromSettings(settingsFile, "max_z");
-    maxDrawables = getIntFromSettings(settingsFile, "max_drawables");
     windowType = getStringFromSettings(settingsFile, "window_type");
     hideCursor = getBoolFromSettings(settingsFile, "hide_cursor");
-    logClassAmountInfo = getBoolFromSettings(settingsFile, "log_class_amount_info");
 }
 
 int Settings::getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString)

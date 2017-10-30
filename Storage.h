@@ -24,8 +24,6 @@ struct StorageGlobal {
     Font font1;
     std::vector<Texture*> textures;
     Text txtLoading;
-    Text txtProcessThreadUsage;
-    int counterForThreadUsage;
     Sprite sprCursor;
     OnscreenButton btnButtonTesting;
     OnscreenButton btnShapeFun;

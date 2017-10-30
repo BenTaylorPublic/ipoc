@@ -101,17 +101,6 @@ void ProcessController::global()
 	storage.state = Exiting;
 	storage.state2 = Loading;
     }
-
-
-    if (Settings::debugMode)
-    {
-	storage.global->counterForThreadUsage++;
-	if (storage.global->counterForThreadUsage == 16)
-	{
-	    storage.global->counterForThreadUsage = 0;
-	    storage.global->txtProcessThreadUsage.setText(std::to_string((int) Debug::processThreadUsagePercent) + "%");
-	}
-    }
 }
 
 void ProcessController::exiting()

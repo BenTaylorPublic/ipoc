@@ -1,4 +1,5 @@
 #include "MasterController.h"
+#include "IPOCSettings.h"
 #include "Settings.h"
 #include "Debug.h"
 #include "FileManager.h"
@@ -14,7 +15,7 @@ void MasterController::IPOCLoad()
 {
     //To seed random numbers across the whole application
     srand(time(NULL));
-    
+
     inputController = new InputController();
     processController = new ProcessController();
     outputController = new OutputController();
@@ -25,8 +26,7 @@ void MasterController::IPOCLoad()
     processThreadJoinable = false;
 
     Settings::loadSettings();
-    Debug::newLog();
-    Debug::logLine("[INFO] Launching IPOC V" + Settings::ipocVersion);
+    Debug::logLine("[INFO] Launching IPOC V" + std::string(IPOC_VERSION));
     Debug::logLine("[INFO] File path: " + Settings::filePath);
     Debug::logLine("[INFO] Loaded settings");
 
@@ -101,7 +101,7 @@ void MasterController::processLoop()
 {
     unsigned int loopNumber = 0;
     //Calculating loop time
-    std::chrono::nanoseconds nanosecondsPerLoop(1000000000 / Settings::loopsPerSecond);
+    std::chrono::nanoseconds nanosecondsPerLoop(LOOP_TIME_IN_NANOSECONDS);
     std::chrono::high_resolution_clock::time_point startOfLoopTime;
 
     //Initial writing to console
@@ -122,24 +122,19 @@ void MasterController::processLoop()
 	loopNumber++;
 
 	inputController->markStartOfLoop();
-	
-	processController->process(); //Executes all program specific code
-	
-	inputController->markEndOfLoop();
-	
-	frame->markAsDrawable();
 
-	if (Settings::debugMode)
-	{
-	    Debug::noteLoopTime((std::chrono::high_resolution_clock::now() - startOfLoopTime).count());
-	}
+	processController->process(); //Executes all program specific code
+
+	inputController->markEndOfLoop();
+
+	frame->markAsDrawable();
 
 	//Checks if the loop went overtime
 	if (std::chrono::high_resolution_clock::now() >= (startOfLoopTime + nanosecondsPerLoop))
 	{
 
 	    //If it did, log and write a warning
-	    Debug::writeLine("[WARN] Loop went over time frame " +std::to_string(loopNumber));
+	    Debug::writeLine("[WARN] Loop went over time frame " + std::to_string(loopNumber));
 	    Debug::log("[WARN] Overtime in loop ");
 	    Debug::logLoopNumber();
 	    Debug::log("\n");
@@ -177,7 +172,7 @@ void MasterController::exit()
     delete outputController;
     delete frame;
 
-    if (Settings::logClassAmountInfo)
+    if (LOG_CLASS_AMOUNT_INFO)
 	Debug::logClassAmountInfo(); //Log all info
     else
 	Debug::logMemoryLeakInfo(); //Only log if there was a leak

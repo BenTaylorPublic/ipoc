@@ -51,19 +51,12 @@ void ThreadManager::loadGlobal()
     frame->addToFrame(&storage->global->txtLoading);
     frame->markAsDrawable();
 
-    //Variables
-    storage->global->counterForThreadUsage = 0;
-
     //Textures
     storage->global->textures.push_back(new Texture("test texture", "default texture.png"));
     storage->global->textures.push_back(new Texture("circle texture", "mouse circle.png"));
     storage->global->textures.push_back(new Texture("button up texture", "button up.png"));
     storage->global->textures.push_back(new Texture("button down texture", "button down.png"));
     storage->global->textures.push_back(new Texture("cursor texture", "cursor.png"));
-
-    storage->global->txtProcessThreadUsage.setFont(storage->global->font1);
-    storage->global->txtProcessThreadUsage.setPosition(Point2D(1530, 5));
-    storage->global->txtProcessThreadUsage.setZ(1);
 
     //Sprites
     storage->global->sprCursor.setTexture(*storage->global->textures[4]);
@@ -99,8 +92,6 @@ void ThreadManager::loadGlobal()
     frame->addToFrame(&storage->global->sprCursor);
     frame->addToFrame(&storage->global->btnButtonTesting);
     frame->addToFrame(&storage->global->btnShapeFun);
-    if (Settings::debugMode)
-	frame->addToFrame(&storage->global->txtProcessThreadUsage);
 
     loadGlobalJoinable = true;
 }
@@ -122,7 +113,6 @@ void ThreadManager::unloadGlobalJoin()
 
 void ThreadManager::unloadGlobal()
 {
-    frame->removeFromFrame(&storage->global->txtProcessThreadUsage);
     frame->removeFromFrame(&storage->global->txtLoading);
     frame->removeFromFrame(&storage->global->sprCursor);
     frame->removeFromFrame(&storage->global->btnButtonTesting);
@@ -276,18 +266,18 @@ void ThreadManager::loadShapeFunJoin()
 void ThreadManager::loadShapeFun()
 {
     storage->shapeFun = new StorageShapeFun;
-    
+
     storage->shapeFun->rectangle = nullptr;
     storage->shapeFun->settingRectangleSize = false;
-    
+
     storage->shapeFun->circle = nullptr;
     storage->shapeFun->settingCircleSize = false;
-    
+
     storage->shapeFun->line = nullptr;
     storage->shapeFun->settingLineSize = false;
-    
+
     storage->shapeFun->mode = LineMode;
-    
+
     storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
     storage->shapeFun->btnClear.setZ(1);
     storage->shapeFun->btnClear.setPosition(Point2D(20, 140));
@@ -296,7 +286,7 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->btnClear.addToUp(new Text(storage->global->font1, "Clear"), Point2D(20, 30));
     storage->shapeFun->btnClear.addToDown(new Sprite(*storage->global->textures[3]));
     storage->shapeFun->btnClear.addToDown(new Text(storage->global->font1, "Clear"), Point2D(20, 37));
-    
+
     frame->addToFrame(&storage->shapeFun->btnClear);
     inputController->addOnscreenButton(&storage->shapeFun->btnClear);
 
@@ -323,19 +313,19 @@ void ThreadManager::unloadShapeFun()
 
     inputController->removeOnscreenButton(&storage->shapeFun->btnClear);
     frame->removeFromFrame(&storage->shapeFun->btnClear);
-    
+
     if (storage->shapeFun->rectangle != nullptr)
     {
 	frame->removeFromFrame(storage->shapeFun->rectangle);
 	delete storage->shapeFun->rectangle;
     }
-    
+
     if (storage->shapeFun->circle != nullptr)
     {
 	frame->removeFromFrame(storage->shapeFun->circle);
 	delete storage->shapeFun->circle;
     }
-    
+
     if (storage->shapeFun->line != nullptr)
     {
 	frame->removeFromFrame(storage->shapeFun->line);
@@ -348,14 +338,14 @@ void ThreadManager::unloadShapeFun()
 	delete it;
     }
     storage->shapeFun->rectangles.clear();
-    
+
     for (Circle* it : storage->shapeFun->circles)
     {
 	frame->removeFromFrame(it);
 	delete it;
     }
     storage->shapeFun->circles.clear();
-    
+
     for (Line* it : storage->shapeFun->lines)
     {
 	frame->removeFromFrame(it);

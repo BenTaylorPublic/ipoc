@@ -10,9 +10,6 @@
 unsigned int Debug::loopNumber = 0;
 MasterController* Debug::masterController = nullptr;
 std::string Debug::logPath = "blank";
-double Debug::processThreadUsagePercent = 0;
-unsigned int Debug::processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED] = {0};
-unsigned int Debug::processThreadUsageIndex = 0;
 
 unsigned int Debug::constructionAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
 unsigned int Debug::destructionAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
@@ -109,10 +106,6 @@ void Debug::incrementLoopNumber()
 
 void Debug::IPOCLoad(MasterController* input)
 {
-    for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
-    {
-	processThreadUsage[0] = 0;
-    }
     masterController = input;
 }
 
@@ -141,27 +134,6 @@ void Debug::notifyOfCopy(const int& classId)
     copyAmount[classId]++;
 }
 
-void Debug::noteLoopTime(const unsigned int& loopDuration)
-{
-    processThreadUsageIndex++;
-    if (processThreadUsageIndex == PROCESS_THREAD_USAGE_DURATIONS_STORED)
-	processThreadUsageIndex = 0;
-    processThreadUsage[processThreadUsageIndex] = loopDuration;
-
-
-
-    //Average the array
-    double sum = 0;
-
-    for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
-    {
-	sum += processThreadUsage[i];
-    }
-
-    processThreadUsagePercent = (sum * 100) / (PROCESS_THREAD_USAGE_DURATIONS_STORED * Settings::loopTimeInNanoseconds);
-
-}
-
 void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
 {
     writeLine("[CRASH] Program crashed. Crash ID " + std::to_string(crashId));
@@ -178,6 +150,7 @@ void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
      * 104: Settings.getIntFromSettings()
      * 105: Settings.getStringFromSettings()
      * 106: Settings.getBoolFromSettings() 
+     * 107: Settings.loadSettings()
      */
 
 }
