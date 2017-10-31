@@ -1,9 +1,7 @@
 #pragma once
 #include <string>
 #include "MasterController.h"
-
-#define AMOUNT_OF_CLASSES 20
-#define PROCESS_THREAD_USAGE_DURATIONS_STORED 8
+#include "TrackedClasses.h"
 
 /*
 Debug is a Static Helper
@@ -19,18 +17,24 @@ public:
     static void notifyOfConstruction(const int& classId); //for memory leak monitoring
     static void notifyOfDestruction(const int& classId); //for memory leak monitoring
     static void notifyOfCopy(const int& classId); //for memory leak monitoring
-    static void write(const int& input); //Writes to the console. You need to provide your own "\n".
-    static void write(const std::string& input); //Writes to the console. You need to provide your own "\n".
-    static void writeLoopNumber(); //Writes to the loop number to the console. You need to provide your own "\n".
+    static void write(const int& input);
+    static void write(const std::string& input);
+    static void writeUnsigned(const unsigned int& input);
+    static void writeLine(const int& input);
+    static void writeLine(const std::string& input);
+    static void writeLineUnsigned(const unsigned int& input);
+    static void writeLoopNumber();
     static void newLog(); //Clears the log file
-    static void log(const int& input); //Adds the input to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
-    static void log(const std::string& input); //Adds the input to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
+    static void log(const int& input);
+    static void log(const std::string& input);
     static void logUnsigned(const unsigned int& input);
-    static void logTimeStamp(); //Adds the time stamp to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
-    static void logLoopNumber(); //Adds the loop to the toLog variable. Once you're happy with the line, you need to use Debug::commitLogLine() to log it.
+    static void logLine(const int& input);
+    static void logLine(const std::string& input);
+    static void logLineUnsigned(const unsigned int& input);
+    static void logTimeStamp();
+    static void logLoopNumber();
     static void logMemoryLeakInfo();
     static void logClassAmountInfo();
-    static void noteLoopTime(const unsigned int& loopDuration);
     static void crash(const unsigned int& crashId, const std::string& callFrom);
     /*
     Calls every object's getStatusString() method, and logs them immediately to the log file.
@@ -42,11 +46,8 @@ public:
     static void incrementLoopNumber(); //Increments the loop number. Used for logging and writing loop numbers from anwywhere in the program.
     static void IPOCLoad(MasterController* input); //Used to received a pointer tot he MasterController. This pointer will then be used to logStatusStrings(), when requested.
     static void setFilePath(std::string inputPath); //used to receive the file path from the Settings class.
-    static double processThreadUsagePercent;
 private:
     static unsigned int loopNumber; //Used for logging and writing loop numbers from anwywhere in the program.
-    static unsigned int processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED];
-    static unsigned int processThreadUsageIndex;
 
     /*
     A pointer the the MasterController.
@@ -55,8 +56,8 @@ private:
     This pointer is used by Debug::logStatusStrings()
      */
     static MasterController* masterController;
-    static unsigned int constructionAmount[AMOUNT_OF_CLASSES];
-    static unsigned int destructionAmount[AMOUNT_OF_CLASSES];
-    static unsigned int copyAmount[AMOUNT_OF_CLASSES];
+    static unsigned int constructionAmount[AMOUNT_OF_TRACKED_CLASSES];
+    static unsigned int destructionAmount[AMOUNT_OF_TRACKED_CLASSES];
+    static unsigned int copyAmount[AMOUNT_OF_TRACKED_CLASSES];
     static std::string logPath; //The filepath of the DebugLog.txt file.
 };

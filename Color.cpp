@@ -5,14 +5,14 @@ Color::Color(const int& inputR, const int& inputG, const int& inputB)
 {
     if (inputR > 255 || inputG > 255 || inputB > 255)
     {
-	Debug::log("[ERR] A color was made with R G or B over 255!\n");
+	Debug::logLine("[ERR] A color was made with R G or B over 255!");
     }
 
     r = inputR;
     g = inputG;
     b = inputB;
 
-    Debug::notifyOfConstruction(11);
+    Debug::notifyOfConstruction(5);
 }
 
 Color::Color()
@@ -20,15 +20,20 @@ Color::Color()
     r = 0;
     g = 0;
     b = 0;
-    Debug::notifyOfConstruction(11);
+    Debug::notifyOfConstruction(5);
 }
 
 Color::~Color()
 {
-    Debug::notifyOfDestruction(11);
+    Debug::notifyOfDestruction(5);
 }
 
-void Color::random()
+Color Color::Random()
+{
+    return Color(rand() % 256, rand() % 256, rand() % 256);
+}
+
+void Color::randomize()
 {
     r = rand() % 256;
     g = rand() % 256;

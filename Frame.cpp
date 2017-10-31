@@ -5,23 +5,21 @@
 Frame::Frame() : drawables(1, std::vector<Drawable*>(0))
 {
     isDrawableBool = false;
-    Debug::notifyOfConstruction(17);
 }
 
 Frame::~Frame()
 {
-    Debug::notifyOfDestruction(17);
 }
 
 void Frame::IPOCLoad()
 {
     std::vector<Drawable*> toAdd;
-    for (unsigned int i = 0; i < Settings::maxZ; i++)
+    for (unsigned int i = 0; i < MAX_Z; i++)
     {
 	drawables.push_back(toAdd);
     }
 
-    for (unsigned int i = 1; i <= Settings::maxDrawables; i++)
+    for (unsigned int i = 1; i <= MAX_DRAWABLES; i++)
     {
 	frameIdsToGive.push(i);
     }
@@ -43,8 +41,8 @@ void Frame::addToFrame(Drawable* drawable)
     drawables.at(drawable->getZ()).push_back(drawable);
     if (frameIdsToGive.size() == 0)
     {
-	Debug::log("[CRASH] frameIdsToGive is empty.\n");
-	Debug::log("[CRASH] There are too many drawables.\n");
+	Debug::logLine("[CRASH] frameIdsToGive is empty.");
+	Debug::logLine("[CRASH] There are too many drawables.");
 	Debug::crash(103, "IPOCFrame.addToFrame()");
     }
 

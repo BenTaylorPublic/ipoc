@@ -10,22 +10,39 @@
 unsigned int Debug::loopNumber = 0;
 MasterController* Debug::masterController = nullptr;
 std::string Debug::logPath = "blank";
-double Debug::processThreadUsagePercent = 0;
-unsigned int Debug::processThreadUsage[PROCESS_THREAD_USAGE_DURATIONS_STORED] = {0};
-unsigned int Debug::processThreadUsageIndex = 0;
 
-unsigned int Debug::constructionAmount[AMOUNT_OF_CLASSES] = {0};
-unsigned int Debug::destructionAmount[AMOUNT_OF_CLASSES] = {0};
-unsigned int Debug::copyAmount[AMOUNT_OF_CLASSES] = {0};
+unsigned int Debug::constructionAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
+unsigned int Debug::destructionAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
+unsigned int Debug::copyAmount[AMOUNT_OF_TRACKED_CLASSES] = {0};
 
 void Debug::write(const int& input)
 {
-    std::cout << input;
+    std::cout << std::to_string(input);
+}
+
+void Debug::writeUnsigned(const unsigned int& input)
+{
+    std::cout << std::to_string(input);
 }
 
 void Debug::write(const std::string& input)
 {
     std::cout << input;
+}
+
+void Debug::writeLine(const int& input)
+{
+    std::cout << std::to_string(input) + "\n";
+}
+
+void Debug::writeLineUnsigned(const unsigned int& input)
+{
+    std::cout << std::to_string(input) + "\n";
+}
+
+void Debug::writeLine(const std::string& input)
+{
+    std::cout << input + "\n";
 }
 
 void Debug::writeLoopNumber()
@@ -46,6 +63,21 @@ void Debug::log(const std::string& input)
 void Debug::logUnsigned(const unsigned int& input)
 {
     FileManager::writeToFile(logPath, std::to_string(input));
+}
+
+void Debug::logLine(const int& input)
+{
+    FileManager::writeToFile(logPath, std::to_string(input) + "\n");
+}
+
+void Debug::logLine(const std::string& input)
+{
+    FileManager::writeToFile(logPath, input + "\n");
+}
+
+void Debug::logLineUnsigned(const unsigned int& input)
+{
+    FileManager::writeToFile(logPath, std::to_string(input) + "\n");
 }
 
 void Debug::logLoopNumber()
@@ -74,10 +106,6 @@ void Debug::incrementLoopNumber()
 
 void Debug::IPOCLoad(MasterController* input)
 {
-    for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
-    {
-	processThreadUsage[0] = 0;
-    }
     masterController = input;
 }
 
@@ -88,7 +116,7 @@ void Debug::logStatusStrings()
 
 void Debug::setFilePath(std::string inputPath)
 {
-    logPath = inputPath + "DebugLog.txt";
+    logPath = inputPath + "DebugLog.log";
 }
 
 void Debug::notifyOfConstruction(const int& classId)
@@ -106,35 +134,14 @@ void Debug::notifyOfCopy(const int& classId)
     copyAmount[classId]++;
 }
 
-void Debug::noteLoopTime(const unsigned int& loopDuration)
-{
-    processThreadUsageIndex++;
-    if (processThreadUsageIndex == PROCESS_THREAD_USAGE_DURATIONS_STORED)
-	processThreadUsageIndex = 0;
-    processThreadUsage[processThreadUsageIndex] = loopDuration;
-    
-    
-    
-    //Average the array
-    double sum = 0;
-    
-    for (int i = 0; i < PROCESS_THREAD_USAGE_DURATIONS_STORED; i++)
-    {
-	sum += processThreadUsage[i];
-    }
-    
-    processThreadUsagePercent = (sum * 100) / (PROCESS_THREAD_USAGE_DURATIONS_STORED * Settings::loopTimeInNanoseconds);
-    
-}
-
 void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
 {
-    write("[CRASH] Program crashed. Crash ID " + std::to_string(crashId) + ".\n");
-    write("[CRASH] Crash called from " + callFrom + "\n");
-    write("[CRASH] Crashed on loop " + std::to_string(loopNumber));
-    log("[CRASH] Program crashed. Crash ID " + std::to_string(crashId) + ".\n");
-    log("[CRASH] Crash called from " + callFrom + "\n");
-    log("[CRASH] Crashed on loop " + std::to_string(loopNumber) + "\n");
+    writeLine("[CRASH] Program crashed. Crash ID " + std::to_string(crashId));
+    writeLine("[CRASH] Crash called from " + callFrom);
+    writeLine("[CRASH] Crashed on loop " + std::to_string(loopNumber));
+    logLine("[CRASH] Program crashed. Crash ID " + std::to_string(crashId));
+    logLine("[CRASH] Crash called from " + callFrom);
+    logLine("[CRASH] Crashed on loop " + std::to_string(loopNumber));
     exit(EXIT_FAILURE);
 
     /*
@@ -143,27 +150,26 @@ void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
      * 104: Settings.getIntFromSettings()
      * 105: Settings.getStringFromSettings()
      * 106: Settings.getBoolFromSettings() 
+     * 107: Settings.loadSettings()
      */
 
 }
 
 void Debug::logClassAmountInfo()
 {
-    log("[INFO] Logging class amount info\n");
+    logLine("[INFO] Logging class amount info");
 
-    log("[INFO] ClassID 0, our benevolent overlord is exempt from this blasphemous scrutiny.\n");
-
-    for (int i = 1; i < AMOUNT_OF_CLASSES; i++)
+    for (int i = 0; i < AMOUNT_OF_TRACKED_CLASSES; i++)
     {
 	log("[INFO] ");
 	if (constructionAmount[i] + copyAmount[i] != destructionAmount[i])
 	{
 	    log("MEMORY LEAK, ");
 	}
-	log("ClassID " + std::to_string(i) + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " + std::to_string(destructionAmount[i]) + ".\n");
+	logLine("Class " + TrackedClasses::classNames[i] + ", constructed " + std::to_string(constructionAmount[i]) + ", copied " + std::to_string(copyAmount[i]) + ", destructed " + std::to_string(destructionAmount[i]) + ".");
     }
 
-    log("[INFO] End of class amount info\n");
+    logLine("[INFO] End of class amount info");
 }
 
 void Debug::logMemoryLeakInfo()
@@ -188,11 +194,11 @@ void Debug::logMemoryLeakInfo()
 
     if (totalConstructionAmount + totalCopyAmount == totalDestructionAmount)
     {
-	log("[INFO] No memory leaks detected\n");
+	logLine("[INFO] No memory leaks detected");
     } else
     {
-	log("[WARNING] Memory leak detected.\n");
+	logLine("[WARNING] Memory leak detected.");
 	logClassAmountInfo();
-	log("[WARNING] End of memory leak information.\n");
+	logLine("[WARNING] End of memory leak information.");
     }
 }

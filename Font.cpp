@@ -2,31 +2,46 @@
 #include "Debug.h"
 #include "Settings.h"
 
+Font::Font()
+{
+    name = "";
+
+    Debug::notifyOfConstruction(0);
+}
+
 Font::Font(const std::string& inputName, const std::string& fileName)
 {
     name = inputName;
 
     if (!font.loadFromFile(Settings::fontFilePath + fileName))
     {
-	Debug::write("[ERROR] SFML font didn't load (");
-	Debug::write(name);
-	Debug::write(")\n");
-	Debug::log("[ERROR] SFML font didn't load (");
-	Debug::log(name);
-	Debug::log(")\n");
+	Debug::writeLine("[ERROR] SFML font didn't load (" + name + ")");
+	Debug::logLine("[ERROR] SFML font didn't load (" + name + ")");
     } else
     {
-	Debug::log("[INFO] Loaded font (");
-	Debug::log(name);
-	Debug::log(")\n");
+	Debug::logLine("[INFO] Loaded font (" + name + ")");
     }
 
-    Debug::notifyOfConstruction(13);
+    Debug::notifyOfConstruction(0);
 }
 
 Font::~Font()
 {
-    Debug::notifyOfDestruction(13);
+    Debug::notifyOfDestruction(0);
+}
+
+void Font::loadFont(const std::string& inputName, const std::string& fileName)
+{
+    name = inputName;
+
+    if (!font.loadFromFile(Settings::fontFilePath + fileName))
+    {
+	Debug::writeLine("[ERROR] SFML font didn't load (" + name + ")");
+	Debug::logLine("[ERROR] SFML font didn't load (" + name + ")");
+    } else
+    {
+	Debug::logLine("[INFO] Loaded font (" + name + ")");
+    }
 }
 
 sf::Font* Font::getFont()

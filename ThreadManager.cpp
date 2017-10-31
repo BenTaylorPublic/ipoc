@@ -1,22 +1,21 @@
 #include "ThreadManager.h"
 #include "Debug.h"
 #include "Settings.h"
+#include "Color.h"
 
 ThreadManager::ThreadManager()
 {
-    Debug::notifyOfConstruction(19);
 }
 
 ThreadManager::~ThreadManager()
 {
-    Debug::notifyOfDestruction(19);
 }
 
-void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager)
+void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController)
 {
     storage = inputStorage;
     frame = inputFrame;
-    onscreenButtonManager = inputOnscreenButtonManager;
+    inputController = inputInputController;
 }
 
 std::string ThreadManager::getStatusString()
@@ -24,156 +23,337 @@ std::string ThreadManager::getStatusString()
     return "N/A";
 }
 
-void ThreadManager::loadMainMenuStart()
+void ThreadManager::loadGlobalStart()
 {
-    loadMainMenuJoinable = false;
-    loadMainMenuThread = new std::thread(&ThreadManager::loadMainMenu, this);
-    Debug::log("[INFO] loadMainMenuThread started\n");
+    loadGlobalJoinable = false;
+    loadGlobalThread = new std::thread(&ThreadManager::loadGlobal, this);
+    Debug::logLine("[INFO] loadMainMenuThread started");
 }
 
-void ThreadManager::loadMainMenuJoin()
+void ThreadManager::loadGlobalJoin()
 {
-    loadMainMenuThread->join();
-    delete loadMainMenuThread;
-    Debug::log("[INFO] loadMainMenuThread joined\n");
+    loadGlobalThread->join();
+    delete loadGlobalThread;
+    loadGlobalJoinable = false;
+    Debug::logLine("[INFO] loadMainMenuThread joined");
 }
 
-void ThreadManager::loadMainMenu()
+void ThreadManager::loadGlobal()
 {
+    storage->global = new StorageGlobal;
+
     //Fonts
-    storage->font1 = new Font("test font", "courier new.ttf");
+    storage->global->font1.loadFont("test font", "courier new.ttf");
 
     //Loading screen
-    storage->txtLoading = new Text("loading text", *storage->font1, 0, "Loading...", Point2D(100, 700));
-    frame->addToFrame(storage->txtLoading);
+    storage->global->txtLoading.setFont(storage->global->font1);
+    storage->global->txtLoading.setPosition(Point2D(100, 700));
+    frame->addToFrame(&storage->global->txtLoading);
     frame->markAsDrawable();
 
-    storage->windowToggleMode = true;
-
     //Textures
-    storage->textures.push_back(new Texture("test texture", "default texture.png"));
-    storage->textures.push_back(new Texture("circle texture", "mouse circle.png"));
-    storage->textures.push_back(new Texture("button up texture", "button up.png"));
-    storage->textures.push_back(new Texture("button down texture", "button down.png"));
-    storage->textures.push_back(new Texture("cursor texture", "cursor.png"));
-
-    //Texts
-    storage->txtCounter = new Text("counter text", *storage->font1, 0, "0", Point2D(20, 20));
-    storage->txtProcessThreadUsage = new Text("process thread usage text", *storage->font1, 0, "0%", Point2D(500, 500));
-    storage->counter = 0;
+    storage->global->textures.push_back(new Texture("test texture", "default texture.png"));
+    storage->global->textures.push_back(new Texture("circle texture", "mouse circle.png"));
+    storage->global->textures.push_back(new Texture("button up texture", "button up.png"));
+    storage->global->textures.push_back(new Texture("button down texture", "button down.png"));
+    storage->global->textures.push_back(new Texture("cursor texture", "cursor.png"));
 
     //Sprites
-    storage->sprCursor = new Sprite("cursor sprite", *storage->textures[4], 2);
+    storage->global->sprCursor.setTexture(*storage->global->textures[4]);
+    storage->global->sprCursor.setZ(2);
 
     //Buttons
-    //Buttons - TriggerOnUp
-    storage->btnTriggerOnUp = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 100));
-    storage->btnTriggerOnUp->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnTriggerOnUp->addToUp(new Sprite("trigger on up up sprite", *storage->textures[2]));
-    storage->btnTriggerOnUp->addToUp(new Text("trigger on up up text", *storage->font1, "Trigger On Up"), Point2D(20, 30));
-    storage->btnTriggerOnUp->addToDown(new Sprite("trigger on up down sprite", *storage->textures[3]));
-    storage->btnTriggerOnUp->addToDown(new Text("trigger on up down text", *storage->font1, "Trigger On Up"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnUp);
+    //Buttons - ButtonTesting
+    storage->global->btnButtonTesting.setButtonTriggerType(TriggerOnUp);
+    storage->global->btnButtonTesting.setZ(1);
+    storage->global->btnButtonTesting.setPosition(Point2D(20, 10));
+    storage->global->btnButtonTesting.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->global->btnButtonTesting.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->global->btnButtonTesting.addToUp(new Text(storage->global->font1, "Buttons"), Point2D(20, 30));
+    storage->global->btnButtonTesting.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->global->btnButtonTesting.addToDown(new Text(storage->global->font1, "Buttons"), Point2D(20, 37));
+    inputController->addOnscreenButton(&storage->global->btnButtonTesting);
 
-    //Buttons - TriggerOnDown
-    storage->btnTriggerOnDown = new OnscreenButton(TriggerOnDown, 1, Point2D(20, 260));
-    storage->btnTriggerOnDown->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnTriggerOnDown->addToUp(new Sprite("trigger on down up sprite", *storage->textures[2]));
-    storage->btnTriggerOnDown->addToUp(new Text("trigger on down up text", *storage->font1, "Trigger On Down"), Point2D(20, 30));
-    storage->btnTriggerOnDown->addToDown(new Sprite("trigger on down down sprite", *storage->textures[3]));
-    storage->btnTriggerOnDown->addToDown(new Text("trigger on down down text", *storage->font1, "Trigger On Down"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnDown);
-
-    //Buttons - TriggerOnHold
-    storage->btnTriggerOnHold = new OnscreenButton(TriggerOnHold, 1, Point2D(20, 420));
-    storage->btnTriggerOnHold->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnTriggerOnHold->addToUp(new Sprite("trigger on hold up sprite", *storage->textures[2]));
-    storage->btnTriggerOnHold->addToUp(new Text("trigger on hold up text", *storage->font1, "Trigger On Hold"), Point2D(20, 30));
-    storage->btnTriggerOnHold->addToDown(new Sprite("trigger on hold down sprite", *storage->textures[3]));
-    storage->btnTriggerOnHold->addToDown(new Text("trigger on hold down text", *storage->font1, "Trigger On Hold"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnTriggerOnHold);
-
-    //Buttons - ToggleWindowMode
-    storage->btnToggleWindowMode = new OnscreenButton(TriggerOnUp, 1, Point2D(340, 100));
-    storage->btnToggleWindowMode->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnToggleWindowMode->addToUp(new Sprite("toggle window mode up sprite", *storage->textures[2]));
-    storage->btnToggleWindowMode->addToUp(new Text("toggle window mode up text", *storage->font1, "Toggle Window"), Point2D(20, 30));
-    storage->btnToggleWindowMode->addToDown(new Sprite("toggle window mode down sprite", *storage->textures[3]));
-    storage->btnToggleWindowMode->addToDown(new Text("toggle window mode down text", *storage->font1, "Toggle Window"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnToggleWindowMode);
-
-    //Buttons - Exit
-    storage->btnExit = new OnscreenButton(TriggerOnUp, 1, Point2D(20, 580));
-    storage->btnExit->setHitBox(Point2D(0, 0), Point2D(300, 100));
-    storage->btnExit->addToUp(new Sprite("exit button up sprite", *storage->textures[2]));
-    storage->btnExit->addToUp(new Text("exit button up text", *storage->font1, "Exit"), Point2D(20, 30));
-    storage->btnExit->addToDown(new Sprite("exit button down sprite", *storage->textures[3]));
-    storage->btnExit->addToDown(new Text("exit button down text", *storage->font1, "Exit"), Point2D(20, 37));
-    onscreenButtonManager->addOnscreenButton(storage->btnExit);
+    //Buttons - ShapeFun
+    storage->global->btnShapeFun.setButtonTriggerType(TriggerOnUp);
+    storage->global->btnShapeFun.setZ(1);
+    storage->global->btnShapeFun.setPosition(Point2D(340, 10));
+    storage->global->btnShapeFun.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->global->btnShapeFun.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->global->btnShapeFun.addToUp(new Text(storage->global->font1, "Shapes"), Point2D(20, 30));
+    storage->global->btnShapeFun.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->global->btnShapeFun.addToDown(new Text(storage->global->font1, "Shapes"), Point2D(20, 37));
+    inputController->addOnscreenButton(&storage->global->btnShapeFun);
 
     //Remove loading screen
-    frame->removeFromFrame(storage->txtLoading);
+    frame->removeFromFrame(&storage->global->txtLoading);
 
-    //Add to the frame
-    frame->addToFrame(storage->txtCounter);
-    frame->addToFrame(storage->sprCursor);
-    frame->addToFrame(storage->btnTriggerOnUp);
-    frame->addToFrame(storage->btnTriggerOnDown);
-    frame->addToFrame(storage->btnTriggerOnHold);
-    frame->addToFrame(storage->btnToggleWindowMode);
-    frame->addToFrame(storage->btnExit);
-    if (Settings::debugMode)
-	frame->addToFrame(storage->txtProcessThreadUsage);
-    storage->state = MainMenu;
+    //Adding to frame
+    frame->addToFrame(&storage->global->sprCursor);
+    frame->addToFrame(&storage->global->btnButtonTesting);
+    frame->addToFrame(&storage->global->btnShapeFun);
 
-    loadMainMenuJoinable = true;
+    loadGlobalJoinable = true;
 }
 
-void ThreadManager::exitCleanUpStart()
+void ThreadManager::unloadGlobalStart()
 {
-    exitCleanUpJoinable = false;
-    exitCleanUpThread = new std::thread(&ThreadManager::exitCleanUp, this);
-    Debug::log("[INFO] exitCleanUpThread started\n");
+    unloadGlobalJoinable = false;
+    unloadGlobalThread = new std::thread(&ThreadManager::unloadGlobal, this);
+    Debug::logLine("[INFO] unloadGlobalThread started");
 }
 
-void ThreadManager::exitCleanUpJoin()
+void ThreadManager::unloadGlobalJoin()
 {
-    exitCleanUpThread->join();
-    delete exitCleanUpThread;
-    Debug::log("[INFO] exitCleanUpThread joined\n");
+    unloadGlobalThread->join();
+    delete unloadGlobalThread;
+    unloadGlobalJoinable = false;
+    Debug::logLine("[INFO] unloadGlobalThread joined");
 }
 
-void ThreadManager::exitCleanUp()
+void ThreadManager::unloadGlobal()
 {
-    frame->removeFromFrame(storage->txtCounter);
-    frame->removeFromFrame(storage->btnTriggerOnHold);
-    frame->removeFromFrame(storage->btnTriggerOnDown);
-    frame->removeFromFrame(storage->btnTriggerOnUp);
-    frame->removeFromFrame(storage->btnToggleWindowMode);
-    frame->removeFromFrame(storage->btnExit);
-    frame->removeFromFrame(storage->txtProcessThreadUsage);
-    delete storage->txtCounter;
-    delete storage->btnTriggerOnDown;
-    delete storage->btnTriggerOnUp;
-    delete storage->btnTriggerOnHold;
-    delete storage->btnToggleWindowMode;
-    delete storage->btnExit;
-    delete storage->txtProcessThreadUsage;
+    frame->removeFromFrame(&storage->global->txtLoading);
+    frame->removeFromFrame(&storage->global->sprCursor);
+    frame->removeFromFrame(&storage->global->btnButtonTesting);
+    frame->removeFromFrame(&storage->global->btnShapeFun);
 
+    inputController->removeOnscreenButton(&storage->global->btnButtonTesting);
+    inputController->removeOnscreenButton(&storage->global->btnShapeFun);
 
-
-    frame->removeFromFrame(storage->txtLoading);
-    frame->removeFromFrame(storage->sprCursor);
-    delete storage->txtLoading;
-    delete storage->sprCursor;
-
-    for (Texture* it : storage->textures)
+    for (Texture* it : storage->global->textures)
     {
 	delete it;
     }
-    storage->textures.clear();
+    storage->global->textures.clear();
 
-    delete storage->font1;
+    delete storage->global;
 
-    exitCleanUpJoinable = true;
+    unloadGlobalJoinable = true;
+}
+
+void ThreadManager::loadButtonTestingStart()
+{
+    loadButtonTestingJoinable = false;
+    loadButtonTestingThread = new std::thread(&ThreadManager::loadButtonTesting, this);
+    Debug::logLine("[INFO] loadButtonTestingThread started");
+}
+
+void ThreadManager::loadButtonTestingJoin()
+{
+    loadButtonTestingThread->join();
+    delete loadButtonTestingThread;
+    loadButtonTestingJoinable = false;
+    Debug::logLine("[INFO] loadButtonTestingThread joined");
+}
+
+void ThreadManager::loadButtonTesting()
+{
+    storage->buttonTesting = new StorageButtonTesting;
+
+    //Variables
+    storage->buttonTesting->counter = 0;
+    storage->buttonTesting->windowToggleMode = true;
+
+    //Texts
+    storage->buttonTesting->txtCounter.setFont(storage->global->font1);
+    storage->buttonTesting->txtCounter.setZ(1);
+    storage->buttonTesting->txtCounter.setText("0");
+    storage->buttonTesting->txtCounter.setPosition(Point2D(400, 345));
+    //Buttons
+    //Buttons - TriggerOnUp
+    storage->buttonTesting->btnTriggerOnUp.setButtonTriggerType(TriggerOnUp);
+    storage->buttonTesting->btnTriggerOnUp.setZ(1);
+    storage->buttonTesting->btnTriggerOnUp.setPosition(Point2D(20, 140));
+    storage->buttonTesting->btnTriggerOnUp.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->buttonTesting->btnTriggerOnUp.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnTriggerOnUp.addToUp(new Text(storage->global->font1, "Trigger On Up"), Point2D(20, 30));
+    storage->buttonTesting->btnTriggerOnUp.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnTriggerOnUp.addToDown(new Text(storage->global->font1, "Trigger On Up"), Point2D(20, 37));
+    inputController->addOnscreenButton(&storage->buttonTesting->btnTriggerOnUp);
+
+    //Buttons - TriggerOnDown
+    storage->buttonTesting->btnTriggerOnDown.setButtonTriggerType(TriggerOnDown);
+    storage->buttonTesting->btnTriggerOnDown.setZ(1);
+    storage->buttonTesting->btnTriggerOnDown.setPosition(Point2D(20, 300));
+    storage->buttonTesting->btnTriggerOnDown.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->buttonTesting->btnTriggerOnDown.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnTriggerOnDown.addToUp(new Text(storage->global->font1, "Trigger On Down"), Point2D(20, 30));
+    storage->buttonTesting->btnTriggerOnDown.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnTriggerOnDown.addToDown(new Text(storage->global->font1, "Trigger On Down"), Point2D(20, 37));
+    inputController->addOnscreenButton(&storage->buttonTesting->btnTriggerOnDown);
+
+    //Buttons - TriggerOnHold
+    storage->buttonTesting->btnTriggerOnHold.setButtonTriggerType(TriggerOnHold);
+    storage->buttonTesting->btnTriggerOnHold.setZ(1);
+    storage->buttonTesting->btnTriggerOnHold.setPosition(Point2D(20, 460));
+    storage->buttonTesting->btnTriggerOnHold.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->buttonTesting->btnTriggerOnHold.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnTriggerOnHold.addToUp(new Text(storage->global->font1, "Trigger On Hold"), Point2D(20, 30));
+    storage->buttonTesting->btnTriggerOnHold.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnTriggerOnHold.addToDown(new Text(storage->global->font1, "Trigger On Hold"), Point2D(20, 37));
+    inputController->addOnscreenButton(&storage->buttonTesting->btnTriggerOnHold);
+
+    //Buttons - ToggleWindowMode
+    storage->buttonTesting->btnToggleWindowMode.setButtonTriggerType(TriggerOnUp);
+    storage->buttonTesting->btnToggleWindowMode.setZ(1);
+    storage->buttonTesting->btnToggleWindowMode.setPosition(Point2D(340, 140));
+    storage->buttonTesting->btnToggleWindowMode.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->buttonTesting->btnToggleWindowMode.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->buttonTesting->btnToggleWindowMode.addToUp(new Text(storage->global->font1, "Toggle Window"), Point2D(20, 30));
+    storage->buttonTesting->btnToggleWindowMode.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->buttonTesting->btnToggleWindowMode.addToDown(new Text(storage->global->font1, "Toggle Window"), Point2D(20, 37));
+    inputController->addOnscreenButton(&storage->buttonTesting->btnToggleWindowMode);
+
+    //Adding to frame
+    frame->addToFrame(&storage->buttonTesting->btnTriggerOnUp);
+    frame->addToFrame(&storage->buttonTesting->btnTriggerOnDown);
+    frame->addToFrame(&storage->buttonTesting->btnTriggerOnHold);
+    frame->addToFrame(&storage->buttonTesting->btnToggleWindowMode);
+    frame->addToFrame(&storage->buttonTesting->txtCounter);
+
+    loadButtonTestingJoinable = true;
+}
+
+void ThreadManager::unloadButtonTestingStart()
+{
+    unloadButtonTestingJoinable = false;
+    unloadButtonTestingThread = new std::thread(&ThreadManager::unloadButtonTesting, this);
+    Debug::logLine("[INFO] unloadButtonTestingThread started");
+}
+
+void ThreadManager::unloadButtonTestingJoin()
+{
+    unloadButtonTestingThread->join();
+    delete unloadButtonTestingThread;
+    unloadButtonTestingJoinable = false;
+    Debug::logLine("[INFO] unloadButtonTestingThread joined");
+}
+
+void ThreadManager::unloadButtonTesting()
+{
+    frame->removeFromFrame(&storage->buttonTesting->txtCounter);
+    frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnHold);
+    frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnDown);
+    frame->removeFromFrame(&storage->buttonTesting->btnTriggerOnUp);
+    frame->removeFromFrame(&storage->buttonTesting->btnToggleWindowMode);
+
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnDown);
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnHold);
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnTriggerOnUp);
+    inputController->removeOnscreenButton(&storage->buttonTesting->btnToggleWindowMode);
+
+    delete storage->buttonTesting;
+
+    unloadButtonTestingJoinable = true;
+}
+
+void ThreadManager::loadShapeFunStart()
+{
+    loadShapeFunJoinable = false;
+    loadShapeFunThread = new std::thread(&ThreadManager::loadShapeFun, this);
+    Debug::logLine("[INFO] loadShapeFunThread started");
+}
+
+void ThreadManager::loadShapeFunJoin()
+{
+    loadShapeFunThread->join();
+    delete loadShapeFunThread;
+    loadShapeFunJoinable = false;
+    Debug::logLine("[INFO] loadShapeFunThread joined");
+}
+
+void ThreadManager::loadShapeFun()
+{
+    storage->shapeFun = new StorageShapeFun;
+
+    storage->shapeFun->rectangle = nullptr;
+    storage->shapeFun->settingRectangleSize = false;
+
+    storage->shapeFun->circle = nullptr;
+    storage->shapeFun->settingCircleSize = false;
+
+    storage->shapeFun->line = nullptr;
+    storage->shapeFun->settingLineSize = false;
+
+    storage->shapeFun->mode = LineMode;
+
+    storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
+    storage->shapeFun->btnClear.setZ(1);
+    storage->shapeFun->btnClear.setPosition(Point2D(20, 140));
+    storage->shapeFun->btnClear.setHitBox(Point2D(0, 0), Point2D(300, 100));
+    storage->shapeFun->btnClear.addToUp(new Sprite(*storage->global->textures[2]));
+    storage->shapeFun->btnClear.addToUp(new Text(storage->global->font1, "Clear"), Point2D(20, 30));
+    storage->shapeFun->btnClear.addToDown(new Sprite(*storage->global->textures[3]));
+    storage->shapeFun->btnClear.addToDown(new Text(storage->global->font1, "Clear"), Point2D(20, 37));
+
+    frame->addToFrame(&storage->shapeFun->btnClear);
+    inputController->addOnscreenButton(&storage->shapeFun->btnClear);
+
+    loadShapeFunJoinable = true;
+}
+
+void ThreadManager::unloadShapeFunStart()
+{
+    unloadShapeFunJoinable = false;
+    unloadShapeFunThread = new std::thread(&ThreadManager::unloadShapeFun, this);
+    Debug::logLine("[INFO] unloadShapeFunThread started");
+}
+
+void ThreadManager::unloadShapeFunJoin()
+{
+    unloadShapeFunThread->join();
+    delete unloadShapeFunThread;
+    unloadShapeFunJoinable = false;
+    Debug::logLine("[INFO] unloadShapeFunThread joined");
+}
+
+void ThreadManager::unloadShapeFun()
+{
+
+    inputController->removeOnscreenButton(&storage->shapeFun->btnClear);
+    frame->removeFromFrame(&storage->shapeFun->btnClear);
+
+    if (storage->shapeFun->rectangle != nullptr)
+    {
+	frame->removeFromFrame(storage->shapeFun->rectangle);
+	delete storage->shapeFun->rectangle;
+    }
+
+    if (storage->shapeFun->circle != nullptr)
+    {
+	frame->removeFromFrame(storage->shapeFun->circle);
+	delete storage->shapeFun->circle;
+    }
+
+    if (storage->shapeFun->line != nullptr)
+    {
+	frame->removeFromFrame(storage->shapeFun->line);
+	delete storage->shapeFun->line;
+    }
+
+    for (Rectangle* it : storage->shapeFun->rectangles)
+    {
+	frame->removeFromFrame(it);
+	delete it;
+    }
+    storage->shapeFun->rectangles.clear();
+
+    for (Circle* it : storage->shapeFun->circles)
+    {
+	frame->removeFromFrame(it);
+	delete it;
+    }
+    storage->shapeFun->circles.clear();
+
+    for (Line* it : storage->shapeFun->lines)
+    {
+	frame->removeFromFrame(it);
+	delete it;
+    }
+    storage->shapeFun->lines.clear();
+
+    delete storage->shapeFun;
+
+    unloadShapeFunJoinable = true;
 }

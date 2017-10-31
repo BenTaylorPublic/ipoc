@@ -4,12 +4,14 @@
 
 InputController::InputController()
 {
-    Debug::notifyOfConstruction(1);
+    for (unsigned int i = 1; i <= 50; i++)
+    {
+	onscreenButtonIdsToGive.push(i);
+    }
 }
 
 InputController::~InputController()
 {
-    Debug::notifyOfDestruction(1);
 }
 
 void InputController::IPOCLoad()
@@ -129,7 +131,7 @@ void InputController::input()
     handlePhysicalButton(sf::Keyboard::End, 97);
 
     //Mouse
-    handlePhysicalButton(sf::Mouse::Left, 98);
+    handleLeftClick(98);
     handlePhysicalButton(sf::Mouse::Right, 99);
     handlePhysicalButton(sf::Mouse::Middle, 100);
 
@@ -147,12 +149,16 @@ void InputController::resetInputArrays()
 
 void InputController::markStartOfLoop()
 {
+
     physicalButtonDown.push(-1);
     physicalButtonUp.push(-1);
+
+    onscreenButtonToClearTrigger.push(nullptr);
 }
 
 void InputController::markEndOfLoop()
 {
+
     int currentIndex = -1;
 
     //Down to hold
@@ -184,6 +190,21 @@ void InputController::markEndOfLoop()
 	    physicalButtonStatusArray[currentIndex] = ButtonUntouched;
 	}
     } while (true);
+
+
+    while (onscreenButtonToClearTrigger.size() >= 1)
+    {
+	OnscreenButton* temp = onscreenButtonToClearTrigger.front();
+	if (temp == nullptr)
+	{
+	    onscreenButtonToClearTrigger.pop();
+	    return;
+	} else
+	{
+	    temp->clearTriggered();
+	    onscreenButtonToClearTrigger.pop();
+	}
+    }
 }
 
 bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton, const ButtonStatus& inputStatus)
@@ -243,6 +264,72 @@ void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton,
 	{
 	    physicalButtonUp.push(index);
 	    physicalButtonStatusArray[index] = ButtonUp;
+	}
+    }
+}
+
+void InputController::handleLeftClick(const int& index)
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+	//left click is down
+	if (physicalButtonStatusArray[index] == ButtonUntouched)
+	{
+
+	    for (OnscreenButton* it : onscreenButtons)
+	    {
+		if (it->mouseDown(mousePoint))
+		{
+		    onscreenButtonToClearTrigger.push(it);
+		}
+	    }
+
+	    physicalButtonDown.push(index);
+	    physicalButtonStatusArray[index] = ButtonDown;
+
+	} else if (physicalButtonStatusArray[index] == ButtonHold)
+	{
+	    for (OnscreenButton* it : onscreenButtons)
+	    {
+		it->mouseHold(mousePoint);
+	    }
+	}
+    } else
+    {
+	//left click is up
+	if (physicalButtonStatusArray[index] == ButtonHold)
+	{
+	    physicalButtonUp.push(index);
+	    physicalButtonStatusArray[index] = ButtonUp;
+
+	    for (OnscreenButton* it : onscreenButtons)
+	    {
+		if (it->mouseUp(mousePoint))
+		{
+		    onscreenButtonToClearTrigger.push(it);
+		}
+	    }
+	}
+    }
+}
+
+void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
+{
+    onscreenButtons.push_back(onscreenButtonToAdd);
+    onscreenButtonToAdd->setOnscreenButtonManagerId(onscreenButtonIdsToGive.front());
+    onscreenButtonIdsToGive.pop();
+}
+
+void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
+{
+    for (unsigned int i = 0; i < onscreenButtons.size(); i++)
+    {
+	if (onscreenButtons[i]->getOnscreenButtonManagerId() == onscreenButtonToRemove->getOnscreenButtonManagerId())
+	{
+	    onscreenButtons.erase(onscreenButtons.begin() + i);
+	    onscreenButtonIdsToGive.push(onscreenButtonToRemove->getOnscreenButtonManagerId());
+	    onscreenButtonToRemove->setOnscreenButtonManagerId(0);
+	    return;
 	}
     }
 }

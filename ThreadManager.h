@@ -5,36 +5,72 @@
 #include <atomic>
 #include "Storage.h"
 #include "Frame.h"
-#include "OnscreenButtonManager.h"
+#include "InputController.h"
 
 class ThreadManager {
 public:
     ThreadManager();
     ~ThreadManager();
-    void IPOCLoad(Storage* inputStorage, Frame* inputFrame, OnscreenButtonManager* inputOnscreenButtonManager);
+    void IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputController);
     std::string getStatusString();
 
-    //loadMainMenu
-    void loadMainMenuStart();
-    void loadMainMenuJoin();
-    std::atomic<bool> loadMainMenuJoinable;
+    //loadGlobal
+    void loadGlobalStart();
+    void loadGlobalJoin();
+    std::atomic<bool> loadGlobalJoinable{false};
 
-    //exitCleanUp
-    void exitCleanUpStart();
-    void exitCleanUpJoin();
-    std::atomic<bool> exitCleanUpJoinable;
+    //unloadGlobal
+    void unloadGlobalStart();
+    void unloadGlobalJoin();
+    std::atomic<bool> unloadGlobalJoinable{false};
+    
+    //loadButtonTesting
+    void loadButtonTestingStart();
+    void loadButtonTestingJoin();
+    std::atomic<bool> loadButtonTestingJoinable{false};
+    
+    //unloadButtonTesting
+    void unloadButtonTestingStart();
+    void unloadButtonTestingJoin();
+    std::atomic<bool> unloadButtonTestingJoinable{false};
+    
+    //loadShapeFun
+    void loadShapeFunStart();
+    void loadShapeFunJoin();
+    std::atomic<bool> loadShapeFunJoinable{false};
+    
+    //unloadoadShapeFun
+    void unloadShapeFunStart();
+    void unloadShapeFunJoin();
+    std::atomic<bool> unloadShapeFunJoinable{false};
 
 private:
     Storage* storage;
     Frame* frame;
-    OnscreenButtonManager* onscreenButtonManager;
+    InputController* inputController;
+    
+    //loadGlobal
+    void loadGlobal();
+    std::thread* loadGlobalThread;
 
-    //loadMainMenu
-    void loadMainMenu();
-    std::thread* loadMainMenuThread;
-
-    //exitCleanUp
-    void exitCleanUp();
-    std::thread* exitCleanUpThread;
+    //unloadGlobal
+    void unloadGlobal();
+    std::thread* unloadGlobalThread;
+    
+    //loadButtonTesting
+    void loadButtonTesting();
+    std::thread* loadButtonTestingThread;
+    
+    //unloadButtonTesting
+    void unloadButtonTesting();
+    std::thread* unloadButtonTestingThread;
+    
+    //loadShapeFun
+    void loadShapeFun();
+    std::thread* loadShapeFunThread;
+    
+    //unloadShapeFun
+    void unloadShapeFun();
+    std::thread* unloadShapeFunThread;
 
 };
