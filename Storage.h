@@ -11,6 +11,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Line.h"
+#include "AnimatedSprite.h"
 
 enum ProgramState {
     FirstLoad, ButtonTesting, ShapeFun, Exiting
@@ -74,5 +75,7 @@ public:
     StorageGlobal* global;
     StorageButtonTesting* buttonTesting;
     StorageShapeFun* shapeFun;
+    
+    AnimatedSprite* thing;
 
 };

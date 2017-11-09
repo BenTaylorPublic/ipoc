@@ -130,6 +130,8 @@ void ProcessController::exiting()
 
 void ProcessController::buttonTestingSafe()
 {
+    storage.thing->tick();
+
     if (storage.buttonTesting->btnTriggerOnDown.isTriggered() || storage.buttonTesting->btnTriggerOnUp.isTriggered() || storage.buttonTesting->btnTriggerOnHold.isTriggered())
     {
 	storage.buttonTesting->counter++;

@@ -88,6 +88,9 @@ void ThreadManager::loadGlobal()
     //Remove loading screen
     frame->removeFromFrame(&storage->global->txtLoading);
 
+    storage->thing = new AnimatedSprite();
+    storage->thing->setProcessEveryXLoops(64);
+
     //Adding to frame
     frame->addToFrame(&storage->global->sprCursor);
     frame->addToFrame(&storage->global->btnButtonTesting);
@@ -128,6 +131,8 @@ void ThreadManager::unloadGlobal()
     storage->global->textures.clear();
 
     delete storage->global;
+
+    delete storage->thing;
 
     unloadGlobalJoinable = true;
 }
