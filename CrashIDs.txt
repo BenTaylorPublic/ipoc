@@ -1,0 +1,6 @@
+CrashID summary
+103: Frame.addToFrame()
+104: Settings.getIntFromSettings()
+105: Settings.getStringFromSettings()
+106: Settings.getBoolFromSettings() 
+107: Settings.loadSettings()
