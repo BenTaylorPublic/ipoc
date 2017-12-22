@@ -4,3 +4,4 @@ CrashID summary
 105: Settings.getStringFromSettings()
 106: Settings.getBoolFromSettings() 
 107: Settings.loadSettings()
+108: DecimatedProcessHandler.addToHandler()

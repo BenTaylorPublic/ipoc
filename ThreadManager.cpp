@@ -11,11 +11,12 @@ ThreadManager::~ThreadManager()
 {
 }
 
-void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController)
+void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController, DecimatedProcessHandler* inputDecimatedProcessHandler)
 {
     storage = inputStorage;
     frame = inputFrame;
     inputController = inputInputController;
+    decimatedProcessHandler = inputDecimatedProcessHandler;
 }
 
 std::string ThreadManager::getStatusString()
@@ -90,6 +91,7 @@ void ThreadManager::loadGlobal()
 
     storage->thing = new AnimatedSprite();
     storage->thing->setProcessEveryXLoops(64);
+    decimatedProcessHandler->addToHandler(storage->thing);
 
     //Adding to frame
     frame->addToFrame(&storage->global->sprCursor);

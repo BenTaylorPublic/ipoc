@@ -8,6 +8,7 @@
 #define SCREEN_TITLE "IPOC Sample"
 #define MAX_Z 9
 #define MAX_DRAWABLES 5000
+#define MAX_DECIMATED_PROCESSES 500
 
 //For debugging
 #define LOG_CLASS_AMOUNT_INFO false

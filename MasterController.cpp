@@ -20,6 +20,7 @@ void MasterController::IPOCLoad()
     processController = new ProcessController();
     outputController = new OutputController();
     frame = new Frame();
+    decimatedProcessHandler = new DecimatedProcessHandler();
 
     threadsLoaded = false;
     inputThreadJoinable = false;
@@ -33,9 +34,10 @@ void MasterController::IPOCLoad()
     Debug::IPOCLoad(this);
 
     inputController->IPOCLoad();
-    processController->IPOCLoad(inputController, frame, outputController);
+    processController->IPOCLoad(inputController, frame, outputController, decimatedProcessHandler);
     outputController->IPOCLoad(frame);
     frame->IPOCLoad();
+    decimatedProcessHandler->IPOCLoad();
     TrackedClasses::loadClassNames();
 
     Debug::logLine("[INFO] Loaded controllers");
@@ -121,11 +123,15 @@ void MasterController::processLoop()
 	processController->incrementLoopNumber();
 	loopNumber++;
 
+	decimatedProcessHandler->markStartOfLoop();
+	
 	inputController->markStartOfLoop();
 
 	processController->process(); //Executes all program specific code
 
 	inputController->markEndOfLoop();
+	
+	decimatedProcessHandler->markEndOfLoop();
 
 	frame->markAsDrawable();
 

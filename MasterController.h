@@ -4,6 +4,7 @@
 #include "ProcessController.h"
 #include "OutputController.h"
 #include "Frame.h"
+#include "DecimatedProcessHandler.h"
 #include <thread>
 #include <atomic>
 
@@ -18,6 +19,7 @@ private:
     ProcessController* processController;
     OutputController* outputController;
     Frame* frame;
+    DecimatedProcessHandler* decimatedProcessHandler;
 
     std::thread inputThread;
     std::thread processThread;

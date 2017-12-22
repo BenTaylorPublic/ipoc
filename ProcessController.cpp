@@ -14,14 +14,15 @@ ProcessController::~ProcessController()
 {
 }
 
-void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr)
+void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandlerPtr)
 {
     ic = inputControllerPtr;
     oc = outputControllerPtr;
     exitProgram = false;
     loopNumber = 0;
     frame = inputFrame;
-    tm.IPOCLoad(&storage, frame, ic);
+    decimatedProcessHandler = decimatedProcessHandlerPtr;
+    tm.IPOCLoad(&storage, frame, ic, decimatedProcessHandler);
 }
 
 void ProcessController::load()
@@ -130,10 +131,10 @@ void ProcessController::exiting()
 
 void ProcessController::buttonTestingSafe()
 {
-    storage.thing->tick();
 
     if (storage.buttonTesting->btnTriggerOnDown.isTriggered() || storage.buttonTesting->btnTriggerOnUp.isTriggered() || storage.buttonTesting->btnTriggerOnHold.isTriggered())
     {
+	decimatedProcessHandler->removeFromHandler(storage.thing);
 	storage.buttonTesting->counter++;
 	storage.buttonTesting->txtCounter.setText(std::to_string(storage.buttonTesting->counter));
     }
