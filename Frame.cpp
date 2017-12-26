@@ -18,11 +18,6 @@ void Frame::IPOCLoad()
     {
 	drawables.push_back(toAdd);
     }
-
-    for (unsigned int i = 1; i <= MAX_DRAWABLES; i++)
-    {
-	frameIdsToGive.push(i);
-    }
 }
 
 std::string Frame::getStatusString()
@@ -39,15 +34,7 @@ void Frame::markStartOfDrawing()
 void Frame::addToFrame(Drawable* drawable)
 {
     drawables.at(drawable->getZ()).push_back(drawable);
-    if (frameIdsToGive.size() == 0)
-    {
-	Debug::logLine("[CRASH] frameIdsToGive is empty.");
-	Debug::logLine("[CRASH] There are too many drawables.");
-	Debug::crash(103, "IPOCFrame.addToFrame()");
-    }
-
-    drawable->setFrameId(frameIdsToGive.front());
-    frameIdsToGive.pop();
+    drawable->registerId();
 }
 
 void Frame::removeFromFrame(Drawable* drawable)
@@ -56,11 +43,10 @@ void Frame::removeFromFrame(Drawable* drawable)
 
     for (unsigned int i = 0; i < drawables.at(z).size(); i++)
     {
-	if (drawables.at(z).at(i)->getFrameId() == drawable->getFrameId())
+	if (drawables.at(z).at(i)->matches(drawable))
 	{
 	    drawables.at(z).erase(drawables.at(z).begin() + i);
-	    frameIdsToGive.push(drawable->getFrameId());
-	    drawable->setFrameId(0);
+	    drawable->clearId();
 	    return;
 	}
     }

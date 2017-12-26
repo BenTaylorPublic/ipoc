@@ -1,5 +1,7 @@
 CrashID summary
-103: Frame.addToFrame()
+101: REMOVED
+102: REMOVED
+103: REMOVED
 104: Settings.getIntFromSettings()
 105: Settings.getStringFromSettings()
 106: Settings.getBoolFromSettings() 

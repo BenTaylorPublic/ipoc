@@ -19,7 +19,6 @@ public:
     Drawable* getNextDrawable();
 private:
     std::vector<std::vector<Drawable*> > drawables;
-    std::queue<unsigned int> frameIdsToGive;
     bool isDrawableBool;
     int currentDrawingZ;
     int currentDrawingIndex;

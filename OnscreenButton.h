@@ -11,7 +11,7 @@ enum OnscreenButtonType {
     TriggerOnUp = 0, TriggerOnDown = 1, TriggerOnHold = 2
 };
 
-class OnscreenButton : public Drawable, public Identifiable {
+class OnscreenButton : public Drawable {
 public:
     OnscreenButton();
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType);
