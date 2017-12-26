@@ -4,13 +4,14 @@
 #include <string>
 #include <vector>
 #include "Drawable.h"
+#include "Identifiable.h"
 #include "Point2D.h"
 
 enum OnscreenButtonType {
     TriggerOnUp = 0, TriggerOnDown = 1, TriggerOnHold = 2
 };
 
-class OnscreenButton : public Drawable {
+class OnscreenButton : public Drawable, public Identifiable {
 public:
     OnscreenButton();
     OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType);
@@ -26,9 +27,7 @@ public:
     bool mouseDown(const Point2D& mousePoint);
     void mouseHold(const Point2D& mousePoint);
     bool mouseUp(const Point2D& mousePoint);
-    void setOnscreenButtonManagerId(const unsigned int& newId);
     void setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType);
-    unsigned int& getOnscreenButtonManagerId();
     void clearTriggered();
     bool isTriggered();
     void draw(sf::RenderTarget& target) override;
@@ -36,7 +35,6 @@ public:
 private:
     bool triggered = false;
     bool stateUp = true;
-    unsigned int onscreenButtonManagerId = 0;
     OnscreenButtonType onscreenButtonType;
     std::vector<Drawable*> stateUpDrawables;
     std::vector<Drawable*> stateDownDrawables;

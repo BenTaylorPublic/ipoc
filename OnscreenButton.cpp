@@ -175,19 +175,9 @@ bool OnscreenButton::mouseUp(const Point2D& mousePoint)
     return false;
 }
 
-void OnscreenButton::setOnscreenButtonManagerId(const unsigned int& newId)
-{
-    onscreenButtonManagerId = newId;
-}
-
 void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType)
 {
     onscreenButtonType = inputOnscreenButtonType;
-}
-
-unsigned int& OnscreenButton::getOnscreenButtonManagerId()
-{
-    return onscreenButtonManagerId;
 }
 
 bool OnscreenButton::isInside(const Point2D& point)

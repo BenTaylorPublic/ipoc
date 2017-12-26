@@ -16,7 +16,7 @@ Identifiable::~Identifiable()
 
 void Identifiable::registerId()
 {
-    if (id == 0)
+    if (id != 0)
     {
 	//Already has an id, so don't get a new one
 	return;

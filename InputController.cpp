@@ -4,10 +4,6 @@
 
 InputController::InputController()
 {
-    for (unsigned int i = 1; i <= 50; i++)
-    {
-	onscreenButtonIdsToGive.push(i);
-    }
 }
 
 InputController::~InputController()
@@ -316,19 +312,17 @@ void InputController::handleLeftClick(const int& index)
 void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
 {
     onscreenButtons.push_back(onscreenButtonToAdd);
-    onscreenButtonToAdd->setOnscreenButtonManagerId(onscreenButtonIdsToGive.front());
-    onscreenButtonIdsToGive.pop();
+    onscreenButtonToAdd->registerId();
 }
 
 void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
 {
     for (unsigned int i = 0; i < onscreenButtons.size(); i++)
     {
-	if (onscreenButtons[i]->getOnscreenButtonManagerId() == onscreenButtonToRemove->getOnscreenButtonManagerId())
+	if (onscreenButtonToRemove->matches(onscreenButtons[i]))
 	{
 	    onscreenButtons.erase(onscreenButtons.begin() + i);
-	    onscreenButtonIdsToGive.push(onscreenButtonToRemove->getOnscreenButtonManagerId());
-	    onscreenButtonToRemove->setOnscreenButtonManagerId(0);
+	    onscreenButtonToRemove->clearId();
 	    return;
 	}
     }

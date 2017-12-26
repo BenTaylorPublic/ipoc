@@ -63,7 +63,7 @@ void Point2D::random(const int& maxX, const int& maxY)
     y = rand() % maxY + 1;
 }
 
-std::string Point2D::getStatusString()
+std::string Point2D::getStatusString() const
 {
     return "(" + std::to_string((int) x) + "," + std::to_string((int) y) + ")";
 }

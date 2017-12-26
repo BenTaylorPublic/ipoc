@@ -32,7 +32,6 @@ private:
     std::queue<int> physicalButtonUp; //Used to mark ButtonUp to ButtonUntouched
 
     std::vector<OnscreenButton*> onscreenButtons;
-    std::queue<unsigned int> onscreenButtonIdsToGive;
     std::queue<OnscreenButton*> onscreenButtonToClearTrigger;
 
     Window* window; //Needed for mouse location relative to window

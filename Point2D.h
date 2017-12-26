@@ -25,6 +25,6 @@ public:
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
      */
-    std::string getStatusString();
+    std::string getStatusString() const;
 private:
 };
