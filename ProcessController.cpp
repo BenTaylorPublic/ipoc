@@ -16,28 +16,28 @@ ProcessController::~ProcessController()
 
 void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandlerPtr)
 {
-    ic = inputControllerPtr;
-    oc = outputControllerPtr;
+    inputController = inputControllerPtr;
+    outputController = outputControllerPtr;
     exitProgram = false;
     loopNumber = 0;
     frame = inputFrame;
     decimatedProcessHandler = decimatedProcessHandlerPtr;
-    tm.IPOCLoad(&storage, frame, ic, decimatedProcessHandler);
+    threadManager.IPOCLoad(&storage, frame, inputController, decimatedProcessHandler);
 }
 
 void ProcessController::load()
 {
     storage.state = FirstLoad;
 
-    tm.loadGlobalStart();
+    threadManager.loadGlobalStart();
 
-    while (!tm.loadGlobalJoinable);
-    tm.loadGlobalJoin();
+    while (!threadManager.loadGlobalJoinable);
+    threadManager.loadGlobalJoin();
 
-    tm.loadButtonTestingStart();
+    threadManager.loadButtonTestingStart();
 
-    while (!tm.loadButtonTestingJoinable);
-    tm.loadButtonTestingJoin();
+    while (!threadManager.loadButtonTestingJoinable);
+    threadManager.loadButtonTestingJoin();
     storage.state = ButtonTesting;
     storage.state2 = Safe;
 }
@@ -63,10 +63,10 @@ void ProcessController::process()
 	} else //NOT SAFE, LOADING
 	{
 
-	    if (tm.unloadShapeFunJoinable && tm.loadButtonTestingJoinable)
+	    if (threadManager.unloadShapeFunJoinable && threadManager.loadButtonTestingJoinable)
 	    {
-		tm.unloadShapeFunJoin();
-		tm.loadButtonTestingJoin();
+		threadManager.unloadShapeFunJoin();
+		threadManager.loadButtonTestingJoin();
 		storage.state2 = Safe;
 	    }
 	}
@@ -77,10 +77,10 @@ void ProcessController::process()
 	    shapeFunSafe();
 	} else //NOT SAFE, LOADING
 	{
-	    if (tm.unloadButtonTestingJoinable && tm.loadShapeFunJoinable)
+	    if (threadManager.unloadButtonTestingJoinable && threadManager.loadShapeFunJoinable)
 	    {
-		tm.unloadButtonTestingJoin();
-		tm.loadShapeFunJoin();
+		threadManager.unloadButtonTestingJoin();
+		threadManager.loadShapeFunJoin();
 		storage.state2 = Safe;
 	    }
 	}
@@ -89,15 +89,15 @@ void ProcessController::process()
 
 void ProcessController::global()
 {
-    storage.global->sprCursor.setPosition(ic->getMousePoint());
-    if (ic->getPhysicalButtonStatus(KeyEscape, ButtonDown))
+    storage.global->sprCursor.setPosition(inputController->getMousePoint());
+    if (inputController->getPhysicalButtonStatus(KeyEscape, ButtonDown))
     {
 	if (storage.state == ButtonTesting)
 	{
-	    tm.unloadButtonTestingStart();
+	    threadManager.unloadButtonTestingStart();
 	} else if (storage.state == ShapeFun)
 	{
-	    tm.unloadShapeFunStart();
+	    threadManager.unloadShapeFunStart();
 	}
 	storage.state = Exiting;
 	storage.state2 = Loading;
@@ -109,22 +109,22 @@ void ProcessController::exiting()
 
     if (storage.state2 == Loading)
     {
-	if (tm.unloadButtonTestingJoinable)
+	if (threadManager.unloadButtonTestingJoinable)
 	{
-	    tm.unloadButtonTestingJoin();
+	    threadManager.unloadButtonTestingJoin();
 	    storage.state2 = Safe;
-	} else if (tm.unloadShapeFunJoinable)
+	} else if (threadManager.unloadShapeFunJoinable)
 	{
-	    tm.unloadShapeFunJoin();
+	    threadManager.unloadShapeFunJoin();
 	    storage.state2 = Safe;
-	} else if (tm.unloadGlobalJoinable)
+	} else if (threadManager.unloadGlobalJoinable)
 	{
-	    tm.unloadGlobalJoin();
+	    threadManager.unloadGlobalJoin();
 	    exitProgram = true;
 	}
     } else
     {
-	tm.unloadGlobalStart();
+	threadManager.unloadGlobalStart();
 	storage.state2 = Loading;
     }
 }
@@ -160,13 +160,13 @@ void ProcessController::buttonTestingSafe()
 
 	    storage.buttonTesting->windowToggleMode = false;
 	}
-	oc->reloadGraphicsWindow();
+	outputController->reloadGraphicsWindow();
     }
 
     if (storage.global->btnShapeFun.isTriggered())
     {
-	tm.unloadButtonTestingStart();
-	tm.loadShapeFunStart();
+	threadManager.unloadButtonTestingStart();
+	threadManager.loadShapeFunStart();
 	storage.state = ShapeFun;
 	storage.state2 = Loading;
     }
@@ -176,8 +176,8 @@ void ProcessController::shapeFunSafe()
 {
     if (storage.global->btnButtonTesting.isTriggered())
     {
-	tm.unloadShapeFunStart();
-	tm.loadButtonTestingStart();
+	threadManager.unloadShapeFunStart();
+	threadManager.loadButtonTestingStart();
 	storage.state = ButtonTesting;
 	storage.state2 = Loading;
     } else if (storage.shapeFun->btnClear.isTriggered())
@@ -231,7 +231,7 @@ void ProcessController::shapeFunSafe()
 	storage.shapeFun->lines.clear();
     } else
     {
-	if (ic->getPhysicalButtonStatus(MouseLeft, ButtonDown))
+	if (inputController->getPhysicalButtonStatus(MouseLeft, ButtonDown))
 	{
 	    if (storage.shapeFun->mode == RectangleMode)
 	    {
@@ -240,7 +240,7 @@ void ProcessController::shapeFunSafe()
 		{
 		    storage.shapeFun->rectangle = new Rectangle();
 		    storage.shapeFun->settingRectangleSize = true;
-		    storage.shapeFun->rectangle->setCornerOne(ic->getMousePoint());
+		    storage.shapeFun->rectangle->setCornerOne(inputController->getMousePoint());
 		    storage.shapeFun->rectangle->setSize(0, 0);
 		    storage.shapeFun->rectangle->setZ(1);
 		    storage.shapeFun->rectangle->setColor(Color::Random());
@@ -249,7 +249,7 @@ void ProcessController::shapeFunSafe()
 		{
 		    storage.shapeFun->rectangles.push_back(storage.shapeFun->rectangle);
 		    storage.shapeFun->settingRectangleSize = false;
-		    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+		    storage.shapeFun->rectangle->setCornerTwo(inputController->getMousePoint());
 		    storage.shapeFun->rectangle = nullptr;
 		}
 	    } else if (storage.shapeFun->mode == CircleMode)
@@ -261,7 +261,7 @@ void ProcessController::shapeFunSafe()
 		    storage.shapeFun->settingCircleSize = true;
 		    storage.shapeFun->circle->setPointCount(50);
 		    storage.shapeFun->circle->setRadius(0);
-		    storage.shapeFun->circleCenter = ic->getMousePoint();
+		    storage.shapeFun->circleCenter = inputController->getMousePoint();
 		    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
 		    storage.shapeFun->circle->setZ(1);
 		    storage.shapeFun->circle->setColor(Color::Random());
@@ -269,7 +269,7 @@ void ProcessController::shapeFunSafe()
 
 		} else
 		{
-		    int radius = storage.shapeFun->circleCenter.distanceTo(ic->getMousePoint());
+		    int radius = storage.shapeFun->circleCenter.distanceTo(inputController->getMousePoint());
 
 		    storage.shapeFun->circle->setRadius(radius);
 		    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
@@ -283,13 +283,13 @@ void ProcessController::shapeFunSafe()
 		{
 		    storage.shapeFun->line = new Line();
 		    storage.shapeFun->settingLineSize = true;
-		    storage.shapeFun->line->setPosition(ic->getMousePoint());
+		    storage.shapeFun->line->setPosition(inputController->getMousePoint());
 		    storage.shapeFun->line->setZ(1);
 		    storage.shapeFun->line->setColor(Color::Random());
 		    frame->addToFrame(storage.shapeFun->line);
 		} else
 		{
-		    storage.shapeFun->line->setPosition2(ic->getMousePoint());
+		    storage.shapeFun->line->setPosition2(inputController->getMousePoint());
 		    storage.shapeFun->lines.push_back(storage.shapeFun->line);
 		    storage.shapeFun->settingLineSize = false;
 		    storage.shapeFun->line = nullptr;
@@ -301,19 +301,19 @@ void ProcessController::shapeFunSafe()
 	if (storage.shapeFun->settingRectangleSize)
 	{
 	    //set corner two, not permanently
-	    storage.shapeFun->rectangle->setCornerTwo(ic->getMousePoint());
+	    storage.shapeFun->rectangle->setCornerTwo(inputController->getMousePoint());
 	} else if (storage.shapeFun->settingCircleSize)
 	{
 	    //set radius, not permanently
-	    int radius = storage.shapeFun->circleCenter.distanceTo(ic->getMousePoint());
+	    int radius = storage.shapeFun->circleCenter.distanceTo(inputController->getMousePoint());
 
 	    storage.shapeFun->circle->setRadius(radius);
 	    storage.shapeFun->circle->setCenter(storage.shapeFun->circleCenter);
 	} else if (storage.shapeFun->settingLineSize)
 	{
 	    //set point 2, not permanently
-	    storage.shapeFun->line->setPosition2(ic->getMousePoint());
-	} else if (ic->getPhysicalButtonStatus(KeyTab, ButtonDown))
+	    storage.shapeFun->line->setPosition2(inputController->getMousePoint());
+	} else if (inputController->getPhysicalButtonStatus(KeyTab, ButtonDown))
 	{
 	    if (storage.shapeFun->mode == RectangleMode)
 		storage.shapeFun->mode = CircleMode;

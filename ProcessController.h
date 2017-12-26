@@ -26,9 +26,9 @@ private:
     Frame* frame;
     bool exitProgram;
     unsigned int loopNumber;
-    InputController* ic;
-    OutputController* oc;
+    InputController* inputController;
+    OutputController* outputController;
     DecimatedProcessHandler* decimatedProcessHandler;
     Storage storage;
-    ThreadManager tm;
+    ThreadManager threadManager;
 };
