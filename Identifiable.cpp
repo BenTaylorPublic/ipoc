@@ -11,6 +11,7 @@ Identifiable::Identifiable()
 
 Identifiable::~Identifiable()
 {
+    clearId();
 }
 
 void Identifiable::registerId()
@@ -35,8 +36,11 @@ void Identifiable::registerId()
 
 void Identifiable::clearId()
 {
-    Identifiable::idsToGive.push(id);
-    id = 0;
+    if (id != 0)
+    {
+	Identifiable::idsToGive.push(id);
+	id = 0;
+    }
 }
 
 bool Identifiable::matches(const Identifiable* identifiable) const
