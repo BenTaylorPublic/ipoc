@@ -11,7 +11,7 @@ class ProcessController {
 public:
     ProcessController();
     ~ProcessController();
-    void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandler);
+    void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandler, Storage* storagePtr);
     void load(); //Program specific, called just before the start of the loop. Load textures and such in here
     void process();
     bool checkForExitProgram();
@@ -29,6 +29,6 @@ private:
     InputController* inputController;
     OutputController* outputController;
     DecimatedProcessHandler* decimatedProcessHandler;
-    Storage storage;
+    Storage* storage;
     ThreadManager threadManager;
 };

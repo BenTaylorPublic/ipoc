@@ -7,6 +7,7 @@
 #include "DecimatedProcessHandler.h"
 #include <thread>
 #include <atomic>
+#include "Storage.h"
 
 class MasterController {
 public:
@@ -20,6 +21,7 @@ private:
     OutputController* outputController;
     Frame* frame;
     DecimatedProcessHandler* decimatedProcessHandler;
+    Storage* storage;
 
     std::thread inputThread;
     std::thread processThread;
