@@ -14,10 +14,6 @@ DecimatedProcessHandler::~DecimatedProcessHandler()
 
 void DecimatedProcessHandler::IPOCLoad()
 {
-    for (int i = 1; i <= MAX_DECIMATED_PROCESSES; i++)
-    {
-	decimatedProcessIdsToGive.push(i);
-    }
 }
 
 void DecimatedProcessHandler::markStartOfLoop()
@@ -47,15 +43,7 @@ void DecimatedProcessHandler::addToHandler(DecimatedProcess* decimatedProcessesT
 	decimatedProcessesPostLoop.push_back(decimatedProcessesToAdd);
     }
 
-    if (decimatedProcessIdsToGive.size() == 0)
-    {
-	Debug::logLine("[CRASH] decimatedProcessIdsToGive is empty.");
-	Debug::logLine("[CRASH] There are too many decimated processes.");
-	Debug::crash(108, "DecimatedProcessHandler.addToHandler()");
-    }
-
-    decimatedProcessesToAdd->setDecimatedProcessId(decimatedProcessIdsToGive.front());
-    decimatedProcessIdsToGive.pop();
+    decimatedProcessesToAdd->registerId();
 }
 
 void DecimatedProcessHandler::removeFromHandler(DecimatedProcess* decimatedProcessesToRemove)
@@ -64,22 +52,20 @@ void DecimatedProcessHandler::removeFromHandler(DecimatedProcess* decimatedProce
     {
 	for (int i = 0; i < decimatedProcessesPreLoop.size(); i++)
 	{
-	    if (decimatedProcessesToRemove->decimatedProcessIdMatches(decimatedProcessesPreLoop[i]->getDecimatedProcessId()))
+	    if (decimatedProcessesToRemove->matches(decimatedProcessesPreLoop[i]))
 	    {
 		decimatedProcessesPreLoop.erase(decimatedProcessesPreLoop.begin() + i);
-		decimatedProcessIdsToGive.push(decimatedProcessesToRemove->getDecimatedProcessId());
-		decimatedProcessesToRemove->setDecimatedProcessId(0);
+		decimatedProcessesToRemove->clearId();
 	    }
 	}
     } else
     {
 	for (int i = 0; i < decimatedProcessesPostLoop.size(); i++)
 	{
-	    if (decimatedProcessesToRemove->decimatedProcessIdMatches(decimatedProcessesPostLoop[i]->getDecimatedProcessId()))
+	    if (decimatedProcessesToRemove->matches(decimatedProcessesPostLoop[i]))
 	    {
 		decimatedProcessesPostLoop.erase(decimatedProcessesPostLoop.begin() + i);
-		decimatedProcessIdsToGive.push(decimatedProcessesToRemove->getDecimatedProcessId());
-		decimatedProcessesToRemove->setDecimatedProcessId(0);
+		decimatedProcessesToRemove->clearId();
 	    }
 	}
     }

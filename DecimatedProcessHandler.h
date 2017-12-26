@@ -15,5 +15,4 @@ public:
 private:
     std::vector<DecimatedProcess*> decimatedProcessesPreLoop;
     std::vector<DecimatedProcess*> decimatedProcessesPostLoop;
-    std::queue<int> decimatedProcessIdsToGive;
 };
