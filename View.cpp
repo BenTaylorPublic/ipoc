@@ -16,7 +16,7 @@ View::~View()
 void View::IPOCLoad()
 {
     std::vector<Drawable*> toAdd;
-    for (unsigned int i = 0; i < MAX_Z; i++)
+    for (unsigned int i = 0; i < HIGHEST_Z_INDEX; i++)
     {
 	drawables.push_back(toAdd);
     }

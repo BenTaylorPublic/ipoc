@@ -18,7 +18,7 @@ Frame::~Frame()
 
 void Frame::IPOCLoad()
 {
-    for (unsigned int i = 0; i < MAX_VIEWS; i++)
+    for (unsigned int i = 0; i < AMOUNT_OF_VIEWS; i++)
     {
 	views.push_back(new View());
 	views.at(i)->IPOCLoad();
@@ -38,7 +38,7 @@ void Frame::removeFromFrame(Drawable* drawable)
 void Frame::drawAll(sf::RenderTarget& target)
 {
 
-    for (unsigned int zIndex = 0; zIndex < MAX_Z; zIndex++)
+    for (unsigned int zIndex = 0; zIndex < HIGHEST_Z_INDEX; zIndex++)
     {
 	for (unsigned int viewIndex = 0; viewIndex < views.size(); viewIndex++)
 	{
