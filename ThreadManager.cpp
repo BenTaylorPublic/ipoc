@@ -92,6 +92,26 @@ void ThreadManager::loadGlobal()
     storage->thing = new AnimatedSprite();
     storage->thing->setProcessEveryXLoops(64);
     decimatedProcessHandler->addToHandler(storage->thing);
+    
+    storage->rec1 = new Rectangle();
+    storage->rec1->setCornerOne(Point2D(10, 10));
+    storage->rec1->setCornerTwo(Point2D(30, 30));
+    frame->addToFrame(storage->rec1);
+    
+    storage->rec2 = new Rectangle();
+    storage->rec2->setCornerOne(Point2D(1890, 10));
+    storage->rec2->setCornerTwo(Point2D(1910, 30));
+    frame->addToFrame(storage->rec2);
+    
+    storage->rec3 = new Rectangle();
+    storage->rec3->setCornerOne(Point2D(10, 1050));
+    storage->rec3->setCornerTwo(Point2D(30, 1070));
+    frame->addToFrame(storage->rec3);
+    
+    storage->rec4 = new Rectangle();
+    storage->rec4->setCornerOne(Point2D(1890, 1050));
+    storage->rec4->setCornerTwo(Point2D(1910, 1070));
+    frame->addToFrame(storage->rec4);
 
     //Adding to frame
     frame->addToFrame(&storage->global->sprCursor);
@@ -134,7 +154,20 @@ void ThreadManager::unloadGlobal()
 
     delete storage->global;
 
+    decimatedProcessHandler->removeFromHandler(storage->thing);
     delete storage->thing;
+    
+    frame->removeFromFrame(storage->rec1);
+    delete storage->rec1;
+    
+    frame->removeFromFrame(storage->rec2);
+    delete storage->rec2;
+    
+    frame->removeFromFrame(storage->rec3);
+    delete storage->rec3;
+    
+    frame->removeFromFrame(storage->rec4);
+    delete storage->rec4;
 
     unloadGlobalJoinable = true;
 }

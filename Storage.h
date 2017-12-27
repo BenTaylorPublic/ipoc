@@ -77,5 +77,8 @@ public:
     StorageShapeFun* shapeFun;
     
     AnimatedSprite* thing;
-
+    Rectangle* rec1;
+    Rectangle* rec2;
+    Rectangle* rec3;
+    Rectangle* rec4;
 };
