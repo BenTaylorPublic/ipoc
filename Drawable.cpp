@@ -13,10 +13,10 @@ Drawable::~Drawable()
 
 void Drawable::setZ(const unsigned int& inputZ)
 {
-    z = inputZ;
+    zIndex = inputZ;
 }
 
 int Drawable::getZ() const
 {
-    return z;
+    return zIndex;
 }

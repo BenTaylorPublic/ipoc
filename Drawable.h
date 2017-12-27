@@ -13,5 +13,7 @@ public:
     virtual void draw(sf::RenderTarget& target) const = 0;
     virtual void setPosition(const Point2D& newPoint) = 0;
 private:
-    int z = 0;
+    unsigned int zIndex = 0;
+    unsigned int viewIndex = 0;
+    
 };
