@@ -53,13 +53,7 @@ void Window::openWindow(const int& inputWindowXSize, const int& inputWindowYSize
 
 void Window::drawFrame(Frame* frame)
 {
-    frame->markStartOfDrawing();
-    const Drawable* drawable = frame->getNextDrawable();
-    while (drawable != nullptr)
-    {
-	drawable->draw(window);
-	drawable = frame->getNextDrawable();
-    }
+    frame->drawAll(window);
 }
 
 void Window::renderWindow()

@@ -4,7 +4,7 @@
 
 Rectangle::Rectangle()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(8);
 }
 

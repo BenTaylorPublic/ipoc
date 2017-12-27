@@ -4,14 +4,14 @@
 
 Text::Text()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setString("SAMPLE TEXT");
     Debug::notifyOfConstruction(2);
 }
 
 Text::Text(Font& inputFont)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
     Debug::notifyOfConstruction(2);
@@ -19,7 +19,7 @@ Text::Text(Font& inputFont)
 
 Text::Text(Font& inputFont, const std::string& inputString)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     Debug::notifyOfConstruction(2);
@@ -29,7 +29,7 @@ Text::Text(Font& inputFont, const unsigned int& inputZ, const std::string& input
 {
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
@@ -37,13 +37,13 @@ Text::Text(Font& inputFont, const unsigned int& inputZ)
 {
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
 Text::Text(Font& inputFont, const std::string& inputString, const Point2D& point)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     setPosition(point);
@@ -55,7 +55,7 @@ Text::Text(Font& inputFont, const unsigned int& inputZ, const std::string& input
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     setPosition(point);
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
@@ -64,7 +64,7 @@ Text::Text(Font& inputFont, const unsigned int& inputZ, const Point2D& point)
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
     setPosition(point);
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 

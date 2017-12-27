@@ -4,7 +4,7 @@
 
 Circle::Circle()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(9);
 }
 

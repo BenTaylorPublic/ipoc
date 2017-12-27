@@ -2,24 +2,22 @@
 
 #include <string>
 #include <vector>
-#include <queue>
 #include "Drawable.h"
+#include "View.h"
+#include <SFML/Graphics.hpp>
 
 class Frame {
 public:
     Frame();
     ~Frame();
     void IPOCLoad();
-    void markStartOfDrawing();
     void markAsDrawable();
     bool isDrawable() const;
     void addToFrame(Drawable* drawable);
     void removeFromFrame(Drawable* drawable);
-    const Drawable* getNextDrawable();
+    void drawAll(sf::RenderTarget& target);
     std::string getStatusString() const;
 private:
-    std::vector<std::vector<Drawable*> > drawables;
+    std::vector<View*> views;
     bool isDrawableBool;
-    int currentDrawingZ;
-    int currentDrawingIndex;
 };

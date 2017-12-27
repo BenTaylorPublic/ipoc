@@ -7,6 +7,7 @@
 #define LOOP_TIME_IN_NANOSECONDS 1000000000 / LOOPS_PER_SECOND
 #define SCREEN_TITLE "IPOC Sample"
 #define MAX_Z 9
+#define MAX_VIEWS 10
 
 //For debugging
 #define LOG_CLASS_AMOUNT_INFO false

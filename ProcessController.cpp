@@ -243,7 +243,7 @@ void ProcessController::shapeFunSafe()
 		    storage->shapeFun->settingRectangleSize = true;
 		    storage->shapeFun->rectangle->setCornerOne(inputController->getMousePoint());
 		    storage->shapeFun->rectangle->setSize(0, 0);
-		    storage->shapeFun->rectangle->setZ(1);
+		    storage->shapeFun->rectangle->setZIndex(1);
 		    storage->shapeFun->rectangle->setColor(Color::Random());
 		    frame->addToFrame(storage->shapeFun->rectangle);
 		} else
@@ -264,7 +264,7 @@ void ProcessController::shapeFunSafe()
 		    storage->shapeFun->circle->setRadius(0);
 		    storage->shapeFun->circleCenter = inputController->getMousePoint();
 		    storage->shapeFun->circle->setCenter(storage->shapeFun->circleCenter);
-		    storage->shapeFun->circle->setZ(1);
+		    storage->shapeFun->circle->setZIndex(1);
 		    storage->shapeFun->circle->setColor(Color::Random());
 		    frame->addToFrame(storage->shapeFun->circle);
 
@@ -285,7 +285,7 @@ void ProcessController::shapeFunSafe()
 		    storage->shapeFun->line = new Line();
 		    storage->shapeFun->settingLineSize = true;
 		    storage->shapeFun->line->setPosition(inputController->getMousePoint());
-		    storage->shapeFun->line->setZ(1);
+		    storage->shapeFun->line->setZIndex(1);
 		    storage->shapeFun->line->setColor(Color::Random());
 		    frame->addToFrame(storage->shapeFun->line);
 		} else

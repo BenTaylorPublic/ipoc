@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <queue>
 #include "DecimatedProcess.h"
 
 class DecimatedProcessHandler {

@@ -14,14 +14,14 @@ OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ)
 {
-    setZ(inputZ);
+    setZIndex(inputZ);
     onscreenButtonType = inputOnscreenButtonType;
     Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point)
 {
-    setZ(inputZ);
+    setZIndex(inputZ);
     setPosition(point);
     onscreenButtonType = inputOnscreenButtonType;
     Debug::notifyOfConstruction(6);

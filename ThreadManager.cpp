@@ -61,12 +61,12 @@ void ThreadManager::loadGlobal()
 
     //Sprites
     storage->global->sprCursor.setTexture(*storage->global->textures[4]);
-    storage->global->sprCursor.setZ(2);
+    storage->global->sprCursor.setZIndex(2);
 
     //Buttons
     //Buttons - ButtonTesting
     storage->global->btnButtonTesting.setButtonTriggerType(TriggerOnUp);
-    storage->global->btnButtonTesting.setZ(1);
+    storage->global->btnButtonTesting.setZIndex(1);
     storage->global->btnButtonTesting.setPosition(Point2D(20, 10));
     storage->global->btnButtonTesting.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->global->btnButtonTesting.addToUp(new Sprite(*storage->global->textures[2]));
@@ -77,7 +77,7 @@ void ThreadManager::loadGlobal()
 
     //Buttons - ShapeFun
     storage->global->btnShapeFun.setButtonTriggerType(TriggerOnUp);
-    storage->global->btnShapeFun.setZ(1);
+    storage->global->btnShapeFun.setZIndex(1);
     storage->global->btnShapeFun.setPosition(Point2D(340, 10));
     storage->global->btnShapeFun.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->global->btnShapeFun.addToUp(new Sprite(*storage->global->textures[2]));
@@ -164,13 +164,13 @@ void ThreadManager::loadButtonTesting()
 
     //Texts
     storage->buttonTesting->txtCounter.setFont(storage->global->font1);
-    storage->buttonTesting->txtCounter.setZ(1);
+    storage->buttonTesting->txtCounter.setZIndex(1);
     storage->buttonTesting->txtCounter.setText("0");
     storage->buttonTesting->txtCounter.setPosition(Point2D(400, 345));
     //Buttons
     //Buttons - TriggerOnUp
     storage->buttonTesting->btnTriggerOnUp.setButtonTriggerType(TriggerOnUp);
-    storage->buttonTesting->btnTriggerOnUp.setZ(1);
+    storage->buttonTesting->btnTriggerOnUp.setZIndex(1);
     storage->buttonTesting->btnTriggerOnUp.setPosition(Point2D(20, 140));
     storage->buttonTesting->btnTriggerOnUp.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonTesting->btnTriggerOnUp.addToUp(new Sprite(*storage->global->textures[2]));
@@ -181,7 +181,7 @@ void ThreadManager::loadButtonTesting()
 
     //Buttons - TriggerOnDown
     storage->buttonTesting->btnTriggerOnDown.setButtonTriggerType(TriggerOnDown);
-    storage->buttonTesting->btnTriggerOnDown.setZ(1);
+    storage->buttonTesting->btnTriggerOnDown.setZIndex(1);
     storage->buttonTesting->btnTriggerOnDown.setPosition(Point2D(20, 300));
     storage->buttonTesting->btnTriggerOnDown.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonTesting->btnTriggerOnDown.addToUp(new Sprite(*storage->global->textures[2]));
@@ -192,7 +192,7 @@ void ThreadManager::loadButtonTesting()
 
     //Buttons - TriggerOnHold
     storage->buttonTesting->btnTriggerOnHold.setButtonTriggerType(TriggerOnHold);
-    storage->buttonTesting->btnTriggerOnHold.setZ(1);
+    storage->buttonTesting->btnTriggerOnHold.setZIndex(1);
     storage->buttonTesting->btnTriggerOnHold.setPosition(Point2D(20, 460));
     storage->buttonTesting->btnTriggerOnHold.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonTesting->btnTriggerOnHold.addToUp(new Sprite(*storage->global->textures[2]));
@@ -203,7 +203,7 @@ void ThreadManager::loadButtonTesting()
 
     //Buttons - ToggleWindowMode
     storage->buttonTesting->btnToggleWindowMode.setButtonTriggerType(TriggerOnUp);
-    storage->buttonTesting->btnToggleWindowMode.setZ(1);
+    storage->buttonTesting->btnToggleWindowMode.setZIndex(1);
     storage->buttonTesting->btnToggleWindowMode.setPosition(Point2D(340, 140));
     storage->buttonTesting->btnToggleWindowMode.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->buttonTesting->btnToggleWindowMode.addToUp(new Sprite(*storage->global->textures[2]));
@@ -286,7 +286,7 @@ void ThreadManager::loadShapeFun()
     storage->shapeFun->mode = LineMode;
 
     storage->shapeFun->btnClear.setButtonTriggerType(TriggerOnUp);
-    storage->shapeFun->btnClear.setZ(1);
+    storage->shapeFun->btnClear.setZIndex(1);
     storage->shapeFun->btnClear.setPosition(Point2D(20, 140));
     storage->shapeFun->btnClear.setHitBox(Point2D(0, 0), Point2D(300, 100));
     storage->shapeFun->btnClear.addToUp(new Sprite(*storage->global->textures[2]));

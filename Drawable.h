@@ -8,8 +8,10 @@ class Drawable : public Identifiable {
 public:
     Drawable();
     virtual ~Drawable();
-    int getZ() const;
-    void setZ(const unsigned int& inputZ);
+    unsigned int getZIndex() const;
+    void setZIndex(const unsigned int& inputZIndex);
+    unsigned int getViewIndex() const;
+    void setViewIndex(const unsigned int& inputViewIndex);
     virtual void draw(sf::RenderTarget& target) const = 0;
     virtual void setPosition(const Point2D& newPoint) = 0;
 private:

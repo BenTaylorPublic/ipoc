@@ -4,20 +4,20 @@
 
 Sprite::Sprite()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(Texture& inputTexture)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     sprite.setTexture(*inputTexture.getTexture());
     Debug::notifyOfConstruction(3);
 }
 
 Sprite::Sprite(Texture& inputTexture, const unsigned int& inputZ)
 {
-    setZ(inputZ);
+    setZIndex(inputZ);
     sprite.setTexture(*inputTexture.getTexture());
     Debug::notifyOfConstruction(3);
 }

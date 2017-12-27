@@ -7,11 +7,13 @@ std::queue<unsigned int> Identifiable::idsToGive;
 Identifiable::Identifiable()
 {
     id = 0;
+    Debug::notifyOfConstruction(14);
 }
 
 Identifiable::~Identifiable()
 {
     clearId();
+    Debug::notifyOfDestruction(14);
 }
 
 void Identifiable::registerId()

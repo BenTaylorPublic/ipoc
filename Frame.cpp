@@ -2,70 +2,50 @@
 #include "Debug.h"
 #include "Settings.h"
 
-Frame::Frame() : drawables(1, std::vector<Drawable*>(0))
+Frame::Frame()
 {
     isDrawableBool = false;
 }
 
 Frame::~Frame()
 {
+    for (View* it : views)
+    {
+	delete it;
+    }
+    views.clear();
 }
 
 void Frame::IPOCLoad()
 {
-    std::vector<Drawable*> toAdd;
-    for (unsigned int i = 0; i < MAX_Z; i++)
+    for (unsigned int i = 0; i < MAX_VIEWS; i++)
     {
-	drawables.push_back(toAdd);
+	views.push_back(new View());
+	views.at(i)->IPOCLoad();
     }
-}
-
-void Frame::markStartOfDrawing()
-{
-    currentDrawingIndex = 0;
-    currentDrawingZ = 0;
 }
 
 void Frame::addToFrame(Drawable* drawable)
 {
-    drawables.at(drawable->getZ()).push_back(drawable);
-    drawable->registerId();
+    views.at(drawable->getViewIndex())->addDrawable(drawable);
 }
 
 void Frame::removeFromFrame(Drawable* drawable)
 {
-    int z = drawable->getZ();
-
-    for (unsigned int i = 0; i < drawables.at(z).size(); i++)
-    {
-	if (drawables.at(z).at(i)->matches(drawable))
-	{
-	    drawables.at(z).erase(drawables.at(z).begin() + i);
-	    drawable->clearId();
-	    return;
-	}
-    }
+    views.at(drawable->getViewIndex())->removeDrawable(drawable);
 }
 
-const Drawable* Frame::getNextDrawable()
+void Frame::drawAll(sf::RenderTarget& target)
 {
-    while (true)
+
+    for (unsigned int zIndex = 0; zIndex < MAX_Z; zIndex++)
     {
-	if (drawables.at(currentDrawingZ).size() > currentDrawingIndex)
+	for (unsigned int viewIndex = 0; viewIndex < views.size(); viewIndex++)
 	{
-	    currentDrawingIndex++;
-	    return drawables.at(currentDrawingZ).at(currentDrawingIndex - 1);
-	} else if (drawables.size() - 1 > currentDrawingZ)
-	{
-	    currentDrawingZ++;
-	    currentDrawingIndex = 0;
-	} else
-	{
-	    isDrawableBool = false; //End of the frame
-	    return nullptr;
+	    views.at(viewIndex)->drawAllAtZ(zIndex, target);
 	}
     }
-
+    isDrawableBool = false;
 }
 
 void Frame::markAsDrawable()
