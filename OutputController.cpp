@@ -56,7 +56,7 @@ void OutputController::output()
     window.renderWindow();
 }
 
-std::string OutputController::getStatusString()
+std::string OutputController::getStatusString() const
 {
     std::string result = "OutputController:\n";
 

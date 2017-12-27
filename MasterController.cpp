@@ -189,7 +189,7 @@ void MasterController::exit()
 
 }
 
-std::string MasterController::getStatusString()
+std::string MasterController::getStatusString() const
 {
     //Calling all objects it has a pointer too
     std::string result = "Master Controller:\n";

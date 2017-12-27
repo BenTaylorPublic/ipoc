@@ -13,7 +13,7 @@ Circle::~Circle()
     Debug::notifyOfDestruction(9);
 }
 
-void Circle::draw(sf::RenderTarget& target)
+void Circle::draw(sf::RenderTarget& target) const
 {
     target.draw(circle);
 }

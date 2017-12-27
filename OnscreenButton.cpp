@@ -86,12 +86,12 @@ void OnscreenButton::setHitBox(const Point2D& inputTopLeft, const Point2D& input
     hitBoxBottomRight = drawingPosition + inputBottomRight;
 }
 
-bool OnscreenButton::isTriggered()
+bool OnscreenButton::isTriggered() const
 {
     return triggered;
 }
 
-void OnscreenButton::draw(sf::RenderTarget& target)
+void OnscreenButton::draw(sf::RenderTarget& target) const
 {
     if (stateUp)
     {
@@ -180,7 +180,7 @@ void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscree
     onscreenButtonType = inputOnscreenButtonType;
 }
 
-bool OnscreenButton::isInside(const Point2D& point)
+bool OnscreenButton::isInside(const Point2D& point) const
 {
     if (point.x > hitBoxTopLeft.x && point.x < hitBoxBottomRight.x)
     {
@@ -197,7 +197,7 @@ void OnscreenButton::clearTriggered()
     triggered = false;
 }
 
-std::string OnscreenButton::getStatusString()
+std::string OnscreenButton::getStatusString() const
 {
     return "N/A";
 }

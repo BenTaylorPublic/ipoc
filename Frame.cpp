@@ -20,11 +20,6 @@ void Frame::IPOCLoad()
     }
 }
 
-std::string Frame::getStatusString()
-{
-    return "N/A";
-}
-
 void Frame::markStartOfDrawing()
 {
     currentDrawingIndex = 0;
@@ -52,7 +47,7 @@ void Frame::removeFromFrame(Drawable* drawable)
     }
 }
 
-Drawable* Frame::getNextDrawable()
+const Drawable* Frame::getNextDrawable()
 {
     while (true)
     {
@@ -78,8 +73,13 @@ void Frame::markAsDrawable()
     isDrawableBool = true;
 }
 
-bool Frame::isDrawable()
+bool Frame::isDrawable() const
 {
     return isDrawableBool;
+}
+
+std::string Frame::getStatusString() const
+{
+    return "N/A";
 }
 

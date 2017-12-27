@@ -29,9 +29,9 @@ public:
     bool mouseUp(const Point2D& mousePoint);
     void setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType);
     void clearTriggered();
-    bool isTriggered();
-    void draw(sf::RenderTarget& target) override;
-    std::string getStatusString();
+    bool isTriggered() const;
+    void draw(sf::RenderTarget& target) const override;
+    std::string getStatusString() const;
 private:
     bool triggered = false;
     bool stateUp = true;
@@ -43,5 +43,5 @@ private:
     Point2D hitBoxTopLeft;
     Point2D hitBoxBottomRight;
     Point2D drawingPosition;
-    bool isInside(const Point2D& point);
+    bool isInside(const Point2D& point) const;
 };

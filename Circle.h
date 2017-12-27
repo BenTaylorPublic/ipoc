@@ -8,7 +8,7 @@ class Circle : public Drawable{
 public:
     Circle();
     ~Circle();
-    void draw(sf::RenderTarget& target) override;
+    void draw(sf::RenderTarget& target) const override;
     void setPosition(const Point2D& newPoint) override;
     void setCenter(const Point2D& newPoint);
     void setRadius(const int& radius);

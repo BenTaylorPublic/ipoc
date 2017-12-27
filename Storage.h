@@ -67,7 +67,7 @@ class Storage {
 public:
     Storage();
     ~Storage();
-    std::string getStatusString();
+    std::string getStatusString() const;
 
     ProgramState state;
     ProgramStateLevel2 state2;

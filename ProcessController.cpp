@@ -326,7 +326,7 @@ void ProcessController::shapeFunSafe()
     }
 }
 
-bool ProcessController::checkForExitProgram()
+bool ProcessController::checkForExitProgram() const
 {
     return exitProgram;
 }
@@ -336,7 +336,7 @@ void ProcessController::incrementLoopNumber()
     loopNumber++;
 }
 
-std::string ProcessController::getStatusString()
+std::string ProcessController::getStatusString() const
 {
     std::string result = "exitProgram: ";
     if (exitProgram)

@@ -14,7 +14,7 @@ public:
     void reloadGraphicsWindow(); //Used when the settings (resoltions, screen type etc) need to be refreshed
     void output();
     void closeGraphicsWindow();
-    std::string getStatusString();
+    std::string getStatusString() const;
 private:
     Window window;
     Frame* frame;

@@ -19,7 +19,7 @@ void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputCont
     decimatedProcessHandler = inputDecimatedProcessHandler;
 }
 
-std::string ThreadManager::getStatusString()
+std::string ThreadManager::getStatusString() const
 {
     return "N/A";
 }

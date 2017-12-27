@@ -10,7 +10,7 @@ public:
     ~Rectangle();
     void setSize(const int& width, const int& height);
     void setColor(const Color& color);
-    void draw(sf::RenderTarget& target) override;
+    void draw(sf::RenderTarget& target) const override;
     void setPosition(const Point2D& newPoint) override;
     void setCornerOne(const Point2D& newPoint);
     void setCornerTwo(const Point2D& newPoint);

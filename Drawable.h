@@ -8,9 +8,9 @@ class Drawable : public Identifiable {
 public:
     Drawable();
     virtual ~Drawable();
-    int getZ();
+    int getZ() const;
     void setZ(const unsigned int& inputZ);
-    virtual void draw(sf::RenderTarget& target) = 0;
+    virtual void draw(sf::RenderTarget& target) const = 0;
     virtual void setPosition(const Point2D& newPoint) = 0;
 private:
     int z = 0;

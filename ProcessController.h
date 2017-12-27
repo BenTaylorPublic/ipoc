@@ -14,9 +14,9 @@ public:
     void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandler, Storage* storagePtr);
     void load(); //Program specific, called just before the start of the loop. Load textures and such in here
     void process();
-    bool checkForExitProgram();
+    bool checkForExitProgram() const;
     void incrementLoopNumber();
-    std::string getStatusString();
+    std::string getStatusString() const;
     //Program specific methods below
     void global();
     void exiting();

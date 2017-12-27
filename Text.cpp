@@ -72,8 +72,8 @@ Text::~Text()
 {
     Debug::notifyOfDestruction(2);
 }
-
-Point2D Text::getPosition()
+ 
+Point2D Text::getPosition() const
 {
     Point2D result;
     result.x = text.getPosition().x;
@@ -81,17 +81,17 @@ Point2D Text::getPosition()
     return result;
 }
 
-int Text::getWidth()
+int Text::getWidth() const
 {
     return text.getGlobalBounds().width;
 }
 
-int Text::getHeight()
+int Text::getHeight() const
 {
     return text.getGlobalBounds().height;
 }
 
-int Text::getLength()
+int Text::getLength() const
 {
     return text.getString().getSize();
 }
@@ -116,12 +116,12 @@ void Text::addText(const std::string& input)
     text.setString(text.getString() + input);
 }
 
-void Text::draw(sf::RenderTarget& target)
+void Text::draw(sf::RenderTarget& target) const
 {
     target.draw(text);
 }
 
-std::string Text::getStatusString()
+std::string Text::getStatusString() const
 {
     return "Text=" + text.getString();
 }

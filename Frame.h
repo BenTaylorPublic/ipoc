@@ -10,13 +10,13 @@ public:
     Frame();
     ~Frame();
     void IPOCLoad();
-    std::string getStatusString();
     void markStartOfDrawing();
     void markAsDrawable();
-    bool isDrawable();
+    bool isDrawable() const;
     void addToFrame(Drawable* drawable);
     void removeFromFrame(Drawable* drawable);
-    Drawable* getNextDrawable();
+    const Drawable* getNextDrawable();
+    std::string getStatusString() const;
 private:
     std::vector<std::vector<Drawable*> > drawables;
     bool isDrawableBool;

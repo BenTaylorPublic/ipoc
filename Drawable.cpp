@@ -16,7 +16,7 @@ void Drawable::setZ(const unsigned int& inputZ)
     z = inputZ;
 }
 
-int Drawable::getZ()
+int Drawable::getZ() const
 {
     return z;
 }

@@ -203,7 +203,7 @@ void InputController::markEndOfLoop()
     }
 }
 
-bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton, const ButtonStatus& inputStatus)
+bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton, const ButtonStatus& inputStatus) const
 {
     if ((inputStatus == ButtonDown || inputStatus == ButtonHold) && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonDown)
 	return true;
@@ -217,7 +217,7 @@ bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysica
 	return false;
 }
 
-const Point2D& InputController::getMousePoint()
+const Point2D& InputController::getMousePoint() const
 {
     return mousePoint;
 }
@@ -333,7 +333,7 @@ void InputController::setGraphicsWindow(Window* inputWindow)
     window = inputWindow;
 }
 
-std::string InputController::getStatusString()
+std::string InputController::getStatusString() const
 {
     return "N/A";
 }

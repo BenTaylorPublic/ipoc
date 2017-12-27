@@ -13,7 +13,7 @@ public:
     ThreadManager();
     ~ThreadManager();
     void IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController, DecimatedProcessHandler* inputDecimatedProcessHandler);
-    std::string getStatusString();
+    std::string getStatusString() const;
 
     //loadGlobal
     void loadGlobalStart();
