@@ -58,6 +58,11 @@ bool Frame::isDrawable() const
     return isDrawableBool;
 }
 
+void Frame::setViewPort(const unsigned int& viewIndex, const float& topLeftX, const float& topLeftY, const float& sizeX, const float& sizeY)
+{
+    views.at(viewIndex)->setViewPort(topLeftX, topLeftY, sizeX, sizeY);
+}
+
 std::string Frame::getStatusString() const
 {
     return "N/A";

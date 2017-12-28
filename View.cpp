@@ -51,3 +51,8 @@ void View::removeDrawable(Drawable* drawable)
 	}
     }
 }
+
+void View::setViewPort(const float& topLeftX, const float& topLeftY, const float& sizeX, const float& sizeY)
+{
+    view.setViewport(sf::FloatRect(topLeftX, topLeftY, sizeX, sizeY));
+}
