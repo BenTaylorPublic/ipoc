@@ -43,7 +43,7 @@ void DecimatedProcessHandler::addToHandler(DecimatedProcess* decimatedProcessesT
 	decimatedProcessesPostLoop.push_back(decimatedProcessesToAdd);
     }
 
-    decimatedProcessesToAdd->registerId();
+    decimatedProcessesToAdd->registerId(ID_DECIMATED_PROCESS);
 }
 
 void DecimatedProcessHandler::removeFromHandler(DecimatedProcess* decimatedProcessesToRemove)
@@ -52,20 +52,20 @@ void DecimatedProcessHandler::removeFromHandler(DecimatedProcess* decimatedProce
     {
 	for (int i = 0; i < decimatedProcessesPreLoop.size(); i++)
 	{
-	    if (decimatedProcessesToRemove->matches(decimatedProcessesPreLoop[i]))
+	    if (decimatedProcessesToRemove->matches(decimatedProcessesPreLoop[i], ID_DECIMATED_PROCESS))
 	    {
 		decimatedProcessesPreLoop.erase(decimatedProcessesPreLoop.begin() + i);
-		decimatedProcessesToRemove->clearId();
+		decimatedProcessesToRemove->clearId(ID_DECIMATED_PROCESS);
 	    }
 	}
     } else
     {
 	for (int i = 0; i < decimatedProcessesPostLoop.size(); i++)
 	{
-	    if (decimatedProcessesToRemove->matches(decimatedProcessesPostLoop[i]))
+	    if (decimatedProcessesToRemove->matches(decimatedProcessesPostLoop[i], ID_DECIMATED_PROCESS))
 	    {
 		decimatedProcessesPostLoop.erase(decimatedProcessesPostLoop.begin() + i);
-		decimatedProcessesToRemove->clearId();
+		decimatedProcessesToRemove->clearId(ID_DECIMATED_PROCESS);
 	    }
 	}
     }

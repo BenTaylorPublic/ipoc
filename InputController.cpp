@@ -312,17 +312,17 @@ void InputController::handleLeftClick(const int& index)
 void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
 {
     onscreenButtons.push_back(onscreenButtonToAdd);
-    onscreenButtonToAdd->registerId();
+    onscreenButtonToAdd->registerId(ID_ONSCREEN_BUTTON);
 }
 
 void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
 {
     for (unsigned int i = 0; i < onscreenButtons.size(); i++)
     {
-	if (onscreenButtonToRemove->matches(onscreenButtons[i]))
+	if (onscreenButtonToRemove->matches(onscreenButtons[i], ID_ONSCREEN_BUTTON))
 	{
 	    onscreenButtons.erase(onscreenButtons.begin() + i);
-	    onscreenButtonToRemove->clearId();
+	    onscreenButtonToRemove->clearId(ID_ONSCREEN_BUTTON);
 	    return;
 	}
     }

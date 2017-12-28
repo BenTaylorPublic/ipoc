@@ -34,7 +34,7 @@ void View::drawAllAtZ(const unsigned int& zIndex, sf::RenderTarget& target) cons
 void View::addDrawable(Drawable* drawable)
 {
     drawables.at(drawable->getZIndex()).push_back(drawable);
-    drawable->registerId();
+    drawable->registerId(ID_DRAWABLE);
 }
 
 void View::removeDrawable(Drawable* drawable)
@@ -43,10 +43,10 @@ void View::removeDrawable(Drawable* drawable)
 
     for (unsigned int i = 0; i < drawables.at(zIndex).size(); i++)
     {
-	if (drawables.at(zIndex).at(i)->matches(drawable))
+	if (drawables.at(zIndex).at(i)->matches(drawable, ID_DRAWABLE))
 	{
 	    drawables.at(zIndex).erase(drawables.at(zIndex).begin() + i);
-	    drawable->clearId();
+	    drawable->clearId(ID_DRAWABLE);
 	    return;
 	}
     }
