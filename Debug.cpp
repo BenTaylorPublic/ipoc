@@ -116,7 +116,7 @@ void Debug::logStatusStrings()
 
 void Debug::setFilePath(std::string inputPath)
 {
-    logPath = inputPath + "DebugLog.log";
+    logPath = inputPath + "/generated/DebugLog.log";
 }
 
 void Debug::notifyOfConstruction(const int& classId)
