@@ -131,7 +131,7 @@ void InputController::input()
     handlePhysicalButton(sf::Mouse::Right, 99);
     handlePhysicalButton(sf::Mouse::Middle, 100);
 
-    sf::Vector2f windowPosition = window->getWindow()->mapPixelToCoords(sf::Mouse::getPosition(*window->getWindow()));
+    sf::Vector2f windowPosition = window->getWindow()->mapPixelToCoords(sf::Mouse::getPosition(*window->getWindow()), sf::View(sf::FloatRect(0, 0, 1920, 1080)));
     mousePoint.x = windowPosition.x;
     mousePoint.y = windowPosition.y;
 
