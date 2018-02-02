@@ -18,7 +18,7 @@ void View::IPOCLoad()
     std::vector<Drawable*> toAdd;
     for (unsigned int i = 0; i < HIGHEST_Z_INDEX; i++)
     {
-	drawables.push_back(toAdd);
+        drawables.push_back(toAdd);
     }
 }
 
@@ -27,7 +27,7 @@ void View::drawAllAtZ(const unsigned int& zIndex, sf::RenderTarget& target) cons
     target.setView(view);
     for (unsigned int i = 0; i < drawables.at(zIndex).size(); i++)
     {
-	drawables.at(zIndex).at(i)->draw(target);
+        drawables.at(zIndex).at(i)->draw(target);
     }
 }
 
@@ -43,12 +43,12 @@ void View::removeDrawable(Drawable* drawable)
 
     for (unsigned int i = 0; i < drawables.at(zIndex).size(); i++)
     {
-	if (drawables.at(zIndex).at(i)->matches(drawable, ID_DRAWABLE))
-	{
-	    drawables.at(zIndex).erase(drawables.at(zIndex).begin() + i);
-	    drawable->clearId(ID_DRAWABLE);
-	    return;
-	}
+        if (drawables.at(zIndex).at(i)->matches(drawable, ID_DRAWABLE))
+        {
+            drawables.at(zIndex).erase(drawables.at(zIndex).begin() + i);
+            drawable->clearId(ID_DRAWABLE);
+            return;
+        }
     }
 }
 
