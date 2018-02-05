@@ -2,89 +2,50 @@
 #include "Debug.h"
 #include "Settings.h"
 
-Frame::Frame() : drawables(1, std::vector<Drawable*>(0))
+Frame::Frame()
 {
     isDrawableBool = false;
 }
 
 Frame::~Frame()
 {
+    for (View* it : views)
+    {
+	delete it;
+    }
+    views.clear();
 }
 
 void Frame::IPOCLoad()
 {
-    std::vector<Drawable*> toAdd;
-    for (unsigned int i = 0; i < MAX_Z; i++)
+    for (unsigned int i = 0; i < AMOUNT_OF_VIEWS; i++)
     {
-	drawables.push_back(toAdd);
+	views.push_back(new View());
+	views.at(i)->IPOCLoad();
     }
-
-    for (unsigned int i = 1; i <= MAX_DRAWABLES; i++)
-    {
-	frameIdsToGive.push(i);
-    }
-}
-
-std::string Frame::getStatusString()
-{
-    return "N/A";
-}
-
-void Frame::markStartOfDrawing()
-{
-    currentDrawingIndex = 0;
-    currentDrawingZ = 0;
 }
 
 void Frame::addToFrame(Drawable* drawable)
 {
-    drawables.at(drawable->getZ()).push_back(drawable);
-    if (frameIdsToGive.size() == 0)
-    {
-	Debug::logLine("[CRASH] frameIdsToGive is empty.");
-	Debug::logLine("[CRASH] There are too many drawables.");
-	Debug::crash(103, "IPOCFrame.addToFrame()");
-    }
-
-    drawable->setFrameId(frameIdsToGive.front());
-    frameIdsToGive.pop();
+    views.at(drawable->getViewIndex())->addDrawable(drawable);
 }
 
 void Frame::removeFromFrame(Drawable* drawable)
 {
-    int z = drawable->getZ();
-
-    for (unsigned int i = 0; i < drawables.at(z).size(); i++)
-    {
-	if (drawables.at(z).at(i)->getFrameId() == drawable->getFrameId())
-	{
-	    drawables.at(z).erase(drawables.at(z).begin() + i);
-	    frameIdsToGive.push(drawable->getFrameId());
-	    drawable->setFrameId(0);
-	    return;
-	}
-    }
+    views.at(drawable->getViewIndex())->removeDrawable(drawable);
 }
 
-Drawable* Frame::getNextDrawable()
+void Frame::drawAll(sf::RenderTarget& target)
 {
-    while (true)
+
+    for (unsigned int zIndex = 0; zIndex < HIGHEST_Z_INDEX; zIndex++)
     {
-	if (drawables.at(currentDrawingZ).size() > currentDrawingIndex)
+	for (unsigned int viewIndex = 0; viewIndex < views.size(); viewIndex++)
 	{
-	    currentDrawingIndex++;
-	    return drawables.at(currentDrawingZ).at(currentDrawingIndex - 1);
-	} else if (drawables.size() - 1 > currentDrawingZ)
-	{
-	    currentDrawingZ++;
-	    currentDrawingIndex = 0;
-	} else
-	{
-	    isDrawableBool = false; //End of the frame
-	    return nullptr;
+	    views.at(viewIndex)->drawAllAtZ(zIndex, target);
 	}
     }
-
+    isDrawableBool = false;
 }
 
 void Frame::markAsDrawable()
@@ -92,8 +53,18 @@ void Frame::markAsDrawable()
     isDrawableBool = true;
 }
 
-bool Frame::isDrawable()
+bool Frame::isDrawable() const
 {
     return isDrawableBool;
+}
+
+void Frame::setViewPort(const unsigned int& viewIndex, const float& topLeftX, const float& topLeftY, const float& sizeX, const float& sizeY)
+{
+    views.at(viewIndex)->setViewPort(topLeftX, topLeftY, sizeX, sizeY);
+}
+
+std::string Frame::getStatusString() const
+{
+    return "N/A";
 }
 

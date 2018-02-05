@@ -92,11 +92,11 @@ void Debug::newLog()
 
 void Debug::logTimeStamp()
 {
-    time_t now = time(0);
-    std::string timeStamp = "";
-    timeStamp = ctime(&now);
-    timeStamp.pop_back();
-    FileManager::writeToFile(logPath, timeStamp);
+    time_t now;
+    time(&now);
+    char buf[sizeof "2011-10-08 07:07:09"];
+    strftime(buf, sizeof buf, "%F %T", localtime(&now));
+    FileManager::writeToFile(logPath, buf);
 }
 
 void Debug::incrementLoopNumber()
@@ -116,7 +116,7 @@ void Debug::logStatusStrings()
 
 void Debug::setFilePath(std::string inputPath)
 {
-    logPath = inputPath + "DebugLog.log";
+    logPath = inputPath + "/generated/DebugLog.log";
 }
 
 void Debug::notifyOfConstruction(const int& classId)
@@ -143,16 +143,6 @@ void Debug::crash(const unsigned int& crashId, const std::string& callFrom)
     logLine("[CRASH] Crash called from " + callFrom);
     logLine("[CRASH] Crashed on loop " + std::to_string(loopNumber));
     exit(EXIT_FAILURE);
-
-    /*
-     * CrashID summary
-     * 103: Frame.addToFrame()
-     * 104: Settings.getIntFromSettings()
-     * 105: Settings.getStringFromSettings()
-     * 106: Settings.getBoolFromSettings() 
-     * 107: Settings.loadSettings()
-     */
-
 }
 
 void Debug::logClassAmountInfo()

@@ -11,22 +11,22 @@ Drawable::~Drawable()
     Debug::notifyOfDestruction(7);
 }
 
-void Drawable::setFrameId(const unsigned int& inputFrameId)
+void Drawable::setZIndex(const unsigned int& inputZIndex)
 {
-    frameId = inputFrameId;
+    zIndex = inputZIndex;
 }
 
-const unsigned int& Drawable::getFrameId()
+unsigned int Drawable::getZIndex() const
 {
-    return frameId;
+    return zIndex;
 }
 
-void Drawable::setZ(const unsigned int& inputZ)
+void Drawable::setViewIndex(const unsigned int& inputViewIndex)
 {
-    z = inputZ;
+    viewIndex = inputViewIndex;
 }
 
-int Drawable::getZ()
+unsigned int Drawable::getViewIndex() const
 {
-    return z;
+    return viewIndex;
 }

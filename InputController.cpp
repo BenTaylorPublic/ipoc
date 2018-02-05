@@ -4,10 +4,6 @@
 
 InputController::InputController()
 {
-    for (unsigned int i = 1; i <= 50; i++)
-    {
-	onscreenButtonIdsToGive.push(i);
-    }
 }
 
 InputController::~InputController()
@@ -135,16 +131,15 @@ void InputController::input()
     handlePhysicalButton(sf::Mouse::Right, 99);
     handlePhysicalButton(sf::Mouse::Middle, 100);
 
-    sf::Vector2i windowPosition = sf::Mouse::getPosition(*window->getWindow());
+    sf::Vector2f windowPosition = window->getWindow()->mapPixelToCoords(sf::Mouse::getPosition(*window->getWindow()), sf::View(sf::FloatRect(0, 0, 1920, 1080)));
     mousePoint.x = windowPosition.x;
     mousePoint.y = windowPosition.y;
-
 }
 
 void InputController::resetInputArrays()
 {
     for (int i = 0; i < AMOUNT_OF_PHYSICAL_BUTTONS; i++)
-	physicalButtonStatusArray[i] = ButtonUntouched;
+        physicalButtonStatusArray[i] = ButtonUntouched;
 }
 
 void InputController::markStartOfLoop()
@@ -165,63 +160,63 @@ void InputController::markEndOfLoop()
     //Keyboard Down to hold
     do
     {
-	currentIndex = physicalButtonDown.front();
-	physicalButtonDown.pop();
+        currentIndex = physicalButtonDown.front();
+        physicalButtonDown.pop();
 
-	if (currentIndex == -1) //Escape character
-	    break;
-	else
-	{
-	    physicalButtonStatusArray[currentIndex] = ButtonHold;
-	}
+        if (currentIndex == -1) //Escape character
+            break;
+        else
+        {
+            physicalButtonStatusArray[currentIndex] = ButtonHold;
+        }
     } while (true);
 
     //Up to Untouched
     //Keyboard Up to Untouched
     do
     {
-	currentIndex = physicalButtonUp.front();
-	physicalButtonUp.pop();
+        currentIndex = physicalButtonUp.front();
+        physicalButtonUp.pop();
 
-	if (currentIndex == -1) //Escape character
-	    break;
-	else
-	{
-	    physicalButtonStatusArray[currentIndex] = ButtonUntouched;
-	}
+        if (currentIndex == -1) //Escape character
+            break;
+        else
+        {
+            physicalButtonStatusArray[currentIndex] = ButtonUntouched;
+        }
     } while (true);
 
 
     while (onscreenButtonToClearTrigger.size() >= 1)
     {
-	OnscreenButton* temp = onscreenButtonToClearTrigger.front();
-	if (temp == nullptr)
-	{
-	    onscreenButtonToClearTrigger.pop();
-	    return;
-	} else
-	{
-	    temp->clearTriggered();
-	    onscreenButtonToClearTrigger.pop();
-	}
+        OnscreenButton* temp = onscreenButtonToClearTrigger.front();
+        if (temp == nullptr)
+        {
+            onscreenButtonToClearTrigger.pop();
+            return;
+        } else
+        {
+            temp->clearTriggered();
+            onscreenButtonToClearTrigger.pop();
+        }
     }
 }
 
-bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton, const ButtonStatus& inputStatus)
+bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton, const ButtonStatus& inputStatus) const
 {
     if ((inputStatus == ButtonDown || inputStatus == ButtonHold) && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonDown)
-	return true;
+        return true;
     else if (inputStatus == ButtonHold && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonHold)
-	return true;
+        return true;
     else if (inputStatus == ButtonUntouched && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonUntouched)
-	return true;
+        return true;
     else if (inputStatus == ButtonUp && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonUp)
-	return true;
+        return true;
     else
-	return false;
+        return false;
 }
 
-const Point2D& InputController::getMousePoint()
+const Point2D& InputController::getMousePoint() const
 {
     return mousePoint;
 }
@@ -230,20 +225,20 @@ void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton,
 {
     if (sf::Keyboard::isKeyPressed(inputButton))
     {
-	//Key is currently DOWN according to SFML
-	if (physicalButtonStatusArray[index] == ButtonUntouched)
-	{
-	    physicalButtonDown.push(index);
-	    physicalButtonStatusArray[index] = ButtonDown;
-	}
+        //Key is currently DOWN according to SFML
+        if (physicalButtonStatusArray[index] == ButtonUntouched)
+        {
+            physicalButtonDown.push(index);
+            physicalButtonStatusArray[index] = ButtonDown;
+        }
     } else
     {
-	//Key is currently UP according to SFML
-	if (physicalButtonStatusArray[index] == ButtonHold)
-	{
-	    physicalButtonUp.push(index);
-	    physicalButtonStatusArray[index] = ButtonUp;
-	}
+        //Key is currently UP according to SFML
+        if (physicalButtonStatusArray[index] == ButtonHold)
+        {
+            physicalButtonUp.push(index);
+            physicalButtonStatusArray[index] = ButtonUp;
+        }
     }
 }
 
@@ -251,20 +246,20 @@ void InputController::handlePhysicalButton(const sf::Mouse::Button& inputButton,
 {
     if (sf::Mouse::isButtonPressed(inputButton))
     {
-	//Key is currently DOWN according to SFML
-	if (physicalButtonStatusArray[index] == ButtonUntouched)
-	{
-	    physicalButtonDown.push(index);
-	    physicalButtonStatusArray[index] = ButtonDown;
-	}
+        //Key is currently DOWN according to SFML
+        if (physicalButtonStatusArray[index] == ButtonUntouched)
+        {
+            physicalButtonDown.push(index);
+            physicalButtonStatusArray[index] = ButtonDown;
+        }
     } else
     {
-	//Key is currently UP according to SFML
-	if (physicalButtonStatusArray[index] == ButtonHold)
-	{
-	    physicalButtonUp.push(index);
-	    physicalButtonStatusArray[index] = ButtonUp;
-	}
+        //Key is currently UP according to SFML
+        if (physicalButtonStatusArray[index] == ButtonHold)
+        {
+            physicalButtonUp.push(index);
+            physicalButtonStatusArray[index] = ButtonUp;
+        }
     }
 }
 
@@ -272,65 +267,63 @@ void InputController::handleLeftClick(const int& index)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
-	//left click is down
-	if (physicalButtonStatusArray[index] == ButtonUntouched)
-	{
+        //left click is down
+        if (physicalButtonStatusArray[index] == ButtonUntouched)
+        {
 
-	    for (OnscreenButton* it : onscreenButtons)
-	    {
-		if (it->mouseDown(mousePoint))
-		{
-		    onscreenButtonToClearTrigger.push(it);
-		}
-	    }
+            for (OnscreenButton* it : onscreenButtons)
+            {
+                if (it->mouseDown(mousePoint))
+                {
+                    onscreenButtonToClearTrigger.push(it);
+                }
+            }
 
-	    physicalButtonDown.push(index);
-	    physicalButtonStatusArray[index] = ButtonDown;
+            physicalButtonDown.push(index);
+            physicalButtonStatusArray[index] = ButtonDown;
 
-	} else if (physicalButtonStatusArray[index] == ButtonHold)
-	{
-	    for (OnscreenButton* it : onscreenButtons)
-	    {
-		it->mouseHold(mousePoint);
-	    }
-	}
+        } else if (physicalButtonStatusArray[index] == ButtonHold)
+        {
+            for (OnscreenButton* it : onscreenButtons)
+            {
+                it->mouseHold(mousePoint);
+            }
+        }
     } else
     {
-	//left click is up
-	if (physicalButtonStatusArray[index] == ButtonHold)
-	{
-	    physicalButtonUp.push(index);
-	    physicalButtonStatusArray[index] = ButtonUp;
+        //left click is up
+        if (physicalButtonStatusArray[index] == ButtonHold)
+        {
+            physicalButtonUp.push(index);
+            physicalButtonStatusArray[index] = ButtonUp;
 
-	    for (OnscreenButton* it : onscreenButtons)
-	    {
-		if (it->mouseUp(mousePoint))
-		{
-		    onscreenButtonToClearTrigger.push(it);
-		}
-	    }
-	}
+            for (OnscreenButton* it : onscreenButtons)
+            {
+                if (it->mouseUp(mousePoint))
+                {
+                    onscreenButtonToClearTrigger.push(it);
+                }
+            }
+        }
     }
 }
 
 void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
 {
     onscreenButtons.push_back(onscreenButtonToAdd);
-    onscreenButtonToAdd->setOnscreenButtonManagerId(onscreenButtonIdsToGive.front());
-    onscreenButtonIdsToGive.pop();
+    onscreenButtonToAdd->registerId(ID_ONSCREEN_BUTTON);
 }
 
 void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
 {
     for (unsigned int i = 0; i < onscreenButtons.size(); i++)
     {
-	if (onscreenButtons[i]->getOnscreenButtonManagerId() == onscreenButtonToRemove->getOnscreenButtonManagerId())
-	{
-	    onscreenButtons.erase(onscreenButtons.begin() + i);
-	    onscreenButtonIdsToGive.push(onscreenButtonToRemove->getOnscreenButtonManagerId());
-	    onscreenButtonToRemove->setOnscreenButtonManagerId(0);
-	    return;
-	}
+        if (onscreenButtonToRemove->matches(onscreenButtons[i], ID_ONSCREEN_BUTTON))
+        {
+            onscreenButtons.erase(onscreenButtons.begin() + i);
+            onscreenButtonToRemove->clearId(ID_ONSCREEN_BUTTON);
+            return;
+        }
     }
 }
 
@@ -339,7 +332,7 @@ void InputController::setGraphicsWindow(Window* inputWindow)
     window = inputWindow;
 }
 
-std::string InputController::getStatusString()
+std::string InputController::getStatusString() const
 {
     return "N/A";
 }

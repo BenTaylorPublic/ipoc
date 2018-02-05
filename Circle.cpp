@@ -4,7 +4,7 @@
 
 Circle::Circle()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(9);
 }
 
@@ -13,7 +13,7 @@ Circle::~Circle()
     Debug::notifyOfDestruction(9);
 }
 
-void Circle::draw(sf::RenderTarget& target)
+void Circle::draw(sf::RenderTarget& target) const
 {
     target.draw(circle);
 }

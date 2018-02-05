@@ -53,13 +53,7 @@ void Window::openWindow(const int& inputWindowXSize, const int& inputWindowYSize
 
 void Window::drawFrame(Frame* frame)
 {
-    frame->markStartOfDrawing();
-    Drawable* drawable = frame->getNextDrawable();
-    while (drawable != nullptr)
-    {
-	drawable->draw(window);
-	drawable = frame->getNextDrawable();
-    }
+    frame->drawAll(window);
 }
 
 void Window::renderWindow()
@@ -77,12 +71,12 @@ void Window::closeWindow()
     window.close();
 }
 
-sf::RenderWindow* Window::getWindow()
+const sf::RenderWindow* Window::getWindow() const
 {
     return &window;
 }
 
-std::string Window::getStatusString()
+std::string Window::getStatusString() const
 {
     return "N/A";
 }

@@ -11,6 +11,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Line.h"
+#include "AnimatedSprite.h"
 
 enum ProgramState {
     FirstLoad, ButtonTesting, ShapeFun, Exiting
@@ -66,7 +67,7 @@ class Storage {
 public:
     Storage();
     ~Storage();
-    std::string getStatusString();
+    std::string getStatusString() const;
 
     ProgramState state;
     ProgramStateLevel2 state2;
@@ -74,5 +75,10 @@ public:
     StorageGlobal* global;
     StorageButtonTesting* buttonTesting;
     StorageShapeFun* shapeFun;
-
+    
+    AnimatedSprite* thing;
+    Rectangle* rec1;
+    Rectangle* rec2;
+    Rectangle* rec3;
+    Rectangle* rec4;
 };

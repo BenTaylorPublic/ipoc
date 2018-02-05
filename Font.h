@@ -17,8 +17,8 @@ public:
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
      */
-    std::string getStatusString();
-    sf::Font* getFont(); //Should strictly be used for creating new Text objects. AKA don't use this you fuck
+    std::string getStatusString() const;
+    const sf::Font* getFont() const; //Should strictly be used for creating new Text objects. AKA don't use this you fuck
 private:
     sf::Font font; //SFML Font object that this class wraps
 };

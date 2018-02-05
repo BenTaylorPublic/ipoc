@@ -50,7 +50,7 @@ Point2D Point2D::getRelative(const Point2D& otherPoint)
     return Point2D(otherPoint.x - x, otherPoint.y - y);
 }
 
-double Point2D::distanceTo(const Point2D& otherPoint)
+double Point2D::distanceTo(const Point2D& otherPoint) const
 {
     int aSquared = std::pow(otherPoint.x - x, 2);
     int bSquared = std::pow(otherPoint.y - y, 2);
@@ -63,7 +63,7 @@ void Point2D::random(const int& maxX, const int& maxY)
     y = rand() % maxY + 1;
 }
 
-std::string Point2D::getStatusString()
+std::string Point2D::getStatusString() const
 {
     return "(" + std::to_string((int) x) + "," + std::to_string((int) y) + ")";
 }

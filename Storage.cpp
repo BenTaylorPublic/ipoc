@@ -10,7 +10,7 @@ Storage::~Storage()
 {
 }
 
-std::string Storage::getStatusString()
+std::string Storage::getStatusString() const
 {
     return "N/A";
 }

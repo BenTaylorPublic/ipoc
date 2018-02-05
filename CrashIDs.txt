@@ -1,0 +1,9 @@
+CrashID summary
+101: REMOVED
+102: REMOVED
+103: REMOVED
+104: Settings.getIntFromSettings()
+105: Settings.getStringFromSettings()
+106: Settings.getBoolFromSettings() 
+107: Settings.loadSettings()
+108: REMOVED

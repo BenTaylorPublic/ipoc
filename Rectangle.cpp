@@ -4,7 +4,7 @@
 
 Rectangle::Rectangle()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(8);
 }
 
@@ -23,7 +23,7 @@ void Rectangle::setColor(const Color& color)
     rectangle.setFillColor(sf::Color(color.r, color.g, color.b));
 }
 
-void Rectangle::draw(sf::RenderTarget& target)
+void Rectangle::draw(sf::RenderTarget& target) const
 {
     target.draw(rectangle);
 }

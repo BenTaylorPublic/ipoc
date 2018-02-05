@@ -9,7 +9,7 @@ class Line : public Drawable{
 public:
     Line();
     ~Line();
-    void draw(sf::RenderTarget& target) override;
+    void draw(sf::RenderTarget& target) const override;
     void setPosition(const Point2D& newPoint) override;
     void setPosition2(const Point2D& newPoint);
     void setColor(const Color& color);

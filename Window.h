@@ -17,8 +17,8 @@ public:
     void renderWindow();
     void clearWindow();
     void closeWindow();
-    sf::RenderWindow* getWindow();
-    std::string getStatusString();
+    const sf::RenderWindow* getWindow() const;
+    std::string getStatusString() const;
 private:
     sf::RenderWindow window;
 

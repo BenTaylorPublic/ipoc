@@ -20,6 +20,8 @@ void MasterController::IPOCLoad()
     processController = new ProcessController();
     outputController = new OutputController();
     frame = new Frame();
+    decimatedProcessHandler = new DecimatedProcessHandler();
+    storage = new Storage();
 
     threadsLoaded = false;
     inputThreadJoinable = false;
@@ -33,9 +35,10 @@ void MasterController::IPOCLoad()
     Debug::IPOCLoad(this);
 
     inputController->IPOCLoad();
-    processController->IPOCLoad(inputController, frame, outputController);
+    processController->IPOCLoad(inputController, frame, outputController, decimatedProcessHandler, storage);
     outputController->IPOCLoad(frame);
     frame->IPOCLoad();
+    decimatedProcessHandler->IPOCLoad();
     TrackedClasses::loadClassNames();
 
     Debug::logLine("[INFO] Loaded controllers");
@@ -121,11 +124,15 @@ void MasterController::processLoop()
 	processController->incrementLoopNumber();
 	loopNumber++;
 
+	decimatedProcessHandler->markStartOfLoop();
+	
 	inputController->markStartOfLoop();
 
 	processController->process(); //Executes all program specific code
 
 	inputController->markEndOfLoop();
+	
+	decimatedProcessHandler->markEndOfLoop();
 
 	frame->markAsDrawable();
 
@@ -171,6 +178,7 @@ void MasterController::exit()
     delete processController;
     delete outputController;
     delete frame;
+    delete storage;
 
     if (LOG_CLASS_AMOUNT_INFO)
 	Debug::logClassAmountInfo(); //Log all info
@@ -181,7 +189,7 @@ void MasterController::exit()
 
 }
 
-std::string MasterController::getStatusString()
+std::string MasterController::getStatusString() const
 {
     //Calling all objects it has a pointer too
     std::string result = "Master Controller:\n";

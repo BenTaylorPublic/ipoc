@@ -17,7 +17,7 @@ public:
     Point2D operator-(const Point2D& rhs);
     Point2D& operator+=(const Point2D& rhs);
     Point2D getRelative(const Point2D& otherPoint);
-    double distanceTo(const Point2D& otherPoint);
+    double distanceTo(const Point2D& otherPoint) const;
     void random(const int& maxX, const int& maxY); //Sets X and Y to a random double, between 0 and the maximum specified
     double x; //X component of the position
     double y; //Y component of the position
@@ -25,6 +25,6 @@ public:
     Returns a string indicating this object's current status, and all objects it manages.
     Should only be used for debugging, but not strictly.
      */
-    std::string getStatusString();
+    std::string getStatusString() const;
 private:
 };

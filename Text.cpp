@@ -4,14 +4,14 @@
 
 Text::Text()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setString("SAMPLE TEXT");
     Debug::notifyOfConstruction(2);
 }
 
 Text::Text(Font& inputFont)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
     Debug::notifyOfConstruction(2);
@@ -19,7 +19,7 @@ Text::Text(Font& inputFont)
 
 Text::Text(Font& inputFont, const std::string& inputString)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     Debug::notifyOfConstruction(2);
@@ -29,7 +29,7 @@ Text::Text(Font& inputFont, const unsigned int& inputZ, const std::string& input
 {
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
@@ -37,13 +37,13 @@ Text::Text(Font& inputFont, const unsigned int& inputZ)
 {
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
 Text::Text(Font& inputFont, const std::string& inputString, const Point2D& point)
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     setPosition(point);
@@ -55,7 +55,7 @@ Text::Text(Font& inputFont, const unsigned int& inputZ, const std::string& input
     text.setFont(*inputFont.getFont());
     text.setString(inputString);
     setPosition(point);
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
@@ -64,7 +64,7 @@ Text::Text(Font& inputFont, const unsigned int& inputZ, const Point2D& point)
     text.setFont(*inputFont.getFont());
     text.setString("SAMPLE TEXT");
     setPosition(point);
-    setZ(inputZ);
+    setZIndex(inputZ);
     Debug::notifyOfConstruction(2);
 }
 
@@ -72,8 +72,8 @@ Text::~Text()
 {
     Debug::notifyOfDestruction(2);
 }
-
-Point2D Text::getPosition()
+ 
+Point2D Text::getPosition() const
 {
     Point2D result;
     result.x = text.getPosition().x;
@@ -81,17 +81,17 @@ Point2D Text::getPosition()
     return result;
 }
 
-int Text::getWidth()
+int Text::getWidth() const
 {
     return text.getGlobalBounds().width;
 }
 
-int Text::getHeight()
+int Text::getHeight() const
 {
     return text.getGlobalBounds().height;
 }
 
-int Text::getLength()
+int Text::getLength() const
 {
     return text.getString().getSize();
 }
@@ -116,12 +116,12 @@ void Text::addText(const std::string& input)
     text.setString(text.getString() + input);
 }
 
-void Text::draw(sf::RenderTarget& target)
+void Text::draw(sf::RenderTarget& target) const
 {
     target.draw(text);
 }
 
-std::string Text::getStatusString()
+std::string Text::getStatusString() const
 {
     return "Text=" + text.getString();
 }

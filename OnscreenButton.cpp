@@ -14,14 +14,14 @@ OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ)
 {
-    setZ(inputZ);
+    setZIndex(inputZ);
     onscreenButtonType = inputOnscreenButtonType;
     Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point)
 {
-    setZ(inputZ);
+    setZIndex(inputZ);
     setPosition(point);
     onscreenButtonType = inputOnscreenButtonType;
     Debug::notifyOfConstruction(6);
@@ -86,12 +86,12 @@ void OnscreenButton::setHitBox(const Point2D& inputTopLeft, const Point2D& input
     hitBoxBottomRight = drawingPosition + inputBottomRight;
 }
 
-bool OnscreenButton::isTriggered()
+bool OnscreenButton::isTriggered() const
 {
     return triggered;
 }
 
-void OnscreenButton::draw(sf::RenderTarget& target)
+void OnscreenButton::draw(sf::RenderTarget& target) const
 {
     if (stateUp)
     {
@@ -175,22 +175,12 @@ bool OnscreenButton::mouseUp(const Point2D& mousePoint)
     return false;
 }
 
-void OnscreenButton::setOnscreenButtonManagerId(const unsigned int& newId)
-{
-    onscreenButtonManagerId = newId;
-}
-
 void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType)
 {
     onscreenButtonType = inputOnscreenButtonType;
 }
 
-unsigned int& OnscreenButton::getOnscreenButtonManagerId()
-{
-    return onscreenButtonManagerId;
-}
-
-bool OnscreenButton::isInside(const Point2D& point)
+bool OnscreenButton::isInside(const Point2D& point) const
 {
     if (point.x > hitBoxTopLeft.x && point.x < hitBoxBottomRight.x)
     {
@@ -207,7 +197,7 @@ void OnscreenButton::clearTriggered()
     triggered = false;
 }
 
-std::string OnscreenButton::getStatusString()
+std::string OnscreenButton::getStatusString() const
 {
     return "N/A";
 }

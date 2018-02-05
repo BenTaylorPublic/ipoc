@@ -23,6 +23,44 @@ void OutputController::createGraphicsWindow(InputController* inputController)
 {
     window.openWindow(Settings::screenWidth, Settings::screenHeight, Settings::screenTitle, Settings::windowType, Settings::hideCursor);
     inputController->setGraphicsWindow(&window);
+
+    if (true) //LETTER BOX / BLACK BARS enabled
+    {
+	double ratio = Settings::screenHeight / Settings::screenWidth;
+	double ratioTarget = 19.0 / 9.0;
+	if (ratio != ratioTarget)
+	{
+	    //Letter boxing needed
+
+
+	    float windowRatio = Settings::screenWidth / (float) Settings::screenHeight;
+	    float viewRatio = (float) 16 / (float) 9;
+	    float sizeX = 1;
+	    float sizeY = 1;
+	    float posX = 0;
+	    float posY = 0;
+
+	    bool horizontalSpacing = true;
+	    if (windowRatio < viewRatio)
+		horizontalSpacing = false;
+
+	    // If horizontalSpacing is true, the black bars will appear on the left and right side.
+	    // Otherwise, the black bars will appear on the top and bottom.
+
+	    if (horizontalSpacing)
+	    {
+		sizeX = viewRatio / windowRatio;
+		posX = (1 - sizeX) / 2.f;
+	    }
+	    else
+	    {
+		sizeY = windowRatio / viewRatio;
+		posY = (1 - sizeY) / 2.f;
+	    }
+	    
+	    frame->setViewPort(0, posX, posY, sizeX, sizeY);
+	}
+    }
 }
 
 void OutputController::reloadGraphicsWindow()
@@ -56,7 +94,7 @@ void OutputController::output()
     window.renderWindow();
 }
 
-std::string OutputController::getStatusString()
+std::string OutputController::getStatusString() const
 {
     std::string result = "OutputController:\n";
 

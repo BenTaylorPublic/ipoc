@@ -21,12 +21,12 @@ Texture::~Texture()
     Debug::notifyOfDestruction(1);
 }
 
-sf::Texture* Texture::getTexture()
+const sf::Texture* Texture::getTexture() const
 {
     return &texture;
 }
 
-std::string Texture::getStatusString()
+std::string Texture::getStatusString() const
 {
     return "Texture name=" + name;
 }

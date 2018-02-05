@@ -4,7 +4,7 @@
 
 Line::Line()
 {
-    setZ(DEFAULT_Z_VALUE);
+    setZIndex(DEFAULT_Z_VALUE);
     Debug::notifyOfConstruction(10);
 }
 
@@ -13,7 +13,7 @@ Line::~Line()
     Debug::notifyOfDestruction(10);
 }
 
-void Line::draw(sf::RenderTarget& target)
+void Line::draw(sf::RenderTarget& target) const
 {
     target.draw(line, 2, sf::Lines);
 }

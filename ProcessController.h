@@ -5,17 +5,18 @@
 #include "Storage.h"
 #include "Frame.h"
 #include "ThreadManager.h"
+#include "DecimatedProcessHandler.h"
 
 class ProcessController {
 public:
     ProcessController();
     ~ProcessController();
-    void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr);
+    void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandler, Storage* storagePtr);
     void load(); //Program specific, called just before the start of the loop. Load textures and such in here
     void process();
-    bool checkForExitProgram();
+    bool checkForExitProgram() const;
     void incrementLoopNumber();
-    std::string getStatusString();
+    std::string getStatusString() const;
     //Program specific methods below
     void global();
     void exiting();
@@ -25,8 +26,9 @@ private:
     Frame* frame;
     bool exitProgram;
     unsigned int loopNumber;
-    InputController* ic;
-    OutputController* oc;
-    Storage storage;
-    ThreadManager tm;
+    InputController* inputController;
+    OutputController* outputController;
+    DecimatedProcessHandler* decimatedProcessHandler;
+    Storage* storage;
+    ThreadManager threadManager;
 };
