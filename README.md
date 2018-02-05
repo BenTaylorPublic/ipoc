@@ -1,4 +1,8 @@
-# IPOC Core #
+# BOSS SIM #
+
+It's a gam
+
+# IPOC #
 
 IPOC is a framework that provides tools for fast development.  
 Some of it's functionality are listed below.
