@@ -13,15 +13,10 @@ public:
     ~ProcessController();
     void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandler, Storage* storagePtr);
     void load(); //Program specific, called just before the start of the loop. Load textures and such in here
-    void process();
+    void process(); //Program specific
     bool checkForExitProgram() const;
     void incrementLoopNumber();
     std::string getStatusString() const;
-    //Program specific methods below
-    void global();
-    void exiting();
-    void buttonTestingSafe();
-    void shapeFunSafe();
 private:
     Frame* frame;
     bool exitProgram;
