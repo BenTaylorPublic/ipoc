@@ -25,7 +25,7 @@ Currently, with a small test app, the whole directory is ~4mb.
 All you should need to do is send a .zip file to the recipient and it should work.
 
 ## Program Specific Code ##
-Code for a specific program should be limited to
+Code for a specific program should be limited to:
 
 1. ProcessController.process()
 2. ProcessController.load()
