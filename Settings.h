@@ -13,6 +13,9 @@
 #define LOG_CLASS_AMOUNT_INFO false
 #define DEBUG_MODE true
 
+//Program specific
+#define BOSS_SIM_VERSION "0.0.1"
+
 enum InputStatus {
     Active, PauseRequested, Paused
 };
