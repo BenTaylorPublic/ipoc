@@ -11,6 +11,9 @@
 
 //For debugging
 #define LOG_CLASS_AMOUNT_INFO false
+/*
+ * Current DEBUG_MODE uses:
+ */
 #define DEBUG_MODE true
 
 //Program specific
