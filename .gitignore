@@ -2,3 +2,5 @@
 /dist/*
 /nbproject/*
 ipoc-core-Makefile.mk
+.idea/*
+cmake-build-debug/*
