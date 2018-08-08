@@ -4,41 +4,42 @@
 
 Rectangle::Rectangle()
 {
-    setZIndex(DEFAULT_Z_VALUE);
-    Debug::notifyOfConstruction(8);
+	setZIndex(DEFAULT_Z_VALUE);
+	Debug::notifyOfConstruction(8);
 }
 
 Rectangle::~Rectangle()
 {
-    Debug::notifyOfDestruction(8);
+	Debug::notifyOfDestruction(8);
 }
 
-void Rectangle::setSize(const int& width, const int& height)
+void Rectangle::setSize(const int& width,
+						const int& height)
 {
-    rectangle.setSize(sf::Vector2f(width, height));
+	rectangle.setSize(sf::Vector2f(width, height));
 }
 
 void Rectangle::setColor(const Color& color)
 {
-    rectangle.setFillColor(sf::Color(color.r, color.g, color.b));
+	rectangle.setFillColor(sf::Color(color.r, color.g, color.b));
 }
 
 void Rectangle::draw(sf::RenderTarget& target) const
 {
-    target.draw(rectangle);
+	target.draw(rectangle);
 }
 
 void Rectangle::setPosition(const Point2D& newPoint)
 {
-    rectangle.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
+	rectangle.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
 }
 
 void Rectangle::setCornerOne(const Point2D& newPoint)
 {
-    rectangle.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
+	rectangle.setPosition(sf::Vector2f(newPoint.x, newPoint.y));
 }
 
 void Rectangle::setCornerTwo(const Point2D& newPoint)
 {
-    rectangle.setSize(sf::Vector2f(newPoint.x - rectangle.getPosition().x, newPoint.y - rectangle.getPosition().y));
+	rectangle.setSize(sf::Vector2f(newPoint.x - rectangle.getPosition().x, newPoint.y - rectangle.getPosition().y));
 }

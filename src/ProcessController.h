@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include "InputController.h"
 #include "OutputController.h"
@@ -7,23 +8,28 @@
 #include "ThreadManager.h"
 #include "DecimatedProcessHandler.h"
 
-class ProcessController {
+class ProcessController
+{
 public:
-    ProcessController();
-    ~ProcessController();
-    void IPOCLoad(InputController* inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandler, Storage* storagePtr);
-    void load(); //Program specific, called just before the start of the loop. Load textures and such in here
-    void process(); //Program specific
-    bool checkForExitProgram() const;
-    void incrementLoopNumber();
-    std::string getStatusString() const;
+	ProcessController();
+	~ProcessController();
+	void IPOCLoad(InputController* inputControllerPtr,
+				  Frame* inputFrame,
+				  OutputController* outputControllerPtr,
+				  DecimatedProcessHandler* decimatedProcessHandler,
+				  Storage* storagePtr);
+	void load(); //Program specific, called just before the start of the loop. Load textures and such in here
+	void process(); //Program specific
+	bool checkForExitProgram() const;
+	void incrementLoopNumber();
+	std::string getStatusString() const;
 private:
-    Frame* frame;
-    bool exitProgram;
-    unsigned int loopNumber;
-    InputController* inputController;
-    OutputController* outputController;
-    DecimatedProcessHandler* decimatedProcessHandler;
-    Storage* storage;
-    ThreadManager threadManager;
+	Frame* frame;
+	bool exitProgram;
+	unsigned int loopNumber;
+	InputController* inputController;
+	OutputController* outputController;
+	DecimatedProcessHandler* decimatedProcessHandler;
+	Storage* storage;
+	ThreadManager threadManager;
 };

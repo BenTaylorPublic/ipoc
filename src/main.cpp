@@ -1,15 +1,14 @@
-
 #include "MasterController.h"
 #include <iostream>
 
 int main()
 {
 
-    MasterController masterController;
+	MasterController masterController;
 
-    masterController.IPOCLoad();
-    masterController.start();
+	masterController.IPOCLoad();
+	masterController.start();
 
-    std::cout << "END OF LINE\n";
-    return 0;
+	std::cout << "END OF LINE\n";
+	return 0;
 }

@@ -14,16 +14,20 @@ ProcessController::~ProcessController()
 {
 }
 
-void ProcessController::IPOCLoad(InputController *inputControllerPtr, Frame* inputFrame, OutputController* outputControllerPtr, DecimatedProcessHandler* decimatedProcessHandlerPtr, Storage* storagePtr)
+void ProcessController::IPOCLoad(InputController* inputControllerPtr,
+								 Frame* inputFrame,
+								 OutputController* outputControllerPtr,
+								 DecimatedProcessHandler* decimatedProcessHandlerPtr,
+								 Storage* storagePtr)
 {
-    inputController = inputControllerPtr;
-    outputController = outputControllerPtr;
-    exitProgram = false;
-    loopNumber = 0;
-    frame = inputFrame;
-    decimatedProcessHandler = decimatedProcessHandlerPtr;
-    storage = storagePtr;
-    threadManager.IPOCLoad(storage, frame, inputController, decimatedProcessHandler);
+	inputController = inputControllerPtr;
+	outputController = outputControllerPtr;
+	exitProgram = false;
+	loopNumber = 0;
+	frame = inputFrame;
+	decimatedProcessHandler = decimatedProcessHandlerPtr;
+	storage = storagePtr;
+	threadManager.IPOCLoad(storage, frame, inputController, decimatedProcessHandler);
 }
 
 void ProcessController::load()
@@ -32,31 +36,31 @@ void ProcessController::load()
 
 void ProcessController::process()
 {
-    if (inputController->getPhysicalButtonStatus(PhysicalButton::KeyEscape, ButtonStatus::ButtonDown))
-    {
-        exitProgram = true;
-    }
+	if (inputController->getPhysicalButtonStatus(PhysicalButton::KeyEscape, ButtonStatus::ButtonDown))
+	{
+		exitProgram = true;
+	}
 }
 
 bool ProcessController::checkForExitProgram() const
 {
-    return exitProgram;
+	return exitProgram;
 }
 
 void ProcessController::incrementLoopNumber()
 {
-    loopNumber++;
+	loopNumber++;
 }
 
 std::string ProcessController::getStatusString() const
 {
-    std::string result = "exitProgram: ";
-    if (exitProgram)
-        result += "true\n";
-    else
-        result += "false\n";
+	std::string result = "exitProgram: ";
+	if (exitProgram)
+		result += "true\n";
+	else
+		result += "false\n";
 
-    result += "loopNumber: " + std::to_string(loopNumber) + "\n";
+	result += "loopNumber: " + std::to_string(loopNumber) + "\n";
 
-    return result;
+	return result;
 }

@@ -4,67 +4,71 @@
 
 Frame::Frame()
 {
-    isDrawableBool = false;
+	isDrawableBool = false;
 }
 
 Frame::~Frame()
 {
-    for (View* it : views)
-    {
-	delete it;
-    }
-    views.clear();
+	for (View* it : views)
+	{
+		delete it;
+	}
+	views.clear();
 }
 
 void Frame::IPOCLoad()
 {
-    for (unsigned int i = 0; i < AMOUNT_OF_VIEWS; i++)
-    {
-	views.push_back(new View());
-	views.at(i)->IPOCLoad();
-    }
+	for (unsigned int i = 0; i < AMOUNT_OF_VIEWS; i++)
+	{
+		views.push_back(new View());
+		views.at(i)->IPOCLoad();
+	}
 }
 
 void Frame::addToFrame(Drawable* drawable)
 {
-    views.at(drawable->getViewIndex())->addDrawable(drawable);
+	views.at(drawable->getViewIndex())->addDrawable(drawable);
 }
 
 void Frame::removeFromFrame(Drawable* drawable)
 {
-    views.at(drawable->getViewIndex())->removeDrawable(drawable);
+	views.at(drawable->getViewIndex())->removeDrawable(drawable);
 }
 
 void Frame::drawAll(sf::RenderTarget& target)
 {
 
-    for (unsigned int zIndex = 0; zIndex < HIGHEST_Z_INDEX; zIndex++)
-    {
-	for (unsigned int viewIndex = 0; viewIndex < views.size(); viewIndex++)
+	for (unsigned int zIndex = 0; zIndex < HIGHEST_Z_INDEX; zIndex++)
 	{
-	    views.at(viewIndex)->drawAllAtZ(zIndex, target);
+		for (unsigned int viewIndex = 0; viewIndex < views.size(); viewIndex++)
+		{
+			views.at(viewIndex)->drawAllAtZ(zIndex, target);
+		}
 	}
-    }
-    isDrawableBool = false;
+	isDrawableBool = false;
 }
 
 void Frame::markAsDrawable()
 {
-    isDrawableBool = true;
+	isDrawableBool = true;
 }
 
 bool Frame::isDrawable() const
 {
-    return isDrawableBool;
+	return isDrawableBool;
 }
 
-void Frame::setViewPort(const unsigned int& viewIndex, const float& topLeftX, const float& topLeftY, const float& sizeX, const float& sizeY)
+void Frame::setViewPort(const unsigned int& viewIndex,
+						const float& topLeftX,
+						const float& topLeftY,
+						const float& sizeX,
+						const float& sizeY)
 {
-    views.at(viewIndex)->setViewPort(topLeftX, topLeftY, sizeX, sizeY);
+	views.at(viewIndex)->setViewPort(topLeftX, topLeftY, sizeX, sizeY);
 }
 
 std::string Frame::getStatusString() const
 {
-    return "N/A";
+	return "N/A";
 }
 

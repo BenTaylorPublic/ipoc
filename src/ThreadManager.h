@@ -8,26 +8,30 @@
 #include "InputController.h"
 #include "DecimatedProcessHandler.h"
 
-class ThreadManager {
+class ThreadManager
+{
 public:
-    ThreadManager();
-    ~ThreadManager();
-    void IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController, DecimatedProcessHandler* inputDecimatedProcessHandler);
-    std::string getStatusString() const;
+	ThreadManager();
+	~ThreadManager();
+	void IPOCLoad(Storage* inputStorage,
+				  Frame* inputFrame,
+				  InputController* inputInputController,
+				  DecimatedProcessHandler* inputDecimatedProcessHandler);
+	std::string getStatusString() const;
 
-    //loadGlobal
-    //void loadGlobalStart();
-    //void loadGlobalJoin();
-    //std::atomic<bool> loadGlobalJoinable{false};
+	//loadGlobal
+	//void loadGlobalStart();
+	//void loadGlobalJoin();
+	//std::atomic<bool> loadGlobalJoinable{false};
 
 private:
-    Storage* storage;
-    Frame* frame;
-    InputController* inputController;
-    DecimatedProcessHandler* decimatedProcessHandler;
+	Storage* storage;
+	Frame* frame;
+	InputController* inputController;
+	DecimatedProcessHandler* decimatedProcessHandler;
 
-    //loadGlobal
-    //void loadGlobal();
-    //std::thread* loadGlobalThread;
+	//loadGlobal
+	//void loadGlobal();
+	//std::thread* loadGlobalThread;
 
 };

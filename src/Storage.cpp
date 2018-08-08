@@ -12,5 +12,5 @@ Storage::~Storage()
 
 std::string Storage::getStatusString() const
 {
-    return "N/A";
+	return "N/A";
 }

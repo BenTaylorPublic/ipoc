@@ -19,25 +19,30 @@
 //Program specific
 #define BOSS_SIM_VERSION "0.0.1"
 
-enum InputStatus {
-    Active, PauseRequested, Paused
+enum InputStatus
+{
+	Active, PauseRequested, Paused
 };
 
-class Settings {
+class Settings
+{
 public:
-    static std::string getStatusString();
-    static void loadSettings();
-    static std::string filePath;
-    static std::string imageFilePath;
-    static std::string fontFilePath;
-    static int screenWidth;
-    static int screenHeight;
-    static std::string screenTitle;
-    static std::string windowType;
-    static bool hideCursor;
-    static InputStatus inputStatus;
+	static std::string getStatusString();
+	static void loadSettings();
+	static std::string filePath;
+	static std::string imageFilePath;
+	static std::string fontFilePath;
+	static int screenWidth;
+	static int screenHeight;
+	static std::string screenTitle;
+	static std::string windowType;
+	static bool hideCursor;
+	static InputStatus inputStatus;
 private:
-    static int getIntFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);
-    static std::string getStringFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);
-    static bool getBoolFromSettings(std::vector<std::string>& inputFile, const std::string& inputString);
+	static int getIntFromSettings(std::vector<std::string>& inputFile,
+								  const std::string& inputString);
+	static std::string getStringFromSettings(std::vector<std::string>& inputFile,
+											 const std::string& inputString);
+	static bool getBoolFromSettings(std::vector<std::string>& inputFile,
+									const std::string& inputString);
 };

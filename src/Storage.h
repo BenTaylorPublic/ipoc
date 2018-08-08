@@ -12,9 +12,10 @@
 #include "Circle.h"
 #include "Line.h"
 
-class Storage {
+class Storage
+{
 public:
-    Storage();
-    ~Storage();
-    std::string getStatusString() const;
+	Storage();
+	~Storage();
+	std::string getStatusString() const;
 };

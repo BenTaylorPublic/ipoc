@@ -2,53 +2,55 @@
 #include "Settings.h"
 #include "Debug.h"
 
-void FileManager::writeToFile(const std::string& filePath, const std::string& input)
+void FileManager::writeToFile(const std::string& filePath,
+							  const std::string& input)
 {
-    std::ofstream file;
-    file.open(filePath, std::ios_base::app);
-    file << input;
-    file.close();
+	std::ofstream file;
+	file.open(filePath, std::ios_base::app);
+	file << input;
+	file.close();
 }
 
-void FileManager::writeToFile(const std::string& filePath, const char& input)
+void FileManager::writeToFile(const std::string& filePath,
+							  const char& input)
 {
-    std::ofstream file;
-    file.open(filePath, std::ios_base::app);
-    file << input;
-    file.close();
+	std::ofstream file;
+	file.open(filePath, std::ios_base::app);
+	file << input;
+	file.close();
 }
 
 void FileManager::clearFile(const std::string& filePath)
 {
-    std::ofstream file;
-    file.open(filePath);
-    file << "";
-    file.close();
+	std::ofstream file;
+	file.open(filePath);
+	file << "";
+	file.close();
 }
 
 std::vector<std::string> FileManager::readFile(const std::string& filePath)
 {
-    std::vector<std::string> result = {};
+	std::vector<std::string> result = {};
 
-    std::string line = "";
-    std::ifstream file(filePath);
-    if (file.is_open())
-    {
-	while (getline(file, line))
+	std::string line = "";
+	std::ifstream file(filePath);
+	if (file.is_open())
 	{
-	    result.push_back(line);
+		while (getline(file, line))
+		{
+			result.push_back(line);
+		}
+		file.close();
+	} else
+	{
+		Debug::logLine("[WARN] A text file could not be read.");
+		Debug::logLine("[WARN] File Path: " + filePath);
 	}
-	file.close();
-    } else
-    {
-	Debug::logLine("[WARN] A text file could not be read.");
-	Debug::logLine("[WARN] File Path: " + filePath);
-    }
 
-    return result;
+	return result;
 }
 
 std::string FileManager::getStatusString()
 {
-    return "N/A";
+	return "N/A";
 }

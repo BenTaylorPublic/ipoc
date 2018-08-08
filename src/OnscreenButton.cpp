@@ -3,201 +3,207 @@
 
 OnscreenButton::OnscreenButton()
 {
-    Debug::notifyOfConstruction(6);
+	Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType)
 {
-    onscreenButtonType = inputOnscreenButtonType;
-    Debug::notifyOfConstruction(6);
+	onscreenButtonType = inputOnscreenButtonType;
+	Debug::notifyOfConstruction(6);
 }
 
-OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ)
+OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType,
+							   const unsigned int& inputZ)
 {
-    setZIndex(inputZ);
-    onscreenButtonType = inputOnscreenButtonType;
-    Debug::notifyOfConstruction(6);
+	setZIndex(inputZ);
+	onscreenButtonType = inputOnscreenButtonType;
+	Debug::notifyOfConstruction(6);
 }
 
-OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType, const unsigned int& inputZ, const Point2D& point)
+OnscreenButton::OnscreenButton(const OnscreenButtonType& inputOnscreenButtonType,
+							   const unsigned int& inputZ,
+							   const Point2D& point)
 {
-    setZIndex(inputZ);
-    setPosition(point);
-    onscreenButtonType = inputOnscreenButtonType;
-    Debug::notifyOfConstruction(6);
+	setZIndex(inputZ);
+	setPosition(point);
+	onscreenButtonType = inputOnscreenButtonType;
+	Debug::notifyOfConstruction(6);
 }
 
 OnscreenButton::~OnscreenButton()
 {
-    for (Drawable* it : stateUpDrawables)
-    {
-	delete it;
-    }
-    stateUpDrawables.clear();
-    stateUpOffset.clear();
+	for (Drawable* it : stateUpDrawables)
+	{
+		delete it;
+	}
+	stateUpDrawables.clear();
+	stateUpOffset.clear();
 
-    for (Drawable* it : stateDownDrawables)
-    {
-	delete it;
-    }
-    stateDownDrawables.clear();
-    stateDownOffset.clear();
+	for (Drawable* it : stateDownDrawables)
+	{
+		delete it;
+	}
+	stateDownDrawables.clear();
+	stateDownOffset.clear();
 
-    Debug::notifyOfDestruction(6);
+	Debug::notifyOfDestruction(6);
 }
 
-void OnscreenButton::addToUp(Drawable* drawable, const Point2D& offsetFromTopLeft)
+void OnscreenButton::addToUp(Drawable* drawable,
+							 const Point2D& offsetFromTopLeft)
 {
-    Debug::notifyOfCopy(4);
-    Debug::notifyOfCopy(4);
-    drawable->setPosition(drawingPosition + offsetFromTopLeft);
-    stateUpDrawables.push_back(drawable);
-    stateUpOffset.push_back(offsetFromTopLeft);
+	Debug::notifyOfCopy(4);
+	Debug::notifyOfCopy(4);
+	drawable->setPosition(drawingPosition + offsetFromTopLeft);
+	stateUpDrawables.push_back(drawable);
+	stateUpOffset.push_back(offsetFromTopLeft);
 }
 
-void OnscreenButton::addToDown(Drawable* drawable, const Point2D& offsetFromTopLeft)
+void OnscreenButton::addToDown(Drawable* drawable,
+							   const Point2D& offsetFromTopLeft)
 {
-    Debug::notifyOfCopy(4);
-    Debug::notifyOfCopy(4);
-    drawable->setPosition(drawingPosition + offsetFromTopLeft);
-    stateDownDrawables.push_back(drawable);
-    stateDownOffset.push_back(offsetFromTopLeft);
+	Debug::notifyOfCopy(4);
+	Debug::notifyOfCopy(4);
+	drawable->setPosition(drawingPosition + offsetFromTopLeft);
+	stateDownDrawables.push_back(drawable);
+	stateDownOffset.push_back(offsetFromTopLeft);
 }
 
 void OnscreenButton::addToUp(Drawable* drawable)
 {
-    Debug::notifyOfCopy(4);
-    drawable->setPosition(drawingPosition);
-    stateUpDrawables.push_back(drawable);
-    stateUpOffset.push_back(Point2D(0, 0));
+	Debug::notifyOfCopy(4);
+	drawable->setPosition(drawingPosition);
+	stateUpDrawables.push_back(drawable);
+	stateUpOffset.push_back(Point2D(0, 0));
 }
 
 void OnscreenButton::addToDown(Drawable* drawable)
 {
-    Debug::notifyOfCopy(4);
-    drawable->setPosition(drawingPosition);
-    stateDownDrawables.push_back(drawable);
-    stateDownOffset.push_back(Point2D(0, 0));
+	Debug::notifyOfCopy(4);
+	drawable->setPosition(drawingPosition);
+	stateDownDrawables.push_back(drawable);
+	stateDownOffset.push_back(Point2D(0, 0));
 }
 
-void OnscreenButton::setHitBox(const Point2D& inputTopLeft, const Point2D& inputBottomRight)
+void OnscreenButton::setHitBox(const Point2D& inputTopLeft,
+							   const Point2D& inputBottomRight)
 {
-    hitBoxTopLeft = drawingPosition + inputTopLeft;
-    hitBoxBottomRight = drawingPosition + inputBottomRight;
+	hitBoxTopLeft = drawingPosition + inputTopLeft;
+	hitBoxBottomRight = drawingPosition + inputBottomRight;
 }
 
 bool OnscreenButton::isTriggered() const
 {
-    return triggered;
+	return triggered;
 }
 
 void OnscreenButton::draw(sf::RenderTarget& target) const
 {
-    if (stateUp)
-    {
-	for (Drawable* it : stateUpDrawables)
+	if (stateUp)
 	{
-	    it->draw(target);
-	}
-    } else
-    {
-	for (Drawable* it : stateDownDrawables)
+		for (Drawable* it : stateUpDrawables)
+		{
+			it->draw(target);
+		}
+	} else
 	{
-	    it->draw(target);
+		for (Drawable* it : stateDownDrawables)
+		{
+			it->draw(target);
+		}
 	}
-    }
 }
 
 void OnscreenButton::setPosition(const Point2D& newPoint)
 {
-    Point2D relativeNewPosition = drawingPosition.getRelative(newPoint);
-    drawingPosition = newPoint;
+	Point2D relativeNewPosition = drawingPosition.getRelative(newPoint);
+	drawingPosition = newPoint;
 
-    for (int i = 0; i < stateUpDrawables.size(); i++)
-    {
-	stateUpDrawables[i]->setPosition(stateUpOffset[i] + drawingPosition);
-    }
+	for (int i = 0; i < stateUpDrawables.size(); i++)
+	{
+		stateUpDrawables[i]->setPosition(stateUpOffset[i] + drawingPosition);
+	}
 
-    for (int i = 0; i < stateDownDrawables.size(); i++)
-    {
-	stateDownDrawables[i]->setPosition(stateDownOffset[i] + drawingPosition);
-    }
+	for (int i = 0; i < stateDownDrawables.size(); i++)
+	{
+		stateDownDrawables[i]->setPosition(stateDownOffset[i] + drawingPosition);
+	}
 
-    hitBoxTopLeft += relativeNewPosition;
-    hitBoxBottomRight += relativeNewPosition;
+	hitBoxTopLeft += relativeNewPosition;
+	hitBoxBottomRight += relativeNewPosition;
 }
 
 bool OnscreenButton::mouseDown(const Point2D& mousePoint)
 {
-    if (isInside(mousePoint))
-    {
-	stateUp = false;
-	if (onscreenButtonType == TriggerOnDown)
+	if (isInside(mousePoint))
 	{
-	    triggered = true;
-	    return true;
-	} else if (onscreenButtonType == TriggerOnHold)
-	{
-	    triggered = true;
+		stateUp = false;
+		if (onscreenButtonType == TriggerOnDown)
+		{
+			triggered = true;
+			return true;
+		} else if (onscreenButtonType == TriggerOnHold)
+		{
+			triggered = true;
+		}
 	}
-    }
-    return false;
+	return false;
 }
 
 void OnscreenButton::mouseHold(const Point2D& mousePoint)
 {
-    if (!isInside(mousePoint))
-    {
-	stateUp = true;
-	if (onscreenButtonType == TriggerOnHold)
+	if (!isInside(mousePoint))
 	{
-	    triggered = false;
+		stateUp = true;
+		if (onscreenButtonType == TriggerOnHold)
+		{
+			triggered = false;
+		}
 	}
-    }
 }
 
 bool OnscreenButton::mouseUp(const Point2D& mousePoint)
 {
-    if (isInside(mousePoint))
-    {
-	if (onscreenButtonType == TriggerOnUp)
+	if (isInside(mousePoint))
 	{
-	    if (!stateUp)
-	    {
-		stateUp = true;
-		triggered = true;
-		return true;
-	    }
+		if (onscreenButtonType == TriggerOnUp)
+		{
+			if (!stateUp)
+			{
+				stateUp = true;
+				triggered = true;
+				return true;
+			}
+		}
 	}
-    }
-    triggered = false;
-    stateUp = true;
-    return false;
+	triggered = false;
+	stateUp = true;
+	return false;
 }
 
 void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscreenButtonType)
 {
-    onscreenButtonType = inputOnscreenButtonType;
+	onscreenButtonType = inputOnscreenButtonType;
 }
 
 bool OnscreenButton::isInside(const Point2D& point) const
 {
-    if (point.x > hitBoxTopLeft.x && point.x < hitBoxBottomRight.x)
-    {
-	if (point.y > hitBoxTopLeft.y && point.y < hitBoxBottomRight.y)
+	if (point.x > hitBoxTopLeft.x && point.x < hitBoxBottomRight.x)
 	{
-	    return true;
+		if (point.y > hitBoxTopLeft.y && point.y < hitBoxBottomRight.y)
+		{
+			return true;
+		}
 	}
-    }
-    return false;
+	return false;
 }
 
 void OnscreenButton::clearTriggered()
 {
-    triggered = false;
+	triggered = false;
 }
 
 std::string OnscreenButton::getStatusString() const
 {
-    return "N/A";
+	return "N/A";
 }

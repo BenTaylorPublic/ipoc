@@ -3,30 +3,30 @@
 
 Drawable::Drawable()
 {
-    Debug::notifyOfConstruction(7);
+	Debug::notifyOfConstruction(7);
 }
 
 Drawable::~Drawable()
 {
-    Debug::notifyOfDestruction(7);
+	Debug::notifyOfDestruction(7);
 }
 
 void Drawable::setZIndex(const unsigned int& inputZIndex)
 {
-    zIndex = inputZIndex;
+	zIndex = inputZIndex;
 }
 
 unsigned int Drawable::getZIndex() const
 {
-    return zIndex;
+	return zIndex;
 }
 
 void Drawable::setViewIndex(const unsigned int& inputViewIndex)
 {
-    viewIndex = inputViewIndex;
+	viewIndex = inputViewIndex;
 }
 
 unsigned int Drawable::getViewIndex() const
 {
-    return viewIndex;
+	return viewIndex;
 }

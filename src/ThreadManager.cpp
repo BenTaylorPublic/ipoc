@@ -11,17 +11,20 @@ ThreadManager::~ThreadManager()
 {
 }
 
-void ThreadManager::IPOCLoad(Storage* inputStorage, Frame* inputFrame, InputController* inputInputController, DecimatedProcessHandler* inputDecimatedProcessHandler)
+void ThreadManager::IPOCLoad(Storage* inputStorage,
+							 Frame* inputFrame,
+							 InputController* inputInputController,
+							 DecimatedProcessHandler* inputDecimatedProcessHandler)
 {
-    storage = inputStorage;
-    frame = inputFrame;
-    inputController = inputInputController;
-    decimatedProcessHandler = inputDecimatedProcessHandler;
+	storage = inputStorage;
+	frame = inputFrame;
+	inputController = inputInputController;
+	decimatedProcessHandler = inputDecimatedProcessHandler;
 }
 
 std::string ThreadManager::getStatusString() const
 {
-    return "N/A";
+	return "N/A";
 }
 
 /*
