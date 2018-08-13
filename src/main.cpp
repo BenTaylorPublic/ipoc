@@ -1,6 +1,8 @@
 #include "MasterController.h"
 #include <iostream>
-
+/*! \mainpage Welcome to IPOC Documentation
+	Not sure what to show here yet
+ */
 int main()
 {
 
