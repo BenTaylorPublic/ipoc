@@ -4,3 +4,4 @@
 ipoc-core-Makefile.mk
 .idea/*
 cmake-build-debug/*
+doxygen/*
