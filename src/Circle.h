@@ -5,6 +5,9 @@
 #include "Point2D.h"
 #include "Color.h"
 
+/**
+ * Circle drawable class
+ */
 class Circle : public Drawable
 {
 public:
