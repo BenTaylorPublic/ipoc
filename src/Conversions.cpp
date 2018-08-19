@@ -64,8 +64,3 @@ std::string Conversions::insertCommas(const int& inputInt)
 
 	return numWithCommas;
 }
-
-std::string Conversions::getStatusString()
-{
-	return "N/A";
-}

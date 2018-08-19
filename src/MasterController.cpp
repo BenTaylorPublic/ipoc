@@ -198,7 +198,6 @@ std::string MasterController::getStatusString() const
 	result += outputController->getStatusString();
 	result += Settings::getStatusString();
 	result += FileManager::getStatusString();
-	result += Conversions::getStatusString();
-
+	
 	return result;
 }
