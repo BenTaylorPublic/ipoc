@@ -41,7 +41,7 @@ public:
 	static std::string insertCommas(const int& inputInt);
 private:
 	/**
-	 * Used to contain the keycode string versions
+	 * Used to contain the keycode string versions of the PhysicalButton enum
 	 */
 	static std::string keyEnumStrings[];
 };
