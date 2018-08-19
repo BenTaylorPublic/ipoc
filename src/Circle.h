@@ -6,7 +6,8 @@
 #include "Color.h"
 
 /**
- * Circle drawable class
+ * Circle is a data type \n
+ * Circle has a TrackedClasses ID of 5
  */
 class Circle : public Drawable
 {
@@ -20,13 +21,13 @@ public:
 	 */
 	~Circle();
 	/**
-	 * <b> IPOC ONLY </b>\n
-	 * Draws the Circle to the render target\n
+	 * <b> IPOC ONLY </b> \n
+	 * Draws the Circle to the render target \n
 	 * @param target sf::RenderTarget render target to draw to
 	 */
 	void draw(sf::RenderTarget& target) const override;
 	/**
-	 * Sets the center position of the Circle.\n
+	 * Sets the center position of the Circle \n
 	 * This function is based off the Circle's current radius, so use setRadius() before using setCenter()
 	 * @param newPoint Point2D new center point for the Circle
 	 */
@@ -37,8 +38,8 @@ public:
 	 */
 	void setColor(const Color& color);
 	/**
-	 * The point count define how many points there are around the Circle\n
-	 * This affects the Circle's smoothness, but can also impact on performance.\n
+	 * The point count define how many points there are around the Circle \n
+	 * This affects the Circle's smoothness, but can also impact on performance \n
 	 * I believe the default point count is 30.
 	 * @param pointCount int the new amount of points for the circle
 	 */
@@ -49,7 +50,7 @@ public:
 	 */
 	void setPosition(const Point2D& newPoint) override;
 	/**
-	 * Sets the Circle's radius\n
+	 * Sets the Circle's radius \n
 	 * If you need to use setCenter(), call setRadius() before hand
 	 * @param radius int new radius for the Circle
 	 */

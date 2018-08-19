@@ -10,18 +10,18 @@ Color::Color(const int& inputR,
 		Debug::logLine("[ERR] A color was made with R G or B over 255!");
 	}
 
-	r = inputR;
-	g = inputG;
-	b = inputB;
+	red = inputR;
+	green = inputG;
+	blue = inputB;
 
 	Debug::notifyOfConstruction(5);
 }
 
 Color::Color()
 {
-	r = 0;
-	g = 0;
-	b = 0;
+	red = 0;
+	green = 0;
+	blue = 0;
 	Debug::notifyOfConstruction(5);
 }
 
@@ -30,20 +30,20 @@ Color::~Color()
 	Debug::notifyOfDestruction(5);
 }
 
-Color Color::Random()
+Color Color::random()
 {
 	return Color(rand() % 256, rand() % 256, rand() % 256);
 }
 
 void Color::randomize()
 {
-	r = rand() % 256;
-	g = rand() % 256;
-	b = rand() % 256;
+	red = rand() % 256;
+	green = rand() % 256;
+	blue = rand() % 256;
 }
 
 std::string Color::getStatusString() const
 {
-	std::string result = "(" + std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b) + ")";
+	std::string result = "(" + std::to_string(red) + "," + std::to_string(green) + "," + std::to_string(blue) + ")";
 	return result;
 }
