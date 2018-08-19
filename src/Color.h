@@ -1,7 +1,10 @@
 #pragma once
 
 #include <string>
-//TODO: Remove red green blue from public, and create get and set accessors
+
+/*
+ * TODO: Remove red green blue from public, and create get and set accessors
+ */
 
 /**
  * Color is a data type \n
@@ -28,7 +31,6 @@ public:
 	 */
 	~Color();
 	/**
-	 * <b> IPOC ONLY </b> \n
 	 * Returns a string indicating this object's current status, and all objects it manages \n
 	 * Should only be used for debugging
 	 */
