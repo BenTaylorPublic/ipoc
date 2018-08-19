@@ -37,14 +37,15 @@ std::string Conversions::replaceStringInString(const std::string& inputString,
 {
 	std::string result = "";
 
-	for (int i = 0; i < inputString.size(); i++)
+	for (int i = 0; i < inputString.size(); i++) //For each character of the input string
 	{
-		if (inputString.substr(i, stringToReplace.size()).compare(stringToReplace) == 0)
+		if (inputString.substr(i, stringToReplace.size()).compare(stringToReplace) == 0) //If the next next x characters matches the string to replace
 		{
-			result += stringToReplaceWith;
-			i += stringToReplace.size() - 1;
+			result += stringToReplaceWith; //Instead add the replace with text
+			i += stringToReplace.size() - 1; //Then increase the character index until it's past the replaced with text
 		} else
 		{
+			//Otherwise just add the character
 			result += inputString.at(i);
 		}
 	}
