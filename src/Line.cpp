@@ -32,7 +32,7 @@ void Line::setPosition2(const Point2D& newPoint)
 
 void Line::setColor(const Color& color)
 {
-	sf::Color newColor(color.r, color.g, color.b);
+	sf::Color newColor(color.red, color.green, color.blue);
 
 	line[0].color = newColor;
 	line[1].color = newColor;

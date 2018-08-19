@@ -21,7 +21,7 @@ void Rectangle::setSize(const int& width,
 
 void Rectangle::setColor(const Color& color)
 {
-	rectangle.setFillColor(sf::Color(color.r, color.g, color.b));
+	rectangle.setFillColor(sf::Color(color.red, color.green, color.blue));
 }
 
 void Rectangle::draw(sf::RenderTarget& target) const

@@ -25,7 +25,7 @@ void Circle::setCenter(const Point2D& newPoint)
 
 void Circle::setColor(const Color& color)
 {
-	circle.setFillColor(sf::Color(color.r, color.g, color.b));
+	circle.setFillColor(sf::Color(color.red, color.green, color.blue));
 }
 
 void Circle::setPointCount(const int& pointCount)
