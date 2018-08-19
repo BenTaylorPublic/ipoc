@@ -10,19 +10,17 @@ class Conversions
 {
 public:
 	/**
-	 * Returns true if a specified string (inputString) contains a second specified string (containsString)
-	 * @param inputString The string that could contain the containsString
-	 * @param containsString The string that could be inside the inputString
-	 * @return true if containsString is inside inputString, otherwise false
-	 */
-	static bool stringContains(const std::string& inputString,
-							   const std::string& containsString);
-	/**
 	 * Converts the PhysicalButton Enum to it's corresponding key as a string
 	 * @param inputKey PhysicalButton Enum to convert to a string
 	 * @return String representation of inputKey
 	 */
 	static std::string convertKeyToString(const PhysicalButton& inputKey);
+	/**
+	 * Returns a number with commas every 3 digits
+	 * @param inputInt integer to put commas into
+	 * @return A string with commas every 3 digits
+	 */
+	static std::string insertCommas(const int& inputInt);
 	/**
 	 * Replaces all occurrences of a string, with a specified string
 	 * @param inputString the original string
@@ -34,11 +32,13 @@ public:
 											 const std::string& stringToReplace,
 											 const std::string& stringToReplaceWith);
 	/**
-	 * Returns a number with commas every 3 digits
-	 * @param inputInt integer to put commas into
-	 * @return A string with commas every 3 digits
+	 * Returns true if a specified string (inputString) contains a second specified string (containsString)
+	 * @param inputString The string that could contain the containsString
+	 * @param containsString The string that could be inside the inputString
+	 * @return true if containsString is inside inputString, otherwise false
 	 */
-	static std::string insertCommas(const int& inputInt);
+	static bool stringContains(const std::string& inputString,
+							   const std::string& containsString);
 private:
 	/**
 	 * Used to contain the keycode string versions of the PhysicalButton enum
