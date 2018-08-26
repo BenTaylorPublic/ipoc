@@ -45,16 +45,16 @@ public:
 	 */
 	void randomize();
 	/**
-	 * The red component of the color (int, 0-255)
+	 * The blue component of the color (int, 0-255)
 	 */
-	int red;
+	int blue;
 	/**
 	 * The green component of the color (int, 0-255)
 	 */
 	int green;
 	/**
-	 * The blue component of the color (int, 0-255)
+	 * The red component of the color (int, 0-255)
 	 */
-	int blue;
+	int red;
 private:
 };
