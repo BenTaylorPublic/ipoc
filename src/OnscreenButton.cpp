@@ -34,6 +34,7 @@ OnscreenButton::~OnscreenButton()
 {
 	for (Drawable* it : stateUpDrawables)
 	{
+
 		delete it;
 	}
 	stateUpDrawables.clear();
