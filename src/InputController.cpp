@@ -10,10 +10,10 @@ InputController::~InputController()
 {
 }
 
-void InputController::IPOCLoad()
+void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
 {
-	resetInputArrays();
-	window = nullptr;
+	onscreenButtons.push_back(onscreenButtonToAdd);
+	onscreenButtonToAdd->registerId(ID_ONSCREEN_BUTTON);
 }
 
 void InputController::input()
@@ -136,19 +136,35 @@ void InputController::input()
 	mousePoint.y = windowPosition.y;
 }
 
-void InputController::resetInputArrays()
+void InputController::IPOCLoad()
 {
-	for (int i = 0; i < AMOUNT_OF_PHYSICAL_BUTTONS; i++)
-		physicalButtonStatusArray[i] = ButtonUntouched;
+	resetInputArrays();
+	window = nullptr;
 }
 
-void InputController::markStartOfLoop()
+const Point2D& InputController::getMousePoint() const
 {
+	return mousePoint;
+}
 
-	physicalButtonDown.push(-1);
-	physicalButtonUp.push(-1);
+bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton,
+											  const ButtonStatus& inputStatus) const
+{
+	if ((inputStatus == ButtonDown || inputStatus == ButtonHold) && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonDown)
+		return true;
+	else if (inputStatus == ButtonHold && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonHold)
+		return true;
+	else if (inputStatus == ButtonUntouched && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonUntouched)
+		return true;
+	else if (inputStatus == ButtonUp && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonUp)
+		return true;
+	else
+		return false;
+}
 
-	onscreenButtonToClearTrigger.push(nullptr);
+std::string InputController::getStatusString() const
+{
+	return "N/A";
 }
 
 void InputController::markEndOfLoop()
@@ -201,26 +217,39 @@ void InputController::markEndOfLoop()
 	}
 }
 
-bool InputController::getPhysicalButtonStatus(const PhysicalButton& inputPhysicalButton,
-											  const ButtonStatus& inputStatus) const
+void InputController::markStartOfLoop()
 {
-	if ((inputStatus == ButtonDown || inputStatus == ButtonHold) &&
-		physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonDown)
-		return true;
-	else if (inputStatus == ButtonHold && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonHold)
-		return true;
-	else if (inputStatus == ButtonUntouched && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonUntouched)
-		return true;
-	else if (inputStatus == ButtonUp && physicalButtonStatusArray[(int) inputPhysicalButton] == ButtonUp)
-		return true;
-	else
-		return false;
+
+	physicalButtonDown.push(-1);
+	physicalButtonUp.push(-1);
+
+	onscreenButtonToClearTrigger.push(nullptr);
 }
 
-const Point2D& InputController::getMousePoint() const
+void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
 {
-	return mousePoint;
+	for (unsigned int i = 0; i < onscreenButtons.size(); i++)
+	{
+		if (onscreenButtonToRemove->matches(onscreenButtons[i], ID_ONSCREEN_BUTTON))
+		{
+			onscreenButtons.erase(onscreenButtons.begin() + i);
+			onscreenButtonToRemove->clearId(ID_ONSCREEN_BUTTON);
+			return;
+		}
+	}
 }
+
+void InputController::setGraphicsWindow(Window* inputWindow)
+{
+	window = inputWindow;
+}
+
+void InputController::resetInputArrays()
+{
+	for (int i = 0; i < AMOUNT_OF_PHYSICAL_BUTTONS; i++)
+		physicalButtonStatusArray[i] = ButtonUntouched;
+}
+
 
 void InputController::handlePhysicalButton(const sf::Keyboard::Key& inputButton,
 										   const int& index)
@@ -310,34 +339,4 @@ void InputController::handleLeftClick(const int& index)
 		}
 	}
 }
-
-void InputController::addOnscreenButton(OnscreenButton* onscreenButtonToAdd)
-{
-	onscreenButtons.push_back(onscreenButtonToAdd);
-	onscreenButtonToAdd->registerId(ID_ONSCREEN_BUTTON);
-}
-
-void InputController::removeOnscreenButton(OnscreenButton* onscreenButtonToRemove)
-{
-	for (unsigned int i = 0; i < onscreenButtons.size(); i++)
-	{
-		if (onscreenButtonToRemove->matches(onscreenButtons[i], ID_ONSCREEN_BUTTON))
-		{
-			onscreenButtons.erase(onscreenButtons.begin() + i);
-			onscreenButtonToRemove->clearId(ID_ONSCREEN_BUTTON);
-			return;
-		}
-	}
-}
-
-void InputController::setGraphicsWindow(Window* inputWindow)
-{
-	window = inputWindow;
-}
-
-std::string InputController::getStatusString() const
-{
-	return "N/A";
-}
-
 
