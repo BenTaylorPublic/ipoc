@@ -18,6 +18,14 @@ void Line::draw(sf::RenderTarget& target) const
 	target.draw(line, 2, sf::Lines);
 }
 
+void Line::setColor(const Color& color)
+{
+	sf::Color newColor(color.red, color.green, color.blue);
+
+	line[0].color = newColor;
+	line[1].color = newColor;
+}
+
 void Line::setPosition(const Point2D& newPoint)
 {
 	line[0].position.x = newPoint.x;
@@ -28,12 +36,4 @@ void Line::setPosition2(const Point2D& newPoint)
 {
 	line[1].position.x = newPoint.x;
 	line[1].position.y = newPoint.y;
-}
-
-void Line::setColor(const Color& color)
-{
-	sf::Color newColor(color.red, color.green, color.blue);
-
-	line[0].color = newColor;
-	line[1].color = newColor;
 }
