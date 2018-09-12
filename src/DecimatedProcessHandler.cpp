@@ -12,27 +12,6 @@ DecimatedProcessHandler::~DecimatedProcessHandler()
 
 }
 
-void DecimatedProcessHandler::IPOCLoad()
-{
-}
-
-void DecimatedProcessHandler::markStartOfLoop()
-{
-	for (int i = 0; i < decimatedProcessesPreLoop.size(); i++)
-	{
-		decimatedProcessesPreLoop[i]->tick();
-	}
-
-}
-
-void DecimatedProcessHandler::markEndOfLoop()
-{
-	for (int i = 0; i < decimatedProcessesPostLoop.size(); i++)
-	{
-		decimatedProcessesPostLoop[i]->tick();
-	}
-}
-
 void DecimatedProcessHandler::addToHandler(DecimatedProcess* decimatedProcessesToAdd)
 {
 	if (decimatedProcessesToAdd->tickBeforeLoop)
@@ -44,6 +23,27 @@ void DecimatedProcessHandler::addToHandler(DecimatedProcess* decimatedProcessesT
 	}
 
 	decimatedProcessesToAdd->registerId(ID_DECIMATED_PROCESS);
+}
+
+void DecimatedProcessHandler::markEndOfLoop()
+{
+	for (int i = 0; i < decimatedProcessesPostLoop.size(); i++)
+	{
+		decimatedProcessesPostLoop[i]->tick();
+	}
+}
+
+void DecimatedProcessHandler::markStartOfLoop()
+{
+	for (int i = 0; i < decimatedProcessesPreLoop.size(); i++)
+	{
+		decimatedProcessesPreLoop[i]->tick();
+	}
+
+}
+
+void DecimatedProcessHandler::IPOCLoad()
+{
 }
 
 void DecimatedProcessHandler::removeFromHandler(DecimatedProcess* decimatedProcessesToRemove)

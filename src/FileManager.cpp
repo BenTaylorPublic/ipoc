@@ -2,23 +2,6 @@
 #include "Settings.h"
 #include "Debug.h"
 
-void FileManager::writeToFile(const std::string& filePath,
-							  const std::string& input)
-{
-	std::ofstream file;
-	file.open(filePath, std::ios_base::app);
-	file << input;
-	file.close();
-}
-
-void FileManager::writeToFile(const std::string& filePath,
-							  const char& input)
-{
-	std::ofstream file;
-	file.open(filePath, std::ios_base::app);
-	file << input;
-	file.close();
-}
 
 void FileManager::clearFile(const std::string& filePath)
 {
@@ -26,6 +9,11 @@ void FileManager::clearFile(const std::string& filePath)
 	file.open(filePath);
 	file << "";
 	file.close();
+}
+
+std::string FileManager::getStatusString()
+{
+	return "N/A";
 }
 
 std::vector<std::string> FileManager::readFile(const std::string& filePath)
@@ -50,7 +38,20 @@ std::vector<std::string> FileManager::readFile(const std::string& filePath)
 	return result;
 }
 
-std::string FileManager::getStatusString()
+void FileManager::writeToFile(const std::string& filePath,
+							  const std::string& input)
 {
-	return "N/A";
+	std::ofstream file;
+	file.open(filePath, std::ios_base::app);
+	file << input;
+	file.close();
+}
+
+void FileManager::writeToFile(const std::string& filePath,
+							  const char& input)
+{
+	std::ofstream file;
+	file.open(filePath, std::ios_base::app);
+	file << input;
+	file.close();
 }

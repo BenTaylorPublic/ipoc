@@ -11,9 +11,9 @@ Drawable::~Drawable()
 	Debug::notifyOfDestruction(7);
 }
 
-void Drawable::setZIndex(const unsigned int& inputZIndex)
+unsigned int Drawable::getViewIndex() const
 {
-	zIndex = inputZIndex;
+	return viewIndex;
 }
 
 unsigned int Drawable::getZIndex() const
@@ -26,7 +26,7 @@ void Drawable::setViewIndex(const unsigned int& inputViewIndex)
 	viewIndex = inputViewIndex;
 }
 
-unsigned int Drawable::getViewIndex() const
+void Drawable::setZIndex(const unsigned int& inputZIndex)
 {
-	return viewIndex;
+	zIndex = inputZIndex;
 }

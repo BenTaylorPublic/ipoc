@@ -31,6 +31,16 @@ Font::~Font()
 	Debug::notifyOfDestruction(0);
 }
 
+const sf::Font* Font::getFont() const
+{
+	return &font;
+}
+
+std::string Font::getStatusString() const
+{
+	return "Font name=" + name;
+}
+
 void Font::loadFont(const std::string& inputName,
 					const std::string& fileName)
 {
@@ -44,14 +54,4 @@ void Font::loadFont(const std::string& inputName,
 	{
 		Debug::logLine("[INFO] Loaded font (" + name + ")");
 	}
-}
-
-const sf::Font* Font::getFont() const
-{
-	return &font;
-}
-
-std::string Font::getStatusString() const
-{
-	return "Font name=" + name;
 }

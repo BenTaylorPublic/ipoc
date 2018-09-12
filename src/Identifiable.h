@@ -7,7 +7,11 @@
 #define ID_DRAWABLE 0
 #define ID_ONSCREEN_BUTTON 1
 #define ID_DECIMATED_PROCESS 0
-
+/**
+ * Identifiable is an interface to inherit from \n
+ * It needs a bit of work before it's usable \n
+ * TODO: Document after it's reworked
+ */
 class Identifiable
 {
 public:

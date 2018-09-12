@@ -13,6 +13,11 @@ DecimatedProcess::~DecimatedProcess()
 	Debug::notifyOfDestruction(11);
 }
 
+void DecimatedProcess::setProcessEveryXLoops(const unsigned int& x)
+{
+	counterGoal = x;
+}
+
 void DecimatedProcess::tick()
 {
 	counter++;
@@ -21,9 +26,4 @@ void DecimatedProcess::tick()
 		process();
 		counter = 0;
 	}
-}
-
-void DecimatedProcess::setProcessEveryXLoops(const unsigned int& x)
-{
-	counterGoal = x;
 }

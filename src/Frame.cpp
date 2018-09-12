@@ -16,23 +16,9 @@ Frame::~Frame()
 	views.clear();
 }
 
-void Frame::IPOCLoad()
-{
-	for (unsigned int i = 0; i < AMOUNT_OF_VIEWS; i++)
-	{
-		views.push_back(new View());
-		views.at(i)->IPOCLoad();
-	}
-}
-
 void Frame::addToFrame(Drawable* drawable)
 {
 	views.at(drawable->getViewIndex())->addDrawable(drawable);
-}
-
-void Frame::removeFromFrame(Drawable* drawable)
-{
-	views.at(drawable->getViewIndex())->removeDrawable(drawable);
 }
 
 void Frame::drawAll(sf::RenderTarget& target)
@@ -48,14 +34,33 @@ void Frame::drawAll(sf::RenderTarget& target)
 	isDrawableBool = false;
 }
 
-void Frame::markAsDrawable()
+std::string Frame::getStatusString() const
 {
-	isDrawableBool = true;
+	return "N/A";
+}
+
+void Frame::IPOCLoad()
+{
+	for (unsigned int i = 0; i < AMOUNT_OF_VIEWS; i++)
+	{
+		views.push_back(new View());
+		views.at(i)->IPOCLoad();
+	}
 }
 
 bool Frame::isDrawable() const
 {
 	return isDrawableBool;
+}
+
+void Frame::markAsDrawable()
+{
+	isDrawableBool = true;
+}
+
+void Frame::removeFromFrame(Drawable* drawable)
+{
+	views.at(drawable->getViewIndex())->removeDrawable(drawable);
 }
 
 void Frame::setViewPort(const unsigned int& viewIndex,
@@ -65,10 +70,5 @@ void Frame::setViewPort(const unsigned int& viewIndex,
 						const float& sizeY)
 {
 	views.at(viewIndex)->setViewPort(topLeftX, topLeftY, sizeX, sizeY);
-}
-
-std::string Frame::getStatusString() const
-{
-	return "N/A";
 }
 

@@ -24,7 +24,7 @@ public:
 	void setProcessEveryXLoops(const unsigned int& x);
 	/**
 	 * <b> IPOC ONLY </b> \n
-	 * Ticks every loops
+	 * Ticks every loops, counter +1
 	 */
 	void tick();
 	/**
@@ -33,15 +33,15 @@ public:
 	bool tickBeforeLoop;
 private:
 	/**
-	 * djngkjsd
+	 * Method to override for a decimated process implementation
 	 */
 	virtual void process() = 0;
 	/**
-	 * kmldksgsd
+	 * The counter that counts up to the counterGoal, +1 per tick()
 	 */
 	unsigned int counter;
 	/**
-	 * dsgds
+	 * The goal for the counter to reach, as it receives +1 from tick(), at which it will trigger process()
 	 */
 	unsigned int counterGoal;
 };
