@@ -50,14 +50,12 @@ OnscreenButton::~OnscreenButton()
 	Debug::notifyOfDestruction(6);
 }
 
-void OnscreenButton::addToUp(Drawable* drawable,
-							 const Point2D& offsetFromTopLeft)
+void OnscreenButton::addToDown(Drawable* drawable)
 {
 	Debug::notifyOfCopy(4);
-	Debug::notifyOfCopy(4);
-	drawable->setPosition(drawingPosition + offsetFromTopLeft);
-	stateUpDrawables.push_back(drawable);
-	stateUpOffset.push_back(offsetFromTopLeft);
+	drawable->setPosition(drawingPosition);
+	stateDownDrawables.push_back(drawable);
+	stateDownOffset.push_back(Point2D(0, 0));
 }
 
 void OnscreenButton::addToDown(Drawable* drawable,
@@ -78,24 +76,19 @@ void OnscreenButton::addToUp(Drawable* drawable)
 	stateUpOffset.push_back(Point2D(0, 0));
 }
 
-void OnscreenButton::addToDown(Drawable* drawable)
+void OnscreenButton::addToUp(Drawable* drawable,
+							 const Point2D& offsetFromTopLeft)
 {
 	Debug::notifyOfCopy(4);
-	drawable->setPosition(drawingPosition);
-	stateDownDrawables.push_back(drawable);
-	stateDownOffset.push_back(Point2D(0, 0));
+	Debug::notifyOfCopy(4);
+	drawable->setPosition(drawingPosition + offsetFromTopLeft);
+	stateUpDrawables.push_back(drawable);
+	stateUpOffset.push_back(offsetFromTopLeft);
 }
 
-void OnscreenButton::setHitBox(const Point2D& inputTopLeft,
-							   const Point2D& inputBottomRight)
+void OnscreenButton::clearTriggered()
 {
-	hitBoxTopLeft = drawingPosition + inputTopLeft;
-	hitBoxBottomRight = drawingPosition + inputBottomRight;
-}
-
-bool OnscreenButton::isTriggered() const
-{
-	return triggered;
+	triggered = false;
 }
 
 void OnscreenButton::draw(sf::RenderTarget& target) const
@@ -115,23 +108,14 @@ void OnscreenButton::draw(sf::RenderTarget& target) const
 	}
 }
 
-void OnscreenButton::setPosition(const Point2D& newPoint)
+std::string OnscreenButton::getStatusString() const
 {
-	Point2D relativeNewPosition = drawingPosition.getRelative(newPoint);
-	drawingPosition = newPoint;
+	return "N/A";
+}
 
-	for (int i = 0; i < stateUpDrawables.size(); i++)
-	{
-		stateUpDrawables[i]->setPosition(stateUpOffset[i] + drawingPosition);
-	}
-
-	for (int i = 0; i < stateDownDrawables.size(); i++)
-	{
-		stateDownDrawables[i]->setPosition(stateDownOffset[i] + drawingPosition);
-	}
-
-	hitBoxTopLeft += relativeNewPosition;
-	hitBoxBottomRight += relativeNewPosition;
+bool OnscreenButton::isTriggered() const
+{
+	return triggered;
 }
 
 bool OnscreenButton::mouseDown(const Point2D& mousePoint)
@@ -187,6 +171,32 @@ void OnscreenButton::setButtonTriggerType(const OnscreenButtonType& inputOnscree
 	onscreenButtonType = inputOnscreenButtonType;
 }
 
+void OnscreenButton::setHitBox(const Point2D& inputTopLeft,
+							   const Point2D& inputBottomRight)
+{
+	hitBoxTopLeft = drawingPosition + inputTopLeft;
+	hitBoxBottomRight = drawingPosition + inputBottomRight;
+}
+
+void OnscreenButton::setPosition(const Point2D& newPoint)
+{
+	Point2D relativeNewPosition = drawingPosition.getRelative(newPoint);
+	drawingPosition = newPoint;
+
+	for (int i = 0; i < stateUpDrawables.size(); i++)
+	{
+		stateUpDrawables[i]->setPosition(stateUpOffset[i] + drawingPosition);
+	}
+
+	for (int i = 0; i < stateDownDrawables.size(); i++)
+	{
+		stateDownDrawables[i]->setPosition(stateDownOffset[i] + drawingPosition);
+	}
+
+	hitBoxTopLeft += relativeNewPosition;
+	hitBoxBottomRight += relativeNewPosition;
+}
+
 bool OnscreenButton::isInside(const Point2D& point) const
 {
 	if (point.x > hitBoxTopLeft.x && point.x < hitBoxBottomRight.x)
@@ -197,14 +207,4 @@ bool OnscreenButton::isInside(const Point2D& point) const
 		}
 	}
 	return false;
-}
-
-void OnscreenButton::clearTriggered()
-{
-	triggered = false;
-}
-
-std::string OnscreenButton::getStatusString() const
-{
-	return "N/A";
 }
