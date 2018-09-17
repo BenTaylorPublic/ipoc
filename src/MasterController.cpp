@@ -11,6 +11,19 @@ MasterController::MasterController()
 {
 }
 
+std::string MasterController::getStatusString() const
+{
+	//Calling all objects it has a pointer too
+	std::string result = "Master Controller:\n";
+	result += inputController->getStatusString();
+	result += processController->getStatusString();
+	result += outputController->getStatusString();
+	result += Settings::getStatusString();
+	result += FileManager::getStatusString();
+
+	return result;
+}
+
 void MasterController::IPOCLoad()
 {
 	//To seed random numbers across the whole application
@@ -187,17 +200,4 @@ void MasterController::exit()
 
 	Debug::logLine("[INFO] Program ended successfully.");
 
-}
-
-std::string MasterController::getStatusString() const
-{
-	//Calling all objects it has a pointer too
-	std::string result = "Master Controller:\n";
-	result += inputController->getStatusString();
-	result += processController->getStatusString();
-	result += outputController->getStatusString();
-	result += Settings::getStatusString();
-	result += FileManager::getStatusString();
-	
-	return result;
 }

@@ -10,13 +10,32 @@
 #include <atomic>
 #include "Storage.h"
 
+/**
+ * MasterController is the main controller that builds an facilitates the running of the program
+ */
 class MasterController
 {
 public:
+	/**
+	 * MasterController constructor
+	 */
 	MasterController();
-	void IPOCLoad();
-	void start();
+	/**
+	 * Returns a string indicating this object's current status, and all objects it manages. \n
+	 * Should only be used for debugging, but not strictly.
+	 * @return status string
+	 */
 	std::string getStatusString() const;
+	/**
+	 * <b> IPOC ONLY </b> \n
+	 * Starts the loading of the application
+	 */
+	void IPOCLoad();
+	/**
+	 * <b> IPOC ONLY </b> \n
+	 * Starts the main loop
+	 */
+	void start();
 private:
 	InputController* inputController;
 	ProcessController* processController;
