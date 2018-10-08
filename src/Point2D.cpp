@@ -30,6 +30,30 @@ Point2D::~Point2D()
 	Debug::notifyOfDestruction(4);
 }
 
+double Point2D::distanceTo(const Point2D& otherPoint) const
+{
+	int aSquared = std::pow(otherPoint.x - x, 2);
+	int bSquared = std::pow(otherPoint.y - y, 2);
+	return sqrt(aSquared + bSquared);
+}
+
+Point2D Point2D::getRelative(const Point2D& otherPoint)
+{
+	return Point2D(otherPoint.x - x, otherPoint.y - y);
+}
+
+std::string Point2D::getStatusString() const
+{
+	return "(" + std::to_string((int) x) + "," + std::to_string((int) y) + ")";
+}
+
+void Point2D::random(const int& maxX,
+					 const int& maxY)
+{
+	x = rand() % maxX + 1;
+	y = rand() % maxY + 1;
+}
+
 Point2D Point2D::operator+(const Point2D& rhs)
 {
 	return Point2D(x + rhs.x, y + rhs.y);
@@ -45,28 +69,4 @@ Point2D& Point2D::operator+=(const Point2D& rhs)
 	x += rhs.x;
 	y += rhs.y;
 	return *this;
-}
-
-Point2D Point2D::getRelative(const Point2D& otherPoint)
-{
-	return Point2D(otherPoint.x - x, otherPoint.y - y);
-}
-
-double Point2D::distanceTo(const Point2D& otherPoint) const
-{
-	int aSquared = std::pow(otherPoint.x - x, 2);
-	int bSquared = std::pow(otherPoint.y - y, 2);
-	return sqrt(aSquared + bSquared);
-}
-
-void Point2D::random(const int& maxX,
-					 const int& maxY)
-{
-	x = rand() % maxX + 1;
-	y = rand() % maxY + 1;
-}
-
-std::string Point2D::getStatusString() const
-{
-	return "(" + std::to_string((int) x) + "," + std::to_string((int) y) + ")";
 }
