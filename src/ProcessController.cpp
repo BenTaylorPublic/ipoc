@@ -14,6 +14,29 @@ ProcessController::~ProcessController()
 {
 }
 
+bool ProcessController::checkForExitProgram() const
+{
+	return exitProgram;
+}
+
+std::string ProcessController::getStatusString() const
+{
+	std::string result = "exitProgram: ";
+	if (exitProgram)
+		result += "true\n";
+	else
+		result += "false\n";
+
+	result += "loopNumber: " + std::to_string(loopNumber) + "\n";
+
+	return result;
+}
+
+void ProcessController::incrementLoopNumber()
+{
+	loopNumber++;
+}
+
 void ProcessController::IPOCLoad(InputController* inputControllerPtr,
 								 Frame* inputFrame,
 								 OutputController* outputControllerPtr,
@@ -40,27 +63,4 @@ void ProcessController::process()
 	{
 		exitProgram = true;
 	}
-}
-
-bool ProcessController::checkForExitProgram() const
-{
-	return exitProgram;
-}
-
-void ProcessController::incrementLoopNumber()
-{
-	loopNumber++;
-}
-
-std::string ProcessController::getStatusString() const
-{
-	std::string result = "exitProgram: ";
-	if (exitProgram)
-		result += "true\n";
-	else
-		result += "false\n";
-
-	result += "loopNumber: " + std::to_string(loopNumber) + "\n";
-
-	return result;
 }
