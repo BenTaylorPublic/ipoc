@@ -197,6 +197,8 @@ void OnscreenButton::setPosition(const Point2D& newPoint)
 	hitBoxBottomRight += relativeNewPosition;
 }
 
+//PRIVATE
+
 bool OnscreenButton::isInside(const Point2D& point) const
 {
 	if (point.x > hitBoxTopLeft.x && point.x < hitBoxBottomRight.x)
