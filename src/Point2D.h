@@ -52,7 +52,7 @@ public:
 	 */
 	std::string getStatusString() const;
 	/**
-	 * Randomises the x and y value between 0 and it's respective Max
+	 * Randomizes the x and y value between 0 and it's respective Max
 	 * @param maxX Limits x to between 0 and maxX
 	 * @param maxY Limits y to between 0 and maxY
 	 */
