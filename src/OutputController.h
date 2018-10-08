@@ -11,12 +11,12 @@ class OutputController
 public:
 	OutputController();
 	~OutputController();
-	void IPOCLoad(Frame* inputFrame);
-	void createGraphicsWindow(InputController* inputController);
-	void reloadGraphicsWindow(); //Used when the settings (resoltions, screen type etc) need to be refreshed
-	void output();
 	void closeGraphicsWindow();
+	void createGraphicsWindow(InputController* inputController);
 	std::string getStatusString() const;
+	void IPOCLoad(Frame* inputFrame);
+	void output();
+	void reloadGraphicsWindow(); //Used when the settings (resoltions, screen type etc) need to be refreshed
 private:
 	Window window;
 	Frame* frame;

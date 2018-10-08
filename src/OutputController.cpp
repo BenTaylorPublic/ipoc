@@ -12,11 +12,9 @@ OutputController::~OutputController()
 {
 }
 
-void OutputController::IPOCLoad(Frame* inputFrame)
+void OutputController::closeGraphicsWindow()
 {
-	window.load();
-
-	frame = inputFrame;
+	window.closeWindow();
 }
 
 void OutputController::createGraphicsWindow(InputController* inputController)
@@ -62,15 +60,20 @@ void OutputController::createGraphicsWindow(InputController* inputController)
 	}
 }
 
-void OutputController::reloadGraphicsWindow()
+std::string OutputController::getStatusString() const
 {
-	reloadWindow = true;
-	Settings::inputStatus = InputStatus::PauseRequested;
+	std::string result = "OutputController:\n";
+
+	result += window.getStatusString();
+
+	return result;
 }
 
-void OutputController::closeGraphicsWindow()
+void OutputController::IPOCLoad(Frame* inputFrame)
 {
-	window.closeWindow();
+	window.load();
+
+	frame = inputFrame;
 }
 
 void OutputController::output()
@@ -93,11 +96,8 @@ void OutputController::output()
 	window.renderWindow();
 }
 
-std::string OutputController::getStatusString() const
+void OutputController::reloadGraphicsWindow()
 {
-	std::string result = "OutputController:\n";
-
-	result += window.getStatusString();
-
-	return result;
+	reloadWindow = true;
+	Settings::inputStatus = InputStatus::PauseRequested;
 }
